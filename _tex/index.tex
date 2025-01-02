@@ -4,7 +4,9 @@
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
-]{agujournal2019}
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
 
 \usepackage{amsmath,amssymb}
 \usepackage{iftex}
@@ -125,11 +127,21 @@
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
-\usepackage{url} %this package should fix any errors with URLs in refs.
-\usepackage{lineno}
-\usepackage[inline]{trackchanges} %for better track changes. finalnew option will compile document with changes incorporated.
-\usepackage{soul}
-\linenumbers
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\KOMAoption{captions}{tableheading}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -177,9 +189,9 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={La Palma Earthquakes},
-  pdfauthor={Steve Purves; Rowan Cockett},
-  pdfkeywords={La Palma, Earthquakes},
+  pdftitle={Detecting misfitting items in Rasch models},
+  pdfauthor={Magnus Johansson},
+  pdfkeywords={Rasch, Psychometrics, Item fit, Simulation},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -188,51 +200,107 @@
   pdfcreator={LaTeX via pandoc}}
 
 
-\journalname{Earth and Space Science}
-
-\draftfalse
+\title{Detecting misfitting items in Rasch models}
+\author{Magnus Johansson}
+\date{2025-01-02}
 
 \begin{document}
-\title{La Palma Earthquakes}
-
-\authors{Steve Purves\affil{1}, Rowan Cockett\affil{1}}
-\affiliation{1}{Curvenote, }
-\correspondingauthor{Steve Purves}{steve@curvenote.com}
-
-
+\maketitle
 \begin{abstract}
-In September 2021, a significant jump in seismic activity on the island
-of La Palma (Canary Islands, Spain) signaled the start of a volcanic
-crisis that still continues at the time of writing. Earthquake data is
-continually collected and published by the Instituto Geográphico
-Nacional (IGN). \ldots{}
+Psychometrics in general have long relied on rule-of-thumb cutoff values
+for various goodness of fit metrics. With more powerful personal
+computers it is both feasible and desirable to use simulation/bootstrap
+methods to determine appropriate cutoff values. This paper illustrates
+and evaluates the use of an R package for Rasch psychometrics that has
+implemented functions to simplify the process of identifying misfitting
+items using simulation based cutoff values. Through a series of
+simulation studies a comparison is made between information weighted
+conditional item fit and item-restscore using Goodman and Kruskal's
+gamma.
 \end{abstract}
-
-\section*{Plain Language Summary}
-Earthquake data for the island of La Palma from the September 2021
-eruption is found \ldots{}
-
-
 
 
 \section{Introduction}\label{introduction}
 
+This paper presents a series of simulations conducted to evaluate
+methods to detect of item misfit in Rasch models. First, conditional
+item infit and outfit will be under scrutiny. Second, item infit will be
+compared to item-restscore (Kreiner 2011; Mueller and Santiago 2022).
+Third, a bootstrap method for item-restscore will be presented and
+tested.
+
+Müller (2020) showed how the range of conditional item infit varies with
+sample size and the expected average item infit range is fairly well
+captured by Smith's rule-of-thumb formula (1±2/√n). However, the average
+range does not apply for all items, since item location also affects
+model expected item fit which means some items may have plausible item
+fit values outside Smith's average value range.
+
+It is proposed that by using parametric bootstrapping one can establish
+item fit cutoff values that are sample and item specific. The R package
+\texttt{easyRasch} (Johansson 2024) includes a function to determine
+item infit and outfit cutoff values, which will be tested in the
+simulations in this paper.
+
+It is important to note that the conditional item fit described by
+Müller (2020) and implemented in the \texttt{iarm} R package (Mueller
+and Santiago 2022) is different from the unconditional item fit
+implemented in software such as Winsteps and RUMM2030, as well as all R
+packages except \texttt{iarm}. Unconditional item fit can result in
+unreliable item fit in sample sizes as small as 250 with increasing
+likelihood of problems as sample size increases. Readers are strongly
+recommended to read Müller's paper to fully understand the problems with
+unconditional item fit.
+
+\section{Methods}\label{methods}
+
 \textsubscript{Source:
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
 Notebook}}
 
-\phantomsection\label{cell-fig-timeline}
-\begin{figure}[H]
+The simulation of response data used three steps: first, a vector of
+theta values (person scores on the latent variable) were generated using
+\texttt{rnorm(mean\ =\ 0,\ sd\ =\ 1.5)}. Second, a set of item locations
+ranging from -2 to 2 logits were generated for dichotomous items, using
+\texttt{runif(n\ =\ 20,\ min\ =\ -2,\ max\ =\ 2)}. Third, the theta
+values were used to simulate item responses for participants, using
+\texttt{sim.xdim()} from the \texttt{eRm} package (Mair and Hatzinger
+2007), which allows simulation of multidimensional response data.
+Multiple datasets were generated using the same item and person
+parameters, varying the targeting and number of the misfitting item(s).
+More details are described under the separate studies below.
 
-\centering{
+The parametric bootstrapping procedure was implemented using random
+samples from the 10 000 simulated responses. The sample size variations
+tested are described under each study.
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-timeline-1.pdf}}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Estimation of item locations based on simulated item responses using
+  conditional maximum likelihood (CML, Mair and Hatzinger 2007).
+\item
+  Estimation of sample theta values using weighted maximum likelihood
+  (Warm 1989)
+\item
+  Simulation of new response data, fitting the Rasch model, using the
+  estimated item locations and theta values.
+\item
+  Estimation of the dichotomous Rasch model for the new response data
+  using CML.
+\item
+  Based on step 4, calculation of conditional item fit (Müller 2020;
+  Mueller and Santiago 2022) and/or item-restscore metrics (Kreiner
+  2011; Mueller and Santiago 2022).
+\end{enumerate}
 
-}
+Steps three and four were iterated over, using resampling with
+replacement from the estimated theta values as a basis for simulating
+the response data in step three.
 
-\caption{\label{fig-timeline}Timeline of recent earthquakes on La Palma}
-
-\end{figure}%
+Summary statistics were created with focus on correctly detecting misfit
+and whether false positives were identified.
 
 \textsubscript{Source:
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
@@ -242,92 +310,316 @@ Notebook}}
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
 Notebook}}
 
-Based on data up to and including 1971, eruptions on La Palma happen
-every 79.8 years on average.
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
 
-Studies of the magma systems feeding the volcano, such as Marrero et al.
-(2019), have proposed that there are two main magma reservoirs feeding
-the Cumbre Vieja volcano; one in the mantle (30-40km depth) which
-charges and in turn feeds a shallower crustal reservoir (10-20km depth).
+\section{Study 1}\label{study-1}
 
-Eight eruptions have been recorded since the late 1400s
-(Figure~\ref{fig-timeline}).
+Conditional mean square (MSQ) infit and outfit, henceforth referred to
+only as infit or outfit. \textbf{Refer to Müller (and vignette ref) for
+technical description\ldots{}}
 
-Data and methods are discussed in Section~\ref{sec-data-methods}.
+Main lines of inquiry:
 
-Let \(x\) denote the number of eruptions in a year. Then, \(x\) can be
-modeled by a Poisson distribution
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  How does the number of iterations used in RIgetfit() impact the
+  indicated cutoff values?
+\item
+  How useful are the cutoff values in detecting misfitting items (and
+  false positives), when using the optimal number of iterations?
+\item
+  Müller (2020) hints at outfit being less useful than infit. We will
+  investigate this by comparing them.
+\end{enumerate}
 
-\begin{equation}\phantomsection\label{eq-poisson}{
-p(x) = \frac{e^{-\lambda} \lambda^{x}}{x !}
-}\end{equation}
+20 dichotomous items are used, with one item misfitting. Item locations
+are the same throughout. The location of the misfitting item relative
+the to the sample theta mean was selected to be approximately 0, -1, and
+-2 logits. Three separate datasets were generated with these variations,
+each with 10 000 simulated respondents. One dataset with all three
+misfitting items was also generated, using the same sample size.
 
-where \(\lambda\) is the rate of eruptions per year. Using
-Equation~\ref{eq-poisson}, the probability of an eruption in the next
-\(t\) years can be calculated.
+The function \texttt{RIgetfit()} from the \texttt{easyRasch} R package
+is tested here. It's source code can be accessed on GitHub. The function
+offers the user a choice of the number of bootstrap iterations to use to
+calculate the cutoff values for infit and outfit.
 
-\begin{longtable}[]{@{}ll@{}}
-\caption{Recent historic eruptions on La
-Palma}\label{tbl-history}\tabularnewline
+Then the \texttt{RIitemfit()} function is used to summarize the
+bootstrap results and also calculates the infit and outfit for each item
+in the observed data and highlights items with infit/outfit values
+outside of the cutoff values. \texttt{RIitemfit()} has a default setting
+to slightly truncate the distribution of values using
+\texttt{stats::quantile()} at 0.001 and 0.999 to reduce extreme values.
+An example is demonstrated in Table~\ref{tbl-itemfit1}, using a subset
+of the items used in the simulations. Figure~\ref{fig-itemfit1} provides
+a visualization of the distribution of bootstrapped infit and outfit
+values, together with the infit/outfit values from the observed data
+illustrated using an orange diamond shape. Note the variation between
+items in plausible values of infit and outfit based on the bootstrap,
+and that Smith's rule-of-thumb regarding infit (1±2/√n) would be 0.9-1.1
+for a sample size of 400.
+
+This study was rather computationally demanding since each simulation
+run entailed 100-400 underlying simulations. The sample sizes used were
+150, 250, 500, and 1000. The number of iterations to determine cutoff
+values were 100, 200, and 400. Sample size and iteration conditions were
+fully crossed with each other and the three different targeting
+variations of the one misfitting item, resulting in 4\emph{3}3 = 36
+conditions. Each combination used 200 simulation runs. The simulations
+took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0549}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0989}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1868}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1099}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1978}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1209}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1319}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0989}}@{}}
+
+\caption{\label{tbl-itemfit1}Conditional item fit with simulation based
+cutoff values}
+
+\tabularnewline
+
 \toprule\noalign{}
-Name & Year \\
-\midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-Name & Year \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Item
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+InfitMSQ
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Infit thresholds
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+OutfitMSQ
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Outfit thresholds
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Infit diff
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Outfit diff
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Location
+\end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Current & 2021 \\
-Teneguía & 1971 \\
-Nambroque & 1949 \\
-El Charco & 1712 \\
-Volcán San Antonio & 1677 \\
-Volcán San Martin & 1646 \\
-Tajuya near El Paso & 1585 \\
-Montaña Quemada & 1492 \\
+V1 & 1.017 & {[}0.863, 1.131{]} & 1.061 & {[}0.577, 1.435{]} & no misfit
+& no misfit & -1.37 \\
+V11 & 1.000 & {[}0.82, 1.169{]} & 1.032 & {[}0.716, 1.279{]} & no misfit
+& no misfit & -0.66 \\
+V3 & 1.022 & {[}0.894, 1.102{]} & 1.050 & {[}0.633, 1.465{]} & no misfit
+& no misfit & 0.46 \\
+V12 & 0.966 & {[}0.84, 1.173{]} & 0.793 & {[}0.786, 1.249{]} & no misfit
+& no misfit & 1.58 \\
+
 \end{longtable}
 
-Table~\ref{tbl-history} summarises the eruptions recorded since the
-colonization of the islands by Europeans in the late 1400s.
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
 
-\begin{figure}
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{images/la-palma-map.png}}
-
-}
-
-\caption{\label{fig-map}Map of La Palma}
-
-\end{figure}%
-
-La Palma is one of the west most islands in the Volcanic Archipelago of
-the Canary Islands (Figure~\ref{fig-map}).
-
+\phantomsection\label{cell-fig-itemfit1}
 \begin{figure}[H]
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-latex/notebooks-explore-earthquakes-fig-spatial-plot-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-itemfit1-1.pdf}}
 
 }
 
-\caption{\label{fig-spatial-plot}Locations of earthquakes on La Palma
-since 2017}
+\caption{\label{fig-itemfit1}Distribution of simulation based item fit
+and estimated item fit from observed data}
 
 \end{figure}%
 
 \textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/notebooks/explore-earthquakes-preview.html\#cell-fig-spatial-plot}{Explore
-Earthquakes}}
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
 
-Figure~\ref{fig-spatial-plot} shows the location of recent Earthquakes
-on La Palma.
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
 
-\section{Data \& Methods}\label{sec-data-methods}
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\subsection{Results}\label{results}
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+Figures show the percent of simulation runs that have identified an item
+as misfitting. Items with more than 5\% are colored in light red. A
+number representing the detection rate is shown nearby the bar for the
+misfitting item. Columns are labelled with the number of iterations used
+by \texttt{RIgetfit()} to determine cutoff values, and rows are labelled
+with the sample size.
+
+\subsubsection{Infit}\label{infit}
+
+\phantomsection\label{cell-fig-ifb0}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-ifb0-1.pdf}}
+
+}
+
+\caption{\label{fig-ifb0}}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+Figure~\ref{fig-ifb0} shows the detection rate when the misfitting item
+is located at the sample mean. Detection rate is highest for the
+condition with 100 iterations with sample size 100 and 250, but it also
+shows higher levels of false positives when sample size increases to 500
+or more.
+
+\phantomsection\label{cell-fig-ifb1}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-ifb1-1.pdf}}
+
+}
+
+\caption{\label{fig-ifb1}}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+When the misfitting item is offset in targeting by -1 logits compared to
+the sample mean (see Figure~\ref{fig-ifb1}), the smallest sample size
+has less power to detect misfit compared to the on-target misfitting
+item. There are lower rates of false positives across all sample sizes
+and iterations.
+
+\phantomsection\label{cell-fig-ifb2}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-ifb2-1.pdf}}
+
+}
+
+\caption{\label{fig-ifb2}}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+Finally, when the misfitting item is located at -2 logits compared to
+the sample mean (see Figure~\ref{fig-ifb2}), we see a stronger reduction
+in power for sample sizes 150 and 250. No false positives are
+identified.
+
+\subsubsection{Outfit}\label{outfit}
+
+\phantomsection\label{cell-fig-ifb0out}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-ifb0out-1.pdf}}
+
+}
+
+\caption{\label{fig-ifb0out}}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\phantomsection\label{cell-fig-ifb1out}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-ifb1out-1.pdf}}
+
+}
+
+\caption{\label{fig-ifb1out}}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\phantomsection\label{cell-fig-ifb2out}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-ifb2out-1.pdf}}
+
+}
+
+\caption{\label{fig-ifb2out}}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+As shown in Figure~\ref{fig-ifb0out}, Figure~\ref{fig-ifb1out}, and
+Figure~\ref{fig-ifb2out}, outfit is performing much worse than infit
+across the board.
+
+\subsubsection{Comments}\label{comments}
+
+Based on these simulation, it seems reasonable to recommend the use of
+infit in determining item fit over outfit. The performance of outfit
+calls to question whether it is useful at all.
+
+Regarding infit, it looks like 100 iterations are to recommend to
+determine cutoff values when the sample size is 250 or lower, while 200
+or 400 iterations reduce the risk for false positives at sample sizes of
+500 or larger. False positives are found at sample sizes 500 and 1000
+only. The risk for false positives is notably higher when the misfitting
+item is located at the sample mean compared to when the misfitting item
+is off-target by -1 logits or more.
+
+These findings make a good argument for removing one item at a time when
+the analysis indicates misfit, starting with the most misfitting item.
+This is especially relevant for sample sizes at 500 or above and when
+misfitting items are located close to the sample mean.
+
+\section{Study 2}\label{study-2}
+
+Item-restscore using the same datasets and adding the dataset with all
+three items misfitting.
+
+\section{Study 3}\label{study-3}
+
+Item-restscore bootstrapped to better handle big samples, but also
+perhaps for smaller samples?
+
+\section{Discussion}\label{discussion}
 
 \section{Conclusion}\label{conclusion}
 
@@ -336,14 +628,36 @@ on La Palma.
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
-\vspace{1em}
+\bibitem[\citeproctext]{ref-easyrasch}
+Johansson, Magnus. 2024. \emph{easyRasch: Psychometric Analysis in r
+with Rasch Measurement Theory}. \url{https://github.com/pgmj/easyRasch}.
 
-\bibitem[\citeproctext]{ref-marrero2019}
-Marrero, J., García, A., Berrocoso, M., Llinares, Á., Rodríguez-Losada,
-A., \& Ortiz, R. (2019). Strategies for the development of volcanic
-hazard maps in monogenetic volcanic fields: The example of {La} {Palma}
-({Canary} {Islands}). \emph{Journal of Applied Volcanology}, \emph{8}.
-\url{https://doi.org/10.1186/s13617-019-0085-5}
+\bibitem[\citeproctext]{ref-kreiner_note_2011}
+Kreiner, Svend. 2011. {``A {Note} on {Item}--{Restscore} {Association}
+in {Rasch} {Models}.''} \emph{Applied Psychological Measurement} 35 (7):
+557--61. \url{https://doi.org/10.1177/0146621611410227}.
+
+\bibitem[\citeproctext]{ref-mair_extended_2007}
+Mair, Patrick, and Reinhold Hatzinger. 2007. {``Extended {Rasch}
+{Modeling}: {The} {eRm} {Package} for the {Application} of {IRT}
+{Models} in {R}.''} \emph{Journal of Statistical Software} 20 (1):
+1--20. \url{https://doi.org/10.18637/jss.v020.i09}.
+
+\bibitem[\citeproctext]{ref-mueller_iarm_2022}
+Mueller, Marianne, and Pedro Henrique Ribeiro Santiago. 2022. {``Iarm:
+{Item} {Analysis} in {Rasch} {Models}.''}
+\url{https://cran.r-project.org/web/packages/iarm/index.html}.
+
+\bibitem[\citeproctext]{ref-muller_item_2020}
+Müller, Marianne. 2020. {``Item Fit Statistics for {Rasch} Analysis: Can
+We Trust Them?''} \emph{Journal of Statistical Distributions and
+Applications} 7 (1): 5.
+\url{https://doi.org/10.1186/s40488-020-00108-7}.
+
+\bibitem[\citeproctext]{ref-warm_weighted_1989}
+Warm, Thomas A. 1989. {``Weighted Likelihood Estimation of Ability in
+Item Response Theory.''} \emph{Psychometrika} 54 (3): 427--50.
+\url{https://doi.org/10.1007/BF02294627}.
 
 \end{CSLReferences}
 
