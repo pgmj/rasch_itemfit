@@ -1,0 +1,948 @@
+<sub-article article-type="notebook" id="nb-3">
+<front-stub>
+<title-group>
+<article-title>Detecting misfitting items in Rasch
+models</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0003-1669-592X</contrib-id>
+<name>
+<surname>Johansson</surname>
+<given-names>Magnus</given-names>
+</name>
+<string-name>Magnus Johansson</string-name>
+
+<xref ref-type="aff" rid="aff-1">a</xref>
+</contrib>
+</contrib-group>
+<aff id="aff-1">
+<institution-wrap>
+<institution>RISE Research Institutes of Sweden</institution>
+</institution-wrap>
+
+
+
+
+
+
+<ext-link ext-link-type="uri" xlink:href="https://ri.se/shic">https://ri.se/shic</ext-link>
+</aff>
+<abstract>
+<p>Psychometrics in general have long relied on rule-of-thumb cutoff
+values for various goodness of fit metrics. With more powerful personal
+computers it is both feasible and desirable to use simulation/bootstrap
+methods to determine appropriate cutoff values. This paper illustrates
+and evaluates the use of an R package for Rasch psychometrics that has
+implemented functions to simplify the process of identifying misfitting
+items using simulation based cutoff values. Through a series of
+simulation studies a comparison is made between information weighted
+conditional item fit and item-restscore using Goodman and Kruskal’s
+gamma.</p>
+</abstract>
+</front-stub>
+
+<body>
+<sec id="introduction">
+  <title>1 Introduction</title>
+  <p>This paper presents a series of simulations conducted to evaluate
+  methods to detect of item misfit in Rasch models. First, conditional
+  item infit and outfit will be under scrutiny. Second, item infit will
+  be compared to item-restscore
+  (<xref alt="Kreiner 2011" rid="ref-kreiner_note_2011" ref-type="bibr">Kreiner
+  2011</xref>;
+  <xref alt="Mueller and Santiago 2022" rid="ref-mueller_iarm_2022" ref-type="bibr">Mueller
+  and Santiago 2022</xref>). Third, a bootstrap method for
+  item-restscore will be presented and tested.</p>
+  <p>Müller
+  (<xref alt="2020" rid="ref-muller_item_2020" ref-type="bibr">2020</xref>)
+  showed how the range of conditional item infit varies with sample size
+  and the expected average item infit range is fairly well captured by
+  Smith’s rule-of-thumb formula (1±2/√n). However, the average range
+  does not apply for all items, since item location also affects model
+  expected item fit which means some items may have plausible item fit
+  values outside Smith’s average value range.</p>
+  <p>It is proposed that by using parametric bootstrapping one can
+  establish item fit cutoff values that are sample and item specific.
+  The R package <monospace>easyRasch</monospace>
+  (<xref alt="Johansson 2024" rid="ref-easyrasch" ref-type="bibr">Johansson
+  2024</xref>) includes a function to determine item infit and outfit
+  cutoff values, which will be tested in the simulations in this
+  paper.</p>
+  <p>It is important to note that the conditional item fit described by
+  Müller
+  (<xref alt="2020" rid="ref-muller_item_2020" ref-type="bibr">2020</xref>)
+  and implemented in the <monospace>iarm</monospace> R package
+  (<xref alt="Mueller and Santiago 2022" rid="ref-mueller_iarm_2022" ref-type="bibr">Mueller
+  and Santiago 2022</xref>) is different from the unconditional item fit
+  implemented in software such as Winsteps and RUMM2030, as well as all
+  R packages except <monospace>iarm</monospace>. Unconditional item fit
+  can result in unreliable item fit in sample sizes as small as 250 with
+  increasing likelihood of problems as sample size increases. Readers
+  are strongly recommended to read Müller’s paper to fully understand
+  the problems with unconditional item fit.</p>
+</sec>
+<sec id="sec-methods">
+  <title>2 Methods</title>
+  <sec specific-use="notebook-content">
+  <code language="r script">library(iarm)</code>
+  <boxed-text>
+    <preformat>Loading required package: eRm</preformat>
+  </boxed-text>
+  <boxed-text>
+    <preformat>Loading required package: ggplot2</preformat>
+  </boxed-text>
+  <code language="r script">library(eRm)
+library(ggdist)
+library(tidyverse)</code>
+  <boxed-text>
+    <preformat>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ lubridate 1.9.3     ✔ tibble    3.2.1
+✔ purrr     1.0.2     ✔ tidyr     1.3.1</preformat>
+  </boxed-text>
+  <boxed-text>
+    <preformat>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</preformat>
+  </boxed-text>
+  <code language="r script">library(easyRasch)</code>
+  <boxed-text>
+    <preformat>Loading required package: formattable
+Loading required package: kableExtra
+
+Attaching package: 'kableExtra'
+
+The following object is masked from 'package:dplyr':
+
+    group_rows
+
+Loading required package: mirt
+Loading required package: stats4
+Loading required package: lattice
+
+Attaching package: 'mirt'
+
+The following objects are masked from 'package:eRm':
+
+    itemfit, personfit
+
+Loading required package: psych
+
+Attaching package: 'psych'
+
+The following objects are masked from 'package:ggplot2':
+
+    %+%, alpha
+
+The following object is masked from 'package:eRm':
+
+    sim.rasch
+
+Loading required package: psychotree
+Loading required package: partykit
+Loading required package: grid
+Loading required package: libcoin
+Loading required package: mvtnorm
+Loading required package: psychotools
+Loading required package: matrixStats
+
+Attaching package: 'matrixStats'
+
+The following object is masked from 'package:dplyr':
+
+    count
+
+Loading required package: reshape
+
+Attaching package: 'reshape'
+
+The following object is masked from 'package:lubridate':
+
+    stamp
+
+The following object is masked from 'package:dplyr':
+
+    rename
+
+The following objects are masked from 'package:tidyr':
+
+    expand, smiths
+
+Loading required package: patchwork
+
+Attaching package: 'patchwork'
+
+The following object is masked from 'package:formattable':
+
+    area
+
+Loading required package: ggrepel
+Loading required package: glue
+Loading required package: catR
+Loading required package: hexbin
+Loading required package: janitor
+
+Attaching package: 'janitor'
+
+The following objects are masked from 'package:stats':
+
+    chisq.test, fisher.test
+
+Loading required package: foreach
+
+Attaching package: 'foreach'
+
+The following objects are masked from 'package:purrr':
+
+    accumulate, when
+
+Loading required package: furrr
+Loading required package: future
+Loading required package: doParallel
+Loading required package: iterators
+Loading required package: parallel</preformat>
+  </boxed-text>
+  <code language="r script">library(arrow)</code>
+  <boxed-text>
+    <preformat>Some features are not enabled in this build of Arrow. Run `arrow_info()` for more information.
+The repository you retrieved Arrow from did not include all of Arrow's features.
+You can install a fully-featured version by running:
+`install.packages('arrow', repos = 'https://apache.r-universe.dev')`.
+
+Attaching package: 'arrow'
+
+The following object is masked from 'package:lubridate':
+
+    duration
+
+The following object is masked from 'package:utils':
+
+    timestamp</preformat>
+  </boxed-text>
+  <code language="r script">### some commands exist in multiple packages, here we define preferred ones that are frequently used
+select &lt;- dplyr::select
+count &lt;- dplyr::count
+rename &lt;- dplyr::rename</code>
+  </sec>
+  <p>The simulation of response data used three steps: first, a vector
+  of theta values (person scores on the latent variable) were generated
+  using <monospace>rnorm(mean = 0, sd = 1.5)</monospace>. Second, a set
+  of item locations ranging from -2 to 2 logits were generated for
+  dichotomous items, using
+  <monospace>runif(n = 20, min = -2, max = 2)</monospace>. Third, the
+  theta values were used to simulate item responses for participants,
+  using <monospace>sim.xdim()</monospace> from the
+  <monospace>eRm</monospace> package
+  (<xref alt="Mair and Hatzinger 2007" rid="ref-mair_extended_2007" ref-type="bibr">Mair
+  and Hatzinger 2007</xref>), which allows simulation of
+  multidimensional response data. Multiple datasets were generated using
+  the same item and person parameters, varying the targeting and number
+  of the misfitting item(s). More details are described under the
+  separate studies below.</p>
+  <p>The parametric bootstrapping procedure was implemented using random
+  samples from the 10 000 simulated responses. The sample size
+  variations tested are described under each study.</p>
+  <list list-type="order">
+    <list-item>
+      <p>Estimation of item locations based on simulated item responses
+      using conditional maximum likelihood (CML,
+      <xref alt="Mair and Hatzinger 2007" rid="ref-mair_extended_2007" ref-type="bibr">Mair
+      and Hatzinger 2007</xref>).</p>
+    </list-item>
+    <list-item>
+      <p>Estimation of sample theta values using weighted maximum
+      likelihood
+      (<xref alt="Warm 1989" rid="ref-warm_weighted_1989" ref-type="bibr">Warm
+      1989</xref>)</p>
+    </list-item>
+    <list-item>
+      <p>Simulation of new response data, fitting the Rasch model, using
+      the estimated item locations and theta values.</p>
+    </list-item>
+    <list-item>
+      <p>Estimation of the dichotomous Rasch model for the new response
+      data using CML.</p>
+    </list-item>
+    <list-item>
+      <p>Based on step 4, calculation of conditional item fit
+      (<xref alt="Müller 2020" rid="ref-muller_item_2020" ref-type="bibr">Müller
+      2020</xref>;
+      <xref alt="Mueller and Santiago 2022" rid="ref-mueller_iarm_2022" ref-type="bibr">Mueller
+      and Santiago 2022</xref>) and/or item-restscore metrics
+      (<xref alt="Kreiner 2011" rid="ref-kreiner_note_2011" ref-type="bibr">Kreiner
+      2011</xref>;
+      <xref alt="Mueller and Santiago 2022" rid="ref-mueller_iarm_2022" ref-type="bibr">Mueller
+      and Santiago 2022</xref>).</p>
+    </list-item>
+  </list>
+  <p>Steps three and four were iterated over, using resampling with
+  replacement from the estimated theta values as a basis for simulating
+  the response data in step three.</p>
+  <p>Summary statistics were created with focus on correctly detecting
+  misfit and whether false positives were identified.</p>
+  <sec specific-use="notebook-content">
+  <code language="r script"># read pre-generated item locations for reproducibility
+items1 &lt;- read_csv(&quot;data/rm_items40.csv&quot;) %&gt;%
+  slice(1:20) %&gt;% 
+  pull(location)</code>
+  <boxed-text>
+    <preformat>Rows: 40 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+dbl (2): item, location
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</preformat>
+  </boxed-text>
+  </sec>
+  <sec specific-use="notebook-content">
+  <code language="r script"># a matrix to specify which dimension each item loads on
+wmat0 &lt;- matrix(nrow = 20,
+               ncol = 2)
+# set all items to load on dimension one
+wmat0[1:20,1] &lt;- 1
+wmat0[1:20,2] &lt;- 0
+# item 9, with good targeting in this item set (closest to sample theta mean of 0), is chosen to belong to a second dimension
+wmat0[9,1] &lt;- 0
+wmat0[9,2] &lt;- 1
+
+# a matrix to specify which dimension each item loads on
+wmat1 &lt;- matrix(nrow = 20,
+               ncol = 2)
+wmat1[1:20,1] &lt;- 1
+wmat1[1:20,2] &lt;- 0
+wmat1[18,1] &lt;- 0
+wmat1[18,2] &lt;- 1
+
+# a matrix to specify which dimension each item loads on
+wmat2 &lt;- matrix(nrow = 20,
+               ncol = 2)
+wmat2[1:20,1] &lt;- 1
+wmat2[1:20,2] &lt;- 0
+wmat2[13,1] &lt;- 0
+wmat2[13,2] &lt;- 1
+
+# generate dichotomous data
+simdata0 &lt;- eRm::sim.xdim(10000, items1, cutpoint = &quot;randomized&quot;, Sigma = sigma, weightmat = wmat0)
+simdata1 &lt;- eRm::sim.xdim(10000, items1, cutpoint = &quot;randomized&quot;, Sigma = sigma, weightmat = wmat1)
+simdata2 &lt;- eRm::sim.xdim(10000, items1, cutpoint = &quot;randomized&quot;, Sigma = sigma, weightmat = wmat2)
+
+simdata &lt;- list(data0 = simdata0,
+                data1 = simdata1,
+                data2 = simdata2)
+#saveRDS(simdata,&quot;simdata10000.rds&quot;)</code>
+  </sec>
+  <sec specific-use="notebook-content">
+  <code language="r script">simdata &lt;- readRDS(&quot;data/simdata10000.rds&quot;)
+demodata &lt;- simdata[[1]] %&gt;% 
+  as.data.frame() %&gt;% 
+  slice(1:400) %&gt;% 
+  select(V1,V11,V3,V12)</code>
+  </sec>
+</sec>
+<sec id="study-1">
+  <title>3 Study 1</title>
+  <p>Conditional mean square (MSQ) infit and outfit, henceforth referred
+  to only as infit or outfit. <bold>Refer to Müller (and vignette ref)
+  for technical description…</bold></p>
+  <p>Main lines of inquiry:</p>
+  <list list-type="order">
+    <list-item>
+      <p>How does the number of iterations used in RIgetfit() impact the
+      indicated cutoff values?</p>
+    </list-item>
+    <list-item>
+      <p>How useful are the cutoff values in detecting misfitting items
+      (and false positives), when using the optimal number of
+      iterations?</p>
+    </list-item>
+    <list-item>
+      <p>Müller
+      (<xref alt="2020" rid="ref-muller_item_2020" ref-type="bibr">2020</xref>)
+      hints at outfit being less useful than infit. We will investigate
+      this by comparing them.</p>
+    </list-item>
+  </list>
+  <p>20 dichotomous items are used, with one item misfitting. Item
+  locations are the same throughout. The location of the misfitting item
+  relative the to the sample theta mean was selected to be approximately
+  0, -1, and -2 logits. Three separate datasets were generated with
+  these variations, each with 10 000 simulated respondents. One dataset
+  with all three misfitting items was also generated, using the same
+  sample size.</p>
+  <p>The function <monospace>RIgetfit()</monospace> from the
+  <monospace>easyRasch</monospace> R package is tested here. It’s source
+  code can be accessed on GitHub. The function offers the user a choice
+  of the number of bootstrap iterations to use to calculate the cutoff
+  values for infit and outfit.</p>
+  <p>Then the <monospace>RIitemfit()</monospace> function is used to
+  summarize the bootstrap results and also calculates the infit and
+  outfit for each item in the observed data and highlights items with
+  infit/outfit values outside of the cutoff values.
+  <monospace>RIitemfit()</monospace> has a default setting to slightly
+  truncate the distribution of values using
+  <monospace>stats::quantile()</monospace> at 0.001 and 0.999 to reduce
+  extreme values. An example is demonstrated in
+  <bold>?@tbl-itemfit1</bold>, using a subset of the items used in the
+  simulations. <xref alt="Figure 1" rid="fig-itemfit1">Figure 1</xref>
+  provides a visualization of the distribution of bootstrapped infit and
+  outfit values, together with the observed infit/outfit indicated with
+  an orange diamond shape. Note the variation between items in plausible
+  values of infit and outfit based on the bootstrap, and that Smith’s
+  rule-of-thumb regarding infit (1±2/√n) would be 0.9-1.1 for a sample
+  size of 400.</p>
+  <p>This study was rather computationally demanding since each
+  simulation run entailed 100-400 underlying simulations. The sample
+  sizes used were 150, 250, 500, and 1000. The number of iterations to
+  determine cutoff values were 100, 200, and 400. Sample size and
+  iteration conditions were fully crossed with each other and the three
+  different targeting variations of the one misfitting item, resulting
+  in 4<italic>3</italic>3 = 36 conditions. Each combination used 200
+  simulation runs. The simulations took about 12 hours to run on a
+  Macbook Pro Max M1 using 9 CPU cores.</p>
+  <sec id="tbl-itemfit1" specific-use="notebook-content">
+  <code language="r script">simfit &lt;- RIgetfit(demodata, iterations = 400, cpu = 8)
+RIitemfit(demodata, simfit, output = &quot;quarto&quot;)</code>
+  <table-wrap>
+    <table>
+      <colgroup>
+        <col width="5%" />
+        <col width="10%" />
+        <col width="19%" />
+        <col width="11%" />
+        <col width="20%" />
+        <col width="12%" />
+        <col width="13%" />
+        <col width="10%" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th align="left">Item</th>
+          <th align="right">InfitMSQ</th>
+          <th align="left">Infit thresholds</th>
+          <th align="right">OutfitMSQ</th>
+          <th align="left">Outfit thresholds</th>
+          <th align="left">Infit diff</th>
+          <th align="left">Outfit diff</th>
+          <th align="right">Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td align="left">V1</td>
+          <td align="right">1.017</td>
+          <td align="left">[0.864, 1.137]</td>
+          <td align="right">1.061</td>
+          <td align="left">[0.624, 1.541]</td>
+          <td align="left">no misfit</td>
+          <td align="left">no misfit</td>
+          <td align="right">-1.37</td>
+        </tr>
+        <tr>
+          <td align="left">V11</td>
+          <td align="right">1.000</td>
+          <td align="left">[0.826, 1.166]</td>
+          <td align="right">1.032</td>
+          <td align="left">[0.687, 1.265]</td>
+          <td align="left">no misfit</td>
+          <td align="left">no misfit</td>
+          <td align="right">-0.66</td>
+        </tr>
+        <tr>
+          <td align="left">V3</td>
+          <td align="right">1.022</td>
+          <td align="left">[0.899, 1.116]</td>
+          <td align="right">1.050</td>
+          <td align="left">[0.632, 1.474]</td>
+          <td align="left">no misfit</td>
+          <td align="left">no misfit</td>
+          <td align="right">0.46</td>
+        </tr>
+        <tr>
+          <td align="left">V12</td>
+          <td align="right">0.966</td>
+          <td align="left">[0.827, 1.185]</td>
+          <td align="right">0.793</td>
+          <td align="left">[0.777, 1.27]</td>
+          <td align="left">no misfit</td>
+          <td align="left">no misfit</td>
+          <td align="right">1.58</td>
+        </tr>
+      </tbody>
+    </table>
+  </table-wrap>
+  </sec>
+  <sec id="cell-fig-itemfit1" specific-use="notebook-content">
+  <code language="r script">RIgetfitPlot(simfit, demodata)</code>
+  <fig id="fig-itemfit1">
+    <caption><p>Figure 1</p></caption>
+    <graphic id="fig-itemfit1" mimetype="image" mime-subtype="png" xlink:href="index_files/figure-jats/fig-itemfit1-1.png" />
+  </fig>
+  </sec>
+  <sec specific-use="notebook-content">
+  <code language="r script"># define function to run simulations for item infit/outfit cutoff values
+itemfitboot &lt;- function(dat, iterations, samplesize) {
+  
+  fit &lt;- list()
+  fit &lt;- foreach(i = 1:iterations) %do% {
+    data &lt;- dat[sample(1:nrow(dat), samplesize), ] %&gt;% 
+      as.data.frame()
+    
+    # check data for responses in all cells
+    n_resp &lt;-
+      data %&gt;%
+      as.matrix() %&gt;%
+      colSums2() %&gt;%
+      t() %&gt;%
+      as.vector()
+    
+    if (min(n_resp, na.rm = TRUE) &lt; 11) {
+      data &lt;- dat[sample(1:nrow(dat), samplesize), ] %&gt;% 
+        as.data.frame()
+    } 
+    
+    # get simulation based cutoff values
+    sfit100 &lt;- RIgetfit(data,100,9)
+    sfit200 &lt;- RIgetfit(data,200,9)
+    sfit400 &lt;- RIgetfit(data,400,9)
+
+    # apply cutoffs and store results
+    rfit100 &lt;- RIitemfit(data,sfit100, output = &quot;dataframe&quot;) %&gt;% 
+      select(infit_msq,outfit_msq,infit_diff,outfit_diff) %&gt;% 
+      add_column(item = 1:ncol(data),
+                 sims = 100,
+                 iteration = i,
+                 samplesize = samplesize)
+    
+    rfit200 &lt;- RIitemfit(data,sfit200, output = &quot;dataframe&quot;) %&gt;% 
+      select(infit_msq,outfit_msq,infit_diff,outfit_diff) %&gt;% 
+      add_column(item = 1:ncol(data),
+                 sims = 200,
+                 iteration = i,
+                 samplesize = samplesize)
+    
+    rfit400 &lt;- RIitemfit(data,sfit400, output = &quot;dataframe&quot;) %&gt;% 
+      select(infit_msq,outfit_msq,infit_diff,outfit_diff) %&gt;% 
+      add_column(item = 1:ncol(data),
+                 sims = 400,
+                 iteration = i,
+                 samplesize = samplesize)
+    
+    # combine output 
+    fit &lt;- rbind(rfit100,rfit200,rfit400)
+  }
+  return(fit)
+}</code>
+  </sec>
+  <sec specific-use="notebook-content">
+  <code language="r script">samplesizes &lt;- c(150,250,500,1000)
+
+ifb0 &lt;- list()
+ifb1 &lt;- list()
+ifb2 &lt;- list()
+
+#library(tictoc)
+#tic()
+ifb0 &lt;- map(samplesizes, ~ itemfitboot(simdata[[1]], iterations = 200, samplesize = .x))
+#toc() # 14257.358 sec elapsed
+
+ifb1 &lt;- map(samplesizes, ~ itemfitboot(simdata[[2]], iterations = 200, samplesize = .x))
+ifb2 &lt;- map(samplesizes, ~ itemfitboot(simdata[[3]], iterations = 200, samplesize = .x))
+
+# saveRDS(ifb0, &quot;data/ifb0_200.rds&quot;)
+# saveRDS(ifb2, &quot;data/ifb2_200.rds&quot;)
+# saveRDS(ifb1, &quot;data/ifb1_200.rds&quot;)
+
+ifb0_df &lt;- map_dfr(1:4, ~ do.call(&quot;rbind&quot;, ifb0[[.x]])) %&gt;% 
+  add_column(targeting = 0)
+
+ifb1_df &lt;- map_dfr(1:4, ~ do.call(&quot;rbind&quot;, ifb1[[.x]])) %&gt;% 
+  add_column(targeting = 1)
+
+ifb2_df &lt;- map_dfr(1:4, ~ do.call(&quot;rbind&quot;, ifb2[[.x]])) %&gt;% 
+  add_column(targeting = 2)
+
+ifb &lt;- rbind(ifb0_df,ifb1_df,ifb2_df)
+
+write_parquet(ifb,&quot;data/ifb.parquet&quot;)</code>
+  </sec>
+  <sec id="results">
+    <title>3.1 Results</title>
+    <sec specific-use="notebook-content">
+    <code language="r script">ifb &lt;- read_parquet(&quot;data/ifb.parquet&quot;)</code>
+    </sec>
+    <p>Figures show the percent of simulation runs that have identified
+    an item as misfitting. Items with more than 5% (crossing the lower
+    horizontal line) are colored in light red. A dashed horizontal line
+    indicates 90% detection rate. A number representing the detection
+    rate is shown nearby the bar for the misfitting item. Columns are
+    labelled with the number of iterations used by
+    <monospace>RIgetfit()</monospace> to determine cutoff values, and
+    rows are labelled with the sample size.</p>
+    <sec id="infit">
+      <title>3.1.1 Infit</title>
+      <sec id="cell-fig-ifb0" specific-use="notebook-content">
+      <code language="r script">ifb %&gt;% 
+  group_by(targeting, samplesize, sims) %&gt;% 
+  filter(!infit_diff == &quot;no misfit&quot;,
+         targeting == 0) %&gt;% 
+  count(item, .drop = F) %&gt;% 
+  mutate(Percent = n/200*100) %&gt;% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent &gt; 5, &quot;a&quot;,&quot;b&quot;))) +
+  geom_hline(yintercept = 5) +
+  geom_text(data = . %&gt;% filter(item == 9),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  guides(fill = &quot;none&quot;) +
+  facet_grid(samplesize~sims) +
+  theme_rise() +
+  geom_hline(yintercept = 90, linetype = &quot;dashed&quot;, linewidth = 0.3) +
+  labs(subtitle = &quot;Targeting 0 logits (item 9 misfit). 200 simulations per combination.&quot;,
+       title = &quot;Conditional infit detection rate&quot;)</code>
+      <boxed-text>
+        <preformat>Warning: Removed 18 rows containing missing values or values outside the scale range
+(`geom_col()`).</preformat>
+      </boxed-text>
+      <fig id="fig-ifb0">
+        <caption><p>Figure 2</p></caption>
+        <graphic id="fig-ifb0" mimetype="image" mime-subtype="png" xlink:href="index_files/figure-jats/fig-ifb0-1.png" />
+      </fig>
+      </sec>
+      <p><xref alt="Figure 2" rid="fig-ifb0">Figure 2</xref> shows the
+      detection rate when the misfitting item is located at the sample
+      mean. Detection rate is highest for the condition with 100
+      iterations with sample size 100 and 250, but it also shows higher
+      levels of false positives when sample size increases to 500 or
+      more.</p>
+      <sec id="cell-fig-ifb1" specific-use="notebook-content">
+      <code language="r script">ifb %&gt;% 
+  group_by(targeting, samplesize, sims) %&gt;% 
+  filter(!infit_diff == &quot;no misfit&quot;,
+         targeting == 1) %&gt;% 
+  count(item, .drop = F) %&gt;% 
+  mutate(Percent = n/200*100) %&gt;% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent &gt; 5, &quot;a&quot;,&quot;b&quot;))) +
+  geom_hline(yintercept = 5) +
+  geom_text(data = . %&gt;% filter(item == 18),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = 1.2, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  guides(fill = &quot;none&quot;) +
+  facet_grid(samplesize~sims) +
+  theme_rise() +
+  geom_hline(yintercept = 90, linetype = &quot;dashed&quot;, linewidth = 0.3) +
+  labs(subtitle = &quot;Targeting -1 logits (item 18 misfit). 200 simulations per combination.&quot;,
+       title = &quot;Conditional infit detection rate&quot;)</code>
+      <boxed-text>
+        <preformat>Warning: Removed 20 rows containing missing values or values outside the scale range
+(`geom_col()`).</preformat>
+      </boxed-text>
+      <fig id="fig-ifb1">
+        <caption><p>Figure 3</p></caption>
+        <graphic id="fig-ifb1" mimetype="image" mime-subtype="png" xlink:href="index_files/figure-jats/fig-ifb1-1.png" />
+      </fig>
+      </sec>
+      <p>When the misfitting item is offset in targeting by -1 logits
+      compared to the sample mean (see
+      <xref alt="Figure 3" rid="fig-ifb1">Figure 3</xref>), the smallest
+      sample size has less power to detect misfit compared to the
+      on-target misfitting item. There are lower rates of false
+      positives across all sample sizes and iterations.</p>
+      <sec id="cell-fig-ifb2" specific-use="notebook-content">
+      <code language="r script">ifb %&gt;% 
+  group_by(targeting, samplesize, sims) %&gt;% 
+  filter(!infit_diff == &quot;no misfit&quot;,
+         targeting == 2) %&gt;% 
+  count(item, .drop = F) %&gt;% 
+  mutate(Percent = n/200*100) %&gt;% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent &gt; 5, &quot;a&quot;,&quot;b&quot;))) +
+  geom_hline(yintercept = 5) +
+  geom_text(data = . %&gt;% filter(item == 13),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = 1.2, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  guides(fill = &quot;none&quot;) +
+  facet_grid(samplesize~sims) +
+  theme_rise() +
+  geom_hline(yintercept = 90, linetype = &quot;dashed&quot;, linewidth = 0.3) +
+  labs(subtitle = &quot;Targeting -2 logits (item 13 misfit). 200 simulations per combination.&quot;,
+       title = &quot;Conditional infit detection rate&quot;)</code>
+      <boxed-text>
+        <preformat>Warning: Removed 16 rows containing missing values or values outside the scale range
+(`geom_col()`).</preformat>
+      </boxed-text>
+      <fig id="fig-ifb2">
+        <caption><p>Figure 4</p></caption>
+        <graphic id="fig-ifb2" mimetype="image" mime-subtype="png" xlink:href="index_files/figure-jats/fig-ifb2-1.png" />
+      </fig>
+      </sec>
+      <p>Finally, when the misfitting item is located at -2 logits
+      compared to the sample mean (see
+      <xref alt="Figure 4" rid="fig-ifb2">Figure 4</xref>), we see a
+      stronger reduction in power for sample sizes 150 and 250. No false
+      positives are identified.</p>
+    </sec>
+    <sec id="outfit">
+      <title>3.1.2 Outfit</title>
+      <sec id="cell-fig-ifb0out" specific-use="notebook-content">
+      <code language="r script">ifb %&gt;% 
+  group_by(targeting, samplesize, sims) %&gt;% 
+  filter(!outfit_diff == &quot;no misfit&quot;,
+         targeting == 0) %&gt;% 
+  count(item, .drop = F) %&gt;% 
+  mutate(Percent = n/200*100) %&gt;% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent &gt; 5, &quot;a&quot;,&quot;b&quot;))) +
+  geom_hline(yintercept = 5) +
+  geom_text(data = . %&gt;% filter(item == 9),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  guides(fill = &quot;none&quot;) +
+  facet_grid(samplesize~sims) +
+  theme_rise() +
+  geom_hline(yintercept = 90, linetype = &quot;dashed&quot;, linewidth = 0.3) +
+  labs(subtitle = &quot;Targeting 0 logits (item 9 misfit). 200 simulations per combination.&quot;,
+       title = &quot;Conditional outfit detection rate&quot;)</code>
+      <boxed-text>
+        <preformat>Warning: Removed 17 rows containing missing values or values outside the scale range
+(`geom_col()`).</preformat>
+      </boxed-text>
+      <fig id="fig-ifb0out">
+        <caption><p>Figure 5</p></caption>
+        <graphic id="fig-ifb0out" mimetype="image" mime-subtype="png" xlink:href="index_files/figure-jats/fig-ifb0out-1.png" />
+      </fig>
+      </sec>
+      <sec id="cell-fig-ifb1out" specific-use="notebook-content">
+      <code language="r script">ifb %&gt;% 
+  group_by(targeting, samplesize, sims) %&gt;% 
+  filter(!outfit_diff == &quot;no misfit&quot;,
+         targeting == 1) %&gt;% 
+  count(item, .drop = F) %&gt;% 
+  mutate(Percent = n/200*100) %&gt;% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent &gt; 5, &quot;a&quot;,&quot;b&quot;))) +
+  geom_hline(yintercept = 5) +
+  geom_text(data = . %&gt;% filter(item == 18),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = 1.2, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  guides(fill = &quot;none&quot;) +
+  facet_grid(samplesize~sims) +
+  theme_rise() +
+  geom_hline(yintercept = 90, linetype = &quot;dashed&quot;, linewidth = 0.3) +
+  labs(subtitle = &quot;Targeting -1 logits (item 18 misfit). 200 simulations per combination.&quot;,
+       title = &quot;Conditional outfit detection rate&quot;)</code>
+      <boxed-text>
+        <preformat>Warning: Removed 19 rows containing missing values or values outside the scale range
+(`geom_col()`).</preformat>
+      </boxed-text>
+      <fig id="fig-ifb1out">
+        <caption><p>Figure 6</p></caption>
+        <graphic id="fig-ifb1out" mimetype="image" mime-subtype="png" xlink:href="index_files/figure-jats/fig-ifb1out-1.png" />
+      </fig>
+      </sec>
+      <sec id="cell-fig-ifb2out" specific-use="notebook-content">
+      <code language="r script">ifb %&gt;% 
+  group_by(targeting, samplesize, sims) %&gt;% 
+  filter(!outfit_diff == &quot;no misfit&quot;,
+         targeting == 2) %&gt;% 
+  count(item, .drop = F) %&gt;% 
+  mutate(Percent = n/200*100) %&gt;% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent &gt; 5, &quot;a&quot;,&quot;b&quot;))) +
+  geom_hline(yintercept = 5) +
+  geom_text(data = . %&gt;% filter(item == 13),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  guides(fill = &quot;none&quot;) +
+  facet_grid(samplesize~sims) +
+  theme_rise() +
+  geom_hline(yintercept = 90, linetype = &quot;dashed&quot;, linewidth = 0.3) +
+  labs(subtitle = &quot;Targeting -2 logits (item 13 misfit). 200 simulations per combination.&quot;,
+       title = &quot;Conditional outfit detection rate&quot;)</code>
+      <boxed-text>
+        <preformat>Warning: Removed 14 rows containing missing values or values outside the scale range
+(`geom_col()`).</preformat>
+      </boxed-text>
+      <fig id="fig-ifb2out">
+        <caption><p>Figure 7</p></caption>
+        <graphic id="fig-ifb2out" mimetype="image" mime-subtype="png" xlink:href="index_files/figure-jats/fig-ifb2out-1.png" />
+      </fig>
+      </sec>
+      <p>As shown in
+      <xref alt="Figure 5" rid="fig-ifb0out">Figure 5</xref>,
+      <xref alt="Figure 6" rid="fig-ifb1out">Figure 6</xref>, and
+      <xref alt="Figure 7" rid="fig-ifb2out">Figure 7</xref>, outfit is
+      performing much worse than infit across the board.</p>
+    </sec>
+    <sec id="comments">
+      <title>3.1.3 Comments</title>
+      <p>Based on these simulation, it seems reasonable to recommend the
+      use of infit in determining item fit over outfit. The performance
+      of outfit calls to question whether it is useful at all.</p>
+      <p>Regarding infit, it looks like 100 iterations are to recommend
+      to determine cutoff values when the sample size is 250 or lower,
+      while 200 or 400 iterations reduce the risk for false positives at
+      sample sizes of 500 or larger. False positives are found at sample
+      sizes 500 and 1000 only. The risk for false positives is notably
+      higher when the misfitting item is located at the sample mean
+      compared to when the misfitting item is off-target by -1 logits or
+      more.</p>
+      <p>These findings make a good argument for removing one item at a
+      time when the analysis indicates misfit, starting with the most
+      misfitting item. This is especially relevant for sample sizes at
+      500 or above and when misfitting items are located close to the
+      sample mean.</p>
+    </sec>
+  </sec>
+</sec>
+<sec id="study-2">
+  <title>4 Study 2</title>
+  <p>Item-restscore using the same datasets and adding the dataset with
+  all three items misfitting.</p>
+</sec>
+<sec id="study-3">
+  <title>5 Study 3</title>
+  <p>Item-restscore bootstrapped to better handle big samples, but also
+  perhaps for smaller samples?</p>
+</sec>
+<sec id="discussion">
+  <title>6 Discussion</title>
+</sec>
+<sec id="conclusion">
+  <title>7 Conclusion</title>
+</sec>
+</body>
+
+
+
+<back>
+<ref-list>
+  <title>References</title>
+  <ref id="ref-muller_item_2020">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Müller</surname><given-names>Marianne</given-names></name>
+      </person-group>
+      <article-title>Item fit statistics for Rasch analysis: Can we trust them?</article-title>
+      <source>Journal of Statistical Distributions and Applications</source>
+      <year iso-8601-date="2020-08">2020</year><month>08</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-06-17">2024</year><month>06</month><day>17</day></date-in-citation>
+      <volume>7</volume>
+      <issue>1</issue>
+      <issn>2195-5832</issn>
+      <uri>https://doi.org/10.1186/s40488-020-00108-7</uri>
+      <pub-id pub-id-type="doi">10.1186/s40488-020-00108-7</pub-id>
+      <fpage>5</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-kreiner_note_2011">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Kreiner</surname><given-names>Svend</given-names></name>
+      </person-group>
+      <article-title>A Note on Item–Restscore Association in Rasch Models</article-title>
+      <source>Applied Psychological Measurement</source>
+      <year iso-8601-date="2011-10">2011</year><month>10</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-03-22">2024</year><month>03</month><day>22</day></date-in-citation>
+      <volume>35</volume>
+      <issue>7</issue>
+      <issn>0146-6216</issn>
+      <uri>https://doi.org/10.1177/0146621611410227</uri>
+      <pub-id pub-id-type="doi">10.1177/0146621611410227</pub-id>
+      <fpage>557</fpage>
+      <lpage>561</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-mueller_iarm_2022">
+    <element-citation>
+      <person-group person-group-type="author">
+        <name><surname>Mueller</surname><given-names>Marianne</given-names></name>
+        <name><surname>Santiago</surname><given-names>Pedro Henrique Ribeiro</given-names></name>
+      </person-group>
+      <article-title>Iarm: Item Analysis in Rasch Models</article-title>
+      <year iso-8601-date="2022-08">2022</year><month>08</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-08-06">2024</year><month>08</month><day>06</day></date-in-citation>
+      <uri>https://cran.r-project.org/web/packages/iarm/index.html</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-easyrasch">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Johansson</surname><given-names>Magnus</given-names></name>
+      </person-group>
+      <source>easyRasch: Psychometric analysis in r with rasch measurement theory</source>
+      <year iso-8601-date="2024">2024</year>
+      <uri>https://github.com/pgmj/easyRasch</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-mair_extended_2007">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Mair</surname><given-names>Patrick</given-names></name>
+        <name><surname>Hatzinger</surname><given-names>Reinhold</given-names></name>
+      </person-group>
+      <article-title>Extended Rasch Modeling: The eRm Package for the Application of IRT Models in R</article-title>
+      <source>Journal of Statistical Software</source>
+      <year iso-8601-date="2007-02">2007</year><month>02</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2020-09-10">2020</year><month>09</month><day>10</day></date-in-citation>
+      <volume>20</volume>
+      <issue>1</issue>
+      <issn>1548-7660</issn>
+      <uri>https://www.jstatsoft.org/index.php/jss/article/view/v020i09</uri>
+      <pub-id pub-id-type="doi">10.18637/jss.v020.i09</pub-id>
+      <fpage>1</fpage>
+      <lpage>20</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-warm_weighted_1989">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Warm</surname><given-names>Thomas A.</given-names></name>
+      </person-group>
+      <article-title>Weighted likelihood estimation of ability in item response theory</article-title>
+      <source>Psychometrika</source>
+      <year iso-8601-date="1989-09">1989</year><month>09</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-02-01">2023</year><month>02</month><day>01</day></date-in-citation>
+      <volume>54</volume>
+      <issue>3</issue>
+      <issn>1860-0980</issn>
+      <uri>https://doi.org/10.1007/BF02294627</uri>
+      <pub-id pub-id-type="doi">10.1007/BF02294627</pub-id>
+      <fpage>427</fpage>
+      <lpage>450</lpage>
+    </element-citation>
+  </ref>
+</ref-list>
+</back>
+
+
+</sub-article>
