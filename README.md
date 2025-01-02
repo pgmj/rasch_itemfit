@@ -1,4 +1,3 @@
-## A Quarto Manuscript Template
+## Detecting misfitting items in Rasch models
 
-This is a template repo for generating a manuscript from Quarto that accompanies the tutorial at: [Quarto Manuscripts: RStudio](https://quarto.org/docs/manuscripts/authoring/rstudio.html)
-
+This is a code and data repository for the manuscript *Detecting misfitting items in Rasch models*.
