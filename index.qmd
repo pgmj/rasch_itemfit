@@ -3,8 +3,8 @@ title: "Detecting item misfit in Rasch models"
 author:
   - name: Magnus Johansson
     affiliations:
-      - name: RISE Research Institutes of Sweden, Division Built Environment, System Transition, Stockholm, Sweden
-      - name: Centre for Psychiatry Research, Department of Clinical Neuroscience, Karolinska Institutet, & Stockholm Health Care Services, Region Stockholm, Solna, Sweden
+      - name: RISE Research Institutes of Sweden, Division Built Environment, System Transition
+      - name: Centre for Psychiatry Research, Department of Clinical Neuroscience, Karolinska Institutet, & Stockholm Health Care Services, Region Stockholm
     orcid: 0000-0003-1669-592X
 keywords:
   - Rasch
@@ -176,6 +176,8 @@ This study was rather computationally demanding since each simulation run entail
 ```{r}
 #| label: tbl-itemfit1
 #| tbl-cap: Conditional item fit with simulation based cutoff values
+#| cache: true
+
 simfit <- RIgetfit(demodata, iterations = 400, cpu = 8)
 RIitemfit(demodata, simfit, output = "quarto")
 ```
@@ -883,6 +885,7 @@ For our final set of simulations, we will use a non-parametric bootstrap procedu
 ```{r}
 #| label: tbl-bootir
 #| tbl-cap: Example output from `RIbootRestscore()`
+#| cache: true
 
 #tic()
 simdata3 %>% 
@@ -900,7 +903,7 @@ simdata3 %>%
 
 Second, we will also apply the bootstrapped item-restscore method to sample sizes 150 and 250, using the complete sample for the same bootstrap procedure to see if this produces more useful information than previously tested strategies for identifying misfitting items.
 
-
+## Results
 
 ```{r}
 #| eval: false
@@ -935,10 +938,11 @@ irb0_df %>%
   ggplot(aes(x = percent, y = item, color = item_restscore)) +
   stat_pointinterval(point_interval	= "median_hdci") +
   theme_rise(fontfamily = "sans") +
-  labs(caption = "Point indicates median value and lines are highest-density continuous interval for .66 and .95.",
+  labs(caption = str_wrap("Point indicates median value and lines are highest-density continuous interval for .66 and .95.",80),
        x = "Distribution of percent values for item misfit", y = "Item",
        title = "Item-restscore bootstrap results",
-       subtitle = "250 bootstrap iterations with 800 respondents from a sample of 2000. 500 simulations were used.") +
+       subtitle = str_wrap("250 bootstrap iterations with 800 respondents from a sample of 2000. 500 simulations were used.",70)
+       ) +
   scale_color_discrete('Type', labels = c("Overfit","Underfit"))
 ```
 
@@ -948,7 +952,7 @@ irb0_df %>%
 #| tbl-subcap: 
 #|   - "Misfitting items"
 #|   - "False positives"
-#| layout-ncol: 2
+#| layout-ncol: 1
 
 irb0_df %>% 
   filter(item %in% c("V9","V13","V18")) %>% 
@@ -988,13 +992,68 @@ irb0_df %>%
 
 ## Smaller samples
 
-Can bootstrapping item-restscore 
+We will use 200 simulations for this part, applied to sample sizes 150 and 250. As an additional condition, we will use both 250 and 500 bootstraps for item-restscore in each simulation.
+
+```{r}
+#| eval: false
+ir_boot2 <- function(dat, iterations, samplesize) {
+  
+  fit <- list()
+  fit <- foreach(i = 1:iterations) %do% {
+    data <- dat[sample(1:nrow(dat), samplesize), ] %>% 
+      as.data.frame()
+    
+        # check data for responses in all cells
+    n_resp <-
+      data %>%
+      as.matrix() %>%
+      colSums2() %>%
+      t() %>%
+      as.vector()
+    
+    if (min(n_resp, na.rm = TRUE) < 11) {
+      data <- dat[sample(1:nrow(dat), samplesize), ] %>% 
+        as.data.frame()
+    } 
+    
+    fit1 <- RIbootRestscore(data, iterations = 250, samplesize = nrow(data), cpu = 9, output = "dataframe", cutoff = 0) %>% 
+      select(item,item_restscore,percent) %>% 
+      filter(!item_restscore == "no misfit") %>% 
+      add_column(iteration = i,
+                 bootit = 250)
+    
+    fit2 <- RIbootRestscore(data, iterations = 500, samplesize = nrow(data), cpu = 9, output = "dataframe", cutoff = 0) %>% 
+      select(item,item_restscore,percent) %>% 
+      filter(!item_restscore == "no misfit") %>% 
+      add_column(iteration = i,
+                 bootit = 500)
+    
+    fit <- rbind(fit1,fit2)
+    
+  }
+  return(fit)
+}
+
+
+#test <- ir_boot2(simdata3, 2, 150)
+
+irb150 <- ir_boot2(simdata3, 200, 150)
+saveRDS(irb150,"data/irb150.rds")
+
+irb250 <- ir_boot2(simdata3, 200, 250)
+saveRDS(irb250,"data/irb250.rds")
+
+```
+
+## Final simulation? 
+
+Run with 40 items and 3 misfitting, just 500 simulations with normal item-restscore to assess if this makes a difference. And 10 items with 1-2 misfit?
 
 # Discussion
 
 ## Limitations
 
-Number of items could be varied more. Partial credit model for polytomous data would have been nice to also test. Although results regarding detection rate should generalize, maybe the sample size in relation to number of items does not easily translate from the dichotomous case.
+Number of items could be varied more. However, the results from Müller [-@muller_item_2020], which use 10, 15, and 20 items, indicates small differences in critical value ranges. But this might not have implications for detection rate of misfitting items (we need the 40 items simulation and maybe 10 also?). Partial credit model for polytomous data would have been nice to also test. Although results regarding detection rate should generalize from RM to PCM, maybe the sample size in relation to number of items does not easily translate from the dichotomous case?
 
 # Conclusion
 
