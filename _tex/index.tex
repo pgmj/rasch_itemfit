@@ -202,7 +202,7 @@
 
 \title{Detecting misfitting items in Rasch models}
 \author{Magnus Johansson}
-\date{2025-01-02}
+\date{2025-01-03}
 
 \begin{document}
 \maketitle
@@ -229,25 +229,27 @@ compared to item-restscore (Kreiner 2011; Mueller and Santiago 2022).
 Third, a bootstrap method for item-restscore will be presented and
 tested.
 
-Müller (2020) showed how the range of conditional item infit varies with
-sample size and the expected average item infit range is fairly well
-captured by Smith's rule-of-thumb formula (1±2/√n). However, the average
-range does not apply for all items, since item location also affects
-model expected item fit which means some items may have plausible item
-fit values outside Smith's average value range.
+Müller (2020) showed how the range of critical values for conditional
+item infit varies with sample size. The expected average item
+conditional infit range was described by Müller as fairly well captured
+by Smith's rule-of-thumb formula 1±2/√n (Smith, Schumacker, and Bush
+1998). However, the average range does not apply for all items, since
+item location also affects model expected item fit which means that some
+items may have plausible item fit values outside Smith's average value
+range.
 
-It is proposed that by using parametric bootstrapping one can establish
-item fit cutoff values that are sample and item specific. The R package
-\texttt{easyRasch} (Johansson 2024) includes a function to determine
-item infit and outfit cutoff values, which will be tested in the
-simulations in this paper.
+It is here proposed that by using parametric bootstrapping one can
+establish item fit critical cutoff values that are sample and item
+specific. The R package \texttt{easyRasch} (Johansson 2024) includes a
+function to determine item infit and outfit cutoff values, which will be
+tested in the simulations in this paper.
 
 It is important to note that the conditional item fit described by
 Müller (2020) and implemented in the \texttt{iarm} R package (Mueller
-and Santiago 2022) is different from the unconditional item fit
-implemented in software such as Winsteps and RUMM2030, as well as all R
-packages except \texttt{iarm}. Unconditional item fit can result in
-unreliable item fit in sample sizes as small as 250 with increasing
+and Santiago 2022) should not be confused with the unconditional item
+fit implemented in software such as Winsteps and RUMM2030, as well as
+all R packages except \texttt{iarm}. Unconditional item fit can result
+in unreliable item fit in sample sizes as small as 250 with increasing
 likelihood of problems as sample size increases. Readers are strongly
 recommended to read Müller's paper to fully understand the problems with
 unconditional item fit.
@@ -257,6 +259,8 @@ unconditional item fit.
 \textsubscript{Source:
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
 Notebook}}
+
+A fully reproducible manuscript with R code and data is available
 
 The simulation of response data used three steps: first, a vector of
 theta values (person scores on the latent variable) were generated using
@@ -299,8 +303,8 @@ Steps three and four were iterated over, using resampling with
 replacement from the estimated theta values as a basis for simulating
 the response data in step three.
 
-Summary statistics were created with focus on correctly detecting misfit
-and whether false positives were identified.
+Summary statistics were created with focus on the percentage of correct
+detection of misfit and false positives.
 
 \textsubscript{Source:
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
@@ -316,9 +320,10 @@ Notebook}}
 
 \section{Study 1}\label{study-1}
 
-Conditional mean square (MSQ) infit and outfit, henceforth referred to
-only as infit or outfit. \textbf{Refer to Müller (and vignette ref) for
-technical description\ldots{}}
+Item mean square standardized residuals are either unweighted, which is
+referred to as ``outfit'', or information weighted, which we call
+``infit'' (Ostini and Nering 2006, 86--87). For details on conditional
+item fit we refer to the previously mentioned paper by Müller (2020).
 
 Main lines of inquiry:
 
@@ -351,17 +356,17 @@ calculate the cutoff values for infit and outfit.
 Then the \texttt{RIitemfit()} function is used to summarize the
 bootstrap results and also calculates the infit and outfit for each item
 in the observed data and highlights items with infit/outfit values
-outside of the cutoff values. \texttt{RIitemfit()} has a default setting
-to slightly truncate the distribution of values using
-\texttt{stats::quantile()} at 0.001 and 0.999 to reduce extreme values.
-An example is demonstrated in Table~\ref{tbl-itemfit1}, using a subset
-of the items used in the simulations. Figure~\ref{fig-itemfit1} provides
-a visualization of the distribution of bootstrapped infit and outfit
-values, together with the infit/outfit values from the observed data
-illustrated using an orange diamond shape. Note the variation between
-items in plausible values of infit and outfit based on the bootstrap,
-and that Smith's rule-of-thumb regarding infit (1±2/√n) would be 0.9-1.1
-for a sample size of 400.
+outside of the cutoff values. \texttt{RIitemfit()} has a default (user
+modifiable) setting to slightly truncate the distribution of values
+using \texttt{stats::quantile()} at 0.001 and 0.999 to remove extreme
+values. An example is demonstrated in Table~\ref{tbl-itemfit1}, using a
+subset of the items used in the simulations. Figure~\ref{fig-itemfit1}
+provides a visualization of the distribution of bootstrapped infit and
+outfit values, together with the infit/outfit values from the observed
+data illustrated using an orange diamond shape. Note the variation
+between items in plausible values of infit and outfit based on the
+bootstrap, and that Smith's rule-of-thumb regarding infit (1±2/√n) would
+be 0.9-1.1 for a sample size of 400.
 
 This study was rather computationally demanding since each simulation
 run entailed 100-400 underlying simulations. The sample sizes used were
@@ -409,13 +414,13 @@ Location
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-V1 & 1.017 & {[}0.863, 1.131{]} & 1.061 & {[}0.577, 1.435{]} & no misfit
+V1 & 1.017 & {[}0.862, 1.162{]} & 1.061 & {[}0.647, 1.423{]} & no misfit
 & no misfit & -1.37 \\
-V11 & 1.000 & {[}0.82, 1.169{]} & 1.032 & {[}0.716, 1.279{]} & no misfit
+V11 & 1.000 & {[}0.839, 1.21{]} & 1.032 & {[}0.742, 1.289{]} & no misfit
 & no misfit & -0.66 \\
-V3 & 1.022 & {[}0.894, 1.102{]} & 1.050 & {[}0.633, 1.465{]} & no misfit
+V3 & 1.022 & {[}0.902, 1.098{]} & 1.050 & {[}0.662, 1.498{]} & no misfit
 & no misfit & 0.46 \\
-V12 & 0.966 & {[}0.84, 1.173{]} & 0.793 & {[}0.786, 1.249{]} & no misfit
+V12 & 0.966 & {[}0.827, 1.19{]} & 0.793 & {[}0.783, 1.306{]} & no misfit
 & no misfit & 1.58 \\
 
 \end{longtable}
@@ -458,10 +463,10 @@ Notebook}}
 
 Figures show the percent of simulation runs that have identified an item
 as misfitting. Items with more than 5\% are colored in light red. A
-number representing the detection rate is shown nearby the bar for the
-misfitting item. Columns are labelled with the number of iterations used
-by \texttt{RIgetfit()} to determine cutoff values, and rows are labelled
-with the sample size.
+number representing the detection rate is shown adjacent to the bar
+representing the misfitting item. The figure grid columns are labelled
+with the number of iterations used by \texttt{RIgetfit()} to determine
+cutoff values, and grid rows are labelled with the sample size.
 
 \subsubsection{Infit}\label{infit}
 
@@ -596,7 +601,8 @@ Based on these simulation, it seems reasonable to recommend the use of
 infit in determining item fit over outfit. The performance of outfit
 calls to question whether it is useful at all.
 
-Regarding infit, it looks like 100 iterations are to recommend to
+Regarding infit and the use of parametric bootstrapping with
+\texttt{RIgetfit()}, it looks like 100 iterations are to recommend to
 determine cutoff values when the sample size is 250 or lower, while 200
 or 400 iterations reduce the risk for false positives at sample sizes of
 500 or larger. False positives are found at sample sizes 500 and 1000
@@ -604,24 +610,151 @@ only. The risk for false positives is notably higher when the misfitting
 item is located at the sample mean compared to when the misfitting item
 is off-target by -1 logits or more.
 
-These findings make a good argument for removing one item at a time when
-the analysis indicates misfit, starting with the most misfitting item.
-This is especially relevant for sample sizes at 500 or above and when
-misfitting items are located close to the sample mean.
-
 \section{Study 2}\label{study-2}
 
-Item-restscore using the same datasets and adding the dataset with all
-three items misfitting.
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\subsection{Results}\label{results-1}
+
+\phantomsection\label{cell-fig-itemrestscore1}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-itemrestscore1-1.pdf}}
+
+}
+
+\caption{\label{fig-itemrestscore1}}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+This simulation includes an additional condition with 100 respondents,
+which results in significantly lower detection rates than with 150
+respondents. Compared to infit at 250 respondents, item-restscore has
+detection rates of 95.2\%, 90.9\%, and 62.4\% for targeting 0, -1, and
+-2, while infit has 96.5\%, 96.5\%, and 71\%. For sample size 500 and
+1000, performance is similar, including the increased tendency for false
+positives at n = 1000.
+
+Similarly to infit, item-restscore has decreased detection rate for
+off-target misfitting items. The false positive rate is lower for
+item-restscore than infit for sample sizes below 1000.
 
 \section{Study 3}\label{study-3}
 
-Item-restscore bootstrapped to better handle big samples, but also
-perhaps for smaller samples?
+We will now compare the performance of infit and item-restscore when all
+three items are misfitting at the same time. This simulation will also
+include a condition with 2000 respondents, to examine if the false
+positive rate increases with more respondents. For infit, we will only
+use 200 iterations with \texttt{RIgetfit()} since that condition seemed
+to strike a balance between detection rate and false positives.
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\subsubsection{Results}\label{results-2}
+
+\phantomsection\label{cell-fig-ifb3}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-ifb3-1.pdf}}
+
+}
+
+\caption{\label{fig-ifb3}}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\phantomsection\label{cell-fig-ifb3out}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-ifb3out-1.pdf}}
+
+}
+
+\caption{\label{fig-ifb3out}}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+Looking at the performance of infit with three misfitting items
+(Figure~\ref{fig-ifb3}), we can see that the detection rate is markedly
+worse for item 13 in sample sizes 500 and below, compared to when single
+items were misfitting. The false positive rate has increased for sample
+size of 1000, and we can see this escalate strongly for n = 2000. Outfit
+(Figure~\ref{fig-ifb3out}) again performs worse than infit.
+
+\phantomsection\label{cell-fig-itemrestscore2}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-itemrestscore2-1.pdf}}
+
+}
+
+\caption{\label{fig-itemrestscore2}}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+Item-restscore has higher detection rate than infit (see
+Figure~\ref{fig-itemrestscore2}), but also higher levels of false
+positives.
+
+\section{Study 4}\label{study-4}
+
+For our final set of simulations, we will use a non-parametric bootstrap
+procedure with item-restscore. First, based on the above problematic
+sample size of 2000, we let the bootstrap function sample with
+replacement using n = 800. 250 bootstrap samples will be used, then we
+summarize the percentage indicating misfit for each item. Second, we
+will also apply this to samplesizes 150, 250, and 500, and use the
+complete sample for the same bootstrap procedure to see if this produces
+more useful information for identifying misfitting items.
 
 \section{Discussion}\label{discussion}
 
 \section{Conclusion}\label{conclusion}
+
+These findings make a good argument for removing one item at a time when
+the analysis indicates misfitting items, starting with the most
+misfitting item. This is especially relevant for sample sizes at 500 or
+above and when misfitting items are located close to the sample mean.
 
 \section*{References}\label{references}
 \addcontentsline{toc}{section}{References}
@@ -653,6 +786,17 @@ Müller, Marianne. 2020. {``Item Fit Statistics for {Rasch} Analysis: Can
 We Trust Them?''} \emph{Journal of Statistical Distributions and
 Applications} 7 (1): 5.
 \url{https://doi.org/10.1186/s40488-020-00108-7}.
+
+\bibitem[\citeproctext]{ref-ostini_polytomous_2006}
+Ostini, Remo, and Michael Nering. 2006. \emph{Polytomous {Item}
+{Response} {Theory} {Models}}. SAGE Publications, Inc.
+\url{https://doi.org/10.4135/9781412985413}.
+
+\bibitem[\citeproctext]{ref-smith_using_1998}
+Smith, R. M., R. E. Schumacker, and M. J. Bush. 1998.
+{``\href{https://www.ncbi.nlm.nih.gov/pubmed/9661732}{Using Item Mean
+Squares to Evaluate Fit to the {Rasch} Model}.''} \emph{Journal of
+Outcome Measurement} 2 (1): 66--78.
 
 \bibitem[\citeproctext]{ref-warm_weighted_1989}
 Warm, Thomas A. 1989. {``Weighted Likelihood Estimation of Ability in
