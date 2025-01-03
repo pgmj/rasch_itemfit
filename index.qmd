@@ -27,11 +27,11 @@ editor_options:
 
 This paper presents a series of simulations conducted to evaluate methods to detect of item misfit in Rasch models. First, conditional item infit and outfit will be under scrutiny. Second, item infit will be compared to item-restscore [@kreiner_note_2011;@mueller_iarm_2022]. Third, a bootstrap method for item-restscore will be presented and tested.
 
-Müller [-@muller_item_2020] showed how the range of conditional item infit varies with sample size and the expected average item infit range is fairly well captured by Smith's rule-of-thumb formula (1±2/√n). However, the average range does not apply for all items, since item location also affects model expected item fit which means some items may have plausible item fit values outside Smith's average value range.
+Müller [-@muller_item_2020] showed how the range of critical values for conditional item infit varies with sample size. The expected average item conditional infit range was described by Müller as fairly well captured by Smith's rule-of-thumb formula 1±2/√n [@smith_using_1998]. However, the average range does not apply for all items, since item location also affects model expected item fit which means that some items may have plausible item fit values outside Smith's average value range.
 
-It is proposed that by using parametric bootstrapping one can establish item fit cutoff values that are sample and item specific. The R package `easyRasch` [@easyrasch] includes a function to determine item infit and outfit cutoff values, which will be tested in the simulations in this paper.
+It is here proposed that by using parametric bootstrapping one can establish item fit critical cutoff values that are sample and item specific. The R package `easyRasch` [@easyrasch] includes a function to determine item infit and outfit cutoff values, which will be tested in the simulations in this paper.
 
-It is important to note that the conditional item fit described by Müller [-@muller_item_2020] and implemented in the `iarm` R package [@mueller_iarm_2022] is different from the unconditional item fit implemented in software such as Winsteps and RUMM2030, as well as all R packages except `iarm`. Unconditional item fit can result in unreliable item fit in sample sizes as small as 250 with increasing likelihood of problems as sample size increases. Readers are strongly recommended to read Müller's paper to fully understand the problems with unconditional item fit.
+It is important to note that the conditional item fit described by Müller [-@muller_item_2020] and implemented in the `iarm` R package [@mueller_iarm_2022] should not be confused with the unconditional item fit implemented in software such as Winsteps and RUMM2030, as well as all R packages except `iarm`. Unconditional item fit can result in unreliable item fit in sample sizes as small as 250 with increasing likelihood of problems as sample size increases. Readers are strongly recommended to read Müller's paper to fully understand the problems with unconditional item fit.
 
 # Methods 
 
@@ -51,8 +51,11 @@ showtext_auto()
 select <- dplyr::select
 count <- dplyr::count
 rename <- dplyr::rename
+
+theme_rise <- theme_rise(fontfamily = "sans")
 ```
 
+A fully reproducible manuscript with R code and data is available 
 
 The simulation of response data used three steps: first, a vector of theta values (person scores on the latent variable) were generated using `rnorm(mean = 0, sd = 1.5)`. Second, a set of item locations ranging from -2 to 2 logits were generated for dichotomous items, using `runif(n = 20, min = -2, max = 2)`. Third, the theta values were used to simulate item responses for participants, using `sim.xdim()` from the `eRm` package [@mair_extended_2007], which allows simulation of multidimensional response data. Multiple datasets were generated using the same item and person parameters, varying the targeting and number of the misfitting item(s). More details are described under the separate studies below.
 
@@ -66,7 +69,7 @@ The parametric bootstrapping procedure was implemented using random samples from
 
 Steps three and four were iterated over, using resampling with replacement from the estimated theta values as a basis for simulating the response data in step three.
 
-Summary statistics were created with focus on correctly detecting misfit and whether false positives were identified.
+Summary statistics were created with focus on the percentage of correct detection of misfit and false positives.
 
 ```{r}
 #| output: false
@@ -115,12 +118,30 @@ simdata <- list(data0 = simdata0,
                 data1 = simdata1,
                 data2 = simdata2)
 #saveRDS(simdata,"simdata10000.rds")
+
+### And one dataset with all 3 items misfitting
+# a matrix to specify which dimension each item loads on
+wmat3 <- matrix(nrow = 20,
+               ncol = 2)
+# set all items to load on dimension one
+wmat3[1:20,1] <- 1
+wmat3[1:20,2] <- 0
+# item 9, with good targeting in this item set (closest to sample theta mean of 0), is chosen to belong to a second dimension
+wmat3[c(9,13,18),1] <- 0
+wmat3[c(9,13,18),2] <- 1
+
+# generate dichotomous data
+simdata3 <- eRm::sim.xdim(10000, items1, cutpoint = "randomized", Sigma = sigma, weightmat = wmat3)
+
+saveRDS(simdata3,"data/simdata3.rds")
 ```
 
 
 ```{r}
 #| output: false
 simdata <- readRDS("data/simdata10000.rds")
+simdata3 <- readRDS("data/simdata3.rds") %>% 
+  as.data.frame()
 demodata <- simdata[[1]] %>% 
   as.data.frame() %>% 
   slice(1:400) %>% 
@@ -129,7 +150,7 @@ demodata <- simdata[[1]] %>%
 
 # Study 1
 
-Conditional mean square (MSQ) infit and outfit, henceforth referred to only as infit or outfit. **Refer to Müller (and vignette ref) for technical description...**
+Item mean square standardized residuals are either unweighted, which is referred to as "outfit", or information weighted, which we call "infit" [@ostini_polytomous_2006, pp. 86-87]. For details on conditional item fit we refer to the previously mentioned paper by Müller [-@muller_item_2020].
 
 Main lines of inquiry:
 
@@ -141,7 +162,7 @@ Main lines of inquiry:
 
 The function `RIgetfit()` from the `easyRasch` R package is tested here. It's source code can be accessed on GitHub. The function offers the user a choice of the number of bootstrap iterations to use to calculate the cutoff values for infit and outfit.
 
-Then the `RIitemfit()` function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. `RIitemfit()` has a default setting to slightly truncate the distribution of values using `stats::quantile()` at 0.001 and 0.999 to reduce extreme values. An example is demonstrated in @tbl-itemfit1, using a subset of the items used in the simulations. @fig-itemfit1 provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith's rule-of-thumb regarding infit (1±2/√n) would be 0.9-1.1 for a sample size of 400.
+Then the `RIitemfit()` function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. `RIitemfit()` has a default (user modifiable) setting to slightly truncate the distribution of values using `stats::quantile()` at 0.001 and 0.999 to remove extreme values. An example is demonstrated in @tbl-itemfit1, using a subset of the items used in the simulations. @fig-itemfit1 provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith's rule-of-thumb regarding infit (1±2/√n) would be 0.9-1.1 for a sample size of 400.
 
 This study was rather computationally demanding since each simulation run entailed 100-400 underlying simulations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4*3*3 = 36 conditions. Each combination used 200 simulation runs. The simulations took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.
 
@@ -260,18 +281,29 @@ write_parquet(ifb,"data/ifb.parquet")
 ifb <- read_parquet("data/ifb.parquet")
 ```
 
-Figures show the percent of simulation runs that have identified an item as misfitting. Items with more than 5% are colored in light red. A number representing the detection rate is shown nearby the bar for the misfitting item. Columns are labelled with the number of iterations used by `RIgetfit()` to determine cutoff values, and rows are labelled with the sample size.
+Figures show the percent of simulation runs that have identified an item as misfitting. Items with more than 5% are colored in light red. A number representing the detection rate is shown adjacent to the bar representing the misfitting item. The figure grid columns are labelled with the number of iterations used by `RIgetfit()` to determine cutoff values, and grid rows are labelled with the sample size.
 
 ### Infit
 
 ```{r}
 #| label: fig-ifb0
+#| fig-height: 5
 ifb %>% 
   group_by(targeting, samplesize, sims) %>% 
   filter(!infit_diff == "no misfit",
          targeting == 0) %>% 
   count(item, .drop = F) %>% 
   mutate(Percent = n/200*100) %>% 
+  ungroup() %>% 
+  mutate(sims = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         samplesize = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000"))) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
@@ -292,12 +324,23 @@ ifb %>%
 
 ```{r}
 #| label: fig-ifb1
+#| fig-height: 5
 ifb %>% 
   group_by(targeting, samplesize, sims) %>% 
   filter(!infit_diff == "no misfit",
          targeting == 1) %>% 
   count(item, .drop = F) %>% 
   mutate(Percent = n/200*100) %>% 
+  ungroup() %>% 
+  mutate(sims = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         samplesize = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000"))) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
@@ -318,12 +361,23 @@ When the misfitting item is offset in targeting by -1 logits compared to the sam
 
 ```{r}
 #| label: fig-ifb2
+#| fig-height: 5
 ifb %>% 
   group_by(targeting, samplesize, sims) %>% 
   filter(!infit_diff == "no misfit",
          targeting == 2) %>% 
   count(item, .drop = F) %>% 
   mutate(Percent = n/200*100) %>% 
+  ungroup() %>% 
+  mutate(sims = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         samplesize = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000"))) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
@@ -346,12 +400,23 @@ Finally, when the misfitting item is located at -2 logits compared to the sample
 
 ```{r}
 #| label: fig-ifb0out
+#| fig-height: 5
 ifb %>% 
   group_by(targeting, samplesize, sims) %>% 
   filter(!outfit_diff == "no misfit",
          targeting == 0) %>% 
   count(item, .drop = F) %>% 
   mutate(Percent = n/200*100) %>% 
+    ungroup() %>% 
+  mutate(sims = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         samplesize = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000"))) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
@@ -370,12 +435,23 @@ ifb %>%
 
 ```{r}
 #| label: fig-ifb1out
+#| fig-height: 5
 ifb %>% 
   group_by(targeting, samplesize, sims) %>% 
   filter(!outfit_diff == "no misfit",
          targeting == 1) %>% 
   count(item, .drop = F) %>% 
   mutate(Percent = n/200*100) %>% 
+    ungroup() %>% 
+  mutate(sims = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         samplesize = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000"))) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
@@ -394,12 +470,23 @@ ifb %>%
 
 ```{r}
 #| label: fig-ifb2out
+#| fig-height: 5
 ifb %>% 
   group_by(targeting, samplesize, sims) %>% 
   filter(!outfit_diff == "no misfit",
          targeting == 2) %>% 
   count(item, .drop = F) %>% 
   mutate(Percent = n/200*100) %>% 
+    ungroup() %>% 
+  mutate(sims = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         samplesize = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000"))) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
@@ -422,21 +509,366 @@ As shown in @fig-ifb0out, @fig-ifb1out, and @fig-ifb2out, outfit is performing m
 
 Based on these simulation, it seems reasonable to recommend the use of infit in determining item fit over outfit. The performance of outfit calls to question whether it is useful at all.
 
-Regarding infit, it looks like 100 iterations are to recommend to determine cutoff values when the sample size is 250 or lower, while 200 or 400 iterations reduce the risk for false positives at sample sizes of 500 or larger. False positives are found at sample sizes 500 and 1000 only. The risk for false positives is notably higher when the misfitting item is located at the sample mean compared to when the misfitting item is off-target by -1 logits or more.
+Regarding infit and the use of parametric bootstrapping with `RIgetfit()`, it looks like 100 iterations are to recommend to determine cutoff values when the sample size is 250 or lower, while 200 or 400 iterations reduce the risk for false positives at sample sizes of 500 or larger. False positives are found at sample sizes 500 and 1000 only. The risk for false positives is notably higher when the misfitting item is located at the sample mean compared to when the misfitting item is off-target by -1 logits or more.
 
-These findings make a good argument for removing one item at a time when the analysis indicates misfit, starting with the most misfitting item. This is especially relevant for sample sizes at 500 or above and when misfitting items are located close to the sample mean.
 
 # Study 2
 
-Item-restscore using the same datasets and adding the dataset with all three items misfitting.
+```{r}
+ir <- function(dat, iterations, samplesize, cpu = 9) {
+  
+  require(doParallel)
+  registerDoParallel(cores = cpu)
+  
+  fit <- data.frame()
+  fit <- foreach(i = 1:iterations, .combine = rbind) %dopar% {
+    data <- dat[sample(1:nrow(dat), samplesize), ]
+    
+    erm_out <- RM(data)
+    
+    cfit <- out_infit(erm_out)
+    cfit_d <- data.frame(infit = cfit$Infit, outfit = cfit$Outfit) %>% 
+      round(3)
+    
+    i1 <- item_restscore(erm_out)
+    i1 <- as.data.frame(i1)
+    
+    i1d <- data.frame("observed" = as.numeric(i1[[1]][1:ncol(data),1]),
+                     "expected" = as.numeric(i1[[1]][1:ncol(data),2]),
+                     "se" = as.numeric(i1[[1]][1:ncol(data),3]),
+                     "p.value" = as.numeric(i1[[1]][1:ncol(data),4]),
+                     "p.adj.BH" = as.numeric(i1[[1]][1:ncol(data),5])
+    ) %>% 
+      mutate(diff_abs = abs(expected - observed),
+             diff = expected - observed,
+             ir_padj = ifelse(p.adj.BH < .05, "sign. misfit","no misfit")) %>% 
+      select(ir_padj, diff, diff_abs) %>% 
+      mutate(item = 1:ncol(data)) %>% 
+      add_column(iteration = i,
+                 samplesize = samplesize)
+    cbind(i1d,cfit_d)
+  }
+  return(fit)
+}
+
+```
+
+```{r}
+#| eval: false
+#| output: false
+
+samplesizes <- c(100,150,250,500,1000)
+
+ir0 <- list()
+ir1 <- list()
+ir2 <- list()
+#library(tictoc)
+#tic()
+ir0 <- map(samplesizes, ~ ir(simdata[[1]], iterations = 1000, samplesize = .x))
+ir1 <- map(samplesizes, ~ ir(simdata[[2]], iterations = 1000, samplesize = .x))
+ir2 <- map(samplesizes, ~ ir(simdata[[3]], iterations = 1000, samplesize = .x))
+#toc()
+# 483.373 sec elapsed
+
+irall <- list(ir0,ir1,ir2)
+
+#saveRDS(irall,"data/item_restscore1000.rds")
+```
+
+## Results
+```{r}
+#| label: fig-itemrestscore1
+#| fig-height: 6
+
+ir_all <- readRDS("data/item_restscore1000.rds")
+ir_results <- bind_rows(ir_all[[1]],ir_all[[2]],ir_all[[3]]) %>% 
+  add_column(targeting = rep(c(0,1,2), each = 100000))
+
+# using patchwork and separate plots to get geom_text working across targeting variations
+results0 <- ir_results %>% 
+  filter(targeting == 0) %>% 
+  group_by(targeting, samplesize) %>% 
+  filter(ir_padj == "sign. misfit" ) %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/1000,
+         targeting = factor(targeting, levels = c(0,1,2), labels = c('On target','-1 logit offset','-2 logits offset'))) %>% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
+  geom_text(data = . %>% filter(item == 9),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  guides(fill = "none") +
+  facet_grid(samplesize ~ .) +
+  theme_rise() +
+  labs(subtitle = "Targeting 0 logits") +
+  theme(strip.text = element_blank())
+
+results1 <- ir_results %>% 
+  filter(targeting == 1) %>% 
+  group_by(targeting, samplesize) %>% 
+  filter(ir_padj == "sign. misfit" ) %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/1000,
+         targeting = factor(targeting, levels = c(0,1,2), labels = c('On target','1 logit offset','2 logits offset'))) %>% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
+  geom_text(data = . %>% filter(item == 18),
+            aes(label = n/10), position = position_dodge(width = 0.9),
+            hjust = 1.2, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  guides(fill = "none") +
+  facet_grid(samplesize ~ .) +
+  theme_rise() +
+  labs(subtitle = "Targeting -1 logits") +
+  theme(strip.text = element_blank())
+
+results2 <- ir_results %>% 
+  filter(targeting == 2) %>% 
+  group_by(targeting, samplesize) %>% 
+  filter(ir_padj == "sign. misfit" ) %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/1000,
+         targeting = factor(targeting, levels = c(0,1,2), labels = c('On target','1 logit offset','2 logits offset'))) %>% 
+  mutate(samplesize = factor(samplesize, levels = c(100,150,250,500,1000),
+                       labels = c("n = 100",
+                                  "n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000"))) %>% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
+  geom_text(data = . %>% filter(item == 13),
+            aes(label = n/10), position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  guides(fill = "none") +
+  facet_grid(samplesize ~ .) +
+  theme_rise() +
+  labs(subtitle = "Targeting -2 logits")
+
+results0 + results1 + results2 +
+  plot_layout(axes = "collect",
+              axis_titles = "collect") +
+  plot_annotation(title = "Item-restscore detection rate across targeting and sample size",
+                  caption = "Note: 1000 simulated datasets for each combination.",
+                  theme = theme_rise())
+```
+
+This simulation includes an additional condition with 100 respondents, which results in significantly lower detection rates than with 150 respondents. Compared to infit at 250 respondents, item-restscore has detection rates of 95.2%, 90.9%, and 62.4% for targeting 0, -1, and -2, while infit has 96.5%, 96.5%, and 71%. For sample size 500 and 1000, performance is similar, including the increased tendency for false positives at n = 1000.
+
+Similarly to infit, item-restscore has decreased detection rate for off-target misfitting items. The false positive rate is lower for item-restscore than infit for sample sizes below 1000.
 
 # Study 3 
 
-Item-restscore bootstrapped to better handle big samples, but also perhaps for smaller samples?
+We will now compare the performance of infit and item-restscore when all three items are misfitting at the same time. This simulation will also include a condition with 2000 respondents, to examine if the false positive rate increases with more respondents. For infit, we will only use 200 iterations with `RIgetfit()` since that condition seemed to strike a balance between detection rate and false positives.
+
+```{r}
+#| output: false
+# define function to run simulations for item infit/outfit cutoff values
+itemfitboot2 <- function(dat, iterations, samplesize) {
+  
+  fit <- list()
+  fit <- foreach(i = 1:iterations) %do% {
+    data <- dat[sample(1:nrow(dat), samplesize), ] %>% 
+      as.data.frame()
+    
+    # check data for responses in all cells
+    n_resp <-
+      data %>%
+      as.matrix() %>%
+      colSums2() %>%
+      t() %>%
+      as.vector()
+    
+    if (min(n_resp, na.rm = TRUE) < 11) {
+      data <- dat[sample(1:nrow(dat), samplesize), ] %>% 
+        as.data.frame()
+    } 
+    
+    sfit200 <- RIgetfit(data,200,9)
+
+    # apply cutoffs and store results
+    rfit200 <- RIitemfit(data,sfit200, output = "dataframe") %>% 
+      select(infit_msq,outfit_msq,infit_diff,outfit_diff) %>% 
+      add_column(item = 1:ncol(data),
+                 sims = 200,
+                 iteration = i,
+                 samplesize = samplesize)
+
+    
+    # combine output 
+    fit <- rfit200
+  }
+  return(fit)
+}
+
+```
+
+
+```{r}
+#| eval: false
+samplesizes <- c(150,250,500,1000,2000)
+ifb3 <- list()
+ir3 <- list()
+
+ifb3 <- map(samplesizes, ~ itemfitboot2(simdata3, iterations = 500, samplesize = .x))
+
+ir3 <- map(samplesizes, ~ ir(simdata3, iterations = 500, samplesize = .x))
+
+#saveRDS(ifb3,"data/ifb3.rds")
+#saveRDS(ir3,"data/ir3.rds")
+```
+
+```{r}
+ifb3 <- readRDS("data/ifb3.rds")
+ir3 <- readRDS("data/ir3.rds")
+
+ifb3_df <- bind_rows(ifb3)
+ir3_df <- bind_rows(ir3)
+```
+
+### Results
+
+```{r}
+#| label: fig-ifb3
+#| fig-height: 7
+ifb3_df %>% 
+  group_by(samplesize, sims) %>% 
+  filter(!infit_diff == "no misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000")),
+         sims = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations"))) %>% 
+
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
+  geom_text(data = . %>% filter(item == 9),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+    geom_text(data = . %>% filter(item == 13),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+    geom_text(data = . %>% filter(item == 18),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  guides(fill = "none") +
+  facet_grid(samplesize~sims) +
+  theme_rise() +
+  labs(subtitle = "3 items misfitting. 500 simulations per combination.",
+       title = "Conditional infit detection rate")
+```
+
+```{r}
+#| label: fig-ifb3out
+#| fig-height: 7
+ifb3_df %>% 
+  group_by(samplesize, sims) %>% 
+  filter(!outfit_diff == "no misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000")),
+         sims = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations"))) %>% 
+
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
+  geom_text(data = . %>% filter(item == 9),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+    geom_text(data = . %>% filter(item == 13),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+    geom_text(data = . %>% filter(item == 18),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  guides(fill = "none") +
+  facet_grid(samplesize~sims) +
+  theme_rise() +
+  labs(subtitle = "3 items misfitting. 500 simulations per combination.",
+       title = "Conditional outfit detection rate")
+```
+
+Looking at the performance of infit with three misfitting items (@fig-ifb3), we can see that the detection rate is markedly worse for item 13 in sample sizes 500 and below, compared to when single items were misfitting. The false positive rate has increased for sample size of 1000, and we can see this escalate strongly for n = 2000. Outfit (@fig-ifb3out) again performs worse than infit.
+
+```{r}
+#| label: fig-itemrestscore2
+#| fig-height: 7
+
+ir3_df %>% 
+  group_by(samplesize) %>% 
+  filter(ir_padj == "sign. misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/500) %>% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
+  geom_text(data = . %>% filter(item == 9),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+    geom_text(data = . %>% filter(item == 13),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+    geom_text(data = . %>% filter(item == 18),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  guides(fill = "none") +
+  facet_grid(samplesize ~ .) +
+  theme_rise() +
+  labs(subtitle = "3 items misfitting. 500 simulations per combination.",
+       title = "Item-restscore detection rate")
+
+```
+
+Item-restscore has higher detection rate than infit (see @fig-itemrestscore2), but also higher levels of false positives.
+
+# Study 4
+
+For our final set of simulations, we will use a non-parametric bootstrap procedure with item-restscore. First, based on the above problematic sample size of 2000, we let the bootstrap function sample with replacement using n = 800. 250 bootstrap samples will be used, then we summarize the percentage indicating misfit for each item. Second, we will also apply this to samplesizes 150, 250, and 500, and use the complete sample for the same bootstrap procedure to see if this produces more useful information for identifying misfitting items.
+
+
 
 # Discussion
 
 # Conclusion
+
+These findings make a good argument for removing one item at a time when the analysis indicates misfitting items, starting with the most misfitting item. This is especially relevant for sample sizes at 500 or above and when misfitting items are located close to the sample mean.
+
 
 # References {.unnumbered}
 
