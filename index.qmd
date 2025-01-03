@@ -1,10 +1,11 @@
 ---
-title: Detecting misfitting items in Rasch models
+title: "Detecting item misfit in Rasch models"
 author:
-  - name: 'Magnus Johansson'
-    affiliation: 'RISE Research Institutes of Sweden'
-    affiliation-url: 'https://ri.se/shic'
-    orcid: '0000-0003-1669-592X'
+  - name: Magnus Johansson
+    affiliations:
+      - name: RISE Research Institutes of Sweden, Division Built Environment, System Transition, Stockholm, Sweden
+      - name: Centre for Psychiatry Research, Department of Clinical Neuroscience, Karolinska Institutet, & Stockholm Health Care Services, Region Stockholm, Solna, Sweden
+    orcid: 0000-0003-1669-592X
 keywords:
   - Rasch
   - Psychometrics
@@ -13,12 +14,18 @@ keywords:
 abstract: |
   Psychometrics in general have long relied on rule-of-thumb cutoff values for various goodness of fit metrics. With more powerful personal computers it is both feasible and desirable to use simulation/bootstrap methods to determine appropriate cutoff values. This paper illustrates and evaluates the use of an R package for Rasch psychometrics that has implemented functions to simplify the process of identifying misfitting items using simulation based cutoff values. Through a series of simulation studies a comparison is made between information weighted conditional item fit and item-restscore using Goodman and Kruskal’s gamma.
 key-points:
+  - Rule-of-thumb critical values for goodness of fit metrics should be replaced with simulation based values
   - Sample size affects the detection rate and false positives rate
   - Number of misfitting items increases false positive rate
+  - Mean squared unweighted "outfit" is not useful
 date: last-modified
 bibliography: references.bib
 number-sections: true
-repo-url: 'https://github.com/pgmj/rasch_itemfit'
+repo-url: https://github.com/pgmj/rasch_itemfit
+shorttitle: Detecting item misfit in Rasch models
+execute:
+  warning: false
+  message: false
 editor_options: 
   chunk_output_type: console
 ---
@@ -55,7 +62,7 @@ rename <- dplyr::rename
 theme_rise <- theme_rise(fontfamily = "sans")
 ```
 
-A fully reproducible manuscript with R code and data is available 
+A fully reproducible manuscript with R code and data is available on GitHub: <https://github.com/pgmj/rasch_itemfit>
 
 The simulation of response data used three steps: first, a vector of theta values (person scores on the latent variable) were generated using `rnorm(mean = 0, sd = 1.5)`. Second, a set of item locations ranging from -2 to 2 logits were generated for dichotomous items, using `runif(n = 20, min = -2, max = 2)`. Third, the theta values were used to simulate item responses for participants, using `sim.xdim()` from the `eRm` package [@mair_extended_2007], which allows simulation of multidimensional response data. Multiple datasets were generated using the same item and person parameters, varying the targeting and number of the misfitting item(s). More details are described under the separate studies below.
 
@@ -150,7 +157,7 @@ demodata <- simdata[[1]] %>%
 
 # Study 1
 
-Item mean square standardized residuals are either unweighted, which is referred to as "outfit", or information weighted, which we call "infit" [@ostini_polytomous_2006, pp. 86-87]. For details on conditional item fit we refer to the previously mentioned paper by Müller [-@muller_item_2020].
+Item mean square standardized residuals are either unweighted, which is referred to as "outfit", or information weighted, which we call "infit" [@ostini_polytomous_2006, pp. 86-87]. For details on conditional item fit we refer to the previously mentioned paper by Müller [-@muller_item_2020]. Conditional item infit and outfit are expected to be near 1, with higher values indicating an item to be underfitting the Rasch model (often due to multidimensionality issues) and lower values indicating overfit.
 
 Main lines of inquiry:
 
@@ -315,7 +322,7 @@ ifb %>%
   scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
-  theme_rise() +
+  theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting 0 logits (item 9 misfit). 200 simulations per combination.",
        title = "Conditional infit detection rate")
 ```
@@ -352,7 +359,7 @@ ifb %>%
   scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
-  theme_rise() +
+  theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting -1 logits (item 18 misfit). 200 simulations per combination.",
        title = "Conditional infit detection rate")
 ```
@@ -389,7 +396,7 @@ ifb %>%
   scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
-  theme_rise() +
+  theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting -2 logits (item 13 misfit). 200 simulations per combination.",
        title = "Conditional infit detection rate")
 ```
@@ -428,7 +435,7 @@ ifb %>%
   scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
-  theme_rise() +
+  theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting 0 logits (item 9 misfit). 200 simulations per combination.",
        title = "Conditional outfit detection rate")
 ```
@@ -463,7 +470,7 @@ ifb %>%
   scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
-  theme_rise() +
+  theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting -1 logits (item 18 misfit). 200 simulations per combination.",
        title = "Conditional outfit detection rate")
 ```
@@ -498,7 +505,7 @@ ifb %>%
   scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
-  theme_rise() +
+  theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting -2 logits (item 13 misfit). 200 simulations per combination.",
        title = "Conditional outfit detection rate")
 ```
@@ -513,6 +520,8 @@ Regarding infit and the use of parametric bootstrapping with `RIgetfit()`, it lo
 
 
 # Study 2
+
+Item-restscore is a metric that compares an expected correlation with the observed correlation. Lower values than expected indicates than an item is underfit to the Rasch model, while higher values indicate overfit. The item-restscore function used in this simulation is from the `iarm` package [@mueller_iarm_2022] and outputs  Benjamini-Hochberg corrected *p*-values [@benjamini_controlling_1995], which are used in determining whether the observed value is statistically significant (using *p* < .05 as critical value) from the expected value for each item.
 
 ```{r}
 ir <- function(dat, iterations, samplesize, cpu = 9) {
@@ -602,7 +611,7 @@ results0 <- ir_results %>%
   scale_x_continuous('Item', breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
   guides(fill = "none") +
   facet_grid(samplesize ~ .) +
-  theme_rise() +
+  theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting 0 logits") +
   theme(strip.text = element_blank())
 
@@ -623,7 +632,7 @@ results1 <- ir_results %>%
   scale_x_continuous('Item', breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
   guides(fill = "none") +
   facet_grid(samplesize ~ .) +
-  theme_rise() +
+  theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting -1 logits") +
   theme(strip.text = element_blank())
 
@@ -650,7 +659,7 @@ results2 <- ir_results %>%
   scale_x_continuous('Item', breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
   guides(fill = "none") +
   facet_grid(samplesize ~ .) +
-  theme_rise() +
+  theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting -2 logits")
 
 results0 + results1 + results2 +
@@ -658,7 +667,7 @@ results0 + results1 + results2 +
               axis_titles = "collect") +
   plot_annotation(title = "Item-restscore detection rate across targeting and sample size",
                   caption = "Note: 1000 simulated datasets for each combination.",
-                  theme = theme_rise())
+                  theme = theme_rise(fontfamily = "sans"))
 ```
 
 This simulation includes an additional condition with 100 respondents, which results in significantly lower detection rates than with 150 respondents. Compared to infit at 250 respondents, item-restscore has detection rates of 95.2%, 90.9%, and 62.4% for targeting 0, -1, and -2, while infit has 96.5%, 96.5%, and 71%. For sample size 500 and 1000, performance is similar, including the increased tendency for false positives at n = 1000.
@@ -774,7 +783,7 @@ ifb3_df %>%
   scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
-  theme_rise() +
+  theme_rise(fontfamily = "sans") +
   labs(subtitle = "3 items misfitting. 500 simulations per combination.",
        title = "Conditional infit detection rate")
 ```
@@ -817,12 +826,12 @@ ifb3_df %>%
   scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
-  theme_rise() +
+  theme_rise(fontfamily = "sans") +
   labs(subtitle = "3 items misfitting. 500 simulations per combination.",
        title = "Conditional outfit detection rate")
 ```
 
-Looking at the performance of infit with three misfitting items (@fig-ifb3), we can see that the detection rate is markedly worse for item 13 in sample sizes 500 and below, compared to when single items were misfitting. The false positive rate has increased for sample size of 1000, and we can see this escalate strongly for n = 2000. Outfit (@fig-ifb3out) again performs worse than infit.
+Looking at the performance of infit with three misfitting items (@fig-ifb3), we can see that the detection rate is markedly worse for item 13 (targeting -1 logits) in sample sizes 500 and below, compared to when single items were misfitting. The false positive rate has increased for sample size of 1000 and we can see it escalate when n = 2000. Outfit (@fig-ifb3out) again performs worse than infit.
 
 ```{r}
 #| label: fig-itemrestscore2
@@ -849,21 +858,143 @@ ir3_df %>%
   scale_x_continuous('Item', breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
   guides(fill = "none") +
   facet_grid(samplesize ~ .) +
-  theme_rise() +
+  theme_rise(fontfamily = "sans") +
   labs(subtitle = "3 items misfitting. 500 simulations per combination.",
        title = "Item-restscore detection rate")
 
 ```
 
-Item-restscore has higher detection rate than infit (see @fig-itemrestscore2), but also higher levels of false positives.
+```{r}
+#| label: tbl-overunder
+ir3_df %>%
+  filter(ir_padj == "sign. misfit") %>% 
+  mutate(type = ifelse(diff < 0, "overfit","underfit")) %>% 
+  count(item,type) %>% 
+  set_names(c("Item","Type of misfit","n")) %>% 
+  knitr::kable()
+```
+
+Item-restscore has higher detection rate than infit (see @fig-itemrestscore2), but also higher levels of false positives. Reviewing the type of misfit identified by item-restscore (see @tbl-overunder), the false positives are all overfitting the Rasch model, except for two instances indicating underfit for item 12. Items 9, 13, and 18, that were simulated to be misfitting due to loading on a separate dimension, are as expected showing underfit to the Rasch model.
 
 # Study 4
 
-For our final set of simulations, we will use a non-parametric bootstrap procedure with item-restscore. First, based on the above problematic sample size of 2000, we let the bootstrap function sample with replacement using n = 800. 250 bootstrap samples will be used, then we summarize the percentage indicating misfit for each item. Second, we will also apply this to samplesizes 150, 250, and 500, and use the complete sample for the same bootstrap procedure to see if this produces more useful information for identifying misfitting items.
+For our final set of simulations, we will use a non-parametric bootstrap procedure with item-restscore. The difference from the parametric bootstrap is that the non-parametric bootstrap samples with replacement directly from the observed response data. First, based on the above problematic sample size of 2000 when three items are misfitting, we will use the bootstrap function to sample with replacement using n = 800 and 250 bootstrap samples. The function `RIbootRestscore()` from the `easyRasch` package will be used. 
+
+```{r}
+#| label: tbl-bootir
+#| tbl-cap: Example output from `RIbootRestscore()`
+
+#tic()
+simdata3 %>% 
+  slice_sample(n = 2000) %>% 
+  RIbootRestscore(iterations = 250, samplesize = 800, cpu = 8, output = "dataframe", cutoff = 0) %>% 
+  select(item,item_restscore,percent) %>% 
+  filter(!item_restscore == "no misfit") %>% 
+  arrange(desc(percent)) %>% 
+  set_names(c("Item","Item-restscore result","Percent of iterations")) %>% 
+  knitr::kable()
+#toc()
+```
+
+`RIbootRestscore()` is demonstrated using a single sample in @tbl-bootir, where the table is sorted on Percent of iterations. The runtime was around 10-12 seconds using 8 CPU cores on a Macbook Pro M1 Max. In our simulation, we will repeat this procedure 500 times and report the average and standard deviation for the percent indicating misfit for each item.
+
+Second, we will also apply the bootstrapped item-restscore method to sample sizes 150 and 250, using the complete sample for the same bootstrap procedure to see if this produces more useful information than previously tested strategies for identifying misfitting items.
 
 
+
+```{r}
+#| eval: false
+ir_boot <- function(dat, iterations, samplesize) {
+  
+  fit <- list()
+  fit <- foreach(i = 1:iterations) %do% {
+    data <- dat[sample(1:nrow(dat), samplesize), ] %>% 
+      as.data.frame()
+    
+    fit <- RIbootRestscore(data, iterations = 250, samplesize = 800, cpu = 9, output = "dataframe", cutoff = 0) %>% 
+      select(item,item_restscore,percent) %>% 
+      filter(!item_restscore == "no misfit") %>% 
+      add_column(iteration = i)
+    
+  }
+  return(fit)
+}
+
+irb0 <- ir_boot(simdata3, 500, 2000)
+saveRDS(irb0,"data/irb0.rds")
+```
+
+```{r}
+#| label: fig-irb0all
+#| fig-height: 5
+irb0 <- readRDS("data/irb0.rds")
+
+irb0_df <- bind_rows(irb0)
+
+irb0_df %>% 
+  ggplot(aes(x = percent, y = item, color = item_restscore)) +
+  stat_pointinterval(point_interval	= "median_hdci") +
+  theme_rise(fontfamily = "sans") +
+  labs(caption = "Point indicates median value and lines are highest-density continuous interval for .66 and .95.",
+       x = "Distribution of percent values for item misfit", y = "Item",
+       title = "Item-restscore bootstrap results",
+       subtitle = "250 bootstrap iterations with 800 respondents from a sample of 2000. 500 simulations were used.") +
+  scale_color_discrete('Type', labels = c("Overfit","Underfit"))
+```
+
+```{r}
+#| label: tbl-irb0mis
+#| tbl-cap: Summary statistics for item-restscore bootstrap simulation
+#| tbl-subcap: 
+#|   - "Misfitting items"
+#|   - "False positives"
+#| layout-ncol: 2
+
+irb0_df %>% 
+  filter(item %in% c("V9","V13","V18")) %>% 
+  rename(Item = item) %>% 
+  group_by(Item) %>% 
+  summarise(Median = median(percent),
+            MAD = mad(percent),
+            Mean = mean(percent),
+            SD = sd(percent),
+            p05 = quantile(percent, .05),
+            p01 = quantile(percent, .01)
+            ) %>% 
+  ungroup() %>% 
+  arrange(desc(p01)) %>% 
+  mutate_if(is.numeric, round, 1) %>% 
+  knitr::kable()
+
+irb0_df %>% 
+  filter(!item %in% c("V9","V13","V18"),
+         item_restscore == "overfit") %>% 
+  rename(Item = item) %>% 
+  group_by(Item) %>% 
+  summarise(Median = median(percent),
+            MAD = mad(percent),
+            Mean = mean(percent),
+            SD = sd(percent),
+            p95 = quantile(percent, .95),
+            p99 = quantile(percent, .99)
+            ) %>% 
+  ungroup() %>% 
+  arrange(desc(p99)) %>% 
+  mutate_if(is.numeric, round, 1) %>% 
+  knitr::kable()
+```
+
+@fig-irb0all shows that there is variation in false positive rate, but it is nearly always indicating overfit, while the misfitting items are only indicated as underfit. The summary statistics in @tbl-irb0mis show that there can be quite a bit of variation for false positives, but the clear majority of results are below 50%. 3 items have 95th percentile values above 50, with the highest at 58.8.
+
+## Smaller samples
+
+Can bootstrapping item-restscore 
 
 # Discussion
+
+## Limitations
+
+Number of items could be varied more. Partial credit model for polytomous data would have been nice to also test. Although results regarding detection rate should generalize, maybe the sample size in relation to number of items does not easily translate from the dichotomous case.
 
 # Conclusion
 

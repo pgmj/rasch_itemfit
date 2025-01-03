@@ -8,8 +8,9 @@ format:
   html:
     toc: true
   pdf:
-    number-sections: true
-    colorlinks: true
-
-
+    number-sections: false
+    reference-doc: custom-reference-doc.docx
+  apaquarto-docx:
+    fig-dpi: 175
+    number-sections: false
 
