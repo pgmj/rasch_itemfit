@@ -189,7 +189,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={Detecting misfitting items in Rasch models},
+  pdftitle={Detecting item misfit in Rasch models},
   pdfauthor={Magnus Johansson},
   pdfkeywords={Rasch, Psychometrics, Item fit, Simulation},
   colorlinks=true,
@@ -200,7 +200,7 @@
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{Detecting misfitting items in Rasch models}
+\title{Detecting item misfit in Rasch models}
 \author{Magnus Johansson}
 \date{2025-01-03}
 
@@ -260,7 +260,8 @@ unconditional item fit.
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
 Notebook}}
 
-A fully reproducible manuscript with R code and data is available
+A fully reproducible manuscript with R code and data is available on
+GitHub: \url{https://github.com/pgmj/rasch_itemfit}
 
 The simulation of response data used three steps: first, a vector of
 theta values (person scores on the latent variable) were generated using
@@ -324,6 +325,9 @@ Item mean square standardized residuals are either unweighted, which is
 referred to as ``outfit'', or information weighted, which we call
 ``infit'' (Ostini and Nering 2006, 86--87). For details on conditional
 item fit we refer to the previously mentioned paper by Müller (2020).
+Conditional item infit and outfit are expected to be near 1, with higher
+values indicating an item to be underfitting the Rasch model (often due
+to multidimensionality issues) and lower values indicating overfit.
 
 Main lines of inquiry:
 
@@ -414,14 +418,14 @@ Location
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-V1 & 1.017 & {[}0.862, 1.162{]} & 1.061 & {[}0.647, 1.423{]} & no misfit
+V1 & 1.017 & {[}0.874, 1.138{]} & 1.061 & {[}0.631, 1.605{]} & no misfit
 & no misfit & -1.37 \\
-V11 & 1.000 & {[}0.839, 1.21{]} & 1.032 & {[}0.742, 1.289{]} & no misfit
-& no misfit & -0.66 \\
-V3 & 1.022 & {[}0.902, 1.098{]} & 1.050 & {[}0.662, 1.498{]} & no misfit
+V11 & 1.000 & {[}0.808, 1.184{]} & 1.032 & {[}0.666, 1.277{]} & no
+misfit & no misfit & -0.66 \\
+V3 & 1.022 & {[}0.918, 1.119{]} & 1.050 & {[}0.668, 1.554{]} & no misfit
 & no misfit & 0.46 \\
-V12 & 0.966 & {[}0.827, 1.19{]} & 0.793 & {[}0.783, 1.306{]} & no misfit
-& no misfit & 1.58 \\
+V12 & 0.966 & {[}0.841, 1.189{]} & 0.793 & {[}0.803, 1.28{]} & no misfit
+& 0.01 & 1.58 \\
 
 \end{longtable}
 
@@ -612,6 +616,16 @@ is off-target by -1 logits or more.
 
 \section{Study 2}\label{study-2}
 
+Item-restscore is a metric that compares an expected correlation with
+the observed correlation. Lower values than expected indicates than an
+item is underfit to the Rasch model, while higher values indicate
+overfit. The item-restscore function used in this simulation is from the
+\texttt{iarm} package (Mueller and Santiago 2022) and outputs
+Benjamini-Hochberg corrected \emph{p}-values (Benjamini and Hochberg
+1995), which are used in determining whether the observed value is
+statistically significant (using \emph{p} \textless{} .05 as critical
+value) from the expected value for each item.
+
 \textsubscript{Source:
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
 Notebook}}
@@ -710,10 +724,11 @@ Notebook}}
 
 Looking at the performance of infit with three misfitting items
 (Figure~\ref{fig-ifb3}), we can see that the detection rate is markedly
-worse for item 13 in sample sizes 500 and below, compared to when single
-items were misfitting. The false positive rate has increased for sample
-size of 1000, and we can see this escalate strongly for n = 2000. Outfit
-(Figure~\ref{fig-ifb3out}) again performs worse than infit.
+worse for item 13 (targeting -1 logits) in sample sizes 500 and below,
+compared to when single items were misfitting. The false positive rate
+has increased for sample size of 1000 and we can see it escalate when n
+= 2000. Outfit (Figure~\ref{fig-ifb3out}) again performs worse than
+infit.
 
 \phantomsection\label{cell-fig-itemrestscore2}
 \begin{figure}[H]
@@ -732,22 +747,239 @@ size of 1000, and we can see this escalate strongly for n = 2000. Outfit
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
 Notebook}}
 
+\begin{longtable}[]{@{}rlr@{}}
+
+\caption{\label{tbl-overunder}}
+
+\tabularnewline
+
+\toprule\noalign{}
+Item & Type of misfit & n \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & overfit & 299 \\
+2 & overfit & 520 \\
+3 & overfit & 224 \\
+4 & overfit & 181 \\
+5 & overfit & 298 \\
+6 & overfit & 475 \\
+7 & overfit & 313 \\
+8 & overfit & 382 \\
+9 & underfit & 2132 \\
+10 & overfit & 365 \\
+11 & overfit & 326 \\
+12 & overfit & 149 \\
+12 & underfit & 2 \\
+13 & underfit & 1595 \\
+14 & overfit & 182 \\
+15 & overfit & 313 \\
+16 & overfit & 278 \\
+17 & overfit & 129 \\
+18 & underfit & 1974 \\
+19 & overfit & 31 \\
+20 & overfit & 387 \\
+
+\end{longtable}
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
 Item-restscore has higher detection rate than infit (see
 Figure~\ref{fig-itemrestscore2}), but also higher levels of false
-positives.
+positives. Reviewing the type of misfit identified by item-restscore
+(see Table~\ref{tbl-overunder}), the false positives are all overfitting
+the Rasch model, except for two instances indicating underfit for item
+12. Items 9, 13, and 18, that were simulated to be misfitting due to
+loading on a separate dimension, are as expected showing underfit to the
+Rasch model.
 
 \section{Study 4}\label{study-4}
 
 For our final set of simulations, we will use a non-parametric bootstrap
-procedure with item-restscore. First, based on the above problematic
-sample size of 2000, we let the bootstrap function sample with
-replacement using n = 800. 250 bootstrap samples will be used, then we
-summarize the percentage indicating misfit for each item. Second, we
-will also apply this to samplesizes 150, 250, and 500, and use the
-complete sample for the same bootstrap procedure to see if this produces
-more useful information for identifying misfitting items.
+procedure with item-restscore. The difference from the parametric
+bootstrap is that the non-parametric bootstrap samples with replacement
+directly from the observed response data. First, based on the above
+problematic sample size of 2000 when three items are misfitting, we will
+use the bootstrap function to sample with replacement using n = 800 and
+250 bootstrap samples. The function \texttt{RIbootRestscore()} from the
+\texttt{easyRasch} package will be used.
+
+\begin{longtable}[]{@{}llr@{}}
+
+\caption{\label{tbl-bootir}Example output from
+\texttt{RIbootRestscore()}}
+
+\tabularnewline
+
+\toprule\noalign{}
+Item & Item-restscore result & Percent of iterations \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+V18 & underfit & 100.0 \\
+V9 & underfit & 100.0 \\
+V13 & underfit & 92.8 \\
+V2 & overfit & 73.6 \\
+V10 & overfit & 34.0 \\
+V6 & overfit & 31.2 \\
+V7 & overfit & 28.4 \\
+V8 & overfit & 22.4 \\
+V15 & overfit & 20.0 \\
+V5 & overfit & 19.6 \\
+V4 & overfit & 12.0 \\
+V16 & overfit & 11.6 \\
+V20 & overfit & 8.8 \\
+V11 & overfit & 8.0 \\
+V1 & overfit & 6.8 \\
+V17 & overfit & 4.8 \\
+V14 & overfit & 3.2 \\
+V19 & overfit & 1.2 \\
+V3 & overfit & 1.2 \\
+V12 & overfit & 0.4 \\
+V12 & underfit & 0.4 \\
+V14 & underfit & 0.4 \\
+
+\end{longtable}
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\texttt{RIbootRestscore()} is demonstrated using a single sample in
+Table~\ref{tbl-bootir}, where the table is sorted on Percent of
+iterations. The runtime was around 10-12 seconds using 8 CPU cores on a
+Macbook Pro M1 Max. In our simulation, we will repeat this procedure 500
+times and report the average and standard deviation for the percent
+indicating misfit for each item.
+
+Second, we will also apply the bootstrapped item-restscore method to
+sample sizes 150 and 250, using the complete sample for the same
+bootstrap procedure to see if this produces more useful information than
+previously tested strategies for identifying misfitting items.
+
+\subsection{Results}\label{results-3}
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\phantomsection\label{cell-fig-irb0all}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-irb0all-1.pdf}}
+
+}
+
+\caption{\label{fig-irb0all}}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\begin{table}
+
+\caption{\label{tbl-irb0mis}Summary statistics for item-restscore
+bootstrap simulation}
+
+\begin{minipage}{\linewidth}
+
+\subcaption{\label{tbl-irb0mis-1}Misfitting items}
+
+\centering{
+
+\begin{tabular}{lrrrrrr}
+\toprule
+Item & Median & MAD & Mean & SD & p05 & p01\\
+\midrule
+V9 & 100.0 & 0.0 & 100.0 & 0.1 & 100.0 & 99.6\\
+V18 & 100.0 & 0.0 & 99.8 & 0.9 & 99.2 & 98.0\\
+V13 & 95.6 & 4.7 & 93.0 & 8.0 & 76.4 & 64.0\\
+\bottomrule
+\end{tabular}
+
+}
+
+\end{minipage}%
+\newline
+\begin{minipage}{\linewidth}
+
+\subcaption{\label{tbl-irb0mis-2}False positives}
+
+\centering{
+
+\begin{tabular}{lrrrrrr}
+\toprule
+Item & Median & MAD & Mean & SD & p95 & p99\\
+\midrule
+V2 & 20.0 & 15.4 & 24.3 & 16.7 & 58.8 & 70.0\\
+V8 & 14.4 & 12.5 & 19.7 & 15.6 & 51.6 & 65.6\\
+V6 & 18.4 & 14.2 & 21.3 & 14.9 & 52.8 & 64.0\\
+V11 & 14.0 & 11.9 & 17.6 & 13.9 & 47.7 & 62.4\\
+V15 & 13.2 & 10.1 & 16.6 & 13.4 & 45.2 & 61.7\\
+V1 & 12.0 & 10.1 & 15.5 & 12.8 & 41.3 & 59.7\\
+V10 & 13.2 & 11.3 & 16.4 & 13.0 & 42.4 & 58.5\\
+V16 & 11.4 & 10.4 & 15.2 & 13.0 & 42.0 & 58.4\\
+V20 & 16.4 & 13.6 & 19.5 & 13.9 & 45.2 & 57.2\\
+V5 & 12.0 & 10.1 & 15.7 & 12.6 & 44.4 & 52.8\\
+V7 & 13.2 & 11.9 & 16.7 & 12.6 & 41.6 & 51.7\\
+V3 & 10.8 & 9.5 & 13.6 & 11.2 & 36.1 & 49.3\\
+V14 & 7.2 & 6.5 & 10.4 & 10.1 & 30.7 & 47.0\\
+V12 & 7.6 & 7.7 & 10.4 & 9.5 & 29.7 & 41.4\\
+V4 & 7.2 & 6.5 & 10.2 & 9.5 & 29.3 & 40.1\\
+V17 & 6.4 & 6.5 & 8.4 & 8.0 & 24.4 & 32.6\\
+V19 & 2.4 & 2.4 & 3.9 & 4.6 & 13.6 & 19.5\\
+\bottomrule
+\end{tabular}
+
+}
+
+\end{minipage}%
+
+\end{table}%
+
+Figure~\ref{fig-irb0all} shows that there is variation in false positive
+rate, but it is nearly always indicating overfit, while the misfitting
+items are only indicated as underfit. The summary statistics in
+Table~\ref{tbl-irb0mis} show that there can be quite a bit of variation
+for false positives, but the clear majority of results are below 50\%. 3
+items have 95th percentile values above 50, with the highest at 58.8.
+
+\subsection{Smaller samples}\label{smaller-samples}
+
+We will use 200 simulations for this part, applied to sample sizes 150
+and 250. As an additional condition, we will use both 250 and 500
+bootstraps for item-restscore in each simulation.
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\subsection{Final simulation?}\label{final-simulation}
+
+Run with 40 items and 3 misfitting, just 500 simulations with normal
+item-restscore to assess if this makes a difference. And 10 items with
+1-2 misfit?
 
 \section{Discussion}\label{discussion}
+
+\subsection{Limitations}\label{limitations}
+
+Number of items could be varied more. However, the results from Müller
+(2020), which use 10, 15, and 20 items, indicates small differences in
+critical value ranges. But this might not have implications for
+detection rate of misfitting items (we need the 40 items simulation and
+maybe 10 also?). Partial credit model for polytomous data would have
+been nice to also test. Although results regarding detection rate should
+generalize from RM to PCM, maybe the sample size in relation to number
+of items does not easily translate from the dichotomous case?
 
 \section{Conclusion}\label{conclusion}
 
@@ -761,6 +993,13 @@ above and when misfitting items are located close to the sample mean.
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-benjamini_controlling_1995}
+Benjamini, Yoav, and Yosef Hochberg. 1995. {``Controlling the {False}
+{Discovery} {Rate}: {A} {Practical} and {Powerful} {Approach} to
+{Multiple} {Testing}.''} \emph{Journal of the Royal Statistical Society:
+Series B (Methodological)} 57 (1): 289--300.
+\url{https://doi.org/10.1111/j.2517-6161.1995.tb02031.x}.
+
 \bibitem[\citeproctext]{ref-easyrasch}
 Johansson, Magnus. 2024. \emph{easyRasch: Psychometric Analysis in r
 with Rasch Measurement Theory}. \url{https://github.com/pgmj/easyRasch}.
