@@ -1102,9 +1102,220 @@ When doing simulation studies there is always a balance to strike between trying
 Item-restscore and item infit will be compared. The latter will use 100 bootstrap iterations to determine critical values for sample sizes 150 and 250, and 200 bootstrap iterations for n >= 500.
 
 ```{r}
+itemfitboot3 <- function(dat, iterations, samplesize) {
+  
+  fit <- list()
+  fit <- foreach(i = 1:iterations) %do% {
+    data <- dat[sample(1:nrow(dat), samplesize), ] %>% 
+      as.data.frame()
+    
+    # check data for responses in all cells
+    n_resp <-
+      data %>%
+      as.matrix() %>%
+      colSums2() %>%
+      t() %>%
+      as.vector()
+    
+    if (min(n_resp, na.rm = TRUE) < 11) {
+      data <- dat[sample(1:nrow(dat), samplesize), ] %>% 
+        as.data.frame()
+    } 
+    
+    if (nrow(data < 400)) {
+      sfit <- RIgetfit(data,100,9)
+    } else if (nrow(data > 400)) {
+      sfit <- RIgetfit(data,200,9)
+    }
+    
+    # apply cutoffs and store results
+    rfit <- RIitemfit(data, sfit, output = "dataframe") %>% 
+      select(infit_msq,outfit_msq,infit_diff,outfit_diff) %>% 
+      add_column(item = 1:ncol(data),
+                 iteration = i,
+                 samplesize = samplesize)
+
+    # combine output 
+    fit <- rfit
+  }
+  return(fit)
+}
 
 ```
 
+```{r}
+#| eval: false
+# simulate data using 40 items
+# read pre-generated item locations for reproducibility
+items2 <- read_csv("data/rm_items40.csv") %>%
+  pull(location)
+
+# a matrix to specify which dimension each item loads on
+wmat4 <- matrix(nrow = 40,
+               ncol = 2)
+# set all items to load on dimension one
+wmat4[1:40,1] <- 1
+wmat4[1:40,2] <- 0
+
+wmat4[c(9,13,18),1] <- 0
+wmat4[c(9,13,18),2] <- 1
+
+# generate dichotomous data
+simdata40items <- eRm::sim.xdim(10000, items2, cutpoint = "randomized", Sigma = sigma, weightmat = wmat4)
+
+# check targeting
+#RItargeting(as.data.frame(simdata40items), model = "RM")
+#RItargeting(simdata3[,1:10], model = "RM")
+
+saveRDS(simdata40items,"data/simdata40items.rds")
+```
+
+
+```{r}
+#| eval: false
+simdata40items <- readRDS("data/simdata40items.rds") %>% 
+  as.data.frame()
+
+samplesizes <- c(150,250,500,1000)
+ifb10 <- list()
+ir10 <- list()
+
+#tic()
+ifb40_60 <- map(samplesizes, ~ itemfitboot3(simdata40items, iterations = 60, samplesize = .x))
+#toc() # 120s for 2 runs
+saveRDS(ifb40_60, "data/ifb40_60i.rds")
+
+ir40 <- map(samplesizes, ~ ir(simdata40items, iterations = 500, samplesize = .x))
+saveRDS(ir40, "data/ir40.rds")
+
+ir10 <- map(samplesizes, ~ ir(simdata3[,1:10], iterations = 500, samplesize = .x))
+saveRDS(ir10, "data/ir10.rds")
+```
+
+```{r}
+ir40 <- readRDS("data/ir40.rds")
+ir10 <- readRDS("data/ir10.rds")
+
+ifb40_60 <- readRDS("data/ifb40_60i.rds")
+
+ir40_df <- bind_rows(ir40)
+ir10_df <- bind_rows(ir10)
+
+ifb40_df <- bind_rows(ifb40_60)
+```
+
+## Results 40 items
+
+```{r}
+#| label: fig-ifb40
+#| fig-height: 5
+ifb40_df %>% 
+  group_by(samplesize) %>% 
+  filter(!infit_diff == "no misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = round(n/60*100,1)) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000"))) %>% 
+
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
+  geom_text(data = . %>% filter(item == 9),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+    geom_text(data = . %>% filter(item == 13),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+    geom_text(data = . %>% filter(item == 18),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(1,40), breaks = seq(1,40,1), guide = guide_axis(n.dodge = 2), minor_breaks = NULL) +
+  guides(fill = "none") +
+  facet_grid(samplesize~.) +
+  theme_rise(fontfamily = "sans") +
+  labs(subtitle = "3 items misfitting. 60 simulations per combination.",
+       title = "Conditional infit detection rate")
+```
+
+
+```{r}
+#| label: fig-itemrestscore40
+#| fig-height: 5
+
+ir40_df %>% 
+  group_by(samplesize) %>% 
+  filter(ir_padj == "sign. misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/500) %>% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
+  geom_text(data = . %>% filter(item == 9),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.65, vjust = 1) +
+    geom_text(data = . %>% filter(item == 13),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.65, vjust = 1) +
+    geom_text(data = . %>% filter(item == 18),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.65, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(0,40), 
+                     breaks = seq(1,40,1), 
+                     guide = guide_axis(n.dodge = 2), minor_breaks = NULL) +
+  guides(fill = "none") +
+  facet_grid(samplesize ~ .) +
+  theme_rise(fontfamily = "sans") +
+  labs(subtitle = "3 items misfitting. 500 simulations per combination.",
+       title = "Item-restscore detection rate")
+
+```
+
+Infit performs better when sample size is 150 or 250 (see @fig-ifb40), while performance is slightly better for item-restscore for n >= 500 in terms of lower rates of false positives (see @fig-itemrestscore40).
+
+## Results 10 items
+
+```{r}
+#| label: fig-itemrestscore10
+#| fig-height: 5
+
+ir10_df %>% 
+  group_by(samplesize) %>% 
+  filter(ir_padj == "sign. misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/500) %>% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
+  geom_text(data = . %>% filter(item == 9),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.65, vjust = 1) +
+    geom_text(data = . %>% filter(item == 13),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.65, vjust = 1) +
+    geom_text(data = . %>% filter(item == 18),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.65, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(0,10), 
+                     breaks = seq(1,10,1), 
+                     guide = guide_axis(n.dodge = 1), minor_breaks = NULL) +
+  guides(fill = "none") +
+  facet_grid(samplesize ~ .) +
+  theme_rise(fontfamily = "sans") +
+  labs(subtitle = "3 items misfitting. 500 simulations per combination.",
+       title = "Item-restscore detection rate")
+```
+
+Compared to when we had 20 items, ... create a summary table! And run more simulations tonight.
 
 
 # Discussion
