@@ -16,7 +16,7 @@ abstract: |
 key-points:
   - Rule-of-thumb critical values for goodness of fit metrics should be replaced with simulation based values
   - Sample size affects the detection rate and false positives rate
-  - Number of misfitting items increases false positive rate
+  - More misfitting items increases false positive rate
   - Mean squared unweighted "outfit" is not useful
 date: last-modified
 bibliography: references.bib
@@ -138,18 +138,49 @@ wmat3[c(9,13,18),2] <- 1
 # generate dichotomous data
 simdata3 <- eRm::sim.xdim(10000, items1, cutpoint = "randomized", Sigma = sigma, weightmat = wmat3)
 
-saveRDS(simdata3,"data/simdata3.rds")
+#saveRDS(simdata3,"data/simdata3.rds")
 ```
 
+```{r}
+#| eval: false
+# simulate data using 40 items
+# read pre-generated item locations for reproducibility
+items2 <- read_csv("data/rm_items40.csv") %>%
+  pull(location)
+
+# a matrix to specify which dimension each item loads on
+wmat4 <- matrix(nrow = 40,
+               ncol = 2)
+# set all items to load on dimension one
+wmat4[1:40,1] <- 1
+wmat4[1:40,2] <- 0
+
+wmat4[c(9,13,18),1] <- 0
+wmat4[c(9,13,18),2] <- 1
+
+# generate dichotomous data
+simdata40items <- eRm::sim.xdim(10000, items2, cutpoint = "randomized", Sigma = sigma, weightmat = wmat4)
+
+# check targeting
+#RItargeting(as.data.frame(simdata40items), model = "RM")
+#RItargeting(simdata3[,1:10], model = "RM")
+
+#saveRDS(simdata40items,"data/simdata40items.rds")
+```
 
 ```{r}
 simdata <- readRDS("data/simdata10000.rds")
+
 simdata3 <- readRDS("data/simdata3.rds") %>% 
   as.data.frame()
+
 demodata <- simdata[[1]] %>% 
   as.data.frame() %>% 
   slice(1:400) %>% 
   select(V1,V11,V3,V12)
+
+simdata40items <- readRDS("data/simdata40items.rds") %>% 
+  as.data.frame()
 ```
 
 # Study 1: Item infit and outfit
@@ -1145,36 +1176,6 @@ itemfitboot3 <- function(dat, iterations, samplesize) {
 
 ```{r}
 #| eval: false
-# simulate data using 40 items
-# read pre-generated item locations for reproducibility
-items2 <- read_csv("data/rm_items40.csv") %>%
-  pull(location)
-
-# a matrix to specify which dimension each item loads on
-wmat4 <- matrix(nrow = 40,
-               ncol = 2)
-# set all items to load on dimension one
-wmat4[1:40,1] <- 1
-wmat4[1:40,2] <- 0
-
-wmat4[c(9,13,18),1] <- 0
-wmat4[c(9,13,18),2] <- 1
-
-# generate dichotomous data
-simdata40items <- eRm::sim.xdim(10000, items2, cutpoint = "randomized", Sigma = sigma, weightmat = wmat4)
-
-# check targeting
-#RItargeting(as.data.frame(simdata40items), model = "RM")
-#RItargeting(simdata3[,1:10], model = "RM")
-
-saveRDS(simdata40items,"data/simdata40items.rds")
-```
-
-
-```{r}
-#| eval: false
-simdata40items <- readRDS("data/simdata40items.rds") %>% 
-  as.data.frame()
 
 samplesizes <- c(150,250,500,1000)
 ifb10 <- list()
@@ -1185,6 +1186,18 @@ ifb40_60 <- map(samplesizes, ~ itemfitboot3(simdata40items, iterations = 60, sam
 #toc() # 120s for 2 runs
 saveRDS(ifb40_60, "data/ifb40_60i.rds")
 
+ifb40_140 <- map(samplesizes, ~ itemfitboot3(simdata40items, iterations = 140, samplesize = .x))
+#toc() # 120s for 2 runs
+saveRDS(ifb40_140, "data/ifb40_140i.rds")
+
+ifb10 <- map(samplesizes, ~ itemfitboot3(simdata3[,1:10], iterations = 200, samplesize = .x))
+
+saveRDS(ifb10, "data/ifb10.rds")
+```
+
+
+```{r}
+#| eval: false
 ir40 <- map(samplesizes, ~ ir(simdata40items, iterations = 500, samplesize = .x))
 saveRDS(ir40, "data/ir40.rds")
 
@@ -1197,11 +1210,19 @@ ir40 <- readRDS("data/ir40.rds")
 ir10 <- readRDS("data/ir10.rds")
 
 ifb40_60 <- readRDS("data/ifb40_60i.rds")
+ifb40_140 <- readRDS("data/ifb40_140i.rds")
+ifb10 <- readRDS("data/ifb10.rds")
+
 
 ir40_df <- bind_rows(ir40)
 ir10_df <- bind_rows(ir10)
 
-ifb40_df <- bind_rows(ifb40_60)
+ifb40_60_df <- bind_rows(ifb40_60)
+ifb40_140_df <- bind_rows(ifb40_140)
+ifb40_df <- rbind(ifb40_60_df,ifb40_140_df)
+
+ifb10_df <- bind_rows(ifb10)
+
 ```
 
 ## Results 40 items
@@ -1213,7 +1234,7 @@ ifb40_df %>%
   group_by(samplesize) %>% 
   filter(!infit_diff == "no misfit") %>% 
   count(item, .drop = F) %>% 
-  mutate(Percent = round(n/60*100,1)) %>% 
+  mutate(Percent = round(n/200*100,1)) %>% 
   ungroup() %>% 
   mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
                              labels = c("n = 150",
@@ -1241,7 +1262,7 @@ ifb40_df %>%
   guides(fill = "none") +
   facet_grid(samplesize~.) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "3 items misfitting. 60 simulations per combination.",
+  labs(subtitle = "3 items misfitting. 200 simulations per combination.",
        title = "Conditional infit detection rate")
 ```
 
@@ -1282,6 +1303,45 @@ ir40_df %>%
 Infit performs better when sample size is 150 or 250 (see @fig-ifb40), while performance is slightly better for item-restscore for n >= 500 in terms of lower rates of false positives (see @fig-itemrestscore40).
 
 ## Results 10 items
+
+```{r}
+#| label: fig-ifb10
+#| fig-height: 5
+ifb10_df %>% 
+  group_by(samplesize) %>% 
+  filter(!infit_diff == "no misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = round(n/200*100,1)) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000"))) %>% 
+
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
+  geom_text(data = . %>% filter(item == 9),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+    geom_text(data = . %>% filter(item == 13),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+    geom_text(data = . %>% filter(item == 18),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(1,10), breaks = seq(1,40,1), guide = guide_axis(n.dodge = 2), minor_breaks = NULL) +
+  guides(fill = "none") +
+  facet_grid(samplesize~.) +
+  theme_rise(fontfamily = "sans") +
+  labs(subtitle = "3 items misfitting. 200 simulations per combination.",
+       title = "Conditional infit detection rate")
+```
 
 ```{r}
 #| label: fig-itemrestscore10
@@ -1328,7 +1388,6 @@ Number of items could be varied more. However, the results from Müller [-@mulle
 
 These findings make a good argument for removing one item at a time when the analysis indicates misfitting items, starting with the most underfitting item. This is especially relevant for *n* >= 500 and when misfitting items are located close to the sample mean.
 
-
 ```{r}
 #| label: fig-loadloc
 #| fig-height: 5
@@ -1336,6 +1395,16 @@ RIloadLoc(simdata3[1:400,], model = "RM")
 ```
 
 Assessing item fit and dimensionality should be done using multiple methods. Item fit and item-restscore should be used in parallel, while also examining residual patterns by reviewing standardized factor loadings on the first residual contrast (see @fig-loadloc for an example) as well as Yen's Q3 residual correlations.
+
+What does this look like with a small sample?
+
+```{r}
+RIloadLoc(simdata3[1:150,], model = "RM")
+simfit2 <- RIgetfit(simdata3[1:150,], iterations = 100, cpu = 8)
+RIitemfit(simdata3[1:150,], simfit2)
+RIgetfitPlot(simfit2, simdata3[1:150,])
+```
+
 
 While the simulations in this paper have used dichotomous data, all functions evaluated in this paper also work with polytomous data using the Rasch Partial Credit Model.
 
