@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
     <meta name="author" content="Magnus Johansson">
-    <meta name="dcterms.date" content="2025-01-03">
+    <meta name="dcterms.date" content="2025-01-04">
     <meta name="keywords" content="Rasch, Psychometrics, Item fit, Simulation">
 
     <title>Detecting item misfit in Rasch models</title>
@@ -182,17 +182,18 @@
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
-     
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script> 
       <meta name="citation_title" content="Detecting item misfit in Rasch models">
-<meta name="citation_abstract" content="Psychometrics in general have long relied on rule-of-thumb cutoff values for various goodness of fit metrics. With more powerful personal computers it is both feasible and desirable to use simulation/bootstrap methods to determine appropriate cutoff values. This paper illustrates and evaluates the use of an R package for Rasch psychometrics that has implemented functions to simplify the process of identifying misfitting items using simulation based cutoff values. Through a series of simulation studies a comparison is made between information weighted conditional item fit and item-restscore using Goodman and Kruskal’s gamma.
+<meta name="citation_abstract" content="Psychometrics in general have long relied on rule-of-thumb critical values for various goodness of fit metrics. With more powerful personal computers it is both feasible and desirable to use simulation methods to determine appropriate critical cutoff values. This paper illustrates and evaluates the use of an R package for Rasch psychometrics that has implemented functions to simplify the process of determining simulation based cutoff values. Through a series of simulation studies a comparison is made between information weighted conditional item fit (&amp;amp;quot;infit&quot;) and item-restscore correlations using Goodman and Kruskal’s $\gamma$. Results indicate the limitations of small samples (n &amp;lt; 500) in correctly detecting item misfit, especially when several items are misfit. Item outfit shows very low performance and should not be used. Conditional infit with simulation based cutoffs performs slightly better than item-restscore with samples below n = 500. Both methods have strongly increased rates of false positives with large samples (n &amp;gt;= 1000). Large samples should use non-parametric bootstrap of subsamples with item-restscore to avoid type-1 errors. Finally, the importance of iterative analyses is emphasized since a situation where several items show underfit will induce seemingly overfit items. Underfit item should be removed one at a time, and a re-analysis conducted for each step to avoid erroneously removing items.
 ">
 <meta name="citation_keywords" content="Rasch,Psychometrics,Item fit,Simulation">
 <meta name="citation_author" content="Magnus Johansson">
-<meta name="citation_publication_date" content="2025-01-03">
-<meta name="citation_cover_date" content="2025-01-03">
+<meta name="citation_publication_date" content="2025-01-04">
+<meta name="citation_cover_date" content="2025-01-04">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-01-03">
+<meta name="citation_online_date" content="2025-01-04">
 <meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=Measures of Association for Cross Classifications;,citation_abstract=When populations are cross-classified with respect to two or more classifications or polytomies, questions often arise about the degree of association existing between the several polytomies. Most of the traditional measures or indices of association are based upon the standard chi-square statistic or on an assumption of underlying joint normality. In this paper a number of alternative measures are considered, almost all based upon a probabilistic model for activity to which the cross-classification may typically lead. Only the case in which the population is completely known is considered, so no question of sampling or measurement error appears. We hope, however, to publish before long some approximate distributions for sample estimators of the measures we propose, and approximate tests of hypotheses. Our major theme is that the measures of association used by an empirical investigator should not be blindly chosen because of tradition and convention only, although these factors may properly be given some weight, but should be constructed in a manner having operational meaning within the context of the particular problem.;,citation_author=Leo A. Goodman;,citation_author=William H. Kruskal;,citation_publication_date=1954;,citation_cover_date=1954;,citation_year=1954;,citation_fulltext_html_url=https://www.jstor.org/stable/2281536;,citation_issue=268;,citation_doi=10.2307/2281536;,citation_issn=0162-1459;,citation_volume=49;,citation_journal_title=Journal of the American Statistical Association;">
 <meta name="citation_reference" content="citation_title=Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing;,citation_abstract=The common approach to the multiplicity problem calls for controlling the familywise error rate (FWER). This approach, though, has faults, and we point out a few. A different approach to problems of multiple significance testing is presented. It calls for controlling the expected proportion of falsely rejected hypotheses — the false discovery rate. This error rate is equivalent to the FWER when all hypotheses are true but is smaller otherwise. Therefore, in problems where the control of the false discovery rate rather than that of the FWER is desired, there is potential for a gain in power. A simple sequential Bonferronitype procedure is proved to control the false discovery rate for independent test statistics, and a simulation study shows that the gain in power is substantial. The use of the new procedure and the appropriateness of the criterion are illustrated with examples.;,citation_author=Yoav Benjamini;,citation_author=Yosef Hochberg;,citation_publication_date=1995-01;,citation_cover_date=1995-01;,citation_year=1995;,citation_fulltext_html_url=https://doi.org/10.1111/j.2517-6161.1995.tb02031.x;,citation_issue=1;,citation_doi=10.1111/j.2517-6161.1995.tb02031.x;,citation_issn=0035-9246;,citation_volume=57;,citation_journal_title=Journal of the Royal Statistical Society: Series B (Methodological);">
 <meta name="citation_reference" content="citation_title=Using item mean squares to evaluate fit to the Rasch model;,citation_abstract=Throughout the mid to late 1970’s considerable research was conducted on the properties of Rasch fit mean squares. This work culminated in a variety of transformations to convert the mean squares into approximate t-statistics. This work was primarily motivated by the influence sample size has on the magnitude of the mean squares and the desire to have a single critical value that can generally be applied to most cases. In the late 1980’s and the early 1990’s the trend seems to have reversed, with numerous researchers using the untransformed fit mean squares as a means of testing fit to the Rasch measurement models. The principal motivation is cited as the influence sample size has on the sensitivity of the t-converted mean squares. The purpose of this paper is to present the historical development of these fit indices and the various transformations and to examine the impact of sample size on both the fit mean squares and the t-transformations of those mean squares. Because the sample size problem has little influence on the person mean square problem, due to the relatively short length (100 items or less), this paper focuses on the item fit mean squares, where it is common to find the statistics used with sample sizes ranging from 30 to 10,000.;,citation_author=R. M. Smith;,citation_author=R. E. Schumacker;,citation_author=M. J. Bush;,citation_publication_date=1998;,citation_cover_date=1998;,citation_year=1998;,citation_issue=1;,citation_issn=1090-655X;,citation_pmid=9661732;,citation_volume=2;,citation_journal_title=Journal of Outcome Measurement;">
 <meta name="citation_reference" content="citation_title=Polytomous Item Response Theory Models;,citation_author=Remo Ostini;,citation_author=Michael Nering;,citation_publication_date=2006;,citation_cover_date=2006;,citation_year=2006;,citation_fulltext_html_url=https://methods.sagepub.com/book/polytomous-item-response-theory-models;,citation_doi=10.4135/9781412985413;,citation_isbn=978-0-7619-3068-6 978-1-4129-8541-3;">
@@ -245,7 +246,7 @@
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">January 3, 2025</p>
+              <p class="date">January 4, 2025</p>
             </div>
           </div>
           
@@ -259,7 +260,7 @@
     <div>
       <div class="abstract">
         <div class="block-title">Abstract</div>
-        <p>Psychometrics in general have long relied on rule-of-thumb cutoff values for various goodness of fit metrics. With more powerful personal computers it is both feasible and desirable to use simulation/bootstrap methods to determine appropriate cutoff values. This paper illustrates and evaluates the use of an R package for Rasch psychometrics that has implemented functions to simplify the process of identifying misfitting items using simulation based cutoff values. Through a series of simulation studies a comparison is made between information weighted conditional item fit and item-restscore using Goodman and Kruskal’s gamma.</p>
+        <p>Psychometrics in general have long relied on rule-of-thumb critical values for various goodness of fit metrics. With more powerful personal computers it is both feasible and desirable to use simulation methods to determine appropriate critical cutoff values. This paper illustrates and evaluates the use of an R package for Rasch psychometrics that has implemented functions to simplify the process of determining simulation based cutoff values. Through a series of simulation studies a comparison is made between information weighted conditional item fit (“infit”) and item-restscore correlations using Goodman and Kruskal’s <span class="math inline">\(\gamma\)</span>. Results indicate the limitations of small samples (n &lt; 500) in correctly detecting item misfit, especially when several items are misfit. Item outfit shows very low performance and should not be used. Conditional infit with simulation based cutoffs performs slightly better than item-restscore with samples below n = 500. Both methods have strongly increased rates of false positives with large samples (n &gt;= 1000). Large samples should use non-parametric bootstrap of subsamples with item-restscore to avoid type-1 errors. Finally, the importance of iterative analyses is emphasized since a situation where several items show underfit will induce seemingly overfit items. Underfit item should be removed one at a time, and a re-analysis conducted for each step to avoid erroneously removing items.</p>
       </div>
     </div>
 
@@ -280,7 +281,7 @@
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods"><span class="header-section-number">2</span> Methods</a></li>
-  <li><a href="#study-1" id="toc-study-1" class="nav-link" data-scroll-target="#study-1"><span class="header-section-number">3</span> Study 1</a>
+  <li><a href="#study-1-item-infit-and-outfit" id="toc-study-1-item-infit-and-outfit" class="nav-link" data-scroll-target="#study-1-item-infit-and-outfit"><span class="header-section-number">3</span> Study 1: Item infit and outfit</a>
   <ul class="collapse">
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">3.1</span> Results</a>
   <ul class="collapse">
@@ -289,26 +290,34 @@
   <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments"><span class="header-section-number">3.1.3</span> Comments</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#study-2" id="toc-study-2" class="nav-link" data-scroll-target="#study-2"><span class="header-section-number">4</span> Study 2</a>
+  <li><a href="#study-2-item-restscore" id="toc-study-2-item-restscore" class="nav-link" data-scroll-target="#study-2-item-restscore"><span class="header-section-number">4</span> Study 2: Item-restscore</a>
   <ul class="collapse">
   <li><a href="#results-1" id="toc-results-1" class="nav-link" data-scroll-target="#results-1"><span class="header-section-number">4.1</span> Results</a></li>
   </ul></li>
-  <li><a href="#study-3" id="toc-study-3" class="nav-link" data-scroll-target="#study-3"><span class="header-section-number">5</span> Study 3</a>
+  <li><a href="#study-3-comparing-infit-and-item-restscore" id="toc-study-3-comparing-infit-and-item-restscore" class="nav-link" data-scroll-target="#study-3-comparing-infit-and-item-restscore"><span class="header-section-number">5</span> Study 3: Comparing infit and item-restscore</a>
   <ul class="collapse">
   <li><a href="#results-2" id="toc-results-2" class="nav-link" data-scroll-target="#results-2"><span class="header-section-number">5.0.1</span> Results</a></li>
   </ul></li>
-  <li><a href="#study-4" id="toc-study-4" class="nav-link" data-scroll-target="#study-4"><span class="header-section-number">6</span> Study 4</a>
+  <li><a href="#study-4-bootstrapped-item-restscore" id="toc-study-4-bootstrapped-item-restscore" class="nav-link" data-scroll-target="#study-4-bootstrapped-item-restscore"><span class="header-section-number">6</span> Study 4: Bootstrapped item-restscore</a>
   <ul class="collapse">
   <li><a href="#results-3" id="toc-results-3" class="nav-link" data-scroll-target="#results-3"><span class="header-section-number">6.1</span> Results</a></li>
-  <li><a href="#smaller-samples" id="toc-smaller-samples" class="nav-link" data-scroll-target="#smaller-samples"><span class="header-section-number">6.2</span> Smaller samples</a></li>
-  <li><a href="#final-simulation" id="toc-final-simulation" class="nav-link" data-scroll-target="#final-simulation"><span class="header-section-number">6.3</span> Final simulation?</a></li>
+  <li><a href="#small-sample-n-150" id="toc-small-sample-n-150" class="nav-link" data-scroll-target="#small-sample-n-150"><span class="header-section-number">6.2</span> Small sample (n = 150)</a></li>
   </ul></li>
-  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">7</span> Discussion</a>
+  <li><a href="#study-5-varying-number-of-items" id="toc-study-5-varying-number-of-items" class="nav-link" data-scroll-target="#study-5-varying-number-of-items"><span class="header-section-number">7</span> Study 5: Varying number of items</a>
   <ul class="collapse">
-  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">7.1</span> Limitations</a></li>
+  <li><a href="#results-40-items" id="toc-results-40-items" class="nav-link" data-scroll-target="#results-40-items"><span class="header-section-number">7.1</span> Results 40 items</a></li>
+  <li><a href="#results-10-items" id="toc-results-10-items" class="nav-link" data-scroll-target="#results-10-items"><span class="header-section-number">7.2</span> Results 10 items</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">8</span> Conclusion</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">8</span> Discussion</a>
+  <ul class="collapse">
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">8.1</span> Limitations</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">9</span> Conclusion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#sec-addmat" id="toc-sec-addmat" class="nav-link" data-scroll-target="#sec-addmat"><span class="header-section-number">10</span> Additional materials</a>
+  <ul class="collapse">
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info"><span class="header-section-number">10.1</span> Session info</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -319,9 +328,9 @@
        <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>This paper presents a series of simulations conducted to evaluate methods to detect of item misfit in Rasch models. First, conditional item infit and outfit will be under scrutiny. Second, item infit will be compared to item-restscore <span class="citation" data-cites="kreiner_note_2011 mueller_iarm_2022">(<a href="#ref-kreiner_note_2011" role="doc-biblioref">Kreiner 2011</a>; <a href="#ref-mueller_iarm_2022" role="doc-biblioref">Mueller and Santiago 2022</a>)</span>. Third, a bootstrap method for item-restscore will be presented and tested.</p>
-<p>Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span> showed how the range of critical values for conditional item infit varies with sample size. The expected average item conditional infit range was described by Müller as fairly well captured by Smith’s rule-of-thumb formula 1±2/√n <span class="citation" data-cites="smith_using_1998">(<a href="#ref-smith_using_1998" role="doc-biblioref">Smith, Schumacker, and Bush 1998</a>)</span>. However, the average range does not apply for all items, since item location also affects model expected item fit which means that some items may have plausible item fit values outside Smith’s average value range.</p>
-<p>It is here proposed that by using parametric bootstrapping one can establish item fit critical cutoff values that are sample and item specific. The R package <code>easyRasch</code> <span class="citation" data-cites="easyrasch">(<a href="#ref-easyrasch" role="doc-biblioref">Johansson 2024</a>)</span> includes a function to determine item infit and outfit cutoff values, which will be tested in the simulations in this paper.</p>
-<p>It is important to note that the conditional item fit described by Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span> and implemented in the <code>iarm</code> R package <span class="citation" data-cites="mueller_iarm_2022">(<a href="#ref-mueller_iarm_2022" role="doc-biblioref">Mueller and Santiago 2022</a>)</span> should not be confused with the unconditional item fit implemented in software such as Winsteps and RUMM2030, as well as all R packages except <code>iarm</code>. Unconditional item fit can result in unreliable item fit in sample sizes as small as 250 with increasing likelihood of problems as sample size increases. Readers are strongly recommended to read Müller’s paper to fully understand the problems with unconditional item fit.</p>
+<p>The assessment of item fit under the Rasch model has for decades been conducted using various rule-of-thumb critical values. Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span> showed how the range of critical values for conditional item infit varies with sample size. The expected average item conditional infit range was described by Müller as fairly well captured by Smith’s rule-of-thumb formula 1±2/√n <span class="citation" data-cites="smith_using_1998">(<a href="#ref-smith_using_1998" role="doc-biblioref">Smith, Schumacker, and Bush 1998</a>)</span>. However, the average range does not apply for all items, since item location relative to sample location also affects model expected item fit. This means that some items within a set of items varying in location are likely to have item fit values outside Smith’s average value range while still fitting the Rasch model.</p>
+<p>It is here proposed that by using parametric bootstrapping one can establish item fit critical cutoff values that are sample and item specific. This procedure uses the estimated item and person locations based on the available data and simulates new response data that fit the Rasch model, to determine the range of plausible item fit values for each item. The R package <code>easyRasch</code> <span class="citation" data-cites="easyrasch">(<a href="#ref-easyrasch" role="doc-biblioref">Johansson 2024</a>)</span> includes a function to determine item infit and outfit cutoff values using this method and will be tested in the simulations in this paper.</p>
+<p>It is important to note that the conditional item fit described by Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span> and implemented in the <code>iarm</code> R package <span class="citation" data-cites="mueller_iarm_2022">(<a href="#ref-mueller_iarm_2022" role="doc-biblioref">Mueller and Santiago 2022</a>)</span> should not be confused with the unconditional item fit implemented in software such as Winsteps and RUMM2030, as well as all R packages except <code>iarm</code>. Unconditional item fit can result in unreliable item fit in sample sizes as small as 250 with increasing likelihood of problems as sample size increases. Readers are strongly recommended to read Müller’s paper to fully understand the issues with unconditional item fit.</p>
 </section>
 <section id="methods" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Methods</h1>
@@ -478,17 +487,18 @@ Loading required package: showtextdb</code></pre>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>theme_rise <span class="ot">&lt;-</span> <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 <p>A fully reproducible manuscript with R code and data is available on GitHub: <a href="https://github.com/pgmj/rasch_itemfit" class="uri">https://github.com/pgmj/rasch_itemfit</a></p>
-<p>The simulation of response data used three steps: first, a vector of theta values (person scores on the latent variable) were generated using <code>rnorm(mean = 0, sd = 1.5)</code>. Second, a set of item locations ranging from -2 to 2 logits were generated for dichotomous items, using <code>runif(n = 20, min = -2, max = 2)</code>. Third, the theta values were used to simulate item responses for participants, using <code>sim.xdim()</code> from the <code>eRm</code> package <span class="citation" data-cites="mair_extended_2007">(<a href="#ref-mair_extended_2007" role="doc-biblioref">Mair and Hatzinger 2007</a>)</span>, which allows simulation of multidimensional response data. Multiple datasets were generated using the same item and person parameters, varying the targeting and number of the misfitting item(s). More details are described under the separate studies below.</p>
-<p>The parametric bootstrapping procedure was implemented using random samples from the 10 000 simulated responses. The sample size variations tested are described under each study.</p>
+<p>The simulation of response data used three steps: First, a vector of theta values (person scores on the latent variable’s logit scale) were generated using <code>rnorm(mean = 0, sd = 1.5)</code>. Second, a set of item locations ranging from -2 to 2 logits were generated for dichotomous items, using <code>runif(n = 20, min = -2, max = 2)</code>. Third, the theta values were used to simulate item responses for participants, using <code>sim.xdim()</code> from the <code>eRm</code> package <span class="citation" data-cites="mair_extended_2007">(<a href="#ref-mair_extended_2007" role="doc-biblioref">Mair and Hatzinger 2007</a>)</span>, which allows simulation of multidimensional response data. Multiple datasets with 10 000 respondents each were generated using the same item and person parameters, varying the targeting of the misfitting item(s) and number of the misfitting item(s). More details are described under the separate studies. The parametric bootstrapping procedure was implemented using random samples from the simulated datasets. Sample size variations tested are described under each study.</p>
+<p>The general procedure for the parametric bootstrapping is as follows:</p>
 <ol type="1">
-<li>Estimation of item locations based on simulated item responses using conditional maximum likelihood <span class="citation" data-cites="mair_extended_2007">(CML, <a href="#ref-mair_extended_2007" role="doc-biblioref">Mair and Hatzinger 2007</a>)</span>.</li>
-<li>Estimation of sample theta values using weighted maximum likelihood <span class="citation" data-cites="warm_weighted_1989">(<a href="#ref-warm_weighted_1989" role="doc-biblioref">Warm 1989</a>)</span></li>
-<li>Simulation of new response data, fitting the Rasch model, using the estimated item locations and theta values.</li>
+<li>Estimation of item locations based on simulated item response data, using conditional maximum likelihood <span class="citation" data-cites="mair_extended_2007">(CML, <a href="#ref-mair_extended_2007" role="doc-biblioref">Mair and Hatzinger 2007</a>)</span>.</li>
+<li>Estimation of sample theta values using weighted maximum likelihood <span class="citation" data-cites="warm_weighted_1989">(<a href="#ref-warm_weighted_1989" role="doc-biblioref">Warm 1989</a>)</span>.</li>
+<li>Simulation of new response data which fit the Rasch model, using the estimated item locations and theta values.</li>
 <li>Estimation of the dichotomous Rasch model for the new response data using CML.</li>
-<li>Based on step 4, calculation of conditional item fit <span class="citation" data-cites="muller_item_2020 mueller_iarm_2022">(<a href="#ref-muller_item_2020" role="doc-biblioref">Müller 2020</a>; <a href="#ref-mueller_iarm_2022" role="doc-biblioref">Mueller and Santiago 2022</a>)</span> and/or item-restscore metrics <span class="citation" data-cites="kreiner_note_2011 mueller_iarm_2022">(<a href="#ref-kreiner_note_2011" role="doc-biblioref">Kreiner 2011</a>; <a href="#ref-mueller_iarm_2022" role="doc-biblioref">Mueller and Santiago 2022</a>)</span>.</li>
+<li>Based on step 4, calculation of conditional item infit and outfit <span class="citation" data-cites="muller_item_2020 mueller_iarm_2022">(<a href="#ref-muller_item_2020" role="doc-biblioref">Müller 2020</a>; <a href="#ref-mueller_iarm_2022" role="doc-biblioref">Mueller and Santiago 2022</a>)</span> and/or item-restscore metrics <span class="citation" data-cites="kreiner_note_2011 mueller_iarm_2022">(<a href="#ref-kreiner_note_2011" role="doc-biblioref">Kreiner 2011</a>; <a href="#ref-mueller_iarm_2022" role="doc-biblioref">Mueller and Santiago 2022</a>)</span>.</li>
 </ol>
 <p>Steps three and four were iterated over, using resampling with replacement from the estimated theta values as a basis for simulating the response data in step three.</p>
 <p>Summary statistics were created with focus on the percentage of correct detection of misfit and false positives.</p>
+<p>A complete list of software used for the analyses is listed in #sec-addmat.</p>
 <div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read pre-generated item locations for reproducibility</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>items1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/rm_items40.csv"</span>) <span class="sc">%&gt;%</span></span>
@@ -567,19 +577,13 @@ dbl (2): item, location
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(V1,V11,V3,V12)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 </section>
-<section id="study-1" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Study 1</h1>
+<section id="study-1-item-infit-and-outfit" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Study 1: Item infit and outfit</h1>
 <p>Item mean square standardized residuals are either unweighted, which is referred to as “outfit”, or information weighted, which we call “infit” <span class="citation" data-cites="ostini_polytomous_2006">(<a href="#ref-ostini_polytomous_2006" role="doc-biblioref">Ostini and Nering 2006, 86–87</a>)</span>. For details on conditional item fit we refer to the previously mentioned paper by Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span>. Conditional item infit and outfit are expected to be near 1, with higher values indicating an item to be underfitting the Rasch model (often due to multidimensionality issues) and lower values indicating overfit.</p>
-<p>Main lines of inquiry:</p>
-<ol type="1">
-<li>How does the number of iterations used in RIgetfit() impact the indicated cutoff values?</li>
-<li>How useful are the cutoff values in detecting misfitting items (and false positives), when using the optimal number of iterations?</li>
-<li>Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span> hints at outfit being less useful than infit. We will investigate this by comparing them.</li>
-</ol>
-<p>20 dichotomous items are used, with one item misfitting. Item locations are the same throughout. The location of the misfitting item relative the to the sample theta mean was selected to be approximately 0, -1, and -2 logits. Three separate datasets were generated with these variations, each with 10 000 simulated respondents. One dataset with all three misfitting items was also generated, using the same sample size.</p>
-<p>The function <code>RIgetfit()</code> from the <code>easyRasch</code> R package is tested here. It’s source code can be accessed on GitHub. The function offers the user a choice of the number of bootstrap iterations to use to calculate the cutoff values for infit and outfit.</p>
+<p>The function <code>RIgetfit()</code> from the <code>easyRasch</code> R package is tested here. It’s source code can be accessed on GitHub, see #sec-addmat. The function offers the user a choice of the number of bootstrap iterations to use to determine the critical cutoff values for each item’s infit and outfit. Our main interest in this study is two-fold. We want to test variations in the number of iterations used in <code>RIgetfit()</code> and evaluate how well the critical values based on the parametric bootstrapping procedure detects misfitting items. Additionally, a comparison between infit and outfit statistics in terms of detection rate and false positive rate will be conducted.</p>
+<p>20 dichotomous items are used, with one item misfitting. Item locations are the same throughout all studies unless otherwise noted. The location of the misfitting item relative the to the sample theta mean was selected to be approximately 0, -1, and -2 logits. Three separate datasets were generated with these variations, each with 10 000 simulated respondents. One dataset with all three misfitting items was also generated, using the same sample size.</p>
 <p>Then the <code>RIitemfit()</code> function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. <code>RIitemfit()</code> has a default (user modifiable) setting to slightly truncate the distribution of values using <code>stats::quantile()</code> at 0.001 and 0.999 to remove extreme values. An example is demonstrated in <a href="#tbl-itemfit1" class="quarto-xref">Table&nbsp;1</a>, using a subset of the items used in the simulations. <a href="#fig-itemfit1" class="quarto-xref">Figure&nbsp;1</a> provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith’s rule-of-thumb regarding infit (1±2/√n) would be 0.9-1.1 for a sample size of 400.</p>
-<p>This study was rather computationally demanding since each simulation run entailed 100-400 underlying simulations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4<em>3</em>3 = 36 conditions. Each combination used 200 simulation runs. The simulations took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.</p>
+<p>This study was rather computationally demanding since each simulation run entailed 100-400 underlying bootstrap iterations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4<em>3</em>3 = 36 conditions. Each combination used 200 simulation runs. The simulations took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.</p>
 <div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div class="cell">
 
 <div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>simfit <span class="ot">&lt;-</span> <span class="fu">RIgetfit</span>(demodata, <span class="at">iterations =</span> <span class="dv">400</span>, <span class="at">cpu =</span> <span class="dv">8</span>)</span>
@@ -1074,9 +1078,9 @@ Figure&nbsp;7
 </section>
 </section>
 </section>
-<section id="study-2" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Study 2</h1>
-<p>Item-restscore is a metric that compares an expected correlation with the observed correlation. Lower values than expected indicates than an item is underfit to the Rasch model, while higher values indicate overfit. The item-restscore function used in this simulation is from the <code>iarm</code> package <span class="citation" data-cites="mueller_iarm_2022">(<a href="#ref-mueller_iarm_2022" role="doc-biblioref">Mueller and Santiago 2022</a>)</span> and outputs Benjamini-Hochberg corrected <em>p</em>-values <span class="citation" data-cites="benjamini_controlling_1995">(<a href="#ref-benjamini_controlling_1995" role="doc-biblioref">Benjamini and Hochberg 1995</a>)</span>, which are used in determining whether the observed value is statistically significant (using <em>p</em> &lt; .05 as critical value) from the expected value for each item.</p>
+<section id="study-2-item-restscore" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Study 2: Item-restscore</h1>
+<p>Item-restscore is a metric that compares an expected correlation with the observed correlation, using Goodman and Kruskal’s <span class="math inline">\(\gamma\)</span> <span class="citation" data-cites="goodman_measures_1954 kreiner_note_2011">(<a href="#ref-goodman_measures_1954" role="doc-biblioref">Goodman and Kruskal 1954</a>; <a href="#ref-kreiner_note_2011" role="doc-biblioref">Kreiner 2011</a>)</span>. Lower observed values than expected indicates than an item is underfit to the Rasch model, while higher values indicate overfit. The item-restscore function used in this simulation is from the <code>iarm</code> package <span class="citation" data-cites="mueller_iarm_2022">(<a href="#ref-mueller_iarm_2022" role="doc-biblioref">Mueller and Santiago 2022</a>)</span> and outputs Benjamini-Hochberg corrected <em>p</em>-values <span class="citation" data-cites="benjamini_controlling_1995">(<a href="#ref-benjamini_controlling_1995" role="doc-biblioref">Benjamini and Hochberg 1995</a>)</span>, which are used to determine whether the differences between the observed and expected values are statistically significant (using <em>p</em> &lt; .05 as critical value) for each item.</p>
 <div class="cell-container"><div class="cell-decorator"><pre>In [17]:</pre></div><div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>ir <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, iterations, samplesize, <span class="at">cpu =</span> <span class="dv">9</span>) {</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -1231,8 +1235,8 @@ Figure&nbsp;8
 <p>Similarly to infit, item-restscore has decreased detection rate for off-target misfitting items. The false positive rate is lower for item-restscore than infit for sample sizes below 1000.</p>
 </section>
 </section>
-<section id="study-3" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Study 3</h1>
+<section id="study-3-comparing-infit-and-item-restscore" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Study 3: Comparing infit and item-restscore</h1>
 <p>We will now compare the performance of infit and item-restscore when all three items are misfitting at the same time. This simulation will also include a condition with 2000 respondents, to examine if the false positive rate increases with more respondents. For infit, we will only use 200 iterations with <code>RIgetfit()</code> since that condition seemed to strike a balance between detection rate and false positives.</p>
 <div class="cell-container"><div class="cell-decorator"><pre>In [20]:</pre></div><div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to run simulations for item infit/outfit cutoff values</span></span>
@@ -1583,8 +1587,8 @@ Table&nbsp;2
 <p>Item-restscore has higher detection rate than infit (see <a href="#fig-itemrestscore2" class="quarto-xref">Figure&nbsp;11</a>), but also higher levels of false positives. Reviewing the type of misfit identified by item-restscore (see <a href="#tbl-overunder" class="quarto-xref">Table&nbsp;2</a>), the false positives are all overfitting the Rasch model, except for two instances indicating underfit for item 12. Items 9, 13, and 18, that were simulated to be misfitting due to loading on a separate dimension, are as expected showing underfit to the Rasch model.</p>
 </section>
 </section>
-<section id="study-4" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Study 4</h1>
+<section id="study-4-bootstrapped-item-restscore" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Study 4: Bootstrapped item-restscore</h1>
 <p>For our final set of simulations, we will use a non-parametric bootstrap procedure with item-restscore. The difference from the parametric bootstrap is that the non-parametric bootstrap samples with replacement directly from the observed response data. First, based on the above problematic sample size of 2000 when three items are misfitting, we will use the bootstrap function to sample with replacement using n = 800 and 250 bootstrap samples. The function <code>RIbootRestscore()</code> from the <code>easyRasch</code> package will be used.</p>
 <div class="cell-container"><div class="cell-decorator"><pre>In [28]:</pre></div><div class="cell">
 
@@ -2060,9 +2064,9 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 </div>
 <p><a href="#fig-irb0all" class="quarto-xref">Figure&nbsp;12</a> shows that there is variation in false positive rate, but it is nearly always indicating overfit, while the misfitting items are only indicated as underfit. The summary statistics in <a href="#tbl-irb0mis" class="quarto-xref">Table&nbsp;4</a> show that there can be quite a bit of variation for false positives, but the clear majority of results are below 50%. 3 items have 95th percentile values above 50, with the highest at 58.8.</p>
 </section>
-<section id="smaller-samples" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="smaller-samples"><span class="header-section-number">6.2</span> Smaller samples</h2>
-<p>We will use 200 simulations for this part, applied to sample sizes 150 and 250. As an additional condition, we will use both 250 and 500 bootstraps for item-restscore in each simulation.</p>
+<section id="small-sample-n-150" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="small-sample-n-150"><span class="header-section-number">6.2</span> Small sample (n = 150)</h2>
+<p>We will use 200 simulations to check the performance of the bootstrapped item-restscore function for sample size 150. As an additional experimental condition, we will use both 250 and 500 bootstraps for item-restscore in each simulation.</p>
 <div class="cell-container"><div class="cell-decorator"><pre>In [32]:</pre></div><div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>ir_boot2 <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, iterations, samplesize) {</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -2102,37 +2106,482 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <span id="cb51-36"><a href="#cb51-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(fit)</span>
 <span id="cb51-37"><a href="#cb51-37" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb51-38"><a href="#cb51-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-39"><a href="#cb51-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-40"><a href="#cb51-40" aria-hidden="true" tabindex="-1"></a><span class="co">#test &lt;- ir_boot2(simdata3, 2, 150)</span></span>
+<span id="cb51-39"><a href="#cb51-39" aria-hidden="true" tabindex="-1"></a>irb150 <span class="ot">&lt;-</span> <span class="fu">ir_boot2</span>(simdata3, <span class="dv">200</span>, <span class="dv">150</span>)</span>
+<span id="cb51-40"><a href="#cb51-40" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(irb150,<span class="st">"data/irb150.rds"</span>)</span>
 <span id="cb51-41"><a href="#cb51-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-42"><a href="#cb51-42" aria-hidden="true" tabindex="-1"></a>irb150 <span class="ot">&lt;-</span> <span class="fu">ir_boot2</span>(simdata3, <span class="dv">200</span>, <span class="dv">150</span>)</span>
-<span id="cb51-43"><a href="#cb51-43" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(irb150,<span class="st">"data/irb150.rds"</span>)</span>
-<span id="cb51-44"><a href="#cb51-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-45"><a href="#cb51-45" aria-hidden="true" tabindex="-1"></a>irb250 <span class="ot">&lt;-</span> <span class="fu">ir_boot2</span>(simdata3, <span class="dv">200</span>, <span class="dv">250</span>)</span>
-<span id="cb51-46"><a href="#cb51-46" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(irb250,<span class="st">"data/irb250.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb51-42"><a href="#cb51-42" aria-hidden="true" tabindex="-1"></a><span class="co"># irb250 &lt;- ir_boot2(simdata3, 200, 250)</span></span>
+<span id="cb51-43"><a href="#cb51-43" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS(irb250,"data/irb250.rds")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [33]:</pre></div><div id="cell-fig-irboot150" class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>irb150 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/irb150.rds"</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>irb150_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(irb150)</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>irb150_df <span class="sc">%&gt;%</span> </span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bootit =</span> <span class="fu">factor</span>(bootit, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">250</span>,<span class="dv">500</span>),</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"250 bootstrap iterations"</span>,</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"500 bootstrap iterations"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> percent, <span class="at">y =</span> item, <span class="at">color =</span> item_restscore)) <span class="sc">+</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_pointinterval</span>(<span class="at">point_interval =</span> <span class="st">"median_hdci"</span>) <span class="sc">+</span></span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="fu">str_wrap</span>(<span class="st">"Point indicates median value and lines are highest-density continuous interval for .66 and .95."</span>,<span class="dv">80</span>),</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Distribution of percent values for item misfit"</span>, <span class="at">y =</span> <span class="st">"Item"</span>,</span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Item-restscore bootstrap results"</span>,</span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">str_wrap</span>(<span class="st">"250 and 500 bootstrap iterations with 150 respondents from a sample of 150. 200 simulations were used."</span>,<span class="dv">70</span>)</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="st">'Type'</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Overfit"</span>,<span class="st">"Underfit"</span>)) <span class="sc">+</span></span>
+<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>bootit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-irboot150" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-irboot150-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-irboot150-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;13: "><img src="index_files/figure-html/fig-irboot150-1.png" id="fig-irboot150" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-irboot150-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+<p>The bootstrapping does not improve on the single instance of item-restscore for the n = 150 condition (see <a href="#fig-irboot150" class="quarto-xref">Figure&nbsp;13</a>). When comparing to the previous results in <a href="#fig-itemrestscore2" class="quarto-xref">Figure&nbsp;11</a>, where the detection rate for the same sample size were at 49.2%, 14.6%, and 34.6% (for items 9, 13, and 18 respectively), the corresponding median values from the bootstrapped item-restscore with 250 iterations were 51.6%, 12.4%, and 37.2%. Using 500 bootstrap iterations did not result in relevant improvements over 250 iterations (see <a href="#tbl-irb150mis" class="quarto-xref">Table&nbsp;5</a>).</p>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>irb150_df <span class="sc">%&gt;%</span> </span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(item <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"V9"</span>,<span class="st">"V13"</span>,<span class="st">"V18"</span>),</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>         bootit <span class="sc">==</span> <span class="dv">250</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Item =</span> item) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Item) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Median =</span> <span class="fu">median</span>(percent),</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">MAD =</span> <span class="fu">mad</span>(percent),</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">Mean =</span> <span class="fu">mean</span>(percent),</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(percent),</span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">p05 =</span> <span class="fu">quantile</span>(percent, .<span class="dv">05</span>),</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">p01 =</span> <span class="fu">quantile</span>(percent, .<span class="dv">01</span>)</span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(p01)) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, round, <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>irb150_df <span class="sc">%&gt;%</span> </span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(item <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"V9"</span>,<span class="st">"V13"</span>,<span class="st">"V18"</span>),</span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>         bootit <span class="sc">==</span> <span class="dv">500</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Item =</span> item) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Item) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Median =</span> <span class="fu">median</span>(percent),</span>
+<span id="cb53-23"><a href="#cb53-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">MAD =</span> <span class="fu">mad</span>(percent),</span>
+<span id="cb53-24"><a href="#cb53-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">Mean =</span> <span class="fu">mean</span>(percent),</span>
+<span id="cb53-25"><a href="#cb53-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(percent),</span>
+<span id="cb53-26"><a href="#cb53-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">p05 =</span> <span class="fu">quantile</span>(percent, .<span class="dv">05</span>),</span>
+<span id="cb53-27"><a href="#cb53-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">p01 =</span> <span class="fu">quantile</span>(percent, .<span class="dv">01</span>)</span>
+<span id="cb53-28"><a href="#cb53-28" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-29"><a href="#cb53-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb53-30"><a href="#cb53-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(p01)) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-31"><a href="#cb53-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, round, <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-32"><a href="#cb53-32" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-irb150mis" class="quarto-layout-panel anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-irb150mis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: Summary statistics for item-restscore bootstrap simulation (n = 150)
+</figcaption>
+<div aria-describedby="tbl-irb150mis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-irb150mis" style="flex-basis: 100.0%;justify-content: center;">
+<div id="tbl-irb150mis-1" class="do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-irb150mis-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) 250 bootstrap iterations
+</figcaption>
+<div aria-describedby="tbl-irb150mis-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-irb150mis-1" class="do-not-create-environment caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Item</th>
+<th style="text-align: right;">Median</th>
+<th style="text-align: right;">MAD</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">SD</th>
+<th style="text-align: right;">p05</th>
+<th style="text-align: right;">p01</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">V13</td>
+<td style="text-align: right;">12.4</td>
+<td style="text-align: right;">17.8</td>
+<td style="text-align: right;">22.5</td>
+<td style="text-align: right;">24.7</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V18</td>
+<td style="text-align: right;">37.2</td>
+<td style="text-align: right;">36.2</td>
+<td style="text-align: right;">40.4</td>
+<td style="text-align: right;">28.4</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">0.4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V9</td>
+<td style="text-align: right;">51.6</td>
+<td style="text-align: right;">38.0</td>
+<td style="text-align: right;">50.4</td>
+<td style="text-align: right;">29.8</td>
+<td style="text-align: right;">2.9</td>
+<td style="text-align: right;">0.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-irb150mis" style="flex-basis: 100.0%;justify-content: center;">
+<div id="tbl-irb150mis-2" class="do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-irb150mis-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) 500 bootstrap iterations
+</figcaption>
+<div aria-describedby="tbl-irb150mis-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-irb150mis-2" class="do-not-create-environment caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Item</th>
+<th style="text-align: right;">Median</th>
+<th style="text-align: right;">MAD</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">SD</th>
+<th style="text-align: right;">p05</th>
+<th style="text-align: right;">p01</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">V13</td>
+<td style="text-align: right;">12.7</td>
+<td style="text-align: right;">17.9</td>
+<td style="text-align: right;">21.9</td>
+<td style="text-align: right;">24.3</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V18</td>
+<td style="text-align: right;">35.6</td>
+<td style="text-align: right;">38.3</td>
+<td style="text-align: right;">38.7</td>
+<td style="text-align: right;">28.8</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V9</td>
+<td style="text-align: right;">53.0</td>
+<td style="text-align: right;">39.1</td>
+<td style="text-align: right;">50.3</td>
+<td style="text-align: right;">29.9</td>
+<td style="text-align: right;">3.6</td>
+<td style="text-align: right;">0.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
 </section>
-<section id="final-simulation" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="final-simulation"><span class="header-section-number">6.3</span> Final simulation?</h2>
-<p>Run with 40 items and 3 misfitting, just 500 simulations with normal item-restscore to assess if this makes a difference. And 10 items with 1-2 misfit?</p>
+</section>
+<section id="study-5-varying-number-of-items" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Study 5: Varying number of items</h1>
+<p>When doing simulation studies there is always a balance to strike between trying to evaluate many scenarios and not having too high complexity. We have been keeping several things constant, such as item locations and number of items, which makes interpretation easier but may limit the applicability of the results. For our final simulation, we will vary the number of items and the number of misfitting items. First, 40 dichotomous items will be used, adding 20 new item locations to the previously used set, with the same three items misfitting (items 9, 13, and 18). Second, items 1-10 out of the initial 20 items will be used, which means only item 9 will be misfit. We’ll again be using sample sizes of 150, 250, 500, and 1000.</p>
+<p>Item-restscore and item infit will be compared. The latter will use 100 bootstrap iterations to determine critical values for sample sizes 150 and 250, and 200 bootstrap iterations for n &gt;= 500.</p>
+<div class="cell-container"><div class="cell-decorator"><pre>In [34]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>itemfitboot3 <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, iterations, samplesize) {</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span>iterations) <span class="sc">%do%</span> {</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> dat[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dat), samplesize), ] <span class="sc">%&gt;%</span> </span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.data.frame</span>()</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check data for responses in all cells</span></span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>    n_resp <span class="ot">&lt;-</span></span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>      data <span class="sc">%&gt;%</span></span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.matrix</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">colSums2</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">t</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.vector</span>()</span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">min</span>(n_resp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&lt;</span> <span class="dv">11</span>) {</span>
+<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>      data <span class="ot">&lt;-</span> dat[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dat), samplesize), ] <span class="sc">%&gt;%</span> </span>
+<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">as.data.frame</span>()</span>
+<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>    } </span>
+<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">nrow</span>(data <span class="sc">&lt;</span> <span class="dv">400</span>)) {</span>
+<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a>      sfit <span class="ot">&lt;-</span> <span class="fu">RIgetfit</span>(data,<span class="dv">100</span>,<span class="dv">9</span>)</span>
+<span id="cb54-23"><a href="#cb54-23" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">nrow</span>(data <span class="sc">&gt;</span> <span class="dv">400</span>)) {</span>
+<span id="cb54-24"><a href="#cb54-24" aria-hidden="true" tabindex="-1"></a>      sfit <span class="ot">&lt;-</span> <span class="fu">RIgetfit</span>(data,<span class="dv">200</span>,<span class="dv">9</span>)</span>
+<span id="cb54-25"><a href="#cb54-25" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb54-26"><a href="#cb54-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb54-27"><a href="#cb54-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># apply cutoffs and store results</span></span>
+<span id="cb54-28"><a href="#cb54-28" aria-hidden="true" tabindex="-1"></a>    rfit <span class="ot">&lt;-</span> <span class="fu">RIitemfit</span>(data, sfit, <span class="at">output =</span> <span class="st">"dataframe"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb54-29"><a href="#cb54-29" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(infit_msq,outfit_msq,infit_diff,outfit_diff) <span class="sc">%&gt;%</span> </span>
+<span id="cb54-30"><a href="#cb54-30" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_column</span>(<span class="at">item =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(data),</span>
+<span id="cb54-31"><a href="#cb54-31" aria-hidden="true" tabindex="-1"></a>                 <span class="at">iteration =</span> i,</span>
+<span id="cb54-32"><a href="#cb54-32" aria-hidden="true" tabindex="-1"></a>                 <span class="at">samplesize =</span> samplesize)</span>
+<span id="cb54-33"><a href="#cb54-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-34"><a href="#cb54-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># combine output </span></span>
+<span id="cb54-35"><a href="#cb54-35" aria-hidden="true" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> rfit</span>
+<span id="cb54-36"><a href="#cb54-36" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb54-37"><a href="#cb54-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(fit)</span>
+<span id="cb54-38"><a href="#cb54-38" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [35]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate data using 40 items</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="co"># read pre-generated item locations for reproducibility</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>items2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/rm_items40.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(location)</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="co"># a matrix to specify which dimension each item loads on</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>wmat4 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">40</span>,</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="co"># set all items to load on dimension one</span></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>wmat4[<span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>wmat4[<span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>wmat4[<span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">13</span>,<span class="dv">18</span>),<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>wmat4[<span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">13</span>,<span class="dv">18</span>),<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a><span class="co"># generate dichotomous data</span></span>
+<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a>simdata40items <span class="ot">&lt;-</span> eRm<span class="sc">::</span><span class="fu">sim.xdim</span>(<span class="dv">10000</span>, items2, <span class="at">cutpoint =</span> <span class="st">"randomized"</span>, <span class="at">Sigma =</span> sigma, <span class="at">weightmat =</span> wmat4)</span>
+<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a><span class="co"># check targeting</span></span>
+<span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a><span class="co">#RItargeting(as.data.frame(simdata40items), model = "RM")</span></span>
+<span id="cb55-21"><a href="#cb55-21" aria-hidden="true" tabindex="-1"></a><span class="co">#RItargeting(simdata3[,1:10], model = "RM")</span></span>
+<span id="cb55-22"><a href="#cb55-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-23"><a href="#cb55-23" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(simdata40items,<span class="st">"data/simdata40items.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [36]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>simdata40items <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/simdata40items.rds"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>samplesizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>)</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>ifb10 <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>ir10 <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="co">#tic()</span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>ifb40_60 <span class="ot">&lt;-</span> <span class="fu">map</span>(samplesizes, <span class="sc">~</span> <span class="fu">itemfitboot3</span>(simdata40items, <span class="at">iterations =</span> <span class="dv">60</span>, <span class="at">samplesize =</span> .x))</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="co">#toc() # 120s for 2 runs</span></span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(ifb40_60, <span class="st">"data/ifb40_60i.rds"</span>)</span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>ir40 <span class="ot">&lt;-</span> <span class="fu">map</span>(samplesizes, <span class="sc">~</span> <span class="fu">ir</span>(simdata40items, <span class="at">iterations =</span> <span class="dv">500</span>, <span class="at">samplesize =</span> .x))</span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(ir40, <span class="st">"data/ir40.rds"</span>)</span>
+<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a>ir10 <span class="ot">&lt;-</span> <span class="fu">map</span>(samplesizes, <span class="sc">~</span> <span class="fu">ir</span>(simdata3[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">iterations =</span> <span class="dv">500</span>, <span class="at">samplesize =</span> .x))</span>
+<span id="cb56-17"><a href="#cb56-17" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(ir10, <span class="st">"data/ir10.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [37]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>ir40 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/ir40.rds"</span>)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>ir10 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/ir10.rds"</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>ifb40_60 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/ifb40_60i.rds"</span>)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>ir40_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(ir40)</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>ir10_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(ir10)</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>ifb40_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(ifb40_60)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<section id="results-40-items" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="results-40-items"><span class="header-section-number">7.1</span> Results 40 items</h2>
+<div class="cell-container"><div class="cell-decorator"><pre>In [38]:</pre></div><div id="cell-fig-ifb40" class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>ifb40_df <span class="sc">%&gt;%</span> </span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>infit_diff <span class="sc">==</span> <span class="st">"no misfit"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item, <span class="at">.drop =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent =</span> <span class="fu">round</span>(n<span class="sc">/</span><span class="dv">60</span><span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samplesize =</span> <span class="fu">factor</span>(samplesize, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>,<span class="dv">2000</span>),</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"n = 150"</span>,</span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 250"</span>,</span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 500"</span>,</span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 1000"</span>,</span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 2000"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> item, <span class="at">y =</span> Percent)) <span class="sc">+</span></span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">ifelse</span>(Percent <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="st">"a"</span>,<span class="st">"b"</span>))) <span class="sc">+</span></span>
+<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">9</span>),</span>
+<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), </span>
+<span id="cb58-18"><a href="#cb58-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb58-19"><a href="#cb58-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb58-20"><a href="#cb58-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">13</span>),</span>
+<span id="cb58-21"><a href="#cb58-21" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), </span>
+<span id="cb58-22"><a href="#cb58-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb58-23"><a href="#cb58-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb58-24"><a href="#cb58-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">18</span>),</span>
+<span id="cb58-25"><a href="#cb58-25" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), </span>
+<span id="cb58-26"><a href="#cb58-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb58-27"><a href="#cb58-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb58-28"><a href="#cb58-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">105</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb58-29"><a href="#cb58-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">'Item'</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">40</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">40</span>,<span class="dv">1</span>), <span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">n.dodge =</span> <span class="dv">2</span>), <span class="at">minor_breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb58-30"><a href="#cb58-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb58-31"><a href="#cb58-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize<span class="sc">~</span>.) <span class="sc">+</span></span>
+<span id="cb58-32"><a href="#cb58-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
+<span id="cb58-33"><a href="#cb58-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"3 items misfitting. 60 simulations per combination."</span>,</span>
+<span id="cb58-34"><a href="#cb58-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Conditional infit detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 7 rows containing missing values or values outside the scale range
+(`geom_col()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-ifb40" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ifb40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-ifb40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;14: "><img src="index_files/figure-html/fig-ifb40-1.png" id="fig-ifb40" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ifb40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [39]:</pre></div><div id="cell-fig-itemrestscore40" class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>ir40_df <span class="sc">%&gt;%</span> </span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ir_padj <span class="sc">==</span> <span class="st">"sign. misfit"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item, <span class="at">.drop =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent =</span> n<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span><span class="dv">500</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> item, <span class="at">y =</span> Percent)) <span class="sc">+</span></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">ifelse</span>(Percent <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="st">"lightblue"</span>,<span class="st">"lightpink"</span>))) <span class="sc">+</span></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">9</span>),</span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.65</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">13</span>),</span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.65</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb60-15"><a href="#cb60-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">18</span>),</span>
+<span id="cb60-16"><a href="#cb60-16" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.65</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb60-18"><a href="#cb60-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">105</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">'Item'</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), </span>
+<span id="cb60-20"><a href="#cb60-20" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">40</span>,<span class="dv">1</span>), </span>
+<span id="cb60-21"><a href="#cb60-21" aria-hidden="true" tabindex="-1"></a>                     <span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">n.dodge =</span> <span class="dv">2</span>), <span class="at">minor_breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb60-22"><a href="#cb60-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb60-23"><a href="#cb60-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb60-24"><a href="#cb60-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
+<span id="cb60-25"><a href="#cb60-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"3 items misfitting. 500 simulations per combination."</span>,</span>
+<span id="cb60-26"><a href="#cb60-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Item-restscore detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 4 rows containing missing values or values outside the scale range
+(`geom_col()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-itemrestscore40" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-itemrestscore40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-itemrestscore40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure&nbsp;15: "><img src="index_files/figure-html/fig-itemrestscore40-1.png" id="fig-itemrestscore40" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-itemrestscore40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+<p>Infit performs better when sample size is 150 or 250 (see <a href="#fig-ifb40" class="quarto-xref">Figure&nbsp;14</a>), while performance is slightly better for item-restscore for n &gt;= 500 in terms of lower rates of false positives (see <a href="#fig-itemrestscore40" class="quarto-xref">Figure&nbsp;15</a>).</p>
+</section>
+<section id="results-10-items" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="results-10-items"><span class="header-section-number">7.2</span> Results 10 items</h2>
+<div class="cell-container"><div class="cell-decorator"><pre>In [40]:</pre></div><div id="cell-fig-itemrestscore10" class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>ir10_df <span class="sc">%&gt;%</span> </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ir_padj <span class="sc">==</span> <span class="st">"sign. misfit"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item, <span class="at">.drop =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent =</span> n<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span><span class="dv">500</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> item, <span class="at">y =</span> Percent)) <span class="sc">+</span></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">ifelse</span>(Percent <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="st">"lightblue"</span>,<span class="st">"lightpink"</span>))) <span class="sc">+</span></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">9</span>),</span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.65</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">13</span>),</span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.65</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">18</span>),</span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.65</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">105</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb62-19"><a href="#cb62-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">'Item'</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), </span>
+<span id="cb62-20"><a href="#cb62-20" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dv">1</span>), </span>
+<span id="cb62-21"><a href="#cb62-21" aria-hidden="true" tabindex="-1"></a>                     <span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">n.dodge =</span> <span class="dv">1</span>), <span class="at">minor_breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb62-22"><a href="#cb62-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb62-23"><a href="#cb62-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb62-24"><a href="#cb62-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
+<span id="cb62-25"><a href="#cb62-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"3 items misfitting. 500 simulations per combination."</span>,</span>
+<span id="cb62-26"><a href="#cb62-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Item-restscore detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 4 rows containing missing values or values outside the scale range
+(`geom_col()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-itemrestscore10" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-itemrestscore10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-itemrestscore10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;16: "><img src="index_files/figure-html/fig-itemrestscore10-1.png" id="fig-itemrestscore10" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-itemrestscore10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+<p>Compared to when we had 20 items, … create a summary table! And run more simulations tonight.</p>
 </section>
 </section>
-<section id="discussion" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Discussion</h1>
-<section id="limitations" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="limitations"><span class="header-section-number">7.1</span> Limitations</h2>
+<section id="discussion" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Discussion</h1>
+<section id="limitations" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="limitations"><span class="header-section-number">8.1</span> Limitations</h2>
 <p>Number of items could be varied more. However, the results from Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span>, which use 10, 15, and 20 items, indicates small differences in critical value ranges. But this might not have implications for detection rate of misfitting items (we need the 40 items simulation and maybe 10 also?). Partial credit model for polytomous data would have been nice to also test. Although results regarding detection rate should generalize from RM to PCM, maybe the sample size in relation to number of items does not easily translate from the dichotomous case?</p>
 </section>
 </section>
-<section id="conclusion" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Conclusion</h1>
-<p>These findings make a good argument for removing one item at a time when the analysis indicates misfitting items, starting with the most misfitting item. This is especially relevant for sample sizes at 500 or above and when misfitting items are located close to the sample mean.</p>
+<section id="conclusion" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Conclusion</h1>
+<p>These findings make a good argument for removing one item at a time when the analysis indicates misfitting items, starting with the most underfitting item. This is especially relevant for <em>n</em> &gt;= 500 and when misfitting items are located close to the sample mean.</p>
+<div class="cell-container"><div class="cell-decorator"><pre>In [41]:</pre></div><div id="cell-fig-loadloc" class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">RIloadLoc</span>(simdata3[<span class="dv">1</span><span class="sc">:</span><span class="dv">400</span>,], <span class="at">model =</span> <span class="st">"RM"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-loadloc" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-loadloc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-loadloc-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;17: "><img src="index_files/figure-html/fig-loadloc-1.png" id="fig-loadloc" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-loadloc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+<p>Assessing item fit and dimensionality should be done using multiple methods. Item fit and item-restscore should be used in parallel, while also examining residual patterns by reviewing standardized factor loadings on the first residual contrast (see <a href="#fig-loadloc" class="quarto-xref">Figure&nbsp;17</a> for an example) as well as Yen’s Q3 residual correlations.</p>
+<p>While the simulations in this paper have used dichotomous data, all functions evaluated in this paper also work with polytomous data using the Rasch Partial Credit Model.</p>
 </section>
 <section id="references" class="level1 unnumbered">
 <h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-benjamini_controlling_1995" class="csl-entry" role="listitem">
 Benjamini, Yoav, and Yosef Hochberg. 1995. <span>“Controlling the <span>False</span> <span>Discovery</span> <span>Rate</span>: <span>A</span> <span>Practical</span> and <span>Powerful</span> <span>Approach</span> to <span>Multiple</span> <span>Testing</span>.”</span> <em>Journal of the Royal Statistical Society: Series B (Methodological)</em> 57 (1): 289–300. <a href="https://doi.org/10.1111/j.2517-6161.1995.tb02031.x">https://doi.org/10.1111/j.2517-6161.1995.tb02031.x</a>.
+</div>
+<div id="ref-goodman_measures_1954" class="csl-entry" role="listitem">
+Goodman, Leo A., and William H. Kruskal. 1954. <span>“Measures of <span>Association</span> for <span>Cross</span> <span>Classifications</span>.”</span> <em>Journal of the American Statistical Association</em> 49 (268): 732–64. <a href="https://doi.org/10.2307/2281536">https://doi.org/10.2307/2281536</a>.
 </div>
 <div id="ref-easyrasch" class="csl-entry" role="listitem">
 Johansson, Magnus. 2024. <em>easyRasch: Psychometric Analysis in r with Rasch Measurement Theory</em>. <a href="https://github.com/pgmj/easyRasch">https://github.com/pgmj/easyRasch</a>.
@@ -2159,6 +2608,92 @@ Smith, R. M., R. E. Schumacker, and M. J. Bush. 1998. <span>“<a href="https://
 Warm, Thomas A. 1989. <span>“Weighted Likelihood Estimation of Ability in Item Response Theory.”</span> <em>Psychometrika</em> 54 (3): 427–50. <a href="https://doi.org/10.1007/BF02294627">https://doi.org/10.1007/BF02294627</a>.
 </div>
 </div>
+</section>
+<section id="sec-addmat" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Additional materials</h1>
+<ul>
+<li>GitHub link for <code>easyRasch</code> source code: <a href="https://github.com/pgmj/easyRasch/" class="uri">https://github.com/pgmj/easyRasch/</a>
+<ul>
+<li>Most functions are defined in this file: <a href="https://github.com/pgmj/easyRasch/blob/main/R/easyRasch.R" class="uri">https://github.com/pgmj/easyRasch/blob/main/R/easyRasch.R</a></li>
+</ul></li>
+</ul>
+<section id="session-info" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="session-info"><span class="header-section-number">10.1</span> Session info</h2>
+<p>This documents the specific R packages and versions used in this study.</p>
+<div class="cell-container"><div class="cell-decorator"><pre>In [42]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.4.2 (2024-10-31)
+Platform: aarch64-apple-darwin20
+Running under: macOS Sequoia 15.2
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+
+locale:
+[1] sv_SE.UTF-8/sv_SE.UTF-8/sv_SE.UTF-8/C/sv_SE.UTF-8/sv_SE.UTF-8
+
+time zone: Europe/Stockholm
+tzcode source: internal
+
+attached base packages:
+ [1] parallel  grid      stats4    stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] showtext_0.9-7    showtextdb_3.0    sysfonts_0.8.9    arrow_16.1.0     
+ [5] easyRasch_0.3.3   doParallel_1.0.17 iterators_1.0.14  furrr_0.3.1      
+ [9] future_1.34.0     foreach_1.5.2     janitor_2.2.0     hexbin_1.28.4    
+[13] catR_3.17         glue_1.8.0        ggrepel_0.9.6     patchwork_1.3.0  
+[17] reshape_0.8.9     matrixStats_1.4.1 psychotree_0.16-1 psychotools_0.7-4
+[21] partykit_1.2-22   mvtnorm_1.3-1     libcoin_1.0-10    psych_2.4.6.26   
+[25] mirt_1.43         lattice_0.22-6    kableExtra_1.4.0  formattable_0.2.1
+[29] lubridate_1.9.3   forcats_1.0.0     stringr_1.5.1     dplyr_1.1.4      
+[33] purrr_1.0.2       readr_2.1.5       tidyr_1.3.1       tibble_3.2.1     
+[37] tidyverse_2.0.0   ggdist_3.3.2      iarm_0.4.3        ggplot2_3.5.1    
+[41] eRm_1.0-6        
+
+loaded via a namespace (and not attached):
+  [1] splines_4.4.2        R.oo_1.26.0          cellranger_1.1.0    
+  [4] rpart_4.1.23         lifecycle_1.0.4      rprojroot_2.0.4     
+  [7] globals_0.16.3       vroom_1.6.5          MASS_7.3-61         
+ [10] backports_1.5.0      magrittr_2.0.3       vcd_1.4-12          
+ [13] Hmisc_5.2-0          rmarkdown_2.28       yaml_2.3.10         
+ [16] sessioninfo_1.2.2    pbapply_1.7-2        RColorBrewer_1.1-3  
+ [19] audio_0.1-11         quadprog_1.5-8       R.utils_2.12.3      
+ [22] nnet_7.3-19          listenv_0.9.1        testthat_3.2.1.1    
+ [25] RPushbullet_0.3.4    vegan_2.6-8          parallelly_1.38.0   
+ [28] svglite_2.1.3        permute_0.9-7        codetools_0.2-20    
+ [31] xml2_1.3.6           tidyselect_1.2.1     farver_2.1.2        
+ [34] base64enc_0.1-3      jsonlite_1.8.9       progressr_0.14.0    
+ [37] Formula_1.2-5        survival_3.7-0       systemfonts_1.1.0   
+ [40] tools_4.4.2          gnm_1.1-5            snow_0.4-4          
+ [43] Rcpp_1.0.13-1        mnormt_2.1.1         gridExtra_2.3       
+ [46] xfun_0.46            here_1.0.1           mgcv_1.9-1          
+ [49] distributional_0.4.0 ca_0.71.1            withr_3.0.2         
+ [52] beepr_2.0            fastmap_1.2.0        fansi_1.0.6         
+ [55] digest_0.6.37        timechange_0.3.0     R6_2.5.1            
+ [58] colorspace_2.1-1     R.methodsS3_1.8.2    inum_1.0-5          
+ [61] utf8_1.2.4           generics_0.1.3       data.table_1.16.0   
+ [64] SimDesign_2.17.1     htmlwidgets_1.6.4    pkgconfig_2.0.3     
+ [67] gtable_0.3.5         lmtest_0.9-40        brio_1.1.5          
+ [70] htmltools_0.5.8.1    scales_1.3.0         snakecase_0.11.1    
+ [73] knitr_1.48           rstudioapi_0.17.1    tzdb_0.4.0          
+ [76] checkmate_2.3.2      nlme_3.1-166         curl_6.0.1          
+ [79] zoo_1.8-12           relimp_1.0-5         vcdExtra_0.8-5      
+ [82] foreign_0.8-87       pillar_1.9.0         vctrs_0.6.5         
+ [85] Deriv_4.1.3          cluster_2.1.6        dcurver_0.9.2       
+ [88] archive_1.1.8        GPArotation_2024.3-1 htmlTable_2.4.3     
+ [91] evaluate_1.0.1       cli_3.6.3            compiler_4.4.2      
+ [94] rlang_1.1.4          crayon_1.5.3         future.apply_1.11.2 
+ [97] labeling_0.4.3       plyr_1.8.9           stringi_1.8.4       
+[100] viridisLite_0.4.2    assertthat_0.2.1     munsell_0.5.1       
+[103] Matrix_1.7-1         qvcalc_1.0.3         hms_1.1.3           
+[106] bit64_4.0.5          bit_4.0.5            readxl_1.4.3        </code></pre>
+</div>
+</div></div>
+</section>
 </section>
      </main>
 <!-- /main column -->  <script id="quarto-html-after-body" type="application/javascript">

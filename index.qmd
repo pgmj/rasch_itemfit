@@ -12,7 +12,7 @@ keywords:
   - Item fit
   - Simulation
 abstract: |
-  Psychometrics in general have long relied on rule-of-thumb cutoff values for various goodness of fit metrics. With more powerful personal computers it is both feasible and desirable to use simulation/bootstrap methods to determine appropriate cutoff values. This paper illustrates and evaluates the use of an R package for Rasch psychometrics that has implemented functions to simplify the process of identifying misfitting items using simulation based cutoff values. Through a series of simulation studies a comparison is made between information weighted conditional item fit and item-restscore using Goodman and Kruskal’s gamma.
+  Psychometrics in general have long relied on rule-of-thumb critical values for various goodness of fit metrics. With more powerful personal computers it is both feasible and desirable to use simulation methods to determine appropriate critical cutoff values. This paper illustrates and evaluates the use of an R package for Rasch psychometrics that has implemented functions to simplify the process of determining simulation based cutoff values. Through a series of simulation studies a comparison is made between information weighted conditional item fit ("infit") and item-restscore correlations using Goodman and Kruskal’s $\gamma$. Results indicate the limitations of small samples (n < 500) in correctly detecting item misfit, especially when several items are misfit. Item outfit shows very low performance and should not be used. Conditional infit with simulation based cutoffs performs slightly better than item-restscore with samples below n = 500. Both methods have strongly increased rates of false positives with large samples (n >= 1000). Large samples should use non-parametric bootstrap of subsamples with item-restscore to avoid type-1 errors. Finally, the importance of iterative analyses is emphasized since a situation where several items show underfit will induce seemingly overfit items. Underfit item should be removed one at a time, and a re-analysis conducted for each step to avoid erroneously removing items.
 key-points:
   - Rule-of-thumb critical values for goodness of fit metrics should be replaced with simulation based values
   - Sample size affects the detection rate and false positives rate
@@ -34,16 +34,15 @@ editor_options:
 
 This paper presents a series of simulations conducted to evaluate methods to detect of item misfit in Rasch models. First, conditional item infit and outfit will be under scrutiny. Second, item infit will be compared to item-restscore [@kreiner_note_2011;@mueller_iarm_2022]. Third, a bootstrap method for item-restscore will be presented and tested.
 
-Müller [-@muller_item_2020] showed how the range of critical values for conditional item infit varies with sample size. The expected average item conditional infit range was described by Müller as fairly well captured by Smith's rule-of-thumb formula 1±2/√n [@smith_using_1998]. However, the average range does not apply for all items, since item location also affects model expected item fit which means that some items may have plausible item fit values outside Smith's average value range.
+The assessment of item fit under the Rasch model has for decades been conducted using various rule-of-thumb critical values. Müller [-@muller_item_2020] showed how the range of critical values for conditional item infit varies with sample size. The expected average item conditional infit range was described by Müller as fairly well captured by Smith's rule-of-thumb formula 1±2/√n [@smith_using_1998]. However, the average range does not apply for all items, since item location relative to sample location also affects model expected item fit. This means that some items within a set of items varying in location are likely to have item fit values outside Smith's average value range while still fitting the Rasch model.
 
-It is here proposed that by using parametric bootstrapping one can establish item fit critical cutoff values that are sample and item specific. The R package `easyRasch` [@easyrasch] includes a function to determine item infit and outfit cutoff values, which will be tested in the simulations in this paper.
+It is here proposed that by using parametric bootstrapping one can establish item fit critical cutoff values that are sample and item specific. This procedure uses the estimated item and person locations based on the available data and simulates new response data that fit the Rasch model, to determine the range of plausible item fit values for each item. The R package `easyRasch` [@easyrasch] includes a function to determine item infit and outfit cutoff values using this method and will be tested in the simulations in this paper.
 
-It is important to note that the conditional item fit described by Müller [-@muller_item_2020] and implemented in the `iarm` R package [@mueller_iarm_2022] should not be confused with the unconditional item fit implemented in software such as Winsteps and RUMM2030, as well as all R packages except `iarm`. Unconditional item fit can result in unreliable item fit in sample sizes as small as 250 with increasing likelihood of problems as sample size increases. Readers are strongly recommended to read Müller's paper to fully understand the problems with unconditional item fit.
+It is important to note that the conditional item fit described by Müller [-@muller_item_2020] and implemented in the `iarm` R package [@mueller_iarm_2022] should not be confused with the unconditional item fit implemented in software such as Winsteps and RUMM2030, as well as all R packages except `iarm`. Unconditional item fit can result in unreliable item fit in sample sizes as small as 250 with increasing likelihood of problems as sample size increases. Readers are strongly recommended to read Müller's paper to fully understand the issues with unconditional item fit.
 
 # Methods 
 
 ```{r}
-#| output: false
 library(iarm)
 library(eRm)
 library(ggdist)
@@ -64,23 +63,23 @@ theme_rise <- theme_rise(fontfamily = "sans")
 
 A fully reproducible manuscript with R code and data is available on GitHub: <https://github.com/pgmj/rasch_itemfit>
 
-The simulation of response data used three steps: first, a vector of theta values (person scores on the latent variable) were generated using `rnorm(mean = 0, sd = 1.5)`. Second, a set of item locations ranging from -2 to 2 logits were generated for dichotomous items, using `runif(n = 20, min = -2, max = 2)`. Third, the theta values were used to simulate item responses for participants, using `sim.xdim()` from the `eRm` package [@mair_extended_2007], which allows simulation of multidimensional response data. Multiple datasets were generated using the same item and person parameters, varying the targeting and number of the misfitting item(s). More details are described under the separate studies below.
+The simulation of response data used three steps: First, a vector of theta values (person scores on the latent variable's logit scale) were generated using `rnorm(mean = 0, sd = 1.5)`. Second, a set of item locations ranging from -2 to 2 logits were generated for dichotomous items, using `runif(n = 20, min = -2, max = 2)`. Third, the theta values were used to simulate item responses for participants, using `sim.xdim()` from the `eRm` package [@mair_extended_2007], which allows simulation of multidimensional response data. Multiple datasets with 10 000 respondents each were generated using the same item and person parameters, varying the targeting of the misfitting item(s) and number of the misfitting item(s). More details are described under the separate studies. The parametric bootstrapping procedure was implemented using random samples from the simulated datasets. Sample size variations tested are described under each study. 
 
-The parametric bootstrapping procedure was implemented using random samples from the 10 000 simulated responses. The sample size variations tested are described under each study. 
+The general procedure for the parametric bootstrapping is as follows:
 
-1. Estimation of item locations based on simulated item responses using conditional maximum likelihood [CML, @mair_extended_2007].
-2. Estimation of sample theta values using weighted maximum likelihood [@warm_weighted_1989]
-3. Simulation of new response data, fitting the Rasch model, using the estimated item locations and theta values.
+1. Estimation of item locations based on simulated item response data, using conditional maximum likelihood [CML, @mair_extended_2007].
+2. Estimation of sample theta values using weighted maximum likelihood [@warm_weighted_1989].
+3. Simulation of new response data which fit the Rasch model, using the estimated item locations and theta values.
 4. Estimation of the dichotomous Rasch model for the new response data using CML.
-5. Based on step 4, calculation of conditional item fit [@muller_item_2020;@mueller_iarm_2022] and/or item-restscore metrics [@kreiner_note_2011;@mueller_iarm_2022].
+5. Based on step 4, calculation of conditional item infit and outfit [@muller_item_2020;@mueller_iarm_2022] and/or item-restscore metrics [@kreiner_note_2011;@mueller_iarm_2022].
 
 Steps three and four were iterated over, using resampling with replacement from the estimated theta values as a basis for simulating the response data in step three.
 
 Summary statistics were created with focus on the percentage of correct detection of misfit and false positives.
 
-```{r}
-#| output: false
+A complete list of software used for the analyses is listed in #sec-addmat.
 
+```{r}
 # read pre-generated item locations for reproducibility
 items1 <- read_csv("data/rm_items40.csv") %>%
   slice(1:20) %>% 
@@ -89,7 +88,6 @@ items1 <- read_csv("data/rm_items40.csv") %>%
 
 ```{r}
 #| eval: false
-#| output: false
 # a matrix to specify which dimension each item loads on
 wmat0 <- matrix(nrow = 20,
                ncol = 2)
@@ -145,7 +143,6 @@ saveRDS(simdata3,"data/simdata3.rds")
 
 
 ```{r}
-#| output: false
 simdata <- readRDS("data/simdata10000.rds")
 simdata3 <- readRDS("data/simdata3.rds") %>% 
   as.data.frame()
@@ -155,23 +152,17 @@ demodata <- simdata[[1]] %>%
   select(V1,V11,V3,V12)
 ```
 
-# Study 1
+# Study 1: Item infit and outfit
 
 Item mean square standardized residuals are either unweighted, which is referred to as "outfit", or information weighted, which we call "infit" [@ostini_polytomous_2006, pp. 86-87]. For details on conditional item fit we refer to the previously mentioned paper by Müller [-@muller_item_2020]. Conditional item infit and outfit are expected to be near 1, with higher values indicating an item to be underfitting the Rasch model (often due to multidimensionality issues) and lower values indicating overfit.
 
-Main lines of inquiry:
+The function `RIgetfit()` from the `easyRasch` R package is tested here. It's source code can be accessed on GitHub, see #sec-addmat. The function offers the user a choice of the number of bootstrap iterations to use to determine the critical cutoff values for each item's infit and outfit. Our main interest in this study is two-fold. We want to test variations in the number of iterations used in `RIgetfit()` and evaluate how well the critical values based on the parametric bootstrapping procedure detects misfitting items. Additionally, a comparison between infit and outfit statistics in terms of detection rate and false positive rate will be conducted.
 
-1. How does the number of iterations used in RIgetfit() impact the indicated cutoff values?
-2. How useful are the cutoff values in detecting misfitting items (and false positives), when using the optimal number of iterations?
-3. Müller [-@muller_item_2020] hints at outfit being less useful than infit. We will investigate this by comparing them.
-
-20 dichotomous items are used, with one item misfitting. Item locations are the same throughout. The location of the misfitting item relative the to the sample theta mean was selected to be approximately 0, -1, and -2 logits. Three separate datasets were generated with these variations, each with 10 000 simulated respondents. One dataset with all three misfitting items was also generated, using the same sample size.
-
-The function `RIgetfit()` from the `easyRasch` R package is tested here. It's source code can be accessed on GitHub. The function offers the user a choice of the number of bootstrap iterations to use to calculate the cutoff values for infit and outfit.
+20 dichotomous items are used, with one item misfitting. Item locations are the same throughout all studies unless otherwise noted. The location of the misfitting item relative the to the sample theta mean was selected to be approximately 0, -1, and -2 logits. Three separate datasets were generated with these variations, each with 10 000 simulated respondents. One dataset with all three misfitting items was also generated, using the same sample size.
 
 Then the `RIitemfit()` function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. `RIitemfit()` has a default (user modifiable) setting to slightly truncate the distribution of values using `stats::quantile()` at 0.001 and 0.999 to remove extreme values. An example is demonstrated in @tbl-itemfit1, using a subset of the items used in the simulations. @fig-itemfit1 provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith's rule-of-thumb regarding infit (1±2/√n) would be 0.9-1.1 for a sample size of 400.
 
-This study was rather computationally demanding since each simulation run entailed 100-400 underlying simulations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4*3*3 = 36 conditions. Each combination used 200 simulation runs. The simulations took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.
+This study was rather computationally demanding since each simulation run entailed 100-400 underlying bootstrap iterations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4*3*3 = 36 conditions. Each combination used 200 simulation runs. The simulations took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.
 
 ```{r}
 #| label: tbl-itemfit1
@@ -190,7 +181,6 @@ RIgetfitPlot(simfit, demodata)
 
 
 ```{r}
-#| output: false
 # define function to run simulations for item infit/outfit cutoff values
 itemfitboot <- function(dat, iterations, samplesize) {
   
@@ -249,7 +239,6 @@ itemfitboot <- function(dat, iterations, samplesize) {
 
 ```{r}
 #| eval: false
-#| output: false
 samplesizes <- c(150,250,500,1000)
 
 ifb0 <- list()
@@ -286,7 +275,6 @@ write_parquet(ifb,"data/ifb.parquet")
 ## Results
 
 ```{r}
-#| output: false
 ifb <- read_parquet("data/ifb.parquet")
 ```
 
@@ -521,9 +509,9 @@ Based on these simulation, it seems reasonable to recommend the use of infit in 
 Regarding infit and the use of parametric bootstrapping with `RIgetfit()`, it looks like 100 iterations are to recommend to determine cutoff values when the sample size is 250 or lower, while 200 or 400 iterations reduce the risk for false positives at sample sizes of 500 or larger. False positives are found at sample sizes 500 and 1000 only. The risk for false positives is notably higher when the misfitting item is located at the sample mean compared to when the misfitting item is off-target by -1 logits or more.
 
 
-# Study 2
+# Study 2: Item-restscore
 
-Item-restscore is a metric that compares an expected correlation with the observed correlation. Lower values than expected indicates than an item is underfit to the Rasch model, while higher values indicate overfit. The item-restscore function used in this simulation is from the `iarm` package [@mueller_iarm_2022] and outputs  Benjamini-Hochberg corrected *p*-values [@benjamini_controlling_1995], which are used in determining whether the observed value is statistically significant (using *p* < .05 as critical value) from the expected value for each item.
+Item-restscore is a metric that compares an expected correlation with the observed correlation, using Goodman and Kruskal’s $\gamma$ [@goodman_measures_1954;@kreiner_note_2011]. Lower observed values than expected indicates than an item is underfit to the Rasch model, while higher values indicate overfit. The item-restscore function used in this simulation is from the `iarm` package [@mueller_iarm_2022] and outputs Benjamini-Hochberg corrected *p*-values [@benjamini_controlling_1995], which are used to determine whether the differences between the observed and expected values are statistically significant (using *p* < .05 as critical value) for each item.
 
 ```{r}
 ir <- function(dat, iterations, samplesize, cpu = 9) {
@@ -566,8 +554,6 @@ ir <- function(dat, iterations, samplesize, cpu = 9) {
 
 ```{r}
 #| eval: false
-#| output: false
-
 samplesizes <- c(100,150,250,500,1000)
 
 ir0 <- list()
@@ -676,12 +662,11 @@ This simulation includes an additional condition with 100 respondents, which res
 
 Similarly to infit, item-restscore has decreased detection rate for off-target misfitting items. The false positive rate is lower for item-restscore than infit for sample sizes below 1000.
 
-# Study 3 
+# Study 3: Comparing infit and item-restscore
 
 We will now compare the performance of infit and item-restscore when all three items are misfitting at the same time. This simulation will also include a condition with 2000 respondents, to examine if the false positive rate increases with more respondents. For infit, we will only use 200 iterations with `RIgetfit()` since that condition seemed to strike a balance between detection rate and false positives.
 
 ```{r}
-#| output: false
 # define function to run simulations for item infit/outfit cutoff values
 itemfitboot2 <- function(dat, iterations, samplesize) {
   
@@ -878,7 +863,7 @@ ir3_df %>%
 
 Item-restscore has higher detection rate than infit (see @fig-itemrestscore2), but also higher levels of false positives. Reviewing the type of misfit identified by item-restscore (see @tbl-overunder), the false positives are all overfitting the Rasch model, except for two instances indicating underfit for item 12. Items 9, 13, and 18, that were simulated to be misfitting due to loading on a separate dimension, are as expected showing underfit to the Rasch model.
 
-# Study 4
+# Study 4: Bootstrapped item-restscore
 
 For our final set of simulations, we will use a non-parametric bootstrap procedure with item-restscore. The difference from the parametric bootstrap is that the non-parametric bootstrap samples with replacement directly from the observed response data. First, based on the above problematic sample size of 2000 when three items are misfitting, we will use the bootstrap function to sample with replacement using n = 800 and 250 bootstrap samples. The function `RIbootRestscore()` from the `easyRasch` package will be used. 
 
@@ -990,9 +975,9 @@ irb0_df %>%
 
 @fig-irb0all shows that there is variation in false positive rate, but it is nearly always indicating overfit, while the misfitting items are only indicated as underfit. The summary statistics in @tbl-irb0mis show that there can be quite a bit of variation for false positives, but the clear majority of results are below 50%. 3 items have 95th percentile values above 50, with the highest at 58.8.
 
-## Smaller samples
+## Small sample (n = 150)
 
-We will use 200 simulations for this part, applied to sample sizes 150 and 250. As an additional condition, we will use both 250 and 500 bootstraps for item-restscore in each simulation.
+We will use 200 simulations to check the performance of the bootstrapped item-restscore function for sample size 150. As an additional experimental condition, we will use both 250 and 500 bootstraps for item-restscore in each simulation.
 
 ```{r}
 #| eval: false
@@ -1034,20 +1019,304 @@ ir_boot2 <- function(dat, iterations, samplesize) {
   return(fit)
 }
 
-
-#test <- ir_boot2(simdata3, 2, 150)
-
 irb150 <- ir_boot2(simdata3, 200, 150)
 saveRDS(irb150,"data/irb150.rds")
 
-irb250 <- ir_boot2(simdata3, 200, 250)
-saveRDS(irb250,"data/irb250.rds")
+# irb250 <- ir_boot2(simdata3, 200, 250)
+# saveRDS(irb250,"data/irb250.rds")
+```
+
+```{r}
+#| label: fig-irboot150
+#| fig-height: 6
+irb150 <- readRDS("data/irb150.rds")
+
+irb150_df <- bind_rows(irb150)
+
+irb150_df %>% 
+  mutate(bootit = factor(bootit, levels = c(250,500),
+                         labels = c("250 bootstrap iterations",
+                                    "500 bootstrap iterations"))) %>% 
+  ggplot(aes(x = percent, y = item, color = item_restscore)) +
+  stat_pointinterval(point_interval	= "median_hdci") +
+  theme_rise(fontfamily = "sans") +
+  labs(caption = str_wrap("Point indicates median value and lines are highest-density continuous interval for .66 and .95.",80),
+       x = "Distribution of percent values for item misfit", y = "Item",
+       title = "Item-restscore bootstrap results",
+       subtitle = str_wrap("250 and 500 bootstrap iterations with 150 respondents from a sample of 150. 200 simulations were used.",70)
+       ) +
+  scale_color_discrete('Type', labels = c("Overfit","Underfit")) +
+  facet_wrap(~bootit)
+```
+
+The bootstrapping does not improve on the single instance of item-restscore for the n = 150 condition (see @fig-irboot150). When comparing to the previous results in @fig-itemrestscore2, where the detection rate for the same sample size were at 49.2%, 14.6%, and 34.6% (for items 9, 13, and 18 respectively), the corresponding median values from the bootstrapped item-restscore with 250 iterations were 51.6%, 12.4%, and 37.2%. Using 500 bootstrap iterations did not result in relevant improvements over 250 iterations (see @tbl-irb150mis).
+
+```{r}
+#| label: tbl-irb150mis
+#| tbl-cap: Summary statistics for item-restscore bootstrap simulation (n = 150)
+#| tbl-subcap: 
+#|   - "250 bootstrap iterations"
+#|   - "500 bootstrap iterations"
+#| layout-ncol: 1
+
+irb150_df %>% 
+  filter(item %in% c("V9","V13","V18"),
+         bootit == 250) %>% 
+  rename(Item = item) %>% 
+  group_by(Item) %>% 
+  summarise(Median = median(percent),
+            MAD = mad(percent),
+            Mean = mean(percent),
+            SD = sd(percent),
+            p05 = quantile(percent, .05),
+            p01 = quantile(percent, .01)
+            ) %>% 
+  ungroup() %>% 
+  arrange(desc(p01)) %>% 
+  mutate_if(is.numeric, round, 1) %>% 
+  knitr::kable()
+
+irb150_df %>% 
+  filter(item %in% c("V9","V13","V18"),
+         bootit == 500) %>% 
+  rename(Item = item) %>% 
+  group_by(Item) %>% 
+  summarise(Median = median(percent),
+            MAD = mad(percent),
+            Mean = mean(percent),
+            SD = sd(percent),
+            p05 = quantile(percent, .05),
+            p01 = quantile(percent, .01)
+            ) %>% 
+  ungroup() %>% 
+  arrange(desc(p01)) %>% 
+  mutate_if(is.numeric, round, 1) %>% 
+  knitr::kable()
+```
+
+
+# Study 5: Varying number of items 
+
+When doing simulation studies there is always a balance to strike between trying to evaluate many scenarios and not having too high complexity. We have been keeping several things constant, such as item locations and number of items, which makes interpretation easier but may limit the applicability of the results. For our final simulation, we will vary the number of items and the number of misfitting items. First, 40 dichotomous items will be used, adding 20 new item locations to the previously used set, with the same three items misfitting (items 9, 13, and 18). Second, items 1-10 out of the initial 20 items will be used, which means only item 9 will be misfit. We'll again be using sample sizes of 150, 250, 500, and 1000.
+
+Item-restscore and item infit will be compared. The latter will use 100 bootstrap iterations to determine critical values for sample sizes 150 and 250, and 200 bootstrap iterations for n >= 500.
+
+```{r}
+itemfitboot3 <- function(dat, iterations, samplesize) {
+  
+  fit <- list()
+  fit <- foreach(i = 1:iterations) %do% {
+    data <- dat[sample(1:nrow(dat), samplesize), ] %>% 
+      as.data.frame()
+    
+    # check data for responses in all cells
+    n_resp <-
+      data %>%
+      as.matrix() %>%
+      colSums2() %>%
+      t() %>%
+      as.vector()
+    
+    if (min(n_resp, na.rm = TRUE) < 11) {
+      data <- dat[sample(1:nrow(dat), samplesize), ] %>% 
+        as.data.frame()
+    } 
+    
+    if (nrow(data < 400)) {
+      sfit <- RIgetfit(data,100,9)
+    } else if (nrow(data > 400)) {
+      sfit <- RIgetfit(data,200,9)
+    }
+    
+    # apply cutoffs and store results
+    rfit <- RIitemfit(data, sfit, output = "dataframe") %>% 
+      select(infit_msq,outfit_msq,infit_diff,outfit_diff) %>% 
+      add_column(item = 1:ncol(data),
+                 iteration = i,
+                 samplesize = samplesize)
+
+    # combine output 
+    fit <- rfit
+  }
+  return(fit)
+}
 
 ```
 
-## Final simulation? 
+```{r}
+#| eval: false
+# simulate data using 40 items
+# read pre-generated item locations for reproducibility
+items2 <- read_csv("data/rm_items40.csv") %>%
+  pull(location)
 
-Run with 40 items and 3 misfitting, just 500 simulations with normal item-restscore to assess if this makes a difference. And 10 items with 1-2 misfit?
+# a matrix to specify which dimension each item loads on
+wmat4 <- matrix(nrow = 40,
+               ncol = 2)
+# set all items to load on dimension one
+wmat4[1:40,1] <- 1
+wmat4[1:40,2] <- 0
+
+wmat4[c(9,13,18),1] <- 0
+wmat4[c(9,13,18),2] <- 1
+
+# generate dichotomous data
+simdata40items <- eRm::sim.xdim(10000, items2, cutpoint = "randomized", Sigma = sigma, weightmat = wmat4)
+
+# check targeting
+#RItargeting(as.data.frame(simdata40items), model = "RM")
+#RItargeting(simdata3[,1:10], model = "RM")
+
+saveRDS(simdata40items,"data/simdata40items.rds")
+```
+
+
+```{r}
+#| eval: false
+simdata40items <- readRDS("data/simdata40items.rds") %>% 
+  as.data.frame()
+
+samplesizes <- c(150,250,500,1000)
+ifb10 <- list()
+ir10 <- list()
+
+#tic()
+ifb40_60 <- map(samplesizes, ~ itemfitboot3(simdata40items, iterations = 60, samplesize = .x))
+#toc() # 120s for 2 runs
+saveRDS(ifb40_60, "data/ifb40_60i.rds")
+
+ir40 <- map(samplesizes, ~ ir(simdata40items, iterations = 500, samplesize = .x))
+saveRDS(ir40, "data/ir40.rds")
+
+ir10 <- map(samplesizes, ~ ir(simdata3[,1:10], iterations = 500, samplesize = .x))
+saveRDS(ir10, "data/ir10.rds")
+```
+
+```{r}
+ir40 <- readRDS("data/ir40.rds")
+ir10 <- readRDS("data/ir10.rds")
+
+ifb40_60 <- readRDS("data/ifb40_60i.rds")
+
+ir40_df <- bind_rows(ir40)
+ir10_df <- bind_rows(ir10)
+
+ifb40_df <- bind_rows(ifb40_60)
+```
+
+## Results 40 items
+
+```{r}
+#| label: fig-ifb40
+#| fig-height: 5
+ifb40_df %>% 
+  group_by(samplesize) %>% 
+  filter(!infit_diff == "no misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = round(n/60*100,1)) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000"))) %>% 
+
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
+  geom_text(data = . %>% filter(item == 9),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+    geom_text(data = . %>% filter(item == 13),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+    geom_text(data = . %>% filter(item == 18),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.3, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(1,40), breaks = seq(1,40,1), guide = guide_axis(n.dodge = 2), minor_breaks = NULL) +
+  guides(fill = "none") +
+  facet_grid(samplesize~.) +
+  theme_rise(fontfamily = "sans") +
+  labs(subtitle = "3 items misfitting. 60 simulations per combination.",
+       title = "Conditional infit detection rate")
+```
+
+
+```{r}
+#| label: fig-itemrestscore40
+#| fig-height: 5
+
+ir40_df %>% 
+  group_by(samplesize) %>% 
+  filter(ir_padj == "sign. misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/500) %>% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
+  geom_text(data = . %>% filter(item == 9),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.65, vjust = 1) +
+    geom_text(data = . %>% filter(item == 13),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.65, vjust = 1) +
+    geom_text(data = . %>% filter(item == 18),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.65, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(0,40), 
+                     breaks = seq(1,40,1), 
+                     guide = guide_axis(n.dodge = 2), minor_breaks = NULL) +
+  guides(fill = "none") +
+  facet_grid(samplesize ~ .) +
+  theme_rise(fontfamily = "sans") +
+  labs(subtitle = "3 items misfitting. 500 simulations per combination.",
+       title = "Item-restscore detection rate")
+
+```
+
+Infit performs better when sample size is 150 or 250 (see @fig-ifb40), while performance is slightly better for item-restscore for n >= 500 in terms of lower rates of false positives (see @fig-itemrestscore40).
+
+## Results 10 items
+
+```{r}
+#| label: fig-itemrestscore10
+#| fig-height: 5
+
+ir10_df %>% 
+  group_by(samplesize) %>% 
+  filter(ir_padj == "sign. misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/500) %>% 
+  
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
+  geom_text(data = . %>% filter(item == 9),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.65, vjust = 1) +
+    geom_text(data = . %>% filter(item == 13),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.65, vjust = 1) +
+    geom_text(data = . %>% filter(item == 18),
+            aes(label = Percent), position = position_dodge(width = 0.9),
+            hjust = -0.65, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_continuous('Item', limits = c(0,10), 
+                     breaks = seq(1,10,1), 
+                     guide = guide_axis(n.dodge = 1), minor_breaks = NULL) +
+  guides(fill = "none") +
+  facet_grid(samplesize ~ .) +
+  theme_rise(fontfamily = "sans") +
+  labs(subtitle = "3 items misfitting. 500 simulations per combination.",
+       title = "Item-restscore detection rate")
+```
+
+Compared to when we had 20 items, ... create a summary table! And run more simulations tonight.
+
 
 # Discussion
 
@@ -1057,11 +1326,35 @@ Number of items could be varied more. However, the results from Müller [-@mulle
 
 # Conclusion
 
-These findings make a good argument for removing one item at a time when the analysis indicates misfitting items, starting with the most misfitting item. This is especially relevant for sample sizes at 500 or above and when misfitting items are located close to the sample mean.
+These findings make a good argument for removing one item at a time when the analysis indicates misfitting items, starting with the most underfitting item. This is especially relevant for *n* >= 500 and when misfitting items are located close to the sample mean.
 
+
+```{r}
+#| label: fig-loadloc
+#| fig-height: 5
+RIloadLoc(simdata3[1:400,], model = "RM")
+```
+
+Assessing item fit and dimensionality should be done using multiple methods. Item fit and item-restscore should be used in parallel, while also examining residual patterns by reviewing standardized factor loadings on the first residual contrast (see @fig-loadloc for an example) as well as Yen's Q3 residual correlations.
+
+While the simulations in this paper have used dichotomous data, all functions evaluated in this paper also work with polytomous data using the Rasch Partial Credit Model.
 
 # References {.unnumbered}
 
 :::{#refs}
 
 :::
+
+# Additional materials {#sec-addmat}
+
+- GitHub link for `easyRasch` source code: <https://github.com/pgmj/easyRasch/>
+  - Most functions are defined in this file: <https://github.com/pgmj/easyRasch/blob/main/R/easyRasch.R>
+
+## Session info
+
+This documents the specific R packages and versions used in this study. 
+
+```{r}
+sessionInfo()
+```
+
