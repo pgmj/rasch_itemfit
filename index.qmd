@@ -315,6 +315,7 @@ Figures show the percent of simulation runs that have identified an item as misf
 
 ```{r}
 #| label: fig-ifb0
+#| fig-cap: Conditional infit detection rate (misfit item at 0 logits)
 #| fig-height: 5
 ifb %>% 
   group_by(targeting, samplesize, sims) %>% 
@@ -331,7 +332,8 @@ ifb %>%
                        labels = c("n = 150",
                                   "n = 250",
                                   "n = 500",
-                                  "n = 1000"))) %>% 
+                                  "n = 1000")),
+         item = factor(item)) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
@@ -340,7 +342,7 @@ ifb %>%
             position = position_dodge(width = 0.9),
             hjust = -0.3, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
@@ -352,6 +354,7 @@ ifb %>%
 
 ```{r}
 #| label: fig-ifb1
+#| fig-cap: Conditional infit detection rate (misfit item at -1 logits)
 #| fig-height: 5
 ifb %>% 
   group_by(targeting, samplesize, sims) %>% 
@@ -368,7 +371,8 @@ ifb %>%
                        labels = c("n = 150",
                                   "n = 250",
                                   "n = 500",
-                                  "n = 1000"))) %>% 
+                                  "n = 1000")),
+         item = factor(item)) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
@@ -377,7 +381,7 @@ ifb %>%
             position = position_dodge(width = 0.9),
             hjust = 1.2, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
@@ -389,6 +393,7 @@ When the misfitting item is offset in targeting by -1 logits compared to the sam
 
 ```{r}
 #| label: fig-ifb2
+#| fig-cap: Conditional infit detection rate (misfit item at -2 logits)
 #| fig-height: 5
 ifb %>% 
   group_by(targeting, samplesize, sims) %>% 
@@ -405,7 +410,8 @@ ifb %>%
                        labels = c("n = 150",
                                   "n = 250",
                                   "n = 500",
-                                  "n = 1000"))) %>% 
+                                  "n = 1000")),
+         item = factor(item)) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
@@ -414,7 +420,7 @@ ifb %>%
             position = position_dodge(width = 0.9),
             hjust = 1.2, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
@@ -428,6 +434,7 @@ Finally, when the misfitting item is located at -2 logits compared to the sample
 
 ```{r}
 #| label: fig-ifb0out
+#| fig-cap: Conditional outfit detection rate (misfit item at 0 logits)
 #| fig-height: 5
 ifb %>% 
   group_by(targeting, samplesize, sims) %>% 
@@ -444,16 +451,17 @@ ifb %>%
                        labels = c("n = 150",
                                   "n = 250",
                                   "n = 500",
-                                  "n = 1000"))) %>% 
+                                  "n = 1000")),
+         item = factor(item)) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 1) +
+            hjust = 0, vjust = -1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
@@ -463,6 +471,7 @@ ifb %>%
 
 ```{r}
 #| label: fig-ifb1out
+#| fig-cap: Conditional outfit detection rate (misfit item at -1 logits)
 #| fig-height: 5
 ifb %>% 
   group_by(targeting, samplesize, sims) %>% 
@@ -479,7 +488,8 @@ ifb %>%
                        labels = c("n = 150",
                                   "n = 250",
                                   "n = 500",
-                                  "n = 1000"))) %>% 
+                                  "n = 1000")),
+         item = factor(item)) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
@@ -488,7 +498,7 @@ ifb %>%
             position = position_dodge(width = 0.9),
             hjust = 1.2, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
@@ -498,6 +508,7 @@ ifb %>%
 
 ```{r}
 #| label: fig-ifb2out
+#| fig-cap: Conditional outfit detection rate (misfit item at -2 logits)
 #| fig-height: 5
 ifb %>% 
   group_by(targeting, samplesize, sims) %>% 
@@ -514,7 +525,8 @@ ifb %>%
                        labels = c("n = 150",
                                   "n = 250",
                                   "n = 500",
-                                  "n = 1000"))) %>% 
+                                  "n = 1000")),
+         item = factor(item)) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
@@ -523,7 +535,7 @@ ifb %>%
             position = position_dodge(width = 0.9),
             hjust = -0.3, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
@@ -531,13 +543,13 @@ ifb %>%
        title = "Conditional outfit detection rate")
 ```
 
-As shown in @fig-ifb0out, @fig-ifb1out, and @fig-ifb2out, outfit is performing much worse than infit across the board.
+As shown in @fig-ifb0out, @fig-ifb1out, and @fig-ifb2out, outfit is performing worse than infit across the board.
 
 ### Comments
 
-Based on these simulation, it seems reasonable to recommend the use of infit in determining item fit over outfit. The performance of outfit calls to question whether it is useful at all.
+Based on these simulation, it is highly recommended to use infit over outfit in assessing item fit. The performance of outfit calls to question whether it is useful at all for detecting item misfit.
 
-Regarding infit and the use of parametric bootstrapping with `RIgetfit()`, it looks like 100 iterations are to recommend to determine cutoff values when the sample size is 250 or lower, while 200 or 400 iterations reduce the risk for false positives at sample sizes of 500 or larger. False positives are found at sample sizes 500 and 1000 only. The risk for false positives is notably higher when the misfitting item is located at the sample mean compared to when the misfitting item is off-target by -1 logits or more.
+Regarding infit and the use of parametric bootstrapping with the function `RIgetfit()`, it looks like 100 iterations are to recommend to determine cutoff values when the sample size is 250 or lower, while 200 or 400 iterations reduce the risk for false positives at sample sizes of 500 or larger. False positives are found at sample sizes 500 and 1000 only. The risk for false positives is notably higher when the misfitting item is located at the sample mean compared to when the misfitting item is off-target by -1 logits or more.
 
 
 # Study 2: Item-restscore
@@ -606,6 +618,7 @@ irall <- list(ir0,ir1,ir2)
 ## Results
 ```{r}
 #| label: fig-itemrestscore1
+#| fig-cap: Item-restscore detection rate across targeting and sample size
 #| fig-height: 6
 
 ir_all <- readRDS("data/item_restscore1000.rds")
@@ -619,7 +632,8 @@ results0 <- ir_results %>%
   filter(ir_padj == "sign. misfit" ) %>% 
   count(item, .drop = F) %>% 
   mutate(Percent = n*100/1000,
-         targeting = factor(targeting, levels = c(0,1,2), labels = c('On target','-1 logit offset','-2 logits offset'))) %>% 
+         targeting = factor(targeting, levels = c(0,1,2), labels = c('On target','-1 logit offset','-2 logits offset')),
+         item = factor(item)) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
@@ -627,7 +641,7 @@ results0 <- ir_results %>%
             aes(label = Percent), position = position_dodge(width = 0.9),
             hjust = -0.3, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
   facet_grid(samplesize ~ .) +
   theme_rise(fontfamily = "sans") +
@@ -640,7 +654,8 @@ results1 <- ir_results %>%
   filter(ir_padj == "sign. misfit" ) %>% 
   count(item, .drop = F) %>% 
   mutate(Percent = n*100/1000,
-         targeting = factor(targeting, levels = c(0,1,2), labels = c('On target','1 logit offset','2 logits offset'))) %>% 
+         targeting = factor(targeting, levels = c(0,1,2), labels = c('On target','1 logit offset','2 logits offset')),
+         item = factor(item)) %>%  
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
@@ -648,7 +663,7 @@ results1 <- ir_results %>%
             aes(label = n/10), position = position_dodge(width = 0.9),
             hjust = 1.2, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
   facet_grid(samplesize ~ .) +
   theme_rise(fontfamily = "sans") +
@@ -667,7 +682,8 @@ results2 <- ir_results %>%
                                   "n = 150",
                                   "n = 250",
                                   "n = 500",
-                                  "n = 1000"))) %>% 
+                                  "n = 1000")),
+         item = factor(item)) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
@@ -675,7 +691,7 @@ results2 <- ir_results %>%
             aes(label = n/10), position = position_dodge(width = 0.9),
             hjust = -0.3, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
   facet_grid(samplesize ~ .) +
   theme_rise(fontfamily = "sans") +
@@ -685,17 +701,15 @@ results0 + results1 + results2 +
   plot_layout(axes = "collect",
               axis_titles = "collect") +
   plot_annotation(title = "Item-restscore detection rate across targeting and sample size",
-                  caption = "Note: 1000 simulated datasets for each combination.",
+                  subtitle = "1000 simulated datasets for each combination.",
                   theme = theme_rise(fontfamily = "sans"))
 ```
 
-This simulation includes an additional condition with 100 respondents, which results in significantly lower detection rates than with 150 respondents. Compared to infit at 250 respondents, item-restscore has detection rates of 95.2%, 90.9%, and 62.4% for targeting 0, -1, and -2, while infit has 96.5%, 96.5%, and 71%. For sample size 500 and 1000, performance is similar, including the increased tendency for false positives at n = 1000.
-
-Similarly to infit, item-restscore has decreased detection rate for off-target misfitting items. The false positive rate is lower for item-restscore than infit for sample sizes below 1000.
+This simulation includes an additional condition with 100 respondents, which results in significantly lower detection rates compared to n = 150. Compared to infit at 250 respondents, item-restscore has detection rates of 95.2%, 90.9%, and 62.4% for targeting 0, -1, and -2, while infit has 96.5%, 96.5%, and 71%. For sample size 500 and 1000, detection rate is similar, including the increased tendency for false positives at n = 1000. The false positive rate is lower for item-restscore than infit for sample sizes below 1000.
 
 # Study 3: Comparing infit and item-restscore
 
-We will now compare the performance of infit and item-restscore when all three items are misfitting at the same time. This simulation will also include a condition with 2000 respondents, to examine if the false positive rate increases with more respondents. For infit, we will only use 200 iterations with `RIgetfit()` since that condition seemed to strike a balance between detection rate and false positives.
+We will now compare the performance of infit and item-restscore when all three items are misfitting at the same time. This simulation will also include a condition with 2000 respondents, to examine if the false positive rate increases with more respondents. For infit, we will only use 200 iterations with `RIgetfit()` since that condition seemed to strike a balance between detection rate and false positives. Outfit is also included to see if it performs as bad as with one misfitting item.
 
 ```{r}
 # define function to run simulations for item infit/outfit cutoff values
@@ -764,50 +778,8 @@ ir3_df <- bind_rows(ir3)
 ### Results
 
 ```{r}
-#| label: fig-ifb3
-#| fig-height: 7
-ifb3_df %>% 
-  group_by(samplesize, sims) %>% 
-  filter(!infit_diff == "no misfit") %>% 
-  count(item, .drop = F) %>% 
-  mutate(Percent = n/500*100) %>% 
-  ungroup() %>% 
-  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
-                             labels = c("n = 150",
-                                        "n = 250",
-                                        "n = 500",
-                                        "n = 1000",
-                                        "n = 2000")),
-         sims = factor(sims, levels = c(100,200,400),
-                       labels = c("100 iterations",
-                                  "200 iterations",
-                                  "400 iterations"))) %>% 
-
-  ggplot(aes(x = item, y = Percent)) +
-  geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
-  geom_text(data = . %>% filter(item == 9),
-            aes(label = Percent), 
-            position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 1) +
-    geom_text(data = . %>% filter(item == 13),
-            aes(label = Percent), 
-            position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 1) +
-    geom_text(data = . %>% filter(item == 18),
-            aes(label = Percent), 
-            position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 1) +
-  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
-  guides(fill = "none") +
-  facet_grid(samplesize~sims) +
-  theme_rise(fontfamily = "sans") +
-  labs(subtitle = "3 items misfitting. 500 simulations per combination.",
-       title = "Conditional infit detection rate")
-```
-
-```{r}
 #| label: fig-ifb3out
+#| fig-cap: Conditional outfit detection rate with three misfitting items
 #| fig-height: 7
 ifb3_df %>% 
   group_by(samplesize, sims) %>% 
@@ -824,32 +796,78 @@ ifb3_df %>%
          sims = factor(sims, levels = c(100,200,400),
                        labels = c("100 iterations",
                                   "200 iterations",
-                                  "400 iterations"))) %>% 
+                                  "400 iterations")),
+         item = factor(item)) %>% 
 
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 1) +
+            hjust = -0.5, vjust = -0.5) +
     geom_text(data = . %>% filter(item == 13),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 1) +
+            hjust = -0.5, vjust = 1) +
     geom_text(data = . %>% filter(item == 18),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 1) +
+            hjust = -0.5, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', limits = c(1,20), breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "3 items misfitting. 500 simulations per combination.",
+  labs(str_wrap("3 items misfitting. 200 iterations used to determine critial value. 500 simulations per combination.",68),
        title = "Conditional outfit detection rate")
 ```
 
-Looking at the performance of infit with three misfitting items (@fig-ifb3), we can see that the detection rate is markedly worse for item 13 (targeting -1 logits) in sample sizes 500 and below, compared to when single items were misfitting. The false positive rate has increased for sample size of 1000 and we can see it escalate when n = 2000. Outfit (@fig-ifb3out) again performs worse than infit.
+```{r}
+#| label: fig-ifb3
+#| fig-cap: Conditional infit detection rate with three misfitting items
+#| fig-height: 7
+ifb3_df %>% 
+  group_by(samplesize, sims) %>% 
+  filter(!infit_diff == "no misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000")),
+         sims = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         item = factor(item)) %>% 
+
+  ggplot(aes(x = item, y = Percent)) +
+  geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
+  geom_text(data = . %>% filter(item == 9),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.5, vjust = 1) +
+    geom_text(data = . %>% filter(item == 13),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.5, vjust = 1) +
+    geom_text(data = . %>% filter(item == 18),
+            aes(label = Percent), 
+            position = position_dodge(width = 0.9),
+            hjust = -0.5, vjust = 1) +
+  scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
+  scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
+  guides(fill = "none") +
+  facet_grid(samplesize~.) +
+  theme_rise(fontfamily = "sans") +
+  labs(subtitle = str_wrap("3 items misfitting. 200 iterations used to determine critial value. 500 simulations per combination.",68),
+       title = "Conditional infit detection rate")
+```
+
+Looking at the performance of infit with three misfitting items (@fig-ifb3), we can see that the detection rate is markedly worse for item 13 (targeting -2 logits) in sample sizes 500 and below, compared to when single items were misfitting. The false positive rate has increased for sample size of 1000 and we can see it increase strongly at n = 2000. Outfit (@fig-ifb3out) again performs worse than infit.
 
 ```{r}
 #| label: fig-itemrestscore2
@@ -860,20 +878,28 @@ ir3_df %>%
   filter(ir_padj == "sign. misfit") %>% 
   count(item, .drop = F) %>% 
   mutate(Percent = n*100/500) %>% 
+  ungroup() %>% 
+  mutate(item = factor(item)) %>% 
+    mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000"))) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 1) +
+            hjust = -0.5, vjust = 1) +
     geom_text(data = . %>% filter(item == 13),
             aes(label = Percent), position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 1) +
+            hjust = -0.5, vjust = 1) +
     geom_text(data = . %>% filter(item == 18),
             aes(label = Percent), position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 1) +
+            hjust = -0.5, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', breaks = seq(1,20,2), guide = guide_axis(n.dodge = 1)) +
+  scale_x_discrete('Item',  guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
   facet_grid(samplesize ~ .) +
   theme_rise(fontfamily = "sans") +
@@ -883,16 +909,74 @@ ir3_df %>%
 ```
 
 ```{r}
+#| label: fig-comp1
+#| fig-cap: Detection rate for item-restscore compared to infit
+#| fig-height: 5
+#| fig-width: 5
+
+ifb3_sum <- ifb3_df %>% 
+  group_by(samplesize, sims) %>% 
+  filter(!infit_diff == "no misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(percent = n/500*100) %>% 
+  ungroup() %>% 
+  filter(item %in% c(9,13,18)) %>% 
+  select(!c(n,sims)) %>% 
+  add_column(Method = "Infit")
+
+ir3_sum <- ir3_df %>% 
+  group_by(samplesize) %>% 
+  filter(ir_padj == "sign. misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(percent = n*100/500) %>% 
+  ungroup() %>% 
+  filter(item %in% c(9,13,18)) %>% 
+  select(!n) %>% 
+  add_column(Method = "Item-restscore")
+
+rbind(ifb3_sum,ir3_sum) %>% 
+  mutate(item = factor(item, levels = c(9,18,13), labels = c("Item 9 (location 0)",
+                                                          "Item 18 (location -1)",
+                                                          "Item 13 (location -2)"),
+                       ordered = T)) %>% 
+    mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000"))) %>% 
+
+  ggplot(aes(x = item, y = percent, fill = Method)) +
+  geom_col(position = "dodge") +
+  geom_text(aes(label = paste0(percent,"%"), y = 8), color = "white",
+            position = position_dodge(width = 0.9)) +
+  facet_grid(samplesize ~ .) +
+  theme_rise(fontfamily = "sans") +
+  labs(y = "Detection rate in percent",
+       title = "Detection rate for item-restscore compared to infit") +
+  scale_fill_brewer(type = "qual", palette = "Dark2") +
+  theme(axis.title.x = element_blank())
+
+```
+
+Item-restscore (see @fig-itemrestscore2) shows comparable detection rate to infit and higher levels of false positives. A comparison is made between the two in @fig-comp1, where item-restscore is performing better than infit at detecting the -2 logits off-target item at n = 250, and better across all items for n = 500 and n = 1000. Infit performs better for samples n = 150 and n = 250 (except the item with location -2 logits).
+
+```{r}
 #| label: tbl-overunder
+#| tbl-cap: Item-restscore summary results across all sample sizes
+#| tbl-colwidths: [60,40]
 ir3_df %>%
   filter(ir_padj == "sign. misfit") %>% 
   mutate(type = ifelse(diff < 0, "overfit","underfit")) %>% 
   count(item,type) %>% 
-  set_names(c("Item","Type of misfit","n")) %>% 
+  mutate(Percent = n*100/2500) %>% 
+  arrange(desc(Percent)) %>% 
+  select(!n) %>% 
+  set_names(c("Item","Type of misfit","Percent")) %>% 
   knitr::kable()
 ```
 
-Item-restscore has higher detection rate than infit (see @fig-itemrestscore2), but also higher levels of false positives. Reviewing the type of misfit identified by item-restscore (see @tbl-overunder), the false positives are all overfitting the Rasch model, except for two instances indicating underfit for item 12. Items 9, 13, and 18, that were simulated to be misfitting due to loading on a separate dimension, are as expected showing underfit to the Rasch model.
+Reviewing the type of misfit identified by item-restscore (see @tbl-overunder), the false positives are all overfitting the Rasch model, except for two instances (out of 2500) indicating underfit for item 12. Items 9, 13, and 18, that were simulated to be misfitting due to loading on a separate dimension, are as expected showing underfit to the Rasch model.
 
 # Study 4: Bootstrapped item-restscore
 
@@ -901,6 +985,7 @@ For our final set of simulations, we will use a non-parametric bootstrap procedu
 ```{r}
 #| label: tbl-bootir
 #| tbl-cap: Example output from `RIbootRestscore()`
+#| tbl-colwidths: [60,40]
 #| cache: true
 
 #tic()
@@ -945,16 +1030,42 @@ saveRDS(irb0,"data/irb0.rds")
 
 ```{r}
 #| label: fig-irb0all
+#| fig-cap: Item-restscore bootstrap results
 #| fig-height: 5
 irb0 <- readRDS("data/irb0.rds")
 
 irb0_df <- bind_rows(irb0)
 
+# irb0_df %>% 
+#   mutate(item = factor(item, levels = paste0("V",20:1), ordered = T)) %>% 
+#   ggplot(aes(x = percent, y = item, color = item_restscore)) +
+#   stat_pointinterval(point_interval	= "median_hdci") +
+#   theme_rise(fontfamily = "sans") +
+#   labs(caption = str_wrap("Point indicates median value and lines are highest-density continuous interval for .66 and .95.",80),
+#        x = "Distribution of percent values for item misfit", y = "Item",
+#        title = "Item-restscore bootstrap results",
+#        subtitle = str_wrap("250 bootstrap iterations with 800 respondents from a sample of 2000. 500 simulations were used.",70)
+#        ) +
+#   scale_color_discrete('Type', labels = c("Overfit","Underfit"))
+
 irb0_df %>% 
-  ggplot(aes(x = percent, y = item, color = item_restscore)) +
-  stat_pointinterval(point_interval	= "median_hdci") +
+  mutate(item = factor(item, levels = paste0("V",20:1), ordered = T)) %>% 
+  group_by(item,item_restscore) %>% 
+  summarise(median = median(percent),
+            mean = mean(percent),
+            q_lower = quantile(percent, .05),
+            q_upper = quantile(percent, .95),
+            sd = sd(percent),
+            mad = mad(percent),
+            se = sd(percent) / sqrt(500),
+            ci_upper = median + (1.96*se),
+            ci_lower = median - (1.96*se)) %>% 
+  
+  ggplot(aes(x = median, y = item, color = item_restscore)) +
+  geom_point(size = 3.5, shape = 18) +
+  geom_segment(aes(x = median - mad, xend = median + mad)) +
   theme_rise(fontfamily = "sans") +
-  labs(caption = str_wrap("Point indicates median value and lines are highest-density continuous interval for .66 and .95.",80),
+  labs(caption = str_wrap("Point indicates median value and horizontal lines are median absolute deviation.",80),
        x = "Distribution of percent values for item misfit", y = "Item",
        title = "Item-restscore bootstrap results",
        subtitle = str_wrap("250 bootstrap iterations with 800 respondents from a sample of 2000. 500 simulations were used.",70)
@@ -978,11 +1089,10 @@ irb0_df %>%
             MAD = mad(percent),
             Mean = mean(percent),
             SD = sd(percent),
-            p05 = quantile(percent, .05),
-            p01 = quantile(percent, .01)
+            `Percentile .05` = quantile(percent, .05)
             ) %>% 
   ungroup() %>% 
-  arrange(desc(p01)) %>% 
+  arrange(desc(`Percentile .05`)) %>% 
   mutate_if(is.numeric, round, 1) %>% 
   knitr::kable()
 
@@ -995,16 +1105,15 @@ irb0_df %>%
             MAD = mad(percent),
             Mean = mean(percent),
             SD = sd(percent),
-            p95 = quantile(percent, .95),
-            p99 = quantile(percent, .99)
+            `Percentile .95` = quantile(percent, .95)
             ) %>% 
   ungroup() %>% 
-  arrange(desc(p99)) %>% 
+  arrange(desc(`Percentile .95`)) %>% 
   mutate_if(is.numeric, round, 1) %>% 
   knitr::kable()
 ```
 
-@fig-irb0all shows that there is variation in false positive rate, but it is nearly always indicating overfit, while the misfitting items are only indicated as underfit. The summary statistics in @tbl-irb0mis show that there can be quite a bit of variation for false positives, but the clear majority of results are below 50%. 3 items have 95th percentile values above 50, with the highest at 58.8.
+@fig-irb0all shows that there is variation in false positive rate and it is nearly always indicating overfit, while the misfitting items are only indicated as underfit. The summary statistics in @tbl-irb0mis show that there can be quite a bit of variation for false positives, but the clear majority of results are below 50%. 3 items have 95th percentile values above 50, with the highest at 58.8.
 
 ## Small sample (n = 150)
 
@@ -1065,64 +1174,87 @@ irb150 <- readRDS("data/irb150.rds")
 irb150_df <- bind_rows(irb150)
 
 irb150_df %>% 
-  mutate(bootit = factor(bootit, levels = c(250,500),
+  mutate(item = factor(item, levels = paste0("V",20:1), ordered = T),
+         bootit = factor(bootit, levels = c(250,500),
                          labels = c("250 bootstrap iterations",
                                     "500 bootstrap iterations"))) %>% 
-  ggplot(aes(x = percent, y = item, color = item_restscore)) +
-  stat_pointinterval(point_interval	= "median_hdci") +
+  group_by(item,item_restscore,bootit) %>% 
+  summarise(median = median(percent),
+            mean = mean(percent),
+            q_lower = quantile(percent, .05),
+            q_upper = quantile(percent, .95),
+            sd = sd(percent),
+            mad = mad(percent),
+            se = sd(percent) / sqrt(500),
+            ci_upper = median + (1.96*se),
+            ci_lower = median - (1.96*se)) %>% 
+  
+  ggplot(aes(x = median, y = item, color = item_restscore)) +
+  geom_point(size = 3.5, shape = 18) +
+  geom_segment(aes(x = median - mad, xend = median + mad)) +
+    geom_text(data = . %>% filter(item == "V9",
+                                  item_restscore == "underfit"),
+            aes(label = median), color = "black",
+            hjust = -0.1, vjust = -1) +
+    geom_text(data = . %>% filter(item == "V13",
+                                  item_restscore == "underfit"),
+            aes(label = median), color = "black",
+            hjust = -0.1, vjust = -1) +
+    geom_text(data = . %>% filter(item == "V18",
+                                  item_restscore == "underfit"),
+            aes(label = median), color = "black",
+            hjust = -0.1, vjust = -1) +
   theme_rise(fontfamily = "sans") +
-  labs(caption = str_wrap("Point indicates median value and lines are highest-density continuous interval for .66 and .95.",80),
+  labs(caption = str_wrap("Point indicates median value and horizontal lines are median absolute deviation.",80),
        x = "Distribution of percent values for item misfit", y = "Item",
        title = "Item-restscore bootstrap results",
-       subtitle = str_wrap("250 and 500 bootstrap iterations with 150 respondents from a sample of 150. 200 simulations were used.",70)
+       subtitle = str_wrap("250 bootstrap iterations with 800 respondents from a sample of 2000. 500 simulations were used.",70)
        ) +
   scale_color_discrete('Type', labels = c("Overfit","Underfit")) +
   facet_wrap(~bootit)
+
+# irb150_df %>% 
+#   mutate(bootit = factor(bootit, levels = c(250,500),
+#                          labels = c("250 bootstrap iterations",
+#                                     "500 bootstrap iterations"))) %>% 
+#   ggplot(aes(x = percent, y = item, color = item_restscore)) +
+#   stat_pointinterval(point_interval	= "median_hdci") +
+#   theme_rise(fontfamily = "sans") +
+#   labs(caption = str_wrap("Point indicates median value and lines are highest-density continuous interval for .66 and .95.",80),
+#        x = "Distribution of percent values for item misfit", y = "Item",
+#        title = "Item-restscore bootstrap results",
+#        subtitle = str_wrap("250 and 500 bootstrap iterations with 150 respondents from a sample of 150. 200 simulations were used.",70)
+#        ) +
+#   scale_color_discrete('Type', labels = c("Overfit","Underfit")) +
+#   facet_wrap(~bootit)
 ```
 
-The bootstrapping does not improve on the single instance of item-restscore for the n = 150 condition (see @fig-irboot150). When comparing to the previous results in @fig-itemrestscore2, where the detection rate for the same sample size were at 49.2%, 14.6%, and 34.6% (for items 9, 13, and 18 respectively), the corresponding median values from the bootstrapped item-restscore with 250 iterations were 51.6%, 12.4%, and 37.2%. Using 500 bootstrap iterations did not result in relevant improvements over 250 iterations (see @tbl-irb150mis).
+Item-restscore bootstrapping improves slightly on the single instance of item-restscore for the n = 150 condition (see @fig-irboot150). When comparing to the previous results in @fig-itemrestscore2, where the detection rate for the same sample size were at 49.2%, 14.6%, and 34.6% (for items 9, 13, and 18 respectively), the corresponding median values from the bootstrapped item-restscore with 250 iterations were 52.4%, 19.2%, and 38.4%. Using 500 bootstrap iterations did not result in relevant improvements over 250 iterations (see @tbl-irb150mis).
 
 ```{r}
 #| label: tbl-irb150mis
 #| tbl-cap: Summary statistics for item-restscore bootstrap simulation (n = 150)
-#| tbl-subcap: 
-#|   - "250 bootstrap iterations"
-#|   - "500 bootstrap iterations"
-#| layout-ncol: 1
 
-irb150_df %>% 
+irb150_tbl <- irb150_df %>% 
   filter(item %in% c("V9","V13","V18"),
-         bootit == 250) %>% 
+         item_restscore == "underfit") %>% 
   rename(Item = item) %>% 
-  group_by(Item) %>% 
+  group_by(Item,bootit) %>% 
   summarise(Median = median(percent),
             MAD = mad(percent),
             Mean = mean(percent),
-            SD = sd(percent),
-            p05 = quantile(percent, .05),
-            p01 = quantile(percent, .01)
+            SD = sd(percent)
             ) %>% 
   ungroup() %>% 
-  arrange(desc(p01)) %>% 
+  arrange(bootit,desc(Median)) %>% 
   mutate_if(is.numeric, round, 1) %>% 
-  knitr::kable()
+  mutate(bootit = as.character(bootit)) %>% 
+  relocate(bootit, .before = "Item") %>% 
+  rename(`Bootstrap iterations` = bootit)  
 
-irb150_df %>% 
-  filter(item %in% c("V9","V13","V18"),
-         bootit == 500) %>% 
-  rename(Item = item) %>% 
-  group_by(Item) %>% 
-  summarise(Median = median(percent),
-            MAD = mad(percent),
-            Mean = mean(percent),
-            SD = sd(percent),
-            p05 = quantile(percent, .05),
-            p01 = quantile(percent, .01)
-            ) %>% 
-  ungroup() %>% 
-  arrange(desc(p01)) %>% 
-  mutate_if(is.numeric, round, 1) %>% 
-  knitr::kable()
+irb150_tbl[c(1,3,4,6),1] <- ""
+
+knitr::kable(irb150_tbl)
 ```
 
 
@@ -1276,6 +1408,8 @@ ir40_df %>%
   filter(ir_padj == "sign. misfit") %>% 
   count(item, .drop = F) %>% 
   mutate(Percent = n*100/500) %>% 
+  ungroup() %>% 
+  mutate(item = factor(item)) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
@@ -1289,9 +1423,8 @@ ir40_df %>%
             aes(label = Percent), position = position_dodge(width = 0.9),
             hjust = -0.65, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', limits = c(0,40), 
-                     breaks = seq(1,40,1), 
-                     guide = guide_axis(n.dodge = 2), minor_breaks = NULL) +
+  scale_x_discrete('Item', 
+                     guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
   facet_grid(samplesize ~ .) +
   theme_rise(fontfamily = "sans") +
@@ -1313,33 +1446,26 @@ ifb10_df %>%
   count(item, .drop = F) %>% 
   mutate(Percent = round(n/200*100,1)) %>% 
   ungroup() %>% 
-  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000),
                              labels = c("n = 150",
                                         "n = 250",
                                         "n = 500",
-                                        "n = 1000",
-                                        "n = 2000"))) %>% 
+                                        "n = 1000"))) %>% 
+  mutate(item = factor(item)) %>% 
 
   ggplot(aes(x = item, y = Percent)) +
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 1) +
-    geom_text(data = . %>% filter(item == 13),
-            aes(label = Percent), 
-            position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 1) +
-    geom_text(data = . %>% filter(item == 18),
-            aes(label = Percent), 
-            position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 1) +
+            hjust = -0.3, vjust = 2) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', limits = c(1,10), breaks = seq(1,40,1), guide = guide_axis(n.dodge = 2), minor_breaks = NULL) +
+  scale_x_discrete('Item') +
   guides(fill = "none") +
-  facet_grid(samplesize~.) +
+  facet_grid(samplesize ~ .) +
+  coord_cartesian(clip = "off") +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "3 items misfitting. 200 simulations per combination.",
+  labs(subtitle = "Item 9 misfitting (targeting = 0). 200 simulations per combination.",
        title = "Conditional infit detection rate")
 ```
 
@@ -1352,27 +1478,22 @@ ir10_df %>%
   filter(ir_padj == "sign. misfit") %>% 
   count(item, .drop = F) %>% 
   mutate(Percent = n*100/500) %>% 
+  ungroup() %>% 
+  mutate(item = factor(item)) %>% 
   
   ggplot(aes(x = item, y = Percent)) +
-  geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
+  geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), position = position_dodge(width = 0.9),
-            hjust = -0.65, vjust = 1) +
-    geom_text(data = . %>% filter(item == 13),
-            aes(label = Percent), position = position_dodge(width = 0.9),
-            hjust = -0.65, vjust = 1) +
-    geom_text(data = . %>% filter(item == 18),
-            aes(label = Percent), position = position_dodge(width = 0.9),
-            hjust = -0.65, vjust = 1) +
+            hjust = -0.65, vjust = 2) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
-  scale_x_continuous('Item', limits = c(0,10), 
-                     breaks = seq(1,10,1), 
-                     guide = guide_axis(n.dodge = 1), minor_breaks = NULL) +
+  scale_x_discrete() +
   guides(fill = "none") +
   facet_grid(samplesize ~ .) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "3 items misfitting. 500 simulations per combination.",
-       title = "Item-restscore detection rate")
+  labs(subtitle = "Item 9 misfitting (targeting = 0). 500 simulations per combination.",
+       title = "Item-restscore detection rate",
+       x = "Item")
 ```
 
 Compared to when we had 20 items, ... create a summary table! And run more simulations tonight.
@@ -1399,10 +1520,10 @@ Assessing item fit and dimensionality should be done using multiple methods. Ite
 What does this look like with a small sample?
 
 ```{r}
-RIloadLoc(simdata3[1:150,], model = "RM")
-simfit2 <- RIgetfit(simdata3[1:150,], iterations = 100, cpu = 8)
-RIitemfit(simdata3[1:150,], simfit2)
-RIgetfitPlot(simfit2, simdata3[1:150,])
+# RIloadLoc(simdata3[1:150,], model = "RM")
+# simfit2 <- RIgetfit(simdata3[1:150,], iterations = 100, cpu = 8)
+# RIitemfit(simdata3[1:150,], simfit2)
+# RIgetfitPlot(simfit2, simdata3[1:150,])
 ```
 
 
