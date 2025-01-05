@@ -191,7 +191,8 @@
 \hypersetup{
   pdftitle={Detecting item misfit in Rasch models},
   pdfauthor={Magnus Johansson},
-  pdfkeywords={Rasch, Psychometrics, Item fit, Simulation},
+  pdfkeywords={Rasch, Psychometrics, Item fit, Cutoffs, Critical
+values, Model fit},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -241,16 +242,16 @@ Third, a bootstrap method for item-restscore will be presented and
 tested.
 
 The assessment of item fit under the Rasch model has for decades been
-conducted using various rule-of-thumb critical values. Müller (2020)
-showed how the range of critical values for conditional item infit
-varies with sample size. The expected average item conditional infit
-range was described by Müller as fairly well captured by Smith's
-rule-of-thumb formula 1±2/√n (Smith, Schumacker, and Bush 1998).
-However, the average range does not apply for all items, since item
-location relative to sample location also affects model expected item
-fit. This means that some items within a set of items varying in
-location are likely to have item fit values outside Smith's average
-value range while still fitting the Rasch model.
+conducted using various more or less arbitrary rule-of-thumb critical
+values. Müller (2020) showed how the range of critical values for
+conditional item infit varies with sample size. The expected average
+item conditional infit range was described by Müller as fairly well
+captured by Smith's rule-of-thumb formula 1±2/\(\sqrt{n}\) (Smith,
+Schumacker, and Bush 1998). However, the average range does not apply
+for all items, since item location relative to sample location also
+affects model expected item fit. This means that some items within a set
+of items varying in location are likely to have item fit values outside
+Smith's average value range while still fitting the Rasch model.
 
 It is here proposed that by using parametric bootstrapping one can
 establish item fit critical cutoff values that are sample and item
@@ -260,6 +261,12 @@ Rasch model, to determine the range of plausible item fit values for
 each item. The R package \texttt{easyRasch} (Johansson 2024) includes a
 function to determine item infit and outfit cutoff values using this
 method and will be tested in the simulations in this paper.
+
+Similar developments have recently taken place in the related field of
+confirmatory factor analysis. McNeish and Wolf (2024) have created an R
+package called \texttt{dynamic} that uses simulation to determine
+appropriate critical values for commonly used model fit metrics, both
+for ordinal data and interval data.
 
 It is important to note that the conditional item fit described by
 Müller (2020) and implemented in the \texttt{iarm} R package (Mueller
@@ -387,8 +394,8 @@ provides a visualization of the distribution of bootstrapped infit and
 outfit values, together with the infit/outfit values from the observed
 data illustrated using an orange diamond shape. Note the variation
 between items in plausible values of infit and outfit based on the
-bootstrap, and that Smith's rule-of-thumb regarding infit (1±2/√n) would
-be 0.9-1.1 for a sample size of 400.
+bootstrap, and that Smith's rule-of-thumb regarding infit
+(1±2/\(\sqrt{n}\)) would be 0.9-1.1 for a sample size of 400.
 
 This study was rather computationally demanding since each simulation
 run entailed 100-400 underlying bootstrap iterations. The sample sizes
@@ -1200,21 +1207,71 @@ Notebook}}
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
 Notebook}}
 
-Compared to when we had 20 items, \ldots{} create a summary table! And
-run more simulations tonight.
+\subsection{Summary figure}\label{summary-figure}
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\phantomsection\label{cell-fig-comp10}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-comp10-1.pdf}}
+
+}
+
+\caption{\label{fig-comp10}Detection rate for item-restscore and infit
+for 10 items}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\phantomsection\label{cell-fig-comp2040}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-comp2040-1.pdf}}
+
+}
+
+\caption{\label{fig-comp2040}Detection rate for item-restscore and infit
+for 20 and 40 items}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+Figure~\ref{fig-comp10} and Figure~\ref{fig-comp2040} summarize the
+findings from the two different comparisons of item numbers. Adding more
+items improves the detection rate substantially for both methods,
+particularly for smaller samples and the off-target items. It also
+results in a larger improvement for infit over item-restscore,
+especially for the n = 150 condition, but also the n = 250 condition for
+off-target items.
 
 \section{Discussion}\label{discussion}
 
 \subsection{Limitations}\label{limitations}
 
-Number of items could be varied more. However, the results from Müller
-(2020), which use 10, 15, and 20 items, indicates small differences in
-critical value ranges. But this might not have implications for
-detection rate of misfitting items (we need the 40 items simulation and
-maybe 10 also?). Partial credit model for polytomous data would have
-been nice to also test. Although results regarding detection rate should
-generalize from RM to PCM, maybe the sample size in relation to number
-of items does not easily translate from the dichotomous case?
+Number of items could have been varied more and investigated further
+with more variation in sample sizes.
+
+Partial credit model for polytomous data would have been nice to also
+test. Although results regarding detection rate should generalize from
+RM to PCM, maybe the sample size in relation to number of items does not
+easily translate from the dichotomous case?
 
 \section{Conclusion}\label{conclusion}
 
@@ -1247,13 +1304,128 @@ also examining residual patterns by reviewing standardized factor
 loadings on the first residual contrast (see Figure~\ref{fig-loadloc}
 for an example) as well as Yen's Q3 residual correlations.
 
-What does this look like with a small sample?
+What does this look like with a small sample (Figure~\ref{fig-loadloc2})
+and what is the item fit in the same small sample
+(Table~\ref{tbl-itemfit2} and Figure~\ref{fig-getfit2})?
+
+\phantomsection\label{cell-fig-loadloc2}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-loadloc2-1.pdf}}
+
+}
+
+\caption{\label{fig-loadloc2}}
+
+\end{figure}%
 
 \textsubscript{Source:
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
 Notebook}}
 
-While the simulations in this paper have used dichotomous data, all
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0549}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0989}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1868}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1099}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1978}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1209}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1319}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0989}}@{}}
+
+\caption{\label{tbl-itemfit2}}
+
+\tabularnewline
+
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Item
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+InfitMSQ
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Infit thresholds
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+OutfitMSQ
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Outfit thresholds
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Infit diff
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Outfit diff
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Location
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+V1 & 0.996 & {[}0.84, 1.268{]} & 0.781 & {[}0.445, 3.268{]} & no misfit
+& no misfit & -2.55 \\
+V2 & 0.905 & {[}0.79, 1.172{]} & 0.890 & {[}0.7, 1.661{]} & no misfit &
+no misfit & -2.01 \\
+V3 & 0.937 & {[}0.868, 1.217{]} & 1.127 & {[}0.708, 1.893{]} & no misfit
+& no misfit & 0.32 \\
+V4 & 0.996 & {[}0.805, 1.294{]} & 0.769 & {[}0.672, 3.2{]} & no misfit &
+no misfit & 1.94 \\
+V5 & 0.985 & {[}0.833, 1.181{]} & 0.949 & {[}0.533, 2.305{]} & no misfit
+& no misfit & 1.09 \\
+V6 & 0.974 & {[}0.804, 1.293{]} & 1.059 & {[}0.71, 1.505{]} & no misfit
+& no misfit & 1.57 \\
+V7 & 0.999 & {[}0.837, 1.259{]} & 1.035 & {[}0.777, 1.42{]} & no misfit
+& no misfit & 0.66 \\
+V8 & 1.014 & {[}0.842, 1.193{]} & 1.023 & {[}0.651, 2.678{]} & no misfit
+& no misfit & -1.20 \\
+V9 & 1.156 & {[}0.742, 1.174{]} & 1.224 & {[}0.554, 2.483{]} & no misfit
+& no misfit & -0.43 \\
+V10 & 0.950 & {[}0.832, 1.133{]} & 0.887 & {[}0.694, 2.017{]} & no
+misfit & no misfit & -0.08 \\
+V11 & 0.982 & {[}0.816, 1.233{]} & 1.027 & {[}0.726, 1.268{]} & no
+misfit & no misfit & -1.24 \\
+V12 & 1.156 & {[}0.831, 1.165{]} & 1.342 & {[}0.589, 2.434{]} & no
+misfit & no misfit & 1.43 \\
+V13 & 1.055 & {[}0.883, 1.191{]} & 1.379 & {[}0.705, 1.736{]} & no
+misfit & no misfit & -2.01 \\
+V14 & 0.981 & {[}0.804, 1.174{]} & 1.058 & {[}0.737, 1.398{]} & no
+misfit & no misfit & 0.45 \\
+V15 & 0.948 & {[}0.759, 1.25{]} & 0.887 & {[}0.591, 2.128{]} & no misfit
+& no misfit & 0.23 \\
+V16 & 0.864 & {[}0.799, 1.217{]} & 0.875 & {[}0.622, 2.079{]} & no
+misfit & no misfit & 1.88 \\
+V17 & 0.967 & {[}0.774, 1.215{]} & 0.791 & {[}0.63, 3.558{]} & no misfit
+& no misfit & 2.06 \\
+V18 & 1.143 & {[}0.771, 1.261{]} & 1.172 & {[}0.664, 1.538{]} & no
+misfit & no misfit & -1.09 \\
+V19 & 0.887 & {[}0.84, 1.171{]} & 0.845 & {[}0.714, 1.432{]} & no misfit
+& no misfit & 0.23 \\
+V20 & 0.995 & {[}0.867, 1.194{]} & 0.925 & {[}0.774, 1.334{]} & no
+misfit & no misfit & -1.24 \\
+
+\end{longtable}
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\phantomsection\label{cell-fig-getfit2}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-getfit2-1.pdf}}
+
+}
+
+\caption{\label{fig-getfit2}}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+While the simulations in this paper have all used dichotomous data, all
 functions evaluated in this paper also work with polytomous data using
 the Rasch Partial Credit Model.
 
@@ -1289,6 +1461,13 @@ Mair, Patrick, and Reinhold Hatzinger. 2007. {``Extended {Rasch}
 {Modeling}: {The} {eRm} {Package} for the {Application} of {IRT}
 {Models} in {R}.''} \emph{Journal of Statistical Software} 20 (1):
 1--20. \url{https://doi.org/10.18637/jss.v020.i09}.
+
+\bibitem[\citeproctext]{ref-mcneish_direct_2024}
+McNeish, Daniel, and Melissa G. Wolf. 2024. {``Direct {Discrepancy}
+{Dynamic} {Fit} {Index} {Cutoffs} for {Arbitrary} {Covariance}
+{Structure} {Models}.''} \emph{Structural Equation Modeling: A
+Multidisciplinary Journal} 31 (5): 835--62.
+\url{https://doi.org/10.1080/10705511.2024.2308005}.
 
 \bibitem[\citeproctext]{ref-mueller_iarm_2022}
 Mueller, Marianne, and Pedro Henrique Ribeiro Santiago. 2022. {``Iarm:

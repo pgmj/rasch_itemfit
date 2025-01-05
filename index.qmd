@@ -10,7 +10,9 @@ keywords:
   - Rasch
   - Psychometrics
   - Item fit
-  - Simulation
+  - Cutoffs
+  - Critical values
+  - Model fit
 abstract: |
   Psychometrics in general have long relied on rule-of-thumb critical values for various goodness of fit metrics. With more powerful personal computers it is both feasible and desirable to use simulation methods to determine appropriate critical cutoff values. This paper illustrates and evaluates the use of an R package for Rasch psychometrics that has implemented functions to simplify the process of determining simulation based cutoff values. Through a series of simulation studies a comparison is made between information weighted conditional item fit ("infit") and item-restscore correlations using Goodman and Kruskal’s $\gamma$. Results indicate the limitations of small samples (n < 500) in correctly detecting item misfit, especially when several items are misfit. Item outfit shows very low performance and should not be used. Conditional infit with simulation based cutoffs performs slightly better than item-restscore with samples below n = 500. Both methods have strongly increased rates of false positives with large samples (n >= 1000). Large samples should use non-parametric bootstrap of subsamples with item-restscore to avoid type-1 errors. Finally, the importance of iterative analyses is emphasized since a situation where several items show underfit will induce seemingly overfit items. Underfit item should be removed one at a time, and a re-analysis conducted for each step to avoid erroneously removing items.
 key-points:
@@ -34,9 +36,11 @@ editor_options:
 
 This paper presents a series of simulations conducted to evaluate methods to detect of item misfit in Rasch models. First, conditional item infit and outfit will be under scrutiny. Second, item infit will be compared to item-restscore [@kreiner_note_2011;@mueller_iarm_2022]. Third, a bootstrap method for item-restscore will be presented and tested.
 
-The assessment of item fit under the Rasch model has for decades been conducted using various rule-of-thumb critical values. Müller [-@muller_item_2020] showed how the range of critical values for conditional item infit varies with sample size. The expected average item conditional infit range was described by Müller as fairly well captured by Smith's rule-of-thumb formula 1±2/√n [@smith_using_1998]. However, the average range does not apply for all items, since item location relative to sample location also affects model expected item fit. This means that some items within a set of items varying in location are likely to have item fit values outside Smith's average value range while still fitting the Rasch model.
+The assessment of item fit under the Rasch model has for decades been conducted using various more or less arbitrary rule-of-thumb critical values. Müller [-@muller_item_2020] showed how the range of critical values for conditional item infit varies with sample size. The expected average item conditional infit range was described by Müller as fairly well captured by Smith's rule-of-thumb formula 1±2/$\sqrt{n}$ [@smith_using_1998]. However, the average range does not apply for all items, since item location relative to sample location also affects model expected item fit. This means that some items within a set of items varying in location are likely to have item fit values outside Smith's average value range while still fitting the Rasch model.
 
 It is here proposed that by using parametric bootstrapping one can establish item fit critical cutoff values that are sample and item specific. This procedure uses the estimated item and person locations based on the available data and simulates new response data that fit the Rasch model, to determine the range of plausible item fit values for each item. The R package `easyRasch` [@easyrasch] includes a function to determine item infit and outfit cutoff values using this method and will be tested in the simulations in this paper.
+
+Similar developments have recently taken place in the related field of confirmatory factor analysis. McNeish and Wolf [-@mcneish_direct_2024] have created an R package called `dynamic` that uses simulation to determine appropriate critical values for commonly used model fit metrics, both for ordinal data and interval data.
 
 It is important to note that the conditional item fit described by Müller [-@muller_item_2020] and implemented in the `iarm` R package [@mueller_iarm_2022] should not be confused with the unconditional item fit implemented in software such as Winsteps and RUMM2030, as well as all R packages except `iarm`. Unconditional item fit can result in unreliable item fit in sample sizes as small as 250 with increasing likelihood of problems as sample size increases. Readers are strongly recommended to read Müller's paper to fully understand the issues with unconditional item fit.
 
@@ -191,7 +195,7 @@ The function `RIgetfit()` from the `easyRasch` R package is tested here. It's so
 
 20 dichotomous items are used, with one item misfitting. Item locations are the same throughout all studies unless otherwise noted. The location of the misfitting item relative the to the sample theta mean was selected to be approximately 0, -1, and -2 logits. Three separate datasets were generated with these variations, each with 10 000 simulated respondents. One dataset with all three misfitting items was also generated, using the same sample size.
 
-Then the `RIitemfit()` function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. `RIitemfit()` has a default (user modifiable) setting to slightly truncate the distribution of values using `stats::quantile()` at 0.001 and 0.999 to remove extreme values. An example is demonstrated in @tbl-itemfit1, using a subset of the items used in the simulations. @fig-itemfit1 provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith's rule-of-thumb regarding infit (1±2/√n) would be 0.9-1.1 for a sample size of 400.
+Then the `RIitemfit()` function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. `RIitemfit()` has a default (user modifiable) setting to slightly truncate the distribution of values using `stats::quantile()` at 0.001 and 0.999 to remove extreme values. An example is demonstrated in @tbl-itemfit1, using a subset of the items used in the simulations. @fig-itemfit1 provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith's rule-of-thumb regarding infit (1±2/$\sqrt{n}$) would be 0.9-1.1 for a sample size of 400.
 
 This study was rather computationally demanding since each simulation run entailed 100-400 underlying bootstrap iterations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4*3*3 = 36 conditions. Each combination used 200 simulation runs. The simulations took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.
 
@@ -880,7 +884,7 @@ ir3_df %>%
   mutate(Percent = n*100/500) %>% 
   ungroup() %>% 
   mutate(item = factor(item)) %>% 
-    mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
                              labels = c("n = 150",
                                         "n = 250",
                                         "n = 500",
@@ -912,7 +916,6 @@ ir3_df %>%
 #| label: fig-comp1
 #| fig-cap: Detection rate for item-restscore compared to infit
 #| fig-height: 5
-#| fig-width: 5
 
 ifb3_sum <- ifb3_df %>% 
   group_by(samplesize, sims) %>% 
@@ -949,7 +952,8 @@ rbind(ifb3_sum,ir3_sum) %>%
   ggplot(aes(x = item, y = percent, fill = Method)) +
   geom_col(position = "dodge") +
   geom_text(aes(label = paste0(percent,"%"), y = 8), color = "white",
-            position = position_dodge(width = 0.9)) +
+            position = position_dodge(width = 0.9),
+            size = 3) +
   facet_grid(samplesize ~ .) +
   theme_rise(fontfamily = "sans") +
   labs(y = "Detection rate in percent",
@@ -1415,13 +1419,13 @@ ir40_df %>%
   geom_col(aes(fill = ifelse(Percent > 5, "lightblue","lightpink"))) +
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), position = position_dodge(width = 0.9),
-            hjust = -0.65, vjust = 1) +
+            hjust = -0.3, vjust = 1) +
     geom_text(data = . %>% filter(item == 13),
             aes(label = Percent), position = position_dodge(width = 0.9),
-            hjust = -0.65, vjust = 1) +
+            hjust = -0.3, vjust = 1) +
     geom_text(data = . %>% filter(item == 18),
             aes(label = Percent), position = position_dodge(width = 0.9),
-            hjust = -0.65, vjust = 1) +
+            hjust = -0.3, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
   scale_x_discrete('Item', 
                      guide = guide_axis(n.dodge = 2)) +
@@ -1458,7 +1462,7 @@ ifb10_df %>%
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = -0.3, vjust = 2) +
+            hjust = 0, vjust = 2) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
   scale_x_discrete('Item') +
   guides(fill = "none") +
@@ -1485,7 +1489,7 @@ ir10_df %>%
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), position = position_dodge(width = 0.9),
-            hjust = -0.65, vjust = 2) +
+            hjust = 0, vjust = 2) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
   scale_x_discrete() +
   guides(fill = "none") +
@@ -1496,14 +1500,248 @@ ir10_df %>%
        x = "Item")
 ```
 
-Compared to when we had 20 items, ... create a summary table! And run more simulations tonight.
 
+## Summary figure
+
+```{r}
+ifb20sum <- ifb3_df %>% 
+  group_by(samplesize) %>% 
+  filter(!infit_diff == "no misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = round(n/500*100,1)) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000"))) %>% 
+  mutate(item = factor(item)) %>% 
+  select(!n) %>% 
+  add_column(n_items = 20)
+
+ifb40sum <- ifb40_df %>% 
+  group_by(samplesize) %>% 
+  filter(!infit_diff == "no misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = round(n/200*100,1)) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000"))) %>% 
+  mutate(item = factor(item)) %>% 
+  select(!n) %>% 
+  add_column(n_items = 40)
+
+ifb_k <- rbind(ifb20sum,ifb40sum) %>% 
+  add_column(Method = "Conditional infit")
+
+
+
+ir20sum <- ir3_df %>% 
+  group_by(samplesize) %>% 
+  filter(ir_padj == "sign. misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/500) %>% 
+  ungroup() %>% 
+  mutate(item = factor(item)) %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000"))) %>% 
+  select(!n) %>% 
+  add_column(n_items = 20)
+
+ir40sum <- ir40_df %>% 
+  group_by(samplesize) %>% 
+  filter(ir_padj == "sign. misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/500) %>% 
+  ungroup() %>% 
+  mutate(item = factor(item)) %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000"))) %>% 
+  select(!n) %>% 
+  add_column(n_items = 40)
+
+ir_k <- rbind(ir20sum,ir40sum) %>% 
+  add_column(Method = "Item-restscore")
+
+dfk2040 <- rbind(ifb_k,ir_k)
+```
+
+
+```{r}
+# 10 and 20 items separately with one misfitting item
+ir10sum <- ir10_df %>% 
+  group_by(samplesize) %>% 
+  filter(ir_padj == "sign. misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/500) %>% 
+  ungroup() %>% 
+  mutate(item = factor(item)) %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000"))) %>% 
+  select(!n) %>% 
+  add_column(n_items = 10)
+
+ir20sum2 <- ir_results %>% 
+  filter(targeting == 0,
+         !samplesize == 100) %>% 
+  group_by(targeting, samplesize) %>% 
+  filter(ir_padj == "sign. misfit" ) %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/1000) %>% 
+  ungroup() %>% 
+  mutate(item = factor(item)) %>% 
+  select(!c(targeting,n)) %>% 
+    mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000"))) %>% 
+  add_column(n_items = 20)
+
+
+ifb10sum <- ifb10_df %>% 
+  group_by(samplesize) %>% 
+  filter(!infit_diff == "no misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = round(n/200*100,1)) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000"))) %>% 
+  mutate(item = factor(item)) %>% 
+  select(!n) %>% 
+  add_column(n_items = 10)
+
+ifb20_1 <- ifb %>% 
+  filter(!infit_diff == "no misfit",
+         targeting == 0) %>% 
+  filter(samplesize %in% c(150,250) & sims == 100) %>% 
+  group_by(samplesize) %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n/200*100) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000")),
+         item = factor(item)) %>% 
+  select(!n) %>% 
+  add_column(n_items = 20)
+
+ifb20_2 <- ifb %>% 
+  filter(!infit_diff == "no misfit",
+         targeting == 0) %>% 
+  filter(samplesize %in% c(500,1000) & sims == 200) %>% 
+  group_by(samplesize) %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n/200*100) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000")),
+         item = factor(item)) %>% 
+  select(!n) %>% 
+  add_column(n_items = 20)
+
+dfk10 <- rbind(ifb10sum,ifb20_1,ifb20_2) %>% 
+  add_column(Method = "Conditional infit")
+
+dfk10_2 <- rbind(ir10sum,ir20sum2) %>% 
+        add_column(Method = "Item-restscore")
+
+
+dfk10 <- rbind(dfk10,dfk10_2)
+```
+
+```{r}
+#| label: fig-comp10
+#| fig-cap: Detection rate for item-restscore and infit for 10 items
+#| fig-height: 5
+dfk10 %>% 
+  mutate(item = as.numeric(item)) %>% 
+  filter(item %in% c(9),
+         !samplesize %in% c("n = 2000")) %>% 
+  drop_na(samplesize) %>% 
+  mutate(item = factor(item, levels = c(9,18,13), labels = c("Item 9 (location 0)",
+                                                             "Item 18 (location -1)",
+                                                             "Item 13 (location -2)"),
+                       ordered = T),
+         n_items = factor(n_items, levels = c(10,20), labels = c("10 items","20 items"))) %>% 
+
+  ggplot(aes(x = item, y = Percent, fill = Method)) +
+  geom_col(position = "dodge") +
+  geom_text(aes(label = paste0(Percent,"%"), y = 8), color = "white",
+            position = position_dodge(width = 0.9),
+            size = 3) +
+  facet_grid(samplesize ~ n_items) +
+  theme_rise(fontfamily = "sans") +
+  labs(y = "Detection rate in percent",
+       title = "Detection rate for item-restscore and infit across sample sizes",
+       subtitle = "One item misfitting with location = 0 logits compared to sample mean.") +
+  scale_fill_brewer(type = "qual", palette = "Dark2") +
+  theme(axis.title.x = element_blank())
+  
+```
+
+```{r}
+#| label: fig-comp2040
+#| fig-cap: Detection rate for item-restscore and infit for 20 and 40 items
+#| fig-height: 5
+dfk2040 %>% 
+  mutate(item = as.numeric(item)) %>% 
+  filter(item %in% c(9,18,13),
+         !samplesize %in% c("n = 2000")) %>% 
+  drop_na(samplesize) %>% 
+  mutate(item = factor(item, levels = c(9,18,13), labels = c("Item 9 (location 0)",
+                                                          "Item 18 (location -1)",
+                                                          "Item 13 (location -2)"),
+                       ordered = T),
+         n_items = factor(n_items, levels = c(20,40), labels = c("20 items","40 items"))) %>% 
+
+  ggplot(aes(x = item, y = Percent, fill = Method)) +
+  geom_col(position = "dodge") +
+  geom_text(aes(label = paste0(Percent,"%"), y = 8), color = "white",
+            position = position_dodge(width = 0.9),
+            size = 3) +
+  facet_grid(samplesize ~ n_items) +
+  theme_rise(fontfamily = "sans") +
+  labs(y = "Detection rate in percent",
+       title = "Detection rate for item-restscore and infit across sample sizes and number of items",
+       subtitle = "Three items misfitting.") +
+  scale_fill_brewer(type = "qual", palette = "Dark2") +
+  theme(axis.title.x = element_blank())
+  
+```
+
+@fig-comp10 and @fig-comp2040 summarize the findings from the two different comparisons of item numbers.  Adding more items improves the detection rate substantially for both methods, particularly for smaller samples and the off-target items. It also results in a larger improvement for infit over item-restscore, especially for the n = 150 condition, but also the n = 250 condition for off-target items.
 
 # Discussion
 
 ## Limitations
 
-Number of items could be varied more. However, the results from Müller [-@muller_item_2020], which use 10, 15, and 20 items, indicates small differences in critical value ranges. But this might not have implications for detection rate of misfitting items (we need the 40 items simulation and maybe 10 also?). Partial credit model for polytomous data would have been nice to also test. Although results regarding detection rate should generalize from RM to PCM, maybe the sample size in relation to number of items does not easily translate from the dichotomous case?
+Number of items could have been varied more and investigated further with more variation in sample sizes.
+
+Partial credit model for polytomous data would have been nice to also test. Although results regarding detection rate should generalize from RM to PCM, maybe the sample size in relation to number of items does not easily translate from the dichotomous case?
 
 # Conclusion
 
@@ -1517,17 +1755,32 @@ RIloadLoc(simdata3[1:400,], model = "RM")
 
 Assessing item fit and dimensionality should be done using multiple methods. Item fit and item-restscore should be used in parallel, while also examining residual patterns by reviewing standardized factor loadings on the first residual contrast (see @fig-loadloc for an example) as well as Yen's Q3 residual correlations.
 
-What does this look like with a small sample?
+What does this look like with a small sample (@fig-loadloc2) and what is the item fit in the same small sample (@tbl-itemfit2 and @fig-getfit2)?
 
 ```{r}
-# RIloadLoc(simdata3[1:150,], model = "RM")
-# simfit2 <- RIgetfit(simdata3[1:150,], iterations = 100, cpu = 8)
-# RIitemfit(simdata3[1:150,], simfit2)
-# RIgetfitPlot(simfit2, simdata3[1:150,])
+#| label: fig-loadloc2
+#| fig-height: 5
+RIloadLoc(simdata3[1:150,], model = "RM")
 ```
 
 
-While the simulations in this paper have used dichotomous data, all functions evaluated in this paper also work with polytomous data using the Rasch Partial Credit Model.
+```{r}
+#| label: tbl-itemfit2
+#| cache: true
+simfit2 <- RIgetfit(simdata3[1:150,], iterations = 100, cpu = 8)
+RIitemfit(simdata3[1:150,], simfit2, output = "quarto")
+```
+
+
+```{r}
+#| label: fig-getfit2
+#| fig-height: 5
+RIgetfitPlot(simfit2, simdata3[1:150,])
+```
+
+
+
+While the simulations in this paper have all used dichotomous data, all functions evaluated in this paper also work with polytomous data using the Rasch Partial Credit Model.
 
 # References {.unnumbered}
 

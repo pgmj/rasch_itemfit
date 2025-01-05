@@ -8,7 +8,7 @@
 
 <meta name="author" content="Magnus Johansson">
 <meta name="dcterms.date" content="2025-01-05">
-<meta name="keywords" content="Rasch, Psychometrics, Item fit, Simulation">
+<meta name="keywords" content="Rasch, Psychometrics, Item fit, Cutoffs, Critical values, Model fit">
 
 <title>Detecting item misfit in Rasch models</title>
 <style>
@@ -93,13 +93,14 @@ window.Quarto = {
 <meta name="citation_title" content="Detecting item misfit in Rasch models">
 <meta name="citation_abstract" content="Psychometrics in general have long relied on rule-of-thumb critical values for various goodness of fit metrics. With more powerful personal computers it is both feasible and desirable to use simulation methods to determine appropriate critical cutoff values. This paper illustrates and evaluates the use of an R package for Rasch psychometrics that has implemented functions to simplify the process of determining simulation based cutoff values. Through a series of simulation studies a comparison is made between information weighted conditional item fit (&amp;amp;quot;infit&quot;) and item-restscore correlations using Goodman and Kruskal’s $\gamma$. Results indicate the limitations of small samples (n &amp;lt; 500) in correctly detecting item misfit, especially when several items are misfit. Item outfit shows very low performance and should not be used. Conditional infit with simulation based cutoffs performs slightly better than item-restscore with samples below n = 500. Both methods have strongly increased rates of false positives with large samples (n &amp;gt;= 1000). Large samples should use non-parametric bootstrap of subsamples with item-restscore to avoid type-1 errors. Finally, the importance of iterative analyses is emphasized since a situation where several items show underfit will induce seemingly overfit items. Underfit item should be removed one at a time, and a re-analysis conducted for each step to avoid erroneously removing items.
 ">
-<meta name="citation_keywords" content="Rasch,Psychometrics,Item fit,Simulation">
+<meta name="citation_keywords" content="Rasch,Psychometrics,Item fit,Cutoffs,Critical values,Model fit">
 <meta name="citation_author" content="Magnus Johansson">
 <meta name="citation_publication_date" content="2025-01-05">
 <meta name="citation_cover_date" content="2025-01-05">
 <meta name="citation_year" content="2025">
 <meta name="citation_online_date" content="2025-01-05">
 <meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=Direct Discrepancy Dynamic Fit Index Cutoffs for Arbitrary Covariance Structure Models;,citation_abstract=Despite the popularity of traditional fit index cutoffs like RMSEA ≤ .06 and CFI ≥ .95, several studies have noted issues with overgeneralizing traditional cutoffs. Computational methods have been proposed to avoid overgeneralization by deriving cutoffs specifically tailored to the characteristics of the model being evaluated. Simulations show favorable performance of these methods; however, these methods support a narrow set of scenarios (e.g., certain models or response scales) and the interpretation of cutoffs is not always standardized, which affects empirical researchers’ ability to confidently and broadly adopt these methods to evaluate model fit. In this paper, we propose an extension to one recently developed computational method—dynamic fit index cutoffs—that (a) permits application to any covariance structure model (e.g., CFA, mediation, bifactor), (b) standardizes interpretation of cutoffs across any covariance structure model, and (c) supports normal, nonnormal, categorical, and missing data. Software is provided to facilitate implementation of the method.;,citation_author=Daniel McNeish;,citation_author=Melissa G. Wolf;,citation_publication_date=2024-09;,citation_cover_date=2024-09;,citation_year=2024;,citation_fulltext_html_url=https://doi.org/10.1080/10705511.2024.2308005;,citation_issue=5;,citation_doi=10.1080/10705511.2024.2308005;,citation_issn=1070-5511;,citation_volume=31;,citation_journal_title=Structural Equation Modeling: A Multidisciplinary Journal;">
 <meta name="citation_reference" content="citation_title=Measures of Association for Cross Classifications;,citation_abstract=When populations are cross-classified with respect to two or more classifications or polytomies, questions often arise about the degree of association existing between the several polytomies. Most of the traditional measures or indices of association are based upon the standard chi-square statistic or on an assumption of underlying joint normality. In this paper a number of alternative measures are considered, almost all based upon a probabilistic model for activity to which the cross-classification may typically lead. Only the case in which the population is completely known is considered, so no question of sampling or measurement error appears. We hope, however, to publish before long some approximate distributions for sample estimators of the measures we propose, and approximate tests of hypotheses. Our major theme is that the measures of association used by an empirical investigator should not be blindly chosen because of tradition and convention only, although these factors may properly be given some weight, but should be constructed in a manner having operational meaning within the context of the particular problem.;,citation_author=Leo A. Goodman;,citation_author=William H. Kruskal;,citation_publication_date=1954;,citation_cover_date=1954;,citation_year=1954;,citation_fulltext_html_url=https://www.jstor.org/stable/2281536;,citation_issue=268;,citation_doi=10.2307/2281536;,citation_issn=0162-1459;,citation_volume=49;,citation_journal_title=Journal of the American Statistical Association;">
 <meta name="citation_reference" content="citation_title=Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing;,citation_abstract=The common approach to the multiplicity problem calls for controlling the familywise error rate (FWER). This approach, though, has faults, and we point out a few. A different approach to problems of multiple significance testing is presented. It calls for controlling the expected proportion of falsely rejected hypotheses — the false discovery rate. This error rate is equivalent to the FWER when all hypotheses are true but is smaller otherwise. Therefore, in problems where the control of the false discovery rate rather than that of the FWER is desired, there is potential for a gain in power. A simple sequential Bonferronitype procedure is proved to control the false discovery rate for independent test statistics, and a simulation study shows that the gain in power is substantial. The use of the new procedure and the appropriateness of the criterion are illustrated with examples.;,citation_author=Yoav Benjamini;,citation_author=Yosef Hochberg;,citation_publication_date=1995-01;,citation_cover_date=1995-01;,citation_year=1995;,citation_fulltext_html_url=https://doi.org/10.1111/j.2517-6161.1995.tb02031.x;,citation_issue=1;,citation_doi=10.1111/j.2517-6161.1995.tb02031.x;,citation_issn=0035-9246;,citation_volume=57;,citation_journal_title=Journal of the Royal Statistical Society: Series B (Methodological);">
 <meta name="citation_reference" content="citation_title=Using item mean squares to evaluate fit to the Rasch model;,citation_abstract=Throughout the mid to late 1970’s considerable research was conducted on the properties of Rasch fit mean squares. This work culminated in a variety of transformations to convert the mean squares into approximate t-statistics. This work was primarily motivated by the influence sample size has on the magnitude of the mean squares and the desire to have a single critical value that can generally be applied to most cases. In the late 1980’s and the early 1990’s the trend seems to have reversed, with numerous researchers using the untransformed fit mean squares as a means of testing fit to the Rasch measurement models. The principal motivation is cited as the influence sample size has on the sensitivity of the t-converted mean squares. The purpose of this paper is to present the historical development of these fit indices and the various transformations and to examine the impact of sample size on both the fit mean squares and the t-transformations of those mean squares. Because the sample size problem has little influence on the person mean square problem, due to the relatively short length (100 items or less), this paper focuses on the item fit mean squares, where it is common to find the statistics used with sample sizes ranging from 30 to 10,000.;,citation_author=R. M. Smith;,citation_author=R. E. Schumacker;,citation_author=M. J. Bush;,citation_publication_date=1998;,citation_cover_date=1998;,citation_year=1998;,citation_issue=1;,citation_issn=1090-655X;,citation_pmid=9661732;,citation_volume=2;,citation_journal_title=Journal of Outcome Measurement;">
@@ -167,7 +168,7 @@ window.Quarto = {
     <div>
       <div class="keywords">
         <div class="block-title">Keywords</div>
-        <p>Rasch, Psychometrics, Item fit, Simulation</p>
+        <p>Rasch, Psychometrics, Item fit, Cutoffs, Critical values, Model fit</p>
       </div>
     </div>
 
@@ -207,6 +208,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#results-40-items" id="toc-results-40-items" class="nav-link" data-scroll-target="#results-40-items"><span class="header-section-number">7.1</span> Results 40 items</a></li>
   <li><a href="#results-10-items" id="toc-results-10-items" class="nav-link" data-scroll-target="#results-10-items"><span class="header-section-number">7.2</span> Results 10 items</a></li>
+  <li><a href="#summary-figure" id="toc-summary-figure" class="nav-link" data-scroll-target="#summary-figure"><span class="header-section-number">7.3</span> Summary figure</a></li>
   </ul></li>
   <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">8</span> Discussion</a>
   <ul class="collapse">
@@ -233,8 +235,9 @@ window.Quarto = {
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>This paper presents a series of simulations conducted to evaluate methods to detect of item misfit in Rasch models. First, conditional item infit and outfit will be under scrutiny. Second, item infit will be compared to item-restscore <span class="citation" data-cites="kreiner_note_2011 mueller_iarm_2022">(<a href="#ref-kreiner_note_2011" role="doc-biblioref">Kreiner 2011</a>; <a href="#ref-mueller_iarm_2022" role="doc-biblioref">Mueller and Santiago 2022</a>)</span>. Third, a bootstrap method for item-restscore will be presented and tested.</p>
-<p>The assessment of item fit under the Rasch model has for decades been conducted using various rule-of-thumb critical values. Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span> showed how the range of critical values for conditional item infit varies with sample size. The expected average item conditional infit range was described by Müller as fairly well captured by Smith’s rule-of-thumb formula 1±2/√n <span class="citation" data-cites="smith_using_1998">(<a href="#ref-smith_using_1998" role="doc-biblioref">Smith, Schumacker, and Bush 1998</a>)</span>. However, the average range does not apply for all items, since item location relative to sample location also affects model expected item fit. This means that some items within a set of items varying in location are likely to have item fit values outside Smith’s average value range while still fitting the Rasch model.</p>
+<p>The assessment of item fit under the Rasch model has for decades been conducted using various more or less arbitrary rule-of-thumb critical values. Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span> showed how the range of critical values for conditional item infit varies with sample size. The expected average item conditional infit range was described by Müller as fairly well captured by Smith’s rule-of-thumb formula 1±2/<span class="math inline">\(\sqrt{n}\)</span> <span class="citation" data-cites="smith_using_1998">(<a href="#ref-smith_using_1998" role="doc-biblioref">Smith, Schumacker, and Bush 1998</a>)</span>. However, the average range does not apply for all items, since item location relative to sample location also affects model expected item fit. This means that some items within a set of items varying in location are likely to have item fit values outside Smith’s average value range while still fitting the Rasch model.</p>
 <p>It is here proposed that by using parametric bootstrapping one can establish item fit critical cutoff values that are sample and item specific. This procedure uses the estimated item and person locations based on the available data and simulates new response data that fit the Rasch model, to determine the range of plausible item fit values for each item. The R package <code>easyRasch</code> <span class="citation" data-cites="easyrasch">(<a href="#ref-easyrasch" role="doc-biblioref">Johansson 2024</a>)</span> includes a function to determine item infit and outfit cutoff values using this method and will be tested in the simulations in this paper.</p>
+<p>Similar developments have recently taken place in the related field of confirmatory factor analysis. McNeish and Wolf <span class="citation" data-cites="mcneish_direct_2024">(<a href="#ref-mcneish_direct_2024" role="doc-biblioref">2024</a>)</span> have created an R package called <code>dynamic</code> that uses simulation to determine appropriate critical values for commonly used model fit metrics, both for ordinal data and interval data.</p>
 <p>It is important to note that the conditional item fit described by Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span> and implemented in the <code>iarm</code> R package <span class="citation" data-cites="mueller_iarm_2022">(<a href="#ref-mueller_iarm_2022" role="doc-biblioref">Mueller and Santiago 2022</a>)</span> should not be confused with the unconditional item fit implemented in software such as Winsteps and RUMM2030, as well as all R packages except <code>iarm</code>. Unconditional item fit can result in unreliable item fit in sample sizes as small as 250 with increasing likelihood of problems as sample size increases. Readers are strongly recommended to read Müller’s paper to fully understand the issues with unconditional item fit.</p>
 </section>
 <section id="methods" class="level1" data-number="2">
@@ -258,7 +261,7 @@ window.Quarto = {
 <p>Item mean square standardized residuals are either unweighted, which is referred to as “outfit”, or information weighted, which we call “infit” <span class="citation" data-cites="ostini_polytomous_2006">(<a href="#ref-ostini_polytomous_2006" role="doc-biblioref">Ostini and Nering 2006, 86–87</a>)</span>. For details on conditional item fit we refer to the previously mentioned paper by Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span>. Conditional item infit and outfit are expected to be near 1, with higher values indicating an item to be underfitting the Rasch model (often due to multidimensionality issues) and lower values indicating overfit.</p>
 <p>The function <code>RIgetfit()</code> from the <code>easyRasch</code> R package is tested here. It’s source code can be accessed on GitHub, see #sec-addmat. The function offers the user a choice of the number of bootstrap iterations to use to determine the critical cutoff values for each item’s infit and outfit. Our main interest in this study is two-fold. We want to test variations in the number of iterations used in <code>RIgetfit()</code> and evaluate how well the critical values based on the parametric bootstrapping procedure detects misfitting items. Additionally, a comparison between infit and outfit statistics in terms of detection rate and false positive rate will be conducted.</p>
 <p>20 dichotomous items are used, with one item misfitting. Item locations are the same throughout all studies unless otherwise noted. The location of the misfitting item relative the to the sample theta mean was selected to be approximately 0, -1, and -2 logits. Three separate datasets were generated with these variations, each with 10 000 simulated respondents. One dataset with all three misfitting items was also generated, using the same sample size.</p>
-<p>Then the <code>RIitemfit()</code> function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. <code>RIitemfit()</code> has a default (user modifiable) setting to slightly truncate the distribution of values using <code>stats::quantile()</code> at 0.001 and 0.999 to remove extreme values. An example is demonstrated in <a href="#tbl-itemfit1" class="quarto-xref">Table&nbsp;1</a>, using a subset of the items used in the simulations. <a href="#fig-itemfit1" class="quarto-xref">Figure&nbsp;1</a> provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith’s rule-of-thumb regarding infit (1±2/√n) would be 0.9-1.1 for a sample size of 400.</p>
+<p>Then the <code>RIitemfit()</code> function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. <code>RIitemfit()</code> has a default (user modifiable) setting to slightly truncate the distribution of values using <code>stats::quantile()</code> at 0.001 and 0.999 to remove extreme values. An example is demonstrated in <a href="#tbl-itemfit1" class="quarto-xref">Table&nbsp;1</a>, using a subset of the items used in the simulations. <a href="#fig-itemfit1" class="quarto-xref">Figure&nbsp;1</a> provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith’s rule-of-thumb regarding infit (1±2/<span class="math inline">\(\sqrt{n}\)</span>) would be 0.9-1.1 for a sample size of 400.</p>
 <p>This study was rather computationally demanding since each simulation run entailed 100-400 underlying bootstrap iterations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4<em>3</em>3 = 36 conditions. Each combination used 200 simulation runs. The simulations took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.</p>
 <div class="cell">
 <div id="tbl-itemfit1" class="cell quarto-float quarto-figure quarto-figure-center anchored">
@@ -532,7 +535,7 @@ Figure&nbsp;11
 <div id="fig-comp1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-comp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-comp1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;12: Detection rate for item-restscore compared to infit"><img src="index_files/figure-html/fig-comp1-1.png" class="img-fluid figure-img" width="480"></a>
+<a href="index_files/figure-html/fig-comp1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;12: Detection rate for item-restscore compared to infit"><img src="index_files/figure-html/fig-comp1-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;12: Detection rate for item-restscore compared to infit
@@ -1220,14 +1223,46 @@ Figure&nbsp;18
 </div>
 </div>
 </div>
-<p>Compared to when we had 20 items, … create a summary table! And run more simulations tonight.</p>
+</section>
+<section id="summary-figure" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="summary-figure"><span class="header-section-number">7.3</span> Summary figure</h2>
+<div id="cell-fig-comp10" class="cell">
+<div class="cell-output-display">
+<div id="fig-comp10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comp10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-comp10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Figure&nbsp;19: Detection rate for item-restscore and infit for 10 items"><img src="index_files/figure-html/fig-comp10-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comp10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19: Detection rate for item-restscore and infit for 10 items
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-fig-comp2040" class="cell">
+<div class="cell-output-display">
+<div id="fig-comp2040" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comp2040-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-comp2040-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20" title="Figure&nbsp;20: Detection rate for item-restscore and infit for 20 and 40 items"><img src="index_files/figure-html/fig-comp2040-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comp2040-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20: Detection rate for item-restscore and infit for 20 and 40 items
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-comp10" class="quarto-xref">Figure&nbsp;19</a> and <a href="#fig-comp2040" class="quarto-xref">Figure&nbsp;20</a> summarize the findings from the two different comparisons of item numbers. Adding more items improves the detection rate substantially for both methods, particularly for smaller samples and the off-target items. It also results in a larger improvement for infit over item-restscore, especially for the n = 150 condition, but also the n = 250 condition for off-target items.</p>
 </section>
 </section>
 <section id="discussion" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Discussion</h1>
 <section id="limitations" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="limitations"><span class="header-section-number">8.1</span> Limitations</h2>
-<p>Number of items could be varied more. However, the results from Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span>, which use 10, 15, and 20 items, indicates small differences in critical value ranges. But this might not have implications for detection rate of misfitting items (we need the 40 items simulation and maybe 10 also?). Partial credit model for polytomous data would have been nice to also test. Although results regarding detection rate should generalize from RM to PCM, maybe the sample size in relation to number of items does not easily translate from the dichotomous case?</p>
+<p>Number of items could have been varied more and investigated further with more variation in sample sizes.</p>
+<p>Partial credit model for polytomous data would have been nice to also test. Although results regarding detection rate should generalize from RM to PCM, maybe the sample size in relation to number of items does not easily translate from the dichotomous case?</p>
 </section>
 </section>
 <section id="conclusion" class="level1" data-number="9">
@@ -1238,18 +1273,285 @@ Figure&nbsp;18
 <div id="fig-loadloc" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-loadloc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-loadloc-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Figure&nbsp;19: "><img src="index_files/figure-html/fig-loadloc-1.png" id="fig-loadloc" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-loadloc-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21" title="Figure&nbsp;21: "><img src="index_files/figure-html/fig-loadloc-1.png" id="fig-loadloc" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-loadloc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;19
+Figure&nbsp;21
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Assessing item fit and dimensionality should be done using multiple methods. Item fit and item-restscore should be used in parallel, while also examining residual patterns by reviewing standardized factor loadings on the first residual contrast (see <a href="#fig-loadloc" class="quarto-xref">Figure&nbsp;19</a> for an example) as well as Yen’s Q3 residual correlations.</p>
-<p>What does this look like with a small sample?</p>
-<p>While the simulations in this paper have used dichotomous data, all functions evaluated in this paper also work with polytomous data using the Rasch Partial Credit Model.</p>
+<p>Assessing item fit and dimensionality should be done using multiple methods. Item fit and item-restscore should be used in parallel, while also examining residual patterns by reviewing standardized factor loadings on the first residual contrast (see <a href="#fig-loadloc" class="quarto-xref">Figure&nbsp;21</a> for an example) as well as Yen’s Q3 residual correlations.</p>
+<p>What does this look like with a small sample (<a href="#fig-loadloc2" class="quarto-xref">Figure&nbsp;22</a>) and what is the item fit in the same small sample (<a href="#tbl-itemfit2" class="quarto-xref">Table&nbsp;6</a> and <a href="#fig-getfit2" class="quarto-xref">Figure&nbsp;23</a>)?</p>
+<div id="cell-fig-loadloc2" class="cell">
+<div class="cell-output-display">
+<div id="fig-loadloc2" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-loadloc2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-loadloc2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22" title="Figure&nbsp;22: "><img src="index_files/figure-html/fig-loadloc2-1.png" id="fig-loadloc2" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-loadloc2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;22
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-itemfit2" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-itemfit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6
+</figcaption>
+<div aria-describedby="tbl-itemfit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 10%">
+<col style="width: 19%">
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Item</th>
+<th style="text-align: right;">InfitMSQ</th>
+<th style="text-align: left;">Infit thresholds</th>
+<th style="text-align: right;">OutfitMSQ</th>
+<th style="text-align: left;">Outfit thresholds</th>
+<th style="text-align: left;">Infit diff</th>
+<th style="text-align: left;">Outfit diff</th>
+<th style="text-align: right;">Location</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">V1</td>
+<td style="text-align: right;">0.996</td>
+<td style="text-align: left;">[0.864, 1.242]</td>
+<td style="text-align: right;">0.781</td>
+<td style="text-align: left;">[0.483, 5.092]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-2.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V2</td>
+<td style="text-align: right;">0.905</td>
+<td style="text-align: left;">[0.862, 1.208]</td>
+<td style="text-align: right;">0.890</td>
+<td style="text-align: left;">[0.78, 1.409]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-2.01</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V3</td>
+<td style="text-align: right;">0.937</td>
+<td style="text-align: left;">[0.811, 1.179]</td>
+<td style="text-align: right;">1.127</td>
+<td style="text-align: left;">[0.67, 1.526]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">0.32</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V4</td>
+<td style="text-align: right;">0.996</td>
+<td style="text-align: left;">[0.852, 1.179]</td>
+<td style="text-align: right;">0.769</td>
+<td style="text-align: left;">[0.719, 1.71]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">1.94</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V5</td>
+<td style="text-align: right;">0.985</td>
+<td style="text-align: left;">[0.851, 1.182]</td>
+<td style="text-align: right;">0.949</td>
+<td style="text-align: left;">[0.653, 2.237]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">1.09</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V6</td>
+<td style="text-align: right;">0.974</td>
+<td style="text-align: left;">[0.824, 1.147]</td>
+<td style="text-align: right;">1.059</td>
+<td style="text-align: left;">[0.742, 1.547]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">1.57</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V7</td>
+<td style="text-align: right;">0.999</td>
+<td style="text-align: left;">[0.817, 1.206]</td>
+<td style="text-align: right;">1.035</td>
+<td style="text-align: left;">[0.759, 1.327]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">0.66</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V8</td>
+<td style="text-align: right;">1.014</td>
+<td style="text-align: left;">[0.832, 1.187]</td>
+<td style="text-align: right;">1.023</td>
+<td style="text-align: left;">[0.589, 1.924]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-1.20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V9</td>
+<td style="text-align: right;">1.156</td>
+<td style="text-align: left;">[0.806, 1.172]</td>
+<td style="text-align: right;">1.224</td>
+<td style="text-align: left;">[0.573, 1.701]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-0.43</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V10</td>
+<td style="text-align: right;">0.950</td>
+<td style="text-align: left;">[0.812, 1.196]</td>
+<td style="text-align: right;">0.887</td>
+<td style="text-align: left;">[0.683, 1.735]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-0.08</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V11</td>
+<td style="text-align: right;">0.982</td>
+<td style="text-align: left;">[0.788, 1.256]</td>
+<td style="text-align: right;">1.027</td>
+<td style="text-align: left;">[0.719, 1.4]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-1.24</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V12</td>
+<td style="text-align: right;">1.156</td>
+<td style="text-align: left;">[0.86, 1.152]</td>
+<td style="text-align: right;">1.342</td>
+<td style="text-align: left;">[0.639, 1.634]</td>
+<td style="text-align: left;">0.004</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">1.43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V13</td>
+<td style="text-align: right;">1.055</td>
+<td style="text-align: left;">[0.846, 1.153]</td>
+<td style="text-align: right;">1.379</td>
+<td style="text-align: left;">[0.687, 1.721]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-2.01</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V14</td>
+<td style="text-align: right;">0.981</td>
+<td style="text-align: left;">[0.821, 1.242]</td>
+<td style="text-align: right;">1.058</td>
+<td style="text-align: left;">[0.741, 1.419]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">0.45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V15</td>
+<td style="text-align: right;">0.948</td>
+<td style="text-align: left;">[0.774, 1.188]</td>
+<td style="text-align: right;">0.887</td>
+<td style="text-align: left;">[0.548, 3.295]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">0.23</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V16</td>
+<td style="text-align: right;">0.864</td>
+<td style="text-align: left;">[0.811, 1.17]</td>
+<td style="text-align: right;">0.875</td>
+<td style="text-align: left;">[0.71, 1.508]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">1.88</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V17</td>
+<td style="text-align: right;">0.967</td>
+<td style="text-align: left;">[0.803, 1.244]</td>
+<td style="text-align: right;">0.791</td>
+<td style="text-align: left;">[0.589, 3.242]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">2.06</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V18</td>
+<td style="text-align: right;">1.143</td>
+<td style="text-align: left;">[0.831, 1.258]</td>
+<td style="text-align: right;">1.172</td>
+<td style="text-align: left;">[0.763, 1.672]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-1.09</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V19</td>
+<td style="text-align: right;">0.887</td>
+<td style="text-align: left;">[0.796, 1.203]</td>
+<td style="text-align: right;">0.845</td>
+<td style="text-align: left;">[0.638, 1.786]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">0.23</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V20</td>
+<td style="text-align: right;">0.995</td>
+<td style="text-align: left;">[0.853, 1.182]</td>
+<td style="text-align: right;">0.925</td>
+<td style="text-align: left;">[0.764, 1.522]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-1.24</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div id="cell-fig-getfit2" class="cell">
+<div class="cell-output-display">
+<div id="fig-getfit2" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-getfit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-getfit2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23" title="Figure&nbsp;23: "><img src="index_files/figure-html/fig-getfit2-1.png" id="fig-getfit2" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-getfit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;23
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>While the simulations in this paper have all used dichotomous data, all functions evaluated in this paper also work with polytomous data using the Rasch Partial Credit Model.</p>
 </section>
 <section id="references" class="level1 unnumbered">
 <h1 class="unnumbered">References</h1>
@@ -1268,6 +1570,9 @@ Kreiner, Svend. 2011. <span>“A <span>Note</span> on <span>Item</span>–<span>
 </div>
 <div id="ref-mair_extended_2007" class="csl-entry" role="listitem">
 Mair, Patrick, and Reinhold Hatzinger. 2007. <span>“Extended <span>Rasch</span> <span>Modeling</span>: <span>The</span> <span class="nocase">eRm</span> <span>Package</span> for the <span>Application</span> of <span>IRT</span> <span>Models</span> in <span>R</span>.”</span> <em>Journal of Statistical Software</em> 20 (1): 1–20. <a href="https://doi.org/10.18637/jss.v020.i09">https://doi.org/10.18637/jss.v020.i09</a>.
+</div>
+<div id="ref-mcneish_direct_2024" class="csl-entry" role="listitem">
+McNeish, Daniel, and Melissa G. Wolf. 2024. <span>“Direct <span>Discrepancy</span> <span>Dynamic</span> <span>Fit</span> <span>Index</span> <span>Cutoffs</span> for <span>Arbitrary</span> <span>Covariance</span> <span>Structure</span> <span>Models</span>.”</span> <em>Structural Equation Modeling: A Multidisciplinary Journal</em> 31 (5): 835–62. <a href="https://doi.org/10.1080/10705511.2024.2308005">https://doi.org/10.1080/10705511.2024.2308005</a>.
 </div>
 <div id="ref-mueller_iarm_2022" class="csl-entry" role="listitem">
 Mueller, Marianne, and Pedro Henrique Ribeiro Santiago. 2022. <span>“Iarm: <span>Item</span> <span>Analysis</span> in <span>Rasch</span> <span>Models</span>.”</span> <a href="https://cran.r-project.org/web/packages/iarm/index.html">https://cran.r-project.org/web/packages/iarm/index.html</a>.

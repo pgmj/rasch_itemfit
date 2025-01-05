@@ -7,7 +7,7 @@
 
     <meta name="author" content="Magnus Johansson">
     <meta name="dcterms.date" content="2025-01-05">
-    <meta name="keywords" content="Rasch, Psychometrics, Item fit, Simulation">
+    <meta name="keywords" content="Rasch, Psychometrics, Item fit, Cutoffs, Critical values, Model fit">
 
     <title>Detecting item misfit in Rasch models</title>
     <style>
@@ -186,13 +186,14 @@
       <meta name="citation_title" content="Detecting item misfit in Rasch models">
 <meta name="citation_abstract" content="Psychometrics in general have long relied on rule-of-thumb critical values for various goodness of fit metrics. With more powerful personal computers it is both feasible and desirable to use simulation methods to determine appropriate critical cutoff values. This paper illustrates and evaluates the use of an R package for Rasch psychometrics that has implemented functions to simplify the process of determining simulation based cutoff values. Through a series of simulation studies a comparison is made between information weighted conditional item fit (&amp;amp;quot;infit&quot;) and item-restscore correlations using Goodman and Kruskal’s $\gamma$. Results indicate the limitations of small samples (n &amp;lt; 500) in correctly detecting item misfit, especially when several items are misfit. Item outfit shows very low performance and should not be used. Conditional infit with simulation based cutoffs performs slightly better than item-restscore with samples below n = 500. Both methods have strongly increased rates of false positives with large samples (n &amp;gt;= 1000). Large samples should use non-parametric bootstrap of subsamples with item-restscore to avoid type-1 errors. Finally, the importance of iterative analyses is emphasized since a situation where several items show underfit will induce seemingly overfit items. Underfit item should be removed one at a time, and a re-analysis conducted for each step to avoid erroneously removing items.
 ">
-<meta name="citation_keywords" content="Rasch,Psychometrics,Item fit,Simulation">
+<meta name="citation_keywords" content="Rasch,Psychometrics,Item fit,Cutoffs,Critical values,Model fit">
 <meta name="citation_author" content="Magnus Johansson">
 <meta name="citation_publication_date" content="2025-01-05">
 <meta name="citation_cover_date" content="2025-01-05">
 <meta name="citation_year" content="2025">
 <meta name="citation_online_date" content="2025-01-05">
 <meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=Direct Discrepancy Dynamic Fit Index Cutoffs for Arbitrary Covariance Structure Models;,citation_abstract=Despite the popularity of traditional fit index cutoffs like RMSEA ≤ .06 and CFI ≥ .95, several studies have noted issues with overgeneralizing traditional cutoffs. Computational methods have been proposed to avoid overgeneralization by deriving cutoffs specifically tailored to the characteristics of the model being evaluated. Simulations show favorable performance of these methods; however, these methods support a narrow set of scenarios (e.g., certain models or response scales) and the interpretation of cutoffs is not always standardized, which affects empirical researchers’ ability to confidently and broadly adopt these methods to evaluate model fit. In this paper, we propose an extension to one recently developed computational method—dynamic fit index cutoffs—that (a) permits application to any covariance structure model (e.g., CFA, mediation, bifactor), (b) standardizes interpretation of cutoffs across any covariance structure model, and (c) supports normal, nonnormal, categorical, and missing data. Software is provided to facilitate implementation of the method.;,citation_author=Daniel McNeish;,citation_author=Melissa G. Wolf;,citation_publication_date=2024-09;,citation_cover_date=2024-09;,citation_year=2024;,citation_fulltext_html_url=https://doi.org/10.1080/10705511.2024.2308005;,citation_issue=5;,citation_doi=10.1080/10705511.2024.2308005;,citation_issn=1070-5511;,citation_volume=31;,citation_journal_title=Structural Equation Modeling: A Multidisciplinary Journal;">
 <meta name="citation_reference" content="citation_title=Measures of Association for Cross Classifications;,citation_abstract=When populations are cross-classified with respect to two or more classifications or polytomies, questions often arise about the degree of association existing between the several polytomies. Most of the traditional measures or indices of association are based upon the standard chi-square statistic or on an assumption of underlying joint normality. In this paper a number of alternative measures are considered, almost all based upon a probabilistic model for activity to which the cross-classification may typically lead. Only the case in which the population is completely known is considered, so no question of sampling or measurement error appears. We hope, however, to publish before long some approximate distributions for sample estimators of the measures we propose, and approximate tests of hypotheses. Our major theme is that the measures of association used by an empirical investigator should not be blindly chosen because of tradition and convention only, although these factors may properly be given some weight, but should be constructed in a manner having operational meaning within the context of the particular problem.;,citation_author=Leo A. Goodman;,citation_author=William H. Kruskal;,citation_publication_date=1954;,citation_cover_date=1954;,citation_year=1954;,citation_fulltext_html_url=https://www.jstor.org/stable/2281536;,citation_issue=268;,citation_doi=10.2307/2281536;,citation_issn=0162-1459;,citation_volume=49;,citation_journal_title=Journal of the American Statistical Association;">
 <meta name="citation_reference" content="citation_title=Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing;,citation_abstract=The common approach to the multiplicity problem calls for controlling the familywise error rate (FWER). This approach, though, has faults, and we point out a few. A different approach to problems of multiple significance testing is presented. It calls for controlling the expected proportion of falsely rejected hypotheses — the false discovery rate. This error rate is equivalent to the FWER when all hypotheses are true but is smaller otherwise. Therefore, in problems where the control of the false discovery rate rather than that of the FWER is desired, there is potential for a gain in power. A simple sequential Bonferronitype procedure is proved to control the false discovery rate for independent test statistics, and a simulation study shows that the gain in power is substantial. The use of the new procedure and the appropriateness of the criterion are illustrated with examples.;,citation_author=Yoav Benjamini;,citation_author=Yosef Hochberg;,citation_publication_date=1995-01;,citation_cover_date=1995-01;,citation_year=1995;,citation_fulltext_html_url=https://doi.org/10.1111/j.2517-6161.1995.tb02031.x;,citation_issue=1;,citation_doi=10.1111/j.2517-6161.1995.tb02031.x;,citation_issn=0035-9246;,citation_volume=57;,citation_journal_title=Journal of the Royal Statistical Society: Series B (Methodological);">
 <meta name="citation_reference" content="citation_title=Using item mean squares to evaluate fit to the Rasch model;,citation_abstract=Throughout the mid to late 1970’s considerable research was conducted on the properties of Rasch fit mean squares. This work culminated in a variety of transformations to convert the mean squares into approximate t-statistics. This work was primarily motivated by the influence sample size has on the magnitude of the mean squares and the desire to have a single critical value that can generally be applied to most cases. In the late 1980’s and the early 1990’s the trend seems to have reversed, with numerous researchers using the untransformed fit mean squares as a means of testing fit to the Rasch measurement models. The principal motivation is cited as the influence sample size has on the sensitivity of the t-converted mean squares. The purpose of this paper is to present the historical development of these fit indices and the various transformations and to examine the impact of sample size on both the fit mean squares and the t-transformations of those mean squares. Because the sample size problem has little influence on the person mean square problem, due to the relatively short length (100 items or less), this paper focuses on the item fit mean squares, where it is common to find the statistics used with sample sizes ranging from 30 to 10,000.;,citation_author=R. M. Smith;,citation_author=R. E. Schumacker;,citation_author=M. J. Bush;,citation_publication_date=1998;,citation_cover_date=1998;,citation_year=1998;,citation_issue=1;,citation_issn=1090-655X;,citation_pmid=9661732;,citation_volume=2;,citation_journal_title=Journal of Outcome Measurement;">
@@ -267,7 +268,7 @@
     <div>
       <div class="keywords">
         <div class="block-title">Keywords</div>
-        <p>Rasch, Psychometrics, Item fit, Simulation</p>
+        <p>Rasch, Psychometrics, Item fit, Cutoffs, Critical values, Model fit</p>
       </div>
     </div>
 
@@ -307,6 +308,7 @@
   <ul class="collapse">
   <li><a href="#results-40-items" id="toc-results-40-items" class="nav-link" data-scroll-target="#results-40-items"><span class="header-section-number">7.1</span> Results 40 items</a></li>
   <li><a href="#results-10-items" id="toc-results-10-items" class="nav-link" data-scroll-target="#results-10-items"><span class="header-section-number">7.2</span> Results 10 items</a></li>
+  <li><a href="#summary-figure" id="toc-summary-figure" class="nav-link" data-scroll-target="#summary-figure"><span class="header-section-number">7.3</span> Summary figure</a></li>
   </ul></li>
   <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">8</span> Discussion</a>
   <ul class="collapse">
@@ -328,8 +330,9 @@
        <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>This paper presents a series of simulations conducted to evaluate methods to detect of item misfit in Rasch models. First, conditional item infit and outfit will be under scrutiny. Second, item infit will be compared to item-restscore <span class="citation" data-cites="kreiner_note_2011 mueller_iarm_2022">(<a href="#ref-kreiner_note_2011" role="doc-biblioref">Kreiner 2011</a>; <a href="#ref-mueller_iarm_2022" role="doc-biblioref">Mueller and Santiago 2022</a>)</span>. Third, a bootstrap method for item-restscore will be presented and tested.</p>
-<p>The assessment of item fit under the Rasch model has for decades been conducted using various rule-of-thumb critical values. Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span> showed how the range of critical values for conditional item infit varies with sample size. The expected average item conditional infit range was described by Müller as fairly well captured by Smith’s rule-of-thumb formula 1±2/√n <span class="citation" data-cites="smith_using_1998">(<a href="#ref-smith_using_1998" role="doc-biblioref">Smith, Schumacker, and Bush 1998</a>)</span>. However, the average range does not apply for all items, since item location relative to sample location also affects model expected item fit. This means that some items within a set of items varying in location are likely to have item fit values outside Smith’s average value range while still fitting the Rasch model.</p>
+<p>The assessment of item fit under the Rasch model has for decades been conducted using various more or less arbitrary rule-of-thumb critical values. Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span> showed how the range of critical values for conditional item infit varies with sample size. The expected average item conditional infit range was described by Müller as fairly well captured by Smith’s rule-of-thumb formula 1±2/<span class="math inline">\(\sqrt{n}\)</span> <span class="citation" data-cites="smith_using_1998">(<a href="#ref-smith_using_1998" role="doc-biblioref">Smith, Schumacker, and Bush 1998</a>)</span>. However, the average range does not apply for all items, since item location relative to sample location also affects model expected item fit. This means that some items within a set of items varying in location are likely to have item fit values outside Smith’s average value range while still fitting the Rasch model.</p>
 <p>It is here proposed that by using parametric bootstrapping one can establish item fit critical cutoff values that are sample and item specific. This procedure uses the estimated item and person locations based on the available data and simulates new response data that fit the Rasch model, to determine the range of plausible item fit values for each item. The R package <code>easyRasch</code> <span class="citation" data-cites="easyrasch">(<a href="#ref-easyrasch" role="doc-biblioref">Johansson 2024</a>)</span> includes a function to determine item infit and outfit cutoff values using this method and will be tested in the simulations in this paper.</p>
+<p>Similar developments have recently taken place in the related field of confirmatory factor analysis. McNeish and Wolf <span class="citation" data-cites="mcneish_direct_2024">(<a href="#ref-mcneish_direct_2024" role="doc-biblioref">2024</a>)</span> have created an R package called <code>dynamic</code> that uses simulation to determine appropriate critical values for commonly used model fit metrics, both for ordinal data and interval data.</p>
 <p>It is important to note that the conditional item fit described by Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span> and implemented in the <code>iarm</code> R package <span class="citation" data-cites="mueller_iarm_2022">(<a href="#ref-mueller_iarm_2022" role="doc-biblioref">Mueller and Santiago 2022</a>)</span> should not be confused with the unconditional item fit implemented in software such as Winsteps and RUMM2030, as well as all R packages except <code>iarm</code>. Unconditional item fit can result in unreliable item fit in sample sizes as small as 250 with increasing likelihood of problems as sample size increases. Readers are strongly recommended to read Müller’s paper to fully understand the issues with unconditional item fit.</p>
 </section>
 <section id="methods" class="level1" data-number="2">
@@ -612,7 +615,7 @@ dbl (2): item, location
 <p>Item mean square standardized residuals are either unweighted, which is referred to as “outfit”, or information weighted, which we call “infit” <span class="citation" data-cites="ostini_polytomous_2006">(<a href="#ref-ostini_polytomous_2006" role="doc-biblioref">Ostini and Nering 2006, 86–87</a>)</span>. For details on conditional item fit we refer to the previously mentioned paper by Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span>. Conditional item infit and outfit are expected to be near 1, with higher values indicating an item to be underfitting the Rasch model (often due to multidimensionality issues) and lower values indicating overfit.</p>
 <p>The function <code>RIgetfit()</code> from the <code>easyRasch</code> R package is tested here. It’s source code can be accessed on GitHub, see #sec-addmat. The function offers the user a choice of the number of bootstrap iterations to use to determine the critical cutoff values for each item’s infit and outfit. Our main interest in this study is two-fold. We want to test variations in the number of iterations used in <code>RIgetfit()</code> and evaluate how well the critical values based on the parametric bootstrapping procedure detects misfitting items. Additionally, a comparison between infit and outfit statistics in terms of detection rate and false positive rate will be conducted.</p>
 <p>20 dichotomous items are used, with one item misfitting. Item locations are the same throughout all studies unless otherwise noted. The location of the misfitting item relative the to the sample theta mean was selected to be approximately 0, -1, and -2 logits. Three separate datasets were generated with these variations, each with 10 000 simulated respondents. One dataset with all three misfitting items was also generated, using the same sample size.</p>
-<p>Then the <code>RIitemfit()</code> function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. <code>RIitemfit()</code> has a default (user modifiable) setting to slightly truncate the distribution of values using <code>stats::quantile()</code> at 0.001 and 0.999 to remove extreme values. An example is demonstrated in <a href="#tbl-itemfit1" class="quarto-xref">Table&nbsp;1</a>, using a subset of the items used in the simulations. <a href="#fig-itemfit1" class="quarto-xref">Figure&nbsp;1</a> provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith’s rule-of-thumb regarding infit (1±2/√n) would be 0.9-1.1 for a sample size of 400.</p>
+<p>Then the <code>RIitemfit()</code> function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. <code>RIitemfit()</code> has a default (user modifiable) setting to slightly truncate the distribution of values using <code>stats::quantile()</code> at 0.001 and 0.999 to remove extreme values. An example is demonstrated in <a href="#tbl-itemfit1" class="quarto-xref">Table&nbsp;1</a>, using a subset of the items used in the simulations. <a href="#fig-itemfit1" class="quarto-xref">Figure&nbsp;1</a> provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith’s rule-of-thumb regarding infit (1±2/<span class="math inline">\(\sqrt{n}\)</span>) would be 0.9-1.1 for a sample size of 400.</p>
 <p>This study was rather computationally demanding since each simulation run entailed 100-400 underlying bootstrap iterations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4<em>3</em>3 = 36 conditions. Each combination used 200 simulation runs. The simulations took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.</p>
 <div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div class="cell">
 
@@ -1427,7 +1430,7 @@ Figure&nbsp;10: Conditional infit detection rate with three misfitting items
 <span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent =</span> n<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span><span class="dv">500</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">item =</span> <span class="fu">factor</span>(item)) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">samplesize =</span> <span class="fu">factor</span>(samplesize, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>,<span class="dv">2000</span>),</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samplesize =</span> <span class="fu">factor</span>(samplesize, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>,<span class="dv">2000</span>),</span>
 <span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"n = 150"</span>,</span>
 <span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 250"</span>,</span>
 <span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 500"</span>,</span>
@@ -1501,18 +1504,19 @@ Figure&nbsp;11
 <span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> item, <span class="at">y =</span> percent, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
 <span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
 <span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(percent,<span class="st">"%"</span>), <span class="at">y =</span> <span class="dv">8</span>), <span class="at">color =</span> <span class="st">"white"</span>,</span>
-<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>)) <span class="sc">+</span></span>
-<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize <span class="sc">~</span> .) <span class="sc">+</span></span>
-<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
-<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Detection rate in percent"</span>,</span>
-<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Detection rate for item-restscore compared to infit"</span>) <span class="sc">+</span></span>
-<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>, <span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
+<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Detection rate in percent"</span>,</span>
+<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Detection rate for item-restscore compared to infit"</span>) <span class="sc">+</span></span>
+<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>, <span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-comp1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-comp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="index_files/figure-html/fig-comp1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;12: Detection rate for item-restscore compared to infit"><img src="index_files/figure-html/fig-comp1-1.png" class="img-fluid figure-img" width="480"></a>
+<a href="index_files/figure-html/fig-comp1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;12: Detection rate for item-restscore compared to infit"><img src="index_files/figure-html/fig-comp1-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;12: Detection rate for item-restscore compared to infit
@@ -2528,13 +2532,13 @@ Figure&nbsp;15
 <span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">ifelse</span>(Percent <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="st">"lightblue"</span>,<span class="st">"lightpink"</span>))) <span class="sc">+</span></span>
 <span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">9</span>),</span>
 <span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
-<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.65</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">13</span>),</span>
 <span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
-<span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.65</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb59-17"><a href="#cb59-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">18</span>),</span>
 <span id="cb59-18"><a href="#cb59-18" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
-<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.65</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb59-20"><a href="#cb59-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">105</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">25</span>)) <span class="sc">+</span></span>
 <span id="cb59-21"><a href="#cb59-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="st">'Item'</span>, </span>
 <span id="cb59-22"><a href="#cb59-22" aria-hidden="true" tabindex="-1"></a>                     <span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">n.dodge =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
@@ -2579,7 +2583,7 @@ Figure&nbsp;16
 <span id="cb60-16"><a href="#cb60-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">9</span>),</span>
 <span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), </span>
 <span id="cb60-18"><a href="#cb60-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
-<span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">vjust =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb60-20"><a href="#cb60-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">105</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">25</span>)) <span class="sc">+</span></span>
 <span id="cb60-21"><a href="#cb60-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="st">'Item'</span>) <span class="sc">+</span></span>
 <span id="cb60-22"><a href="#cb60-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
@@ -2614,7 +2618,7 @@ Figure&nbsp;17
 <span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">ifelse</span>(Percent <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="st">"a"</span>,<span class="st">"b"</span>))) <span class="sc">+</span></span>
 <span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">9</span>),</span>
 <span id="cb61-12"><a href="#cb61-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
-<span id="cb61-13"><a href="#cb61-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.65</span>, <span class="at">vjust =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb61-13"><a href="#cb61-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb61-14"><a href="#cb61-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">105</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">25</span>)) <span class="sc">+</span></span>
 <span id="cb61-15"><a href="#cb61-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>() <span class="sc">+</span></span>
 <span id="cb61-16"><a href="#cb61-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
@@ -2636,43 +2640,553 @@ Figure&nbsp;18
 </div>
 </div>
 </div></div>
-<p>Compared to when we had 20 items, … create a summary table! And run more simulations tonight.</p>
+</section>
+<section id="summary-figure" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="summary-figure"><span class="header-section-number">7.3</span> Summary figure</h2>
+<div class="cell-container"><div class="cell-decorator"><pre>In [46]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>ifb20sum <span class="ot">&lt;-</span> ifb3_df <span class="sc">%&gt;%</span> </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>infit_diff <span class="sc">==</span> <span class="st">"no misfit"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item, <span class="at">.drop =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent =</span> <span class="fu">round</span>(n<span class="sc">/</span><span class="dv">500</span><span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samplesize =</span> <span class="fu">factor</span>(samplesize, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>),</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"n = 150"</span>,</span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 250"</span>,</span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 500"</span>,</span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 1000"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">item =</span> <span class="fu">factor</span>(item)) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>n) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">n_items =</span> <span class="dv">20</span>)</span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a>ifb40sum <span class="ot">&lt;-</span> ifb40_df <span class="sc">%&gt;%</span> </span>
+<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>infit_diff <span class="sc">==</span> <span class="st">"no misfit"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-19"><a href="#cb62-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item, <span class="at">.drop =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-20"><a href="#cb62-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent =</span> <span class="fu">round</span>(n<span class="sc">/</span><span class="dv">200</span><span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-21"><a href="#cb62-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb62-22"><a href="#cb62-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samplesize =</span> <span class="fu">factor</span>(samplesize, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>),</span>
+<span id="cb62-23"><a href="#cb62-23" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"n = 150"</span>,</span>
+<span id="cb62-24"><a href="#cb62-24" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 250"</span>,</span>
+<span id="cb62-25"><a href="#cb62-25" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 500"</span>,</span>
+<span id="cb62-26"><a href="#cb62-26" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 1000"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-27"><a href="#cb62-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">item =</span> <span class="fu">factor</span>(item)) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-28"><a href="#cb62-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>n) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-29"><a href="#cb62-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">n_items =</span> <span class="dv">40</span>)</span>
+<span id="cb62-30"><a href="#cb62-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-31"><a href="#cb62-31" aria-hidden="true" tabindex="-1"></a>ifb_k <span class="ot">&lt;-</span> <span class="fu">rbind</span>(ifb20sum,ifb40sum) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-32"><a href="#cb62-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">Method =</span> <span class="st">"Conditional infit"</span>)</span>
+<span id="cb62-33"><a href="#cb62-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-34"><a href="#cb62-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-35"><a href="#cb62-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-36"><a href="#cb62-36" aria-hidden="true" tabindex="-1"></a>ir20sum <span class="ot">&lt;-</span> ir3_df <span class="sc">%&gt;%</span> </span>
+<span id="cb62-37"><a href="#cb62-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-38"><a href="#cb62-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ir_padj <span class="sc">==</span> <span class="st">"sign. misfit"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-39"><a href="#cb62-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item, <span class="at">.drop =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-40"><a href="#cb62-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent =</span> n<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span><span class="dv">500</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-41"><a href="#cb62-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb62-42"><a href="#cb62-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">item =</span> <span class="fu">factor</span>(item)) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-43"><a href="#cb62-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samplesize =</span> <span class="fu">factor</span>(samplesize, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>,<span class="dv">2000</span>),</span>
+<span id="cb62-44"><a href="#cb62-44" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"n = 150"</span>,</span>
+<span id="cb62-45"><a href="#cb62-45" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 250"</span>,</span>
+<span id="cb62-46"><a href="#cb62-46" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 500"</span>,</span>
+<span id="cb62-47"><a href="#cb62-47" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 1000"</span>,</span>
+<span id="cb62-48"><a href="#cb62-48" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 2000"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-49"><a href="#cb62-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>n) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-50"><a href="#cb62-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">n_items =</span> <span class="dv">20</span>)</span>
+<span id="cb62-51"><a href="#cb62-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-52"><a href="#cb62-52" aria-hidden="true" tabindex="-1"></a>ir40sum <span class="ot">&lt;-</span> ir40_df <span class="sc">%&gt;%</span> </span>
+<span id="cb62-53"><a href="#cb62-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-54"><a href="#cb62-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ir_padj <span class="sc">==</span> <span class="st">"sign. misfit"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-55"><a href="#cb62-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item, <span class="at">.drop =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-56"><a href="#cb62-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent =</span> n<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span><span class="dv">500</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-57"><a href="#cb62-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb62-58"><a href="#cb62-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">item =</span> <span class="fu">factor</span>(item)) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-59"><a href="#cb62-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samplesize =</span> <span class="fu">factor</span>(samplesize, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>,<span class="dv">2000</span>),</span>
+<span id="cb62-60"><a href="#cb62-60" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"n = 150"</span>,</span>
+<span id="cb62-61"><a href="#cb62-61" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 250"</span>,</span>
+<span id="cb62-62"><a href="#cb62-62" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 500"</span>,</span>
+<span id="cb62-63"><a href="#cb62-63" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 1000"</span>,</span>
+<span id="cb62-64"><a href="#cb62-64" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 2000"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-65"><a href="#cb62-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>n) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-66"><a href="#cb62-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">n_items =</span> <span class="dv">40</span>)</span>
+<span id="cb62-67"><a href="#cb62-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-68"><a href="#cb62-68" aria-hidden="true" tabindex="-1"></a>ir_k <span class="ot">&lt;-</span> <span class="fu">rbind</span>(ir20sum,ir40sum) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-69"><a href="#cb62-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">Method =</span> <span class="st">"Item-restscore"</span>)</span>
+<span id="cb62-70"><a href="#cb62-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-71"><a href="#cb62-71" aria-hidden="true" tabindex="-1"></a>dfk2040 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(ifb_k,ir_k)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [47]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10 and 20 items separately with one misfitting item</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>ir10sum <span class="ot">&lt;-</span> ir10_df <span class="sc">%&gt;%</span> </span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ir_padj <span class="sc">==</span> <span class="st">"sign. misfit"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item, <span class="at">.drop =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent =</span> n<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span><span class="dv">500</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">item =</span> <span class="fu">factor</span>(item)) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samplesize =</span> <span class="fu">factor</span>(samplesize, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>),</span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"n = 150"</span>,</span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 250"</span>,</span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 500"</span>,</span>
+<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 1000"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>n) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">n_items =</span> <span class="dv">10</span>)</span>
+<span id="cb63-16"><a href="#cb63-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-17"><a href="#cb63-17" aria-hidden="true" tabindex="-1"></a>ir20sum2 <span class="ot">&lt;-</span> ir_results <span class="sc">%&gt;%</span> </span>
+<span id="cb63-18"><a href="#cb63-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(targeting <span class="sc">==</span> <span class="dv">0</span>,</span>
+<span id="cb63-19"><a href="#cb63-19" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>samplesize <span class="sc">==</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(targeting, samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-21"><a href="#cb63-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ir_padj <span class="sc">==</span> <span class="st">"sign. misfit"</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-22"><a href="#cb63-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item, <span class="at">.drop =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-23"><a href="#cb63-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent =</span> n<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span><span class="dv">1000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-24"><a href="#cb63-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb63-25"><a href="#cb63-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">item =</span> <span class="fu">factor</span>(item)) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-26"><a href="#cb63-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(targeting,n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-27"><a href="#cb63-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">samplesize =</span> <span class="fu">factor</span>(samplesize, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>,<span class="dv">2000</span>),</span>
+<span id="cb63-28"><a href="#cb63-28" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"n = 150"</span>,</span>
+<span id="cb63-29"><a href="#cb63-29" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 250"</span>,</span>
+<span id="cb63-30"><a href="#cb63-30" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 500"</span>,</span>
+<span id="cb63-31"><a href="#cb63-31" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 1000"</span>,</span>
+<span id="cb63-32"><a href="#cb63-32" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 2000"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-33"><a href="#cb63-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">n_items =</span> <span class="dv">20</span>)</span>
+<span id="cb63-34"><a href="#cb63-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-35"><a href="#cb63-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-36"><a href="#cb63-36" aria-hidden="true" tabindex="-1"></a>ifb10sum <span class="ot">&lt;-</span> ifb10_df <span class="sc">%&gt;%</span> </span>
+<span id="cb63-37"><a href="#cb63-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-38"><a href="#cb63-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>infit_diff <span class="sc">==</span> <span class="st">"no misfit"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-39"><a href="#cb63-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item, <span class="at">.drop =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-40"><a href="#cb63-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent =</span> <span class="fu">round</span>(n<span class="sc">/</span><span class="dv">200</span><span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-41"><a href="#cb63-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb63-42"><a href="#cb63-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samplesize =</span> <span class="fu">factor</span>(samplesize, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>),</span>
+<span id="cb63-43"><a href="#cb63-43" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"n = 150"</span>,</span>
+<span id="cb63-44"><a href="#cb63-44" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 250"</span>,</span>
+<span id="cb63-45"><a href="#cb63-45" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 500"</span>,</span>
+<span id="cb63-46"><a href="#cb63-46" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 1000"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-47"><a href="#cb63-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">item =</span> <span class="fu">factor</span>(item)) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-48"><a href="#cb63-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>n) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-49"><a href="#cb63-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">n_items =</span> <span class="dv">10</span>)</span>
+<span id="cb63-50"><a href="#cb63-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-51"><a href="#cb63-51" aria-hidden="true" tabindex="-1"></a>ifb20_1 <span class="ot">&lt;-</span> ifb <span class="sc">%&gt;%</span> </span>
+<span id="cb63-52"><a href="#cb63-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>infit_diff <span class="sc">==</span> <span class="st">"no misfit"</span>,</span>
+<span id="cb63-53"><a href="#cb63-53" aria-hidden="true" tabindex="-1"></a>         targeting <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-54"><a href="#cb63-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(samplesize <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>) <span class="sc">&amp;</span> sims <span class="sc">==</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-55"><a href="#cb63-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-56"><a href="#cb63-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item, <span class="at">.drop =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-57"><a href="#cb63-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent =</span> n<span class="sc">/</span><span class="dv">200</span><span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-58"><a href="#cb63-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb63-59"><a href="#cb63-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samplesize =</span> <span class="fu">factor</span>(samplesize, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>),</span>
+<span id="cb63-60"><a href="#cb63-60" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"n = 150"</span>,</span>
+<span id="cb63-61"><a href="#cb63-61" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 250"</span>,</span>
+<span id="cb63-62"><a href="#cb63-62" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 500"</span>,</span>
+<span id="cb63-63"><a href="#cb63-63" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 1000"</span>)),</span>
+<span id="cb63-64"><a href="#cb63-64" aria-hidden="true" tabindex="-1"></a>         <span class="at">item =</span> <span class="fu">factor</span>(item)) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-65"><a href="#cb63-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>n) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-66"><a href="#cb63-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">n_items =</span> <span class="dv">20</span>)</span>
+<span id="cb63-67"><a href="#cb63-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-68"><a href="#cb63-68" aria-hidden="true" tabindex="-1"></a>ifb20_2 <span class="ot">&lt;-</span> ifb <span class="sc">%&gt;%</span> </span>
+<span id="cb63-69"><a href="#cb63-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>infit_diff <span class="sc">==</span> <span class="st">"no misfit"</span>,</span>
+<span id="cb63-70"><a href="#cb63-70" aria-hidden="true" tabindex="-1"></a>         targeting <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-71"><a href="#cb63-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(samplesize <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">500</span>,<span class="dv">1000</span>) <span class="sc">&amp;</span> sims <span class="sc">==</span> <span class="dv">200</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-72"><a href="#cb63-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-73"><a href="#cb63-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item, <span class="at">.drop =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-74"><a href="#cb63-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent =</span> n<span class="sc">/</span><span class="dv">200</span><span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-75"><a href="#cb63-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb63-76"><a href="#cb63-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samplesize =</span> <span class="fu">factor</span>(samplesize, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>),</span>
+<span id="cb63-77"><a href="#cb63-77" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"n = 150"</span>,</span>
+<span id="cb63-78"><a href="#cb63-78" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 250"</span>,</span>
+<span id="cb63-79"><a href="#cb63-79" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 500"</span>,</span>
+<span id="cb63-80"><a href="#cb63-80" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"n = 1000"</span>)),</span>
+<span id="cb63-81"><a href="#cb63-81" aria-hidden="true" tabindex="-1"></a>         <span class="at">item =</span> <span class="fu">factor</span>(item)) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-82"><a href="#cb63-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>n) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-83"><a href="#cb63-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">n_items =</span> <span class="dv">20</span>)</span>
+<span id="cb63-84"><a href="#cb63-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-85"><a href="#cb63-85" aria-hidden="true" tabindex="-1"></a>dfk10 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(ifb10sum,ifb20_1,ifb20_2) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-86"><a href="#cb63-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">Method =</span> <span class="st">"Conditional infit"</span>)</span>
+<span id="cb63-87"><a href="#cb63-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-88"><a href="#cb63-88" aria-hidden="true" tabindex="-1"></a>dfk10_2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(ir10sum,ir20sum2) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-89"><a href="#cb63-89" aria-hidden="true" tabindex="-1"></a>        <span class="fu">add_column</span>(<span class="at">Method =</span> <span class="st">"Item-restscore"</span>)</span>
+<span id="cb63-90"><a href="#cb63-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-91"><a href="#cb63-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-92"><a href="#cb63-92" aria-hidden="true" tabindex="-1"></a>dfk10 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(dfk10,dfk10_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [48]:</pre></div><div id="cell-fig-comp10" class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>dfk10 <span class="sc">%&gt;%</span> </span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">item =</span> <span class="fu">as.numeric</span>(item)) <span class="sc">%&gt;%</span> </span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(item <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">9</span>),</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>samplesize <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"n = 2000"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">item =</span> <span class="fu">factor</span>(item, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">18</span>,<span class="dv">13</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Item 9 (location 0)"</span>,</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>                                                             <span class="st">"Item 18 (location -1)"</span>,</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>                                                             <span class="st">"Item 13 (location -2)"</span>),</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ordered =</span> T),</span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_items =</span> <span class="fu">factor</span>(n_items, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">20</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"10 items"</span>,<span class="st">"20 items"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> item, <span class="at">y =</span> Percent, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
+<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb64-14"><a href="#cb64-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(Percent,<span class="st">"%"</span>), <span class="at">y =</span> <span class="dv">8</span>), <span class="at">color =</span> <span class="st">"white"</span>,</span>
+<span id="cb64-15"><a href="#cb64-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb64-16"><a href="#cb64-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb64-17"><a href="#cb64-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize <span class="sc">~</span> n_items) <span class="sc">+</span></span>
+<span id="cb64-18"><a href="#cb64-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
+<span id="cb64-19"><a href="#cb64-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Detection rate in percent"</span>,</span>
+<span id="cb64-20"><a href="#cb64-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Detection rate for item-restscore and infit across sample sizes"</span>,</span>
+<span id="cb64-21"><a href="#cb64-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"One item misfitting with location = 0 logits compared to sample mean."</span>) <span class="sc">+</span></span>
+<span id="cb64-22"><a href="#cb64-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>, <span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb64-23"><a href="#cb64-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-comp10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comp10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-comp10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Figure&nbsp;19: Detection rate for item-restscore and infit for 10 items"><img src="index_files/figure-html/fig-comp10-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comp10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19: Detection rate for item-restscore and infit for 10 items
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [49]:</pre></div><div id="cell-fig-comp2040" class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>dfk2040 <span class="sc">%&gt;%</span> </span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">item =</span> <span class="fu">as.numeric</span>(item)) <span class="sc">%&gt;%</span> </span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(item <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">18</span>,<span class="dv">13</span>),</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>samplesize <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"n = 2000"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(samplesize) <span class="sc">%&gt;%</span> </span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">item =</span> <span class="fu">factor</span>(item, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">18</span>,<span class="dv">13</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Item 9 (location 0)"</span>,</span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>                                                          <span class="st">"Item 18 (location -1)"</span>,</span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>                                                          <span class="st">"Item 13 (location -2)"</span>),</span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ordered =</span> T),</span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_items =</span> <span class="fu">factor</span>(n_items, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">40</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"20 items"</span>,<span class="st">"40 items"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> item, <span class="at">y =</span> Percent, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
+<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb65-14"><a href="#cb65-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(Percent,<span class="st">"%"</span>), <span class="at">y =</span> <span class="dv">8</span>), <span class="at">color =</span> <span class="st">"white"</span>,</span>
+<span id="cb65-15"><a href="#cb65-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb65-16"><a href="#cb65-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb65-17"><a href="#cb65-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize <span class="sc">~</span> n_items) <span class="sc">+</span></span>
+<span id="cb65-18"><a href="#cb65-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
+<span id="cb65-19"><a href="#cb65-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Detection rate in percent"</span>,</span>
+<span id="cb65-20"><a href="#cb65-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Detection rate for item-restscore and infit across sample sizes and number of items"</span>,</span>
+<span id="cb65-21"><a href="#cb65-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Three items misfitting."</span>) <span class="sc">+</span></span>
+<span id="cb65-22"><a href="#cb65-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>, <span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb65-23"><a href="#cb65-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-comp2040" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comp2040-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-comp2040-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20" title="Figure&nbsp;20: Detection rate for item-restscore and infit for 20 and 40 items"><img src="index_files/figure-html/fig-comp2040-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comp2040-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20: Detection rate for item-restscore and infit for 20 and 40 items
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+<p><a href="#fig-comp10" class="quarto-xref">Figure&nbsp;19</a> and <a href="#fig-comp2040" class="quarto-xref">Figure&nbsp;20</a> summarize the findings from the two different comparisons of item numbers. Adding more items improves the detection rate substantially for both methods, particularly for smaller samples and the off-target items. It also results in a larger improvement for infit over item-restscore, especially for the n = 150 condition, but also the n = 250 condition for off-target items.</p>
 </section>
 </section>
 <section id="discussion" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Discussion</h1>
 <section id="limitations" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="limitations"><span class="header-section-number">8.1</span> Limitations</h2>
-<p>Number of items could be varied more. However, the results from Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span>, which use 10, 15, and 20 items, indicates small differences in critical value ranges. But this might not have implications for detection rate of misfitting items (we need the 40 items simulation and maybe 10 also?). Partial credit model for polytomous data would have been nice to also test. Although results regarding detection rate should generalize from RM to PCM, maybe the sample size in relation to number of items does not easily translate from the dichotomous case?</p>
+<p>Number of items could have been varied more and investigated further with more variation in sample sizes.</p>
+<p>Partial credit model for polytomous data would have been nice to also test. Although results regarding detection rate should generalize from RM to PCM, maybe the sample size in relation to number of items does not easily translate from the dichotomous case?</p>
 </section>
 </section>
 <section id="conclusion" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Conclusion</h1>
 <p>These findings make a good argument for removing one item at a time when the analysis indicates misfitting items, starting with the most underfitting item. This is especially relevant for <em>n</em> &gt;= 500 and when misfitting items are located close to the sample mean.</p>
-<div class="cell-container"><div class="cell-decorator"><pre>In [46]:</pre></div><div id="cell-fig-loadloc" class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">RIloadLoc</span>(simdata3[<span class="dv">1</span><span class="sc">:</span><span class="dv">400</span>,], <span class="at">model =</span> <span class="st">"RM"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [50]:</pre></div><div id="cell-fig-loadloc" class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">RIloadLoc</span>(simdata3[<span class="dv">1</span><span class="sc">:</span><span class="dv">400</span>,], <span class="at">model =</span> <span class="st">"RM"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-loadloc" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-loadloc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="index_files/figure-html/fig-loadloc-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Figure&nbsp;19: "><img src="index_files/figure-html/fig-loadloc-1.png" id="fig-loadloc" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-loadloc-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21" title="Figure&nbsp;21: "><img src="index_files/figure-html/fig-loadloc-1.png" id="fig-loadloc" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-loadloc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;19
+Figure&nbsp;21
 </figcaption>
 </figure>
 </div>
 </div>
 </div></div>
-<p>Assessing item fit and dimensionality should be done using multiple methods. Item fit and item-restscore should be used in parallel, while also examining residual patterns by reviewing standardized factor loadings on the first residual contrast (see <a href="#fig-loadloc" class="quarto-xref">Figure&nbsp;19</a> for an example) as well as Yen’s Q3 residual correlations.</p>
-<p>What does this look like with a small sample?</p>
-<div class="cell-container"><div class="cell-decorator"><pre>In [47]:</pre></div><div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RIloadLoc(simdata3[1:150,], model = "RM")</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co"># simfit2 &lt;- RIgetfit(simdata3[1:150,], iterations = 100, cpu = 8)</span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="co"># RIitemfit(simdata3[1:150,], simfit2)</span></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co"># RIgetfitPlot(simfit2, simdata3[1:150,])</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Assessing item fit and dimensionality should be done using multiple methods. Item fit and item-restscore should be used in parallel, while also examining residual patterns by reviewing standardized factor loadings on the first residual contrast (see <a href="#fig-loadloc" class="quarto-xref">Figure&nbsp;21</a> for an example) as well as Yen’s Q3 residual correlations.</p>
+<p>What does this look like with a small sample (<a href="#fig-loadloc2" class="quarto-xref">Figure&nbsp;22</a>) and what is the item fit in the same small sample (<a href="#tbl-itemfit2" class="quarto-xref">Table&nbsp;6</a> and <a href="#fig-getfit2" class="quarto-xref">Figure&nbsp;23</a>)?</p>
+<div class="cell-container"><div class="cell-decorator"><pre>In [51]:</pre></div><div id="cell-fig-loadloc2" class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">RIloadLoc</span>(simdata3[<span class="dv">1</span><span class="sc">:</span><span class="dv">150</span>,], <span class="at">model =</span> <span class="st">"RM"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-loadloc2" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-loadloc2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-loadloc2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22" title="Figure&nbsp;22: "><img src="index_files/figure-html/fig-loadloc2-1.png" id="fig-loadloc2" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-loadloc2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;22
+</figcaption>
+</figure>
+</div>
+</div>
 </div></div>
-<p>While the simulations in this paper have used dichotomous data, all functions evaluated in this paper also work with polytomous data using the Rasch Partial Credit Model.</p>
+<div class="cell-container"><div class="cell-decorator"><pre>In [52]:</pre></div><div class="cell">
+
+<div class="cell-container"><div class="cell-decorator"><pre>In [53]:</pre></div><div><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>simfit2 <span class="ot">&lt;-</span> <span class="fu">RIgetfit</span>(simdata3[<span class="dv">1</span><span class="sc">:</span><span class="dv">150</span>,], <span class="at">iterations =</span> <span class="dv">100</span>, <span class="at">cpu =</span> <span class="dv">8</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">RIitemfit</span>(simdata3[<span class="dv">1</span><span class="sc">:</span><span class="dv">150</span>,], simfit2, <span class="at">output =</span> <span class="st">"quarto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div><div id="tbl-itemfit2" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-itemfit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6
+</figcaption>
+<div aria-describedby="tbl-itemfit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 10%">
+<col style="width: 19%">
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Item</th>
+<th style="text-align: right;">InfitMSQ</th>
+<th style="text-align: left;">Infit thresholds</th>
+<th style="text-align: right;">OutfitMSQ</th>
+<th style="text-align: left;">Outfit thresholds</th>
+<th style="text-align: left;">Infit diff</th>
+<th style="text-align: left;">Outfit diff</th>
+<th style="text-align: right;">Location</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">V1</td>
+<td style="text-align: right;">0.996</td>
+<td style="text-align: left;">[0.864, 1.242]</td>
+<td style="text-align: right;">0.781</td>
+<td style="text-align: left;">[0.483, 5.092]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-2.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V2</td>
+<td style="text-align: right;">0.905</td>
+<td style="text-align: left;">[0.862, 1.208]</td>
+<td style="text-align: right;">0.890</td>
+<td style="text-align: left;">[0.78, 1.409]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-2.01</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V3</td>
+<td style="text-align: right;">0.937</td>
+<td style="text-align: left;">[0.811, 1.179]</td>
+<td style="text-align: right;">1.127</td>
+<td style="text-align: left;">[0.67, 1.526]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">0.32</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V4</td>
+<td style="text-align: right;">0.996</td>
+<td style="text-align: left;">[0.852, 1.179]</td>
+<td style="text-align: right;">0.769</td>
+<td style="text-align: left;">[0.719, 1.71]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">1.94</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V5</td>
+<td style="text-align: right;">0.985</td>
+<td style="text-align: left;">[0.851, 1.182]</td>
+<td style="text-align: right;">0.949</td>
+<td style="text-align: left;">[0.653, 2.237]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">1.09</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V6</td>
+<td style="text-align: right;">0.974</td>
+<td style="text-align: left;">[0.824, 1.147]</td>
+<td style="text-align: right;">1.059</td>
+<td style="text-align: left;">[0.742, 1.547]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">1.57</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V7</td>
+<td style="text-align: right;">0.999</td>
+<td style="text-align: left;">[0.817, 1.206]</td>
+<td style="text-align: right;">1.035</td>
+<td style="text-align: left;">[0.759, 1.327]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">0.66</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V8</td>
+<td style="text-align: right;">1.014</td>
+<td style="text-align: left;">[0.832, 1.187]</td>
+<td style="text-align: right;">1.023</td>
+<td style="text-align: left;">[0.589, 1.924]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-1.20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V9</td>
+<td style="text-align: right;">1.156</td>
+<td style="text-align: left;">[0.806, 1.172]</td>
+<td style="text-align: right;">1.224</td>
+<td style="text-align: left;">[0.573, 1.701]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-0.43</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V10</td>
+<td style="text-align: right;">0.950</td>
+<td style="text-align: left;">[0.812, 1.196]</td>
+<td style="text-align: right;">0.887</td>
+<td style="text-align: left;">[0.683, 1.735]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-0.08</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V11</td>
+<td style="text-align: right;">0.982</td>
+<td style="text-align: left;">[0.788, 1.256]</td>
+<td style="text-align: right;">1.027</td>
+<td style="text-align: left;">[0.719, 1.4]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-1.24</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V12</td>
+<td style="text-align: right;">1.156</td>
+<td style="text-align: left;">[0.86, 1.152]</td>
+<td style="text-align: right;">1.342</td>
+<td style="text-align: left;">[0.639, 1.634]</td>
+<td style="text-align: left;">0.004</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">1.43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V13</td>
+<td style="text-align: right;">1.055</td>
+<td style="text-align: left;">[0.846, 1.153]</td>
+<td style="text-align: right;">1.379</td>
+<td style="text-align: left;">[0.687, 1.721]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-2.01</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V14</td>
+<td style="text-align: right;">0.981</td>
+<td style="text-align: left;">[0.821, 1.242]</td>
+<td style="text-align: right;">1.058</td>
+<td style="text-align: left;">[0.741, 1.419]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">0.45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V15</td>
+<td style="text-align: right;">0.948</td>
+<td style="text-align: left;">[0.774, 1.188]</td>
+<td style="text-align: right;">0.887</td>
+<td style="text-align: left;">[0.548, 3.295]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">0.23</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V16</td>
+<td style="text-align: right;">0.864</td>
+<td style="text-align: left;">[0.811, 1.17]</td>
+<td style="text-align: right;">0.875</td>
+<td style="text-align: left;">[0.71, 1.508]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">1.88</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V17</td>
+<td style="text-align: right;">0.967</td>
+<td style="text-align: left;">[0.803, 1.244]</td>
+<td style="text-align: right;">0.791</td>
+<td style="text-align: left;">[0.589, 3.242]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">2.06</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V18</td>
+<td style="text-align: right;">1.143</td>
+<td style="text-align: left;">[0.831, 1.258]</td>
+<td style="text-align: right;">1.172</td>
+<td style="text-align: left;">[0.763, 1.672]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-1.09</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V19</td>
+<td style="text-align: right;">0.887</td>
+<td style="text-align: left;">[0.796, 1.203]</td>
+<td style="text-align: right;">0.845</td>
+<td style="text-align: left;">[0.638, 1.786]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">0.23</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V20</td>
+<td style="text-align: right;">0.995</td>
+<td style="text-align: left;">[0.853, 1.182]</td>
+<td style="text-align: right;">0.925</td>
+<td style="text-align: left;">[0.764, 1.522]</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: left;">no misfit</td>
+<td style="text-align: right;">-1.24</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div></div></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [54]:</pre></div><div id="cell-fig-getfit2" class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">RIgetfitPlot</span>(simfit2, simdata3[<span class="dv">1</span><span class="sc">:</span><span class="dv">150</span>,])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-getfit2" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-getfit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-getfit2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23" title="Figure&nbsp;23: "><img src="index_files/figure-html/fig-getfit2-1.png" id="fig-getfit2" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-getfit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;23
+</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+<p>While the simulations in this paper have all used dichotomous data, all functions evaluated in this paper also work with polytomous data using the Rasch Partial Credit Model.</p>
 </section>
 <section id="references" class="level1 unnumbered">
 <h1 class="unnumbered">References</h1>
@@ -2691,6 +3205,9 @@ Kreiner, Svend. 2011. <span>“A <span>Note</span> on <span>Item</span>–<span>
 </div>
 <div id="ref-mair_extended_2007" class="csl-entry" role="listitem">
 Mair, Patrick, and Reinhold Hatzinger. 2007. <span>“Extended <span>Rasch</span> <span>Modeling</span>: <span>The</span> <span class="nocase">eRm</span> <span>Package</span> for the <span>Application</span> of <span>IRT</span> <span>Models</span> in <span>R</span>.”</span> <em>Journal of Statistical Software</em> 20 (1): 1–20. <a href="https://doi.org/10.18637/jss.v020.i09">https://doi.org/10.18637/jss.v020.i09</a>.
+</div>
+<div id="ref-mcneish_direct_2024" class="csl-entry" role="listitem">
+McNeish, Daniel, and Melissa G. Wolf. 2024. <span>“Direct <span>Discrepancy</span> <span>Dynamic</span> <span>Fit</span> <span>Index</span> <span>Cutoffs</span> for <span>Arbitrary</span> <span>Covariance</span> <span>Structure</span> <span>Models</span>.”</span> <em>Structural Equation Modeling: A Multidisciplinary Journal</em> 31 (5): 835–62. <a href="https://doi.org/10.1080/10705511.2024.2308005">https://doi.org/10.1080/10705511.2024.2308005</a>.
 </div>
 <div id="ref-mueller_iarm_2022" class="csl-entry" role="listitem">
 Mueller, Marianne, and Pedro Henrique Ribeiro Santiago. 2022. <span>“Iarm: <span>Item</span> <span>Analysis</span> in <span>Rasch</span> <span>Models</span>.”</span> <a href="https://cran.r-project.org/web/packages/iarm/index.html">https://cran.r-project.org/web/packages/iarm/index.html</a>.
@@ -2720,8 +3237,8 @@ Warm, Thomas A. 1989. <span>“Weighted Likelihood Estimation of Ability in Item
 <section id="session-info" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="session-info"><span class="header-section-number">10.1</span> Session info</h2>
 <p>This documents the specific R packages and versions used in this study.</p>
-<div class="cell-container"><div class="cell-decorator"><pre>In [48]:</pre></div><div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [55]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.2 (2024-10-31)
 Platform: aarch64-apple-darwin20
