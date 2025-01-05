@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Magnus Johansson">
-<meta name="dcterms.date" content="2025-01-04">
+<meta name="dcterms.date" content="2025-01-05">
 <meta name="keywords" content="Rasch, Psychometrics, Item fit, Simulation">
 
 <title>Detecting item misfit in Rasch models</title>
@@ -95,10 +95,10 @@ window.Quarto = {
 ">
 <meta name="citation_keywords" content="Rasch,Psychometrics,Item fit,Simulation">
 <meta name="citation_author" content="Magnus Johansson">
-<meta name="citation_publication_date" content="2025-01-04">
-<meta name="citation_cover_date" content="2025-01-04">
+<meta name="citation_publication_date" content="2025-01-05">
+<meta name="citation_cover_date" content="2025-01-05">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-01-04">
+<meta name="citation_online_date" content="2025-01-05">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=Measures of Association for Cross Classifications;,citation_abstract=When populations are cross-classified with respect to two or more classifications or polytomies, questions often arise about the degree of association existing between the several polytomies. Most of the traditional measures or indices of association are based upon the standard chi-square statistic or on an assumption of underlying joint normality. In this paper a number of alternative measures are considered, almost all based upon a probabilistic model for activity to which the cross-classification may typically lead. Only the case in which the population is completely known is considered, so no question of sampling or measurement error appears. We hope, however, to publish before long some approximate distributions for sample estimators of the measures we propose, and approximate tests of hypotheses. Our major theme is that the measures of association used by an empirical investigator should not be blindly chosen because of tradition and convention only, although these factors may properly be given some weight, but should be constructed in a manner having operational meaning within the context of the particular problem.;,citation_author=Leo A. Goodman;,citation_author=William H. Kruskal;,citation_publication_date=1954;,citation_cover_date=1954;,citation_year=1954;,citation_fulltext_html_url=https://www.jstor.org/stable/2281536;,citation_issue=268;,citation_doi=10.2307/2281536;,citation_issn=0162-1459;,citation_volume=49;,citation_journal_title=Journal of the American Statistical Association;">
 <meta name="citation_reference" content="citation_title=Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing;,citation_abstract=The common approach to the multiplicity problem calls for controlling the familywise error rate (FWER). This approach, though, has faults, and we point out a few. A different approach to problems of multiple significance testing is presented. It calls for controlling the expected proportion of falsely rejected hypotheses — the false discovery rate. This error rate is equivalent to the FWER when all hypotheses are true but is smaller otherwise. Therefore, in problems where the control of the false discovery rate rather than that of the FWER is desired, there is potential for a gain in power. A simple sequential Bonferronitype procedure is proved to control the false discovery rate for independent test statistics, and a simulation study shows that the gain in power is substantial. The use of the new procedure and the appropriateness of the criterion are illustrated with examples.;,citation_author=Yoav Benjamini;,citation_author=Yosef Hochberg;,citation_publication_date=1995-01;,citation_cover_date=1995-01;,citation_year=1995;,citation_fulltext_html_url=https://doi.org/10.1111/j.2517-6161.1995.tb02031.x;,citation_issue=1;,citation_doi=10.1111/j.2517-6161.1995.tb02031.x;,citation_issn=0035-9246;,citation_volume=57;,citation_journal_title=Journal of the Royal Statistical Society: Series B (Methodological);">
@@ -146,7 +146,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">January 4, 2025</p>
+              <p class="date">January 5, 2025</p>
             </div>
           </div>
           
@@ -360,13 +360,13 @@ Figure&nbsp;1: Distribution of simulation based item fit and estimated item fit 
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="infit"><span class="header-section-number">3.1.1</span> Infit</h3>
 <div id="cell-fig-ifb0" class="cell">
 <div class="cell-output-display">
-<div id="fig-ifb0" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-ifb0" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ifb0-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-ifb0-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: "><img src="index_files/figure-html/fig-ifb0-1.png" id="fig-ifb0" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-ifb0-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Conditional infit detection rate (misfit item at 0 logits)"><img src="index_files/figure-html/fig-ifb0-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ifb0-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ifb0-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Conditional infit detection rate (misfit item at 0 logits)
 </figcaption>
 </figure>
 </div>
@@ -375,13 +375,13 @@ Figure&nbsp;2
 <p><a href="#fig-ifb0" class="quarto-xref">Figure&nbsp;2</a> shows the detection rate when the misfitting item is located at the sample mean. Detection rate is highest for the condition with 100 iterations with sample size 100 and 250, but it also shows higher levels of false positives when sample size increases to 500 or more.</p>
 <div id="cell-fig-ifb1" class="cell">
 <div class="cell-output-display">
-<div id="fig-ifb1" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-ifb1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ifb1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-ifb1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: "><img src="index_files/figure-html/fig-ifb1-1.png" id="fig-ifb1" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-ifb1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: Conditional infit detection rate (misfit item at -1 logits)"><img src="index_files/figure-html/fig-ifb1-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ifb1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ifb1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Conditional infit detection rate (misfit item at -1 logits)
 </figcaption>
 </figure>
 </div>
@@ -390,13 +390,13 @@ Figure&nbsp;3
 <p>When the misfitting item is offset in targeting by -1 logits compared to the sample mean (see <a href="#fig-ifb1" class="quarto-xref">Figure&nbsp;3</a>), the smallest sample size has less power to detect misfit compared to the on-target misfitting item. There are lower rates of false positives across all sample sizes and iterations.</p>
 <div id="cell-fig-ifb2" class="cell">
 <div class="cell-output-display">
-<div id="fig-ifb2" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-ifb2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ifb2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-ifb2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: "><img src="index_files/figure-html/fig-ifb2-1.png" id="fig-ifb2" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-ifb2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Conditional infit detection rate (misfit item at -2 logits)"><img src="index_files/figure-html/fig-ifb2-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ifb2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ifb2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Conditional infit detection rate (misfit item at -2 logits)
 </figcaption>
 </figure>
 </div>
@@ -408,13 +408,13 @@ Figure&nbsp;4
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="outfit"><span class="header-section-number">3.1.2</span> Outfit</h3>
 <div id="cell-fig-ifb0out" class="cell">
 <div class="cell-output-display">
-<div id="fig-ifb0out" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-ifb0out" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ifb0out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-ifb0out-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: "><img src="index_files/figure-html/fig-ifb0out-1.png" id="fig-ifb0out" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-ifb0out-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: Conditional outfit detection rate (misfit item at 0 logits)"><img src="index_files/figure-html/fig-ifb0out-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ifb0out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ifb0out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Conditional outfit detection rate (misfit item at 0 logits)
 </figcaption>
 </figure>
 </div>
@@ -422,13 +422,13 @@ Figure&nbsp;5
 </div>
 <div id="cell-fig-ifb1out" class="cell">
 <div class="cell-output-display">
-<div id="fig-ifb1out" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-ifb1out" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ifb1out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-ifb1out-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;6: "><img src="index_files/figure-html/fig-ifb1out-1.png" id="fig-ifb1out" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-ifb1out-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;6: Conditional outfit detection rate (misfit item at -1 logits)"><img src="index_files/figure-html/fig-ifb1out-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ifb1out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ifb1out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Conditional outfit detection rate (misfit item at -1 logits)
 </figcaption>
 </figure>
 </div>
@@ -436,24 +436,24 @@ Figure&nbsp;6
 </div>
 <div id="cell-fig-ifb2out" class="cell">
 <div class="cell-output-display">
-<div id="fig-ifb2out" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-ifb2out" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ifb2out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-ifb2out-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;7: "><img src="index_files/figure-html/fig-ifb2out-1.png" id="fig-ifb2out" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-ifb2out-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;7: Conditional outfit detection rate (misfit item at -2 logits)"><img src="index_files/figure-html/fig-ifb2out-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ifb2out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ifb2out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Conditional outfit detection rate (misfit item at -2 logits)
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>As shown in <a href="#fig-ifb0out" class="quarto-xref">Figure&nbsp;5</a>, <a href="#fig-ifb1out" class="quarto-xref">Figure&nbsp;6</a>, and <a href="#fig-ifb2out" class="quarto-xref">Figure&nbsp;7</a>, outfit is performing much worse than infit across the board.</p>
+<p>As shown in <a href="#fig-ifb0out" class="quarto-xref">Figure&nbsp;5</a>, <a href="#fig-ifb1out" class="quarto-xref">Figure&nbsp;6</a>, and <a href="#fig-ifb2out" class="quarto-xref">Figure&nbsp;7</a>, outfit is performing worse than infit across the board.</p>
 </section>
 <section id="comments" class="level3" data-number="3.1.3">
 <h3 data-number="3.1.3" class="anchored" data-anchor-id="comments"><span class="header-section-number">3.1.3</span> Comments</h3>
-<p>Based on these simulation, it seems reasonable to recommend the use of infit in determining item fit over outfit. The performance of outfit calls to question whether it is useful at all.</p>
-<p>Regarding infit and the use of parametric bootstrapping with <code>RIgetfit()</code>, it looks like 100 iterations are to recommend to determine cutoff values when the sample size is 250 or lower, while 200 or 400 iterations reduce the risk for false positives at sample sizes of 500 or larger. False positives are found at sample sizes 500 and 1000 only. The risk for false positives is notably higher when the misfitting item is located at the sample mean compared to when the misfitting item is off-target by -1 logits or more.</p>
+<p>Based on these simulation, it is highly recommended to use infit over outfit in assessing item fit. The performance of outfit calls to question whether it is useful at all for detecting item misfit.</p>
+<p>Regarding infit and the use of parametric bootstrapping with the function <code>RIgetfit()</code>, it looks like 100 iterations are to recommend to determine cutoff values when the sample size is 250 or lower, while 200 or 400 iterations reduce the risk for false positives at sample sizes of 500 or larger. False positives are found at sample sizes 500 and 1000 only. The risk for false positives is notably higher when the misfitting item is located at the sample mean compared to when the misfitting item is off-target by -1 logits or more.</p>
 </section>
 </section>
 </section>
@@ -464,56 +464,55 @@ Figure&nbsp;7
 <h2 data-number="4.1" class="anchored" data-anchor-id="results-1"><span class="header-section-number">4.1</span> Results</h2>
 <div id="cell-fig-itemrestscore1" class="cell">
 <div class="cell-output-display">
-<div id="fig-itemrestscore1" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-itemrestscore1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-itemrestscore1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-itemrestscore1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;8: "><img src="index_files/figure-html/fig-itemrestscore1-1.png" id="fig-itemrestscore1" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-itemrestscore1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;8: Item-restscore detection rate across targeting and sample size"><img src="index_files/figure-html/fig-itemrestscore1-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-itemrestscore1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-itemrestscore1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Item-restscore detection rate across targeting and sample size
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>This simulation includes an additional condition with 100 respondents, which results in significantly lower detection rates than with 150 respondents. Compared to infit at 250 respondents, item-restscore has detection rates of 95.2%, 90.9%, and 62.4% for targeting 0, -1, and -2, while infit has 96.5%, 96.5%, and 71%. For sample size 500 and 1000, performance is similar, including the increased tendency for false positives at n = 1000.</p>
-<p>Similarly to infit, item-restscore has decreased detection rate for off-target misfitting items. The false positive rate is lower for item-restscore than infit for sample sizes below 1000.</p>
+<p>This simulation includes an additional condition with 100 respondents, which results in significantly lower detection rates compared to n = 150. Compared to infit at 250 respondents, item-restscore has detection rates of 95.2%, 90.9%, and 62.4% for targeting 0, -1, and -2, while infit has 96.5%, 96.5%, and 71%. For sample size 500 and 1000, detection rate is similar, including the increased tendency for false positives at n = 1000. The false positive rate is lower for item-restscore than infit for sample sizes below 1000.</p>
 </section>
 </section>
 <section id="study-3-comparing-infit-and-item-restscore" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Study 3: Comparing infit and item-restscore</h1>
-<p>We will now compare the performance of infit and item-restscore when all three items are misfitting at the same time. This simulation will also include a condition with 2000 respondents, to examine if the false positive rate increases with more respondents. For infit, we will only use 200 iterations with <code>RIgetfit()</code> since that condition seemed to strike a balance between detection rate and false positives.</p>
+<p>We will now compare the performance of infit and item-restscore when all three items are misfitting at the same time. This simulation will also include a condition with 2000 respondents, to examine if the false positive rate increases with more respondents. For infit, we will only use 200 iterations with <code>RIgetfit()</code> since that condition seemed to strike a balance between detection rate and false positives. Outfit is also included to see if it performs as bad as with one misfitting item.</p>
 <section id="results-2" class="level3" data-number="5.0.1">
 <h3 data-number="5.0.1" class="anchored" data-anchor-id="results-2"><span class="header-section-number">5.0.1</span> Results</h3>
-<div id="cell-fig-ifb3" class="cell">
-<div class="cell-output-display">
-<div id="fig-ifb3" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ifb3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-ifb3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;9: "><img src="index_files/figure-html/fig-ifb3-1.png" id="fig-ifb3" class="img-fluid figure-img" width="672"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ifb3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
 <div id="cell-fig-ifb3out" class="cell">
 <div class="cell-output-display">
-<div id="fig-ifb3out" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-ifb3out" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ifb3out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-ifb3out-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;10: "><img src="index_files/figure-html/fig-ifb3out-1.png" id="fig-ifb3out" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-ifb3out-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;9: Conditional outfit detection rate with three misfitting items"><img src="index_files/figure-html/fig-ifb3out-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ifb3out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ifb3out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Conditional outfit detection rate with three misfitting items
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Looking at the performance of infit with three misfitting items (<a href="#fig-ifb3" class="quarto-xref">Figure&nbsp;9</a>), we can see that the detection rate is markedly worse for item 13 (targeting -1 logits) in sample sizes 500 and below, compared to when single items were misfitting. The false positive rate has increased for sample size of 1000 and we can see it escalate when n = 2000. Outfit (<a href="#fig-ifb3out" class="quarto-xref">Figure&nbsp;10</a>) again performs worse than infit.</p>
+<div id="cell-fig-ifb3" class="cell">
+<div class="cell-output-display">
+<div id="fig-ifb3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ifb3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-ifb3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;10: Conditional infit detection rate with three misfitting items"><img src="index_files/figure-html/fig-ifb3-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ifb3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Conditional infit detection rate with three misfitting items
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Looking at the performance of infit with three misfitting items (<a href="#fig-ifb3" class="quarto-xref">Figure&nbsp;10</a>), we can see that the detection rate is markedly worse for item 13 (targeting -2 logits) in sample sizes 500 and below, compared to when single items were misfitting. The false positive rate has increased for sample size of 1000 and we can see it increase strongly at n = 2000. Outfit (<a href="#fig-ifb3out" class="quarto-xref">Figure&nbsp;9</a>) again performs worse than infit.</p>
 <div id="cell-fig-itemrestscore2" class="cell">
 <div class="cell-output-display">
 <div id="fig-itemrestscore2" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
@@ -528,127 +527,147 @@ Figure&nbsp;11
 </div>
 </div>
 </div>
-<div class="cell">
-<div id="tbl-overunder" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<div id="cell-fig-comp1" class="cell">
+<div class="cell-output-display">
+<div id="fig-comp1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-comp1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;12: Detection rate for item-restscore compared to infit"><img src="index_files/figure-html/fig-comp1-1.png" class="img-fluid figure-img" width="480"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: Detection rate for item-restscore compared to infit
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Item-restscore (see <a href="#fig-itemrestscore2" class="quarto-xref">Figure&nbsp;11</a>) shows comparable detection rate to infit and higher levels of false positives. A comparison is made between the two in <a href="#fig-comp1" class="quarto-xref">Figure&nbsp;12</a>, where item-restscore is performing better than infit at detecting the -2 logits off-target item at n = 250, and better across all items for n = 500 and n = 1000. Infit performs better for samples n = 150 and n = 250 (except the item with location -2 logits).</p>
+<div class="cell" data-tbl-colwidths="[60,40]">
+<div id="tbl-overunder" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-colwidths="[60,40]">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-overunder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-overunder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Item-restscore summary results across all sample sizes
 </figcaption>
 <div aria-describedby="tbl-overunder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment caption-top table table-sm table-striped small">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 28%">
+<col style="width: 28%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: right;">Item</th>
 <th style="text-align: left;">Type of misfit</th>
-<th style="text-align: right;">n</th>
+<th style="text-align: right;">Percent</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">299</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">underfit</td>
+<td style="text-align: right;">85.28</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">underfit</td>
+<td style="text-align: right;">78.96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">underfit</td>
+<td style="text-align: right;">63.80</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">520</td>
+<td style="text-align: right;">20.80</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">224</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">181</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">298</td>
-</tr>
-<tr class="even">
 <td style="text-align: right;">6</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">475</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">7</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">313</td>
+<td style="text-align: right;">19.00</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">8</td>
+<td style="text-align: right;">20</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">382</td>
+<td style="text-align: right;">15.48</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">9</td>
-<td style="text-align: left;">underfit</td>
-<td style="text-align: right;">2132</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">15.28</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">10</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">365</td>
+<td style="text-align: right;">14.60</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">11</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">326</td>
+<td style="text-align: right;">13.04</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">12</td>
+<td style="text-align: right;">7</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">149</td>
+<td style="text-align: right;">12.52</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">12</td>
-<td style="text-align: left;">underfit</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">13</td>
-<td style="text-align: left;">underfit</td>
-<td style="text-align: right;">1595</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">14</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">182</td>
-</tr>
-<tr class="even">
 <td style="text-align: right;">15</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">313</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">16</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">278</td>
+<td style="text-align: right;">12.52</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">17</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">129</td>
+<td style="text-align: right;">11.96</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">18</td>
-<td style="text-align: left;">underfit</td>
-<td style="text-align: right;">1974</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">11.92</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">11.12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">8.96</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">7.28</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">7.24</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">5.96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">5.16</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">19</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">31</td>
+<td style="text-align: right;">1.24</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">20</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">387</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">underfit</td>
+<td style="text-align: right;">0.08</td>
 </tr>
 </tbody>
 </table>
@@ -657,21 +676,26 @@ Table&nbsp;2
 </figure>
 </div>
 </div>
-<p>Item-restscore has higher detection rate than infit (see <a href="#fig-itemrestscore2" class="quarto-xref">Figure&nbsp;11</a>), but also higher levels of false positives. Reviewing the type of misfit identified by item-restscore (see <a href="#tbl-overunder" class="quarto-xref">Table&nbsp;2</a>), the false positives are all overfitting the Rasch model, except for two instances indicating underfit for item 12. Items 9, 13, and 18, that were simulated to be misfitting due to loading on a separate dimension, are as expected showing underfit to the Rasch model.</p>
+<p>Reviewing the type of misfit identified by item-restscore (see <a href="#tbl-overunder" class="quarto-xref">Table&nbsp;2</a>), the false positives are all overfitting the Rasch model, except for two instances (out of 2500) indicating underfit for item 12. Items 9, 13, and 18, that were simulated to be misfitting due to loading on a separate dimension, are as expected showing underfit to the Rasch model.</p>
 </section>
 </section>
 <section id="study-4-bootstrapped-item-restscore" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Study 4: Bootstrapped item-restscore</h1>
 <p>For our final set of simulations, we will use a non-parametric bootstrap procedure with item-restscore. The difference from the parametric bootstrap is that the non-parametric bootstrap samples with replacement directly from the observed response data. First, based on the above problematic sample size of 2000 when three items are misfitting, we will use the bootstrap function to sample with replacement using n = 800 and 250 bootstrap samples. The function <code>RIbootRestscore()</code> from the <code>easyRasch</code> package will be used.</p>
-<div class="cell">
-<div id="tbl-bootir" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<div class="cell" data-tbl-colwidths="[60,40]">
+<div id="tbl-bootir" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-colwidths="[60,40]">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-bootir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;3: Example output from <code>RIbootRestscore()</code>
 </figcaption>
 <div aria-describedby="tbl-bootir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 28%">
+<col style="width: 28%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Item</th>
@@ -681,93 +705,93 @@ Table&nbsp;3: Example output from <code>RIbootRestscore()</code>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">V18</td>
-<td style="text-align: left;">underfit</td>
-<td style="text-align: right;">100.0</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">V9</td>
 <td style="text-align: left;">underfit</td>
 <td style="text-align: right;">100.0</td>
 </tr>
+<tr class="even">
+<td style="text-align: left;">V18</td>
+<td style="text-align: left;">underfit</td>
+<td style="text-align: right;">99.6</td>
+</tr>
 <tr class="odd">
 <td style="text-align: left;">V13</td>
 <td style="text-align: left;">underfit</td>
-<td style="text-align: right;">85.6</td>
+<td style="text-align: right;">83.2</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">V14</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">42.4</td>
+<td style="text-align: right;">42.8</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">V6</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">40.0</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">V10</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">37.2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V12</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">25.6</td>
+<td style="text-align: right;">38.4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">V16</td>
+<td style="text-align: left;">V6</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">20.8</td>
+<td style="text-align: right;">32.0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">V7</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">20.4</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">V20</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">20.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V2</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">14.0</td>
+<td style="text-align: right;">31.2</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">V7</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">26.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V16</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">21.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V12</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">17.6</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">V5</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">13.6</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V3</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">10.8</td>
+<td style="text-align: right;">17.6</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">V2</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">16.8</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">V8</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">10.0</td>
+<td style="text-align: right;">8.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V3</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">7.6</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">V1</td>
 <td style="text-align: left;">overfit</td>
-<td style="text-align: right;">2.8</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">V19</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">2.4</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V4</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">1.2</td>
+<td style="text-align: right;">2.0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">V17</td>
 <td style="text-align: left;">underfit</td>
+<td style="text-align: right;">2.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V11</td>
+<td style="text-align: left;">overfit</td>
+<td style="text-align: right;">0.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V4</td>
+<td style="text-align: left;">overfit</td>
 <td style="text-align: right;">0.8</td>
 </tr>
 <tr class="odd">
@@ -776,17 +800,12 @@ Table&nbsp;3: Example output from <code>RIbootRestscore()</code>
 <td style="text-align: right;">0.4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">V15</td>
-<td style="text-align: left;">underfit</td>
+<td style="text-align: left;">V19</td>
+<td style="text-align: left;">overfit</td>
 <td style="text-align: right;">0.4</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">V19</td>
-<td style="text-align: left;">underfit</td>
-<td style="text-align: right;">0.4</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">V4</td>
 <td style="text-align: left;">underfit</td>
 <td style="text-align: right;">0.4</td>
 </tr>
@@ -803,13 +822,13 @@ Table&nbsp;3: Example output from <code>RIbootRestscore()</code>
 <h2 data-number="6.1" class="anchored" data-anchor-id="results-3"><span class="header-section-number">6.1</span> Results</h2>
 <div id="cell-fig-irb0all" class="cell">
 <div class="cell-output-display">
-<div id="fig-irb0all" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-irb0all" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-irb0all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-irb0all-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;12: "><img src="index_files/figure-html/fig-irb0all-1.png" id="fig-irb0all" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-irb0all-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;13: Item-restscore bootstrap results"><img src="index_files/figure-html/fig-irb0all-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-irb0all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-irb0all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: Item-restscore bootstrap results
 </figcaption>
 </figure>
 </div>
@@ -837,8 +856,7 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <th style="text-align: right;">MAD</th>
 <th style="text-align: right;">Mean</th>
 <th style="text-align: right;">SD</th>
-<th style="text-align: right;">p05</th>
-<th style="text-align: right;">p01</th>
+<th style="text-align: right;">Percentile .05</th>
 </tr>
 </thead>
 <tbody>
@@ -849,7 +867,6 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <td style="text-align: right;">100.0</td>
 <td style="text-align: right;">0.1</td>
 <td style="text-align: right;">100.0</td>
-<td style="text-align: right;">99.6</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">V18</td>
@@ -858,7 +875,6 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <td style="text-align: right;">99.8</td>
 <td style="text-align: right;">0.9</td>
 <td style="text-align: right;">99.2</td>
-<td style="text-align: right;">98.0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">V13</td>
@@ -867,7 +883,6 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <td style="text-align: right;">93.0</td>
 <td style="text-align: right;">8.0</td>
 <td style="text-align: right;">76.4</td>
-<td style="text-align: right;">64.0</td>
 </tr>
 </tbody>
 </table>
@@ -892,8 +907,7 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <th style="text-align: right;">MAD</th>
 <th style="text-align: right;">Mean</th>
 <th style="text-align: right;">SD</th>
-<th style="text-align: right;">p95</th>
-<th style="text-align: right;">p99</th>
+<th style="text-align: right;">Percentile .95</th>
 </tr>
 </thead>
 <tbody>
@@ -904,25 +918,22 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <td style="text-align: right;">24.3</td>
 <td style="text-align: right;">16.7</td>
 <td style="text-align: right;">58.8</td>
-<td style="text-align: right;">70.0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">V8</td>
-<td style="text-align: right;">14.4</td>
-<td style="text-align: right;">12.5</td>
-<td style="text-align: right;">19.7</td>
-<td style="text-align: right;">15.6</td>
-<td style="text-align: right;">51.6</td>
-<td style="text-align: right;">65.6</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">V6</td>
 <td style="text-align: right;">18.4</td>
 <td style="text-align: right;">14.2</td>
 <td style="text-align: right;">21.3</td>
 <td style="text-align: right;">14.9</td>
 <td style="text-align: right;">52.8</td>
-<td style="text-align: right;">64.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V8</td>
+<td style="text-align: right;">14.4</td>
+<td style="text-align: right;">12.5</td>
+<td style="text-align: right;">19.7</td>
+<td style="text-align: right;">15.6</td>
+<td style="text-align: right;">51.6</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">V11</td>
@@ -931,7 +942,6 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <td style="text-align: right;">17.6</td>
 <td style="text-align: right;">13.9</td>
 <td style="text-align: right;">47.7</td>
-<td style="text-align: right;">62.4</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">V15</td>
@@ -940,61 +950,54 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <td style="text-align: right;">16.6</td>
 <td style="text-align: right;">13.4</td>
 <td style="text-align: right;">45.2</td>
-<td style="text-align: right;">61.7</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">V1</td>
-<td style="text-align: right;">12.0</td>
-<td style="text-align: right;">10.1</td>
-<td style="text-align: right;">15.5</td>
-<td style="text-align: right;">12.8</td>
-<td style="text-align: right;">41.3</td>
-<td style="text-align: right;">59.7</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V10</td>
-<td style="text-align: right;">13.2</td>
-<td style="text-align: right;">11.3</td>
-<td style="text-align: right;">16.4</td>
-<td style="text-align: right;">13.0</td>
-<td style="text-align: right;">42.4</td>
-<td style="text-align: right;">58.5</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">V16</td>
-<td style="text-align: right;">11.4</td>
-<td style="text-align: right;">10.4</td>
-<td style="text-align: right;">15.2</td>
-<td style="text-align: right;">13.0</td>
-<td style="text-align: right;">42.0</td>
-<td style="text-align: right;">58.4</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">V20</td>
 <td style="text-align: right;">16.4</td>
 <td style="text-align: right;">13.6</td>
 <td style="text-align: right;">19.5</td>
 <td style="text-align: right;">13.9</td>
 <td style="text-align: right;">45.2</td>
-<td style="text-align: right;">57.2</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">V5</td>
 <td style="text-align: right;">12.0</td>
 <td style="text-align: right;">10.1</td>
 <td style="text-align: right;">15.7</td>
 <td style="text-align: right;">12.6</td>
 <td style="text-align: right;">44.4</td>
-<td style="text-align: right;">52.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V10</td>
+<td style="text-align: right;">13.2</td>
+<td style="text-align: right;">11.3</td>
+<td style="text-align: right;">16.4</td>
+<td style="text-align: right;">13.0</td>
+<td style="text-align: right;">42.4</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">V16</td>
+<td style="text-align: right;">11.4</td>
+<td style="text-align: right;">10.4</td>
+<td style="text-align: right;">15.2</td>
+<td style="text-align: right;">13.0</td>
+<td style="text-align: right;">42.0</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">V7</td>
 <td style="text-align: right;">13.2</td>
 <td style="text-align: right;">11.9</td>
 <td style="text-align: right;">16.7</td>
 <td style="text-align: right;">12.6</td>
 <td style="text-align: right;">41.6</td>
-<td style="text-align: right;">51.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V1</td>
+<td style="text-align: right;">12.0</td>
+<td style="text-align: right;">10.1</td>
+<td style="text-align: right;">15.5</td>
+<td style="text-align: right;">12.8</td>
+<td style="text-align: right;">41.3</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">V3</td>
@@ -1003,7 +1006,6 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <td style="text-align: right;">13.6</td>
 <td style="text-align: right;">11.2</td>
 <td style="text-align: right;">36.1</td>
-<td style="text-align: right;">49.3</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">V14</td>
@@ -1012,7 +1014,6 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <td style="text-align: right;">10.4</td>
 <td style="text-align: right;">10.1</td>
 <td style="text-align: right;">30.7</td>
-<td style="text-align: right;">47.0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">V12</td>
@@ -1021,7 +1022,6 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <td style="text-align: right;">10.4</td>
 <td style="text-align: right;">9.5</td>
 <td style="text-align: right;">29.7</td>
-<td style="text-align: right;">41.4</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">V4</td>
@@ -1030,7 +1030,6 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <td style="text-align: right;">10.2</td>
 <td style="text-align: right;">9.5</td>
 <td style="text-align: right;">29.3</td>
-<td style="text-align: right;">40.1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">V17</td>
@@ -1039,7 +1038,6 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <td style="text-align: right;">8.4</td>
 <td style="text-align: right;">8.0</td>
 <td style="text-align: right;">24.4</td>
-<td style="text-align: right;">32.6</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">V19</td>
@@ -1048,7 +1046,6 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <td style="text-align: right;">3.9</td>
 <td style="text-align: right;">4.6</td>
 <td style="text-align: right;">13.6</td>
-<td style="text-align: right;">19.5</td>
 </tr>
 </tbody>
 </table>
@@ -1060,7 +1057,7 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 </div>
 </figure>
 </div>
-<p><a href="#fig-irb0all" class="quarto-xref">Figure&nbsp;12</a> shows that there is variation in false positive rate, but it is nearly always indicating overfit, while the misfitting items are only indicated as underfit. The summary statistics in <a href="#tbl-irb0mis" class="quarto-xref">Table&nbsp;4</a> show that there can be quite a bit of variation for false positives, but the clear majority of results are below 50%. 3 items have 95th percentile values above 50, with the highest at 58.8.</p>
+<p><a href="#fig-irb0all" class="quarto-xref">Figure&nbsp;13</a> shows that there is variation in false positive rate and it is nearly always indicating overfit, while the misfitting items are only indicated as underfit. The summary statistics in <a href="#tbl-irb0mis" class="quarto-xref">Table&nbsp;4</a> show that there can be quite a bit of variation for false positives, but the clear majority of results are below 50%. 3 items have 95th percentile values above 50, with the highest at 58.8.</p>
 </section>
 <section id="small-sample-n-150" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="small-sample-n-150"><span class="header-section-number">6.2</span> Small sample (n = 150)</h2>
@@ -1070,134 +1067,90 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 <div id="fig-irboot150" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-irboot150-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-irboot150-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;13: "><img src="index_files/figure-html/fig-irboot150-1.png" id="fig-irboot150" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-irboot150-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;14: "><img src="index_files/figure-html/fig-irboot150-1.png" id="fig-irboot150" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-irboot150-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13
+Figure&nbsp;14
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The bootstrapping does not improve on the single instance of item-restscore for the n = 150 condition (see <a href="#fig-irboot150" class="quarto-xref">Figure&nbsp;13</a>). When comparing to the previous results in <a href="#fig-itemrestscore2" class="quarto-xref">Figure&nbsp;11</a>, where the detection rate for the same sample size were at 49.2%, 14.6%, and 34.6% (for items 9, 13, and 18 respectively), the corresponding median values from the bootstrapped item-restscore with 250 iterations were 51.6%, 12.4%, and 37.2%. Using 500 bootstrap iterations did not result in relevant improvements over 250 iterations (see <a href="#tbl-irb150mis" class="quarto-xref">Table&nbsp;5</a>).</p>
-<div id="tbl-irb150mis" class="quarto-layout-panel anchored">
+<p>Item-restscore bootstrapping improves slightly on the single instance of item-restscore for the n = 150 condition (see <a href="#fig-irboot150" class="quarto-xref">Figure&nbsp;14</a>). When comparing to the previous results in <a href="#fig-itemrestscore2" class="quarto-xref">Figure&nbsp;11</a>, where the detection rate for the same sample size were at 49.2%, 14.6%, and 34.6% (for items 9, 13, and 18 respectively), the corresponding median values from the bootstrapped item-restscore with 250 iterations were 52.4%, 19.2%, and 38.4%. Using 500 bootstrap iterations did not result in relevant improvements over 250 iterations (see <a href="#tbl-irb150mis" class="quarto-xref">Table&nbsp;5</a>).</p>
+<div class="cell">
+<div id="tbl-irb150mis" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-irb150mis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;5: Summary statistics for item-restscore bootstrap simulation (n = 150)
 </figcaption>
 <div aria-describedby="tbl-irb150mis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-irb150mis" style="flex-basis: 100.0%;justify-content: center;">
-<div id="tbl-irb150mis-1" class="do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-subfloat-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-irb150mis-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(a) 250 bootstrap iterations
-</figcaption>
-<div aria-describedby="tbl-irb150mis-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="tbl-irb150mis-1" class="do-not-create-environment caption-top table">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
+<th style="text-align: left;">Bootstrap iterations</th>
 <th style="text-align: left;">Item</th>
 <th style="text-align: right;">Median</th>
 <th style="text-align: right;">MAD</th>
 <th style="text-align: right;">Mean</th>
 <th style="text-align: right;">SD</th>
-<th style="text-align: right;">p05</th>
-<th style="text-align: right;">p01</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">V13</td>
-<td style="text-align: right;">12.4</td>
-<td style="text-align: right;">17.8</td>
-<td style="text-align: right;">22.5</td>
-<td style="text-align: right;">24.7</td>
-<td style="text-align: right;">0.4</td>
-<td style="text-align: right;">0.4</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">V9</td>
+<td style="text-align: right;">52.4</td>
+<td style="text-align: right;">38.0</td>
+<td style="text-align: right;">51.4</td>
+<td style="text-align: right;">29.2</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">250</td>
+<td style="text-align: left;">V18</td>
+<td style="text-align: right;">38.4</td>
+<td style="text-align: right;">35.6</td>
+<td style="text-align: right;">42.0</td>
+<td style="text-align: right;">27.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">V13</td>
+<td style="text-align: right;">19.2</td>
+<td style="text-align: right;">21.9</td>
+<td style="text-align: right;">27.3</td>
+<td style="text-align: right;">25.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">V9</td>
+<td style="text-align: right;">54.3</td>
+<td style="text-align: right;">37.8</td>
+<td style="text-align: right;">51.0</td>
+<td style="text-align: right;">29.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">500</td>
 <td style="text-align: left;">V18</td>
 <td style="text-align: right;">37.2</td>
-<td style="text-align: right;">36.2</td>
-<td style="text-align: right;">40.4</td>
-<td style="text-align: right;">28.4</td>
-<td style="text-align: right;">0.9</td>
-<td style="text-align: right;">0.4</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V9</td>
-<td style="text-align: right;">51.6</td>
-<td style="text-align: right;">38.0</td>
-<td style="text-align: right;">50.4</td>
-<td style="text-align: right;">29.8</td>
-<td style="text-align: right;">2.9</td>
-<td style="text-align: right;">0.4</td>
-</tr>
-</tbody>
-</table>
-</div>
-</figure>
-</div>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-irb150mis" style="flex-basis: 100.0%;justify-content: center;">
-<div id="tbl-irb150mis-2" class="do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-subfloat-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-irb150mis-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) 500 bootstrap iterations
-</figcaption>
-<div aria-describedby="tbl-irb150mis-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="tbl-irb150mis-2" class="do-not-create-environment caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Item</th>
-<th style="text-align: right;">Median</th>
-<th style="text-align: right;">MAD</th>
-<th style="text-align: right;">Mean</th>
-<th style="text-align: right;">SD</th>
-<th style="text-align: right;">p05</th>
-<th style="text-align: right;">p01</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">V13</td>
-<td style="text-align: right;">12.7</td>
-<td style="text-align: right;">17.9</td>
-<td style="text-align: right;">21.9</td>
-<td style="text-align: right;">24.3</td>
-<td style="text-align: right;">0.2</td>
-<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">35.9</td>
+<td style="text-align: right;">41.4</td>
+<td style="text-align: right;">27.9</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">V18</td>
-<td style="text-align: right;">35.6</td>
-<td style="text-align: right;">38.3</td>
-<td style="text-align: right;">38.7</td>
-<td style="text-align: right;">28.8</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V9</td>
-<td style="text-align: right;">53.0</td>
-<td style="text-align: right;">39.1</td>
-<td style="text-align: right;">50.3</td>
-<td style="text-align: right;">29.9</td>
-<td style="text-align: right;">3.6</td>
-<td style="text-align: right;">0.2</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">V13</td>
+<td style="text-align: right;">19.4</td>
+<td style="text-align: right;">23.1</td>
+<td style="text-align: right;">27.2</td>
+<td style="text-align: right;">24.7</td>
 </tr>
 </tbody>
 </table>
 </div>
-</figure>
-</div>
-</div>
-</div>
 </div>
 </figure>
+</div>
 </div>
 </section>
 </section>
@@ -1212,10 +1165,10 @@ Table&nbsp;5: Summary statistics for item-restscore bootstrap simulation (n = 15
 <div id="fig-ifb40" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ifb40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-ifb40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;14: "><img src="index_files/figure-html/fig-ifb40-1.png" id="fig-ifb40" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-ifb40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure&nbsp;15: "><img src="index_files/figure-html/fig-ifb40-1.png" id="fig-ifb40" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ifb40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14
+Figure&nbsp;15
 </figcaption>
 </figure>
 </div>
@@ -1226,28 +1179,42 @@ Figure&nbsp;14
 <div id="fig-itemrestscore40" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-itemrestscore40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-itemrestscore40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure&nbsp;15: "><img src="index_files/figure-html/fig-itemrestscore40-1.png" id="fig-itemrestscore40" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-itemrestscore40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;16: "><img src="index_files/figure-html/fig-itemrestscore40-1.png" id="fig-itemrestscore40" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-itemrestscore40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15
+Figure&nbsp;16
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Infit performs better when sample size is 150 or 250 (see <a href="#fig-ifb40" class="quarto-xref">Figure&nbsp;14</a>), while performance is slightly better for item-restscore for n &gt;= 500 in terms of lower rates of false positives (see <a href="#fig-itemrestscore40" class="quarto-xref">Figure&nbsp;15</a>).</p>
+<p>Infit performs better when sample size is 150 or 250 (see <a href="#fig-ifb40" class="quarto-xref">Figure&nbsp;15</a>), while performance is slightly better for item-restscore for n &gt;= 500 in terms of lower rates of false positives (see <a href="#fig-itemrestscore40" class="quarto-xref">Figure&nbsp;16</a>).</p>
 </section>
 <section id="results-10-items" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="results-10-items"><span class="header-section-number">7.2</span> Results 10 items</h2>
+<div id="cell-fig-ifb10" class="cell">
+<div class="cell-output-display">
+<div id="fig-ifb10" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ifb10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-ifb10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;17: "><img src="index_files/figure-html/fig-ifb10-1.png" id="fig-ifb10" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ifb10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <div id="cell-fig-itemrestscore10" class="cell">
 <div class="cell-output-display">
 <div id="fig-itemrestscore10" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-itemrestscore10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-itemrestscore10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;16: "><img src="index_files/figure-html/fig-itemrestscore10-1.png" id="fig-itemrestscore10" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-itemrestscore10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;18: "><img src="index_files/figure-html/fig-itemrestscore10-1.png" id="fig-itemrestscore10" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-itemrestscore10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;16
+Figure&nbsp;18
 </figcaption>
 </figure>
 </div>
@@ -1271,16 +1238,17 @@ Figure&nbsp;16
 <div id="fig-loadloc" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-loadloc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-loadloc-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;17: "><img src="index_files/figure-html/fig-loadloc-1.png" id="fig-loadloc" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-loadloc-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Figure&nbsp;19: "><img src="index_files/figure-html/fig-loadloc-1.png" id="fig-loadloc" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-loadloc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17
+Figure&nbsp;19
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Assessing item fit and dimensionality should be done using multiple methods. Item fit and item-restscore should be used in parallel, while also examining residual patterns by reviewing standardized factor loadings on the first residual contrast (see <a href="#fig-loadloc" class="quarto-xref">Figure&nbsp;17</a> for an example) as well as Yen’s Q3 residual correlations.</p>
+<p>Assessing item fit and dimensionality should be done using multiple methods. Item fit and item-restscore should be used in parallel, while also examining residual patterns by reviewing standardized factor loadings on the first residual contrast (see <a href="#fig-loadloc" class="quarto-xref">Figure&nbsp;19</a> for an example) as well as Yen’s Q3 residual correlations.</p>
+<p>What does this look like with a small sample?</p>
 <p>While the simulations in this paper have used dichotomous data, all functions evaluated in this paper also work with polytomous data using the Rasch Partial Credit Model.</p>
 </section>
 <section id="references" class="level1 unnumbered">
@@ -1340,7 +1308,7 @@ BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRbla
 LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
 
 locale:
-[1] sv_SE.UTF-8/sv_SE.UTF-8/sv_SE.UTF-8/C/sv_SE.UTF-8/sv_SE.UTF-8
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 
 time zone: Europe/Stockholm
 tzcode source: internal
