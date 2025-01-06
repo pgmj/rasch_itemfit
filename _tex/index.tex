@@ -203,7 +203,7 @@ values, Model fit},
 
 \title{Detecting item misfit in Rasch models}
 \author{Magnus Johansson}
-\date{2025-01-05}
+\date{2025-01-06}
 
 \begin{document}
 \maketitle
@@ -520,7 +520,7 @@ Notebook}}
 
 Figure~\ref{fig-ifb0} shows the detection rate when the misfitting item
 is located at the sample mean. Detection rate is highest for the
-condition with 100 iterations with sample size 100 and 250, but it also
+condition with 100 iterations with sample size 150 and 250, but it also
 shows higher levels of false positives when sample size increases to 500
 or more.
 
@@ -702,11 +702,11 @@ item-restscore}\label{study-3-comparing-infit-and-item-restscore}
 We will now compare the performance of infit and item-restscore when all
 three items are misfitting at the same time. This simulation will also
 include a condition with 2000 respondents, to examine if the false
-positive rate increases with more respondents. For infit, we will only
-use 200 iterations with \texttt{RIgetfit()} since that condition seemed
-to strike a balance between detection rate and false positives. Outfit
-is also included to see if it performs as bad as with one misfitting
-item.
+positive rate increases with more respondents. For infit, we will use
+100 iterations with \texttt{RIgetfit()} for n \textless{} 500, and 200
+for n \textgreater= 500, since this produced the best results in Study
+1. Outfit is also included to see if it performs as bad as with one
+misfitting item.
 
 \textsubscript{Source:
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
@@ -1035,8 +1035,8 @@ items have 95th percentile values above 50, with the highest at 58.8.
 
 We will use 200 simulations to check the performance of the bootstrapped
 item-restscore function for sample size 150. As an additional
-experimental condition, we will use both 250 and 500 bootstraps for
-item-restscore in each simulation.
+experimental condition, we will use both 250 and 500 bootstrap
+iterations for item-restscore in each simulation.
 
 \textsubscript{Source:
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
@@ -1067,7 +1067,10 @@ sample size were at 49.2\%, 14.6\%, and 34.6\% (for items 9, 13, and 18
 respectively), the corresponding median values from the bootstrapped
 item-restscore with 250 iterations were 52.4\%, 19.2\%, and 38.4\%.
 Using 500 bootstrap iterations did not result in relevant improvements
-over 250 iterations (see Table~\ref{tbl-irb150mis}).
+over 250 iterations (see Table~\ref{tbl-irb150mis}). Compared to the
+results using infit (Figure~\ref{fig-ifb3}), with detection rates of
+59.2\%, 19\%, and 51.8\%, item-restscore inferior also when
+bootstrapped.
 
 \begin{longtable}[]{@{}llrrrr@{}}
 
@@ -1113,10 +1116,6 @@ sizes of 150, 250, 500, and 1000.
 Item-restscore and item infit will be compared. The latter will use 100
 bootstrap iterations to determine critical values for sample sizes 150
 and 250, and 200 bootstrap iterations for n \textgreater= 500.
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 \textsubscript{Source:
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
@@ -1256,30 +1255,12 @@ Notebook}}
 Figure~\ref{fig-comp10} and Figure~\ref{fig-comp2040} summarize the
 findings from the two different comparisons of item numbers. Adding more
 items improves the detection rate substantially for both methods,
-particularly for smaller samples and the off-target items. It also
-results in a larger improvement for infit over item-restscore,
-especially for the n = 150 condition, but also the n = 250 condition for
-off-target items.
+particularly for smaller samples and the off-target items. 40 items
+compared to 20 items results in a larger improvement for infit over
+item-restscore for the n = 150 condition, but also the n = 250 and n =
+500 conditions for the -2 logits off-target item.
 
 \section{Discussion}\label{discussion}
-
-\subsection{Limitations}\label{limitations}
-
-Number of items could have been varied more and investigated further
-with more variation in sample sizes.
-
-Partial credit model for polytomous data would have been nice to also
-test. Although results regarding detection rate should generalize from
-RM to PCM, maybe the sample size in relation to number of items does not
-easily translate from the dichotomous case?
-
-\section{Conclusion}\label{conclusion}
-
-These findings make a good argument for removing one item at a time when
-the analysis indicates misfitting items, starting with the most
-underfitting item. This is especially relevant for \emph{n}
-\textgreater= 500 and when misfitting items are located close to the
-sample mean.
 
 \phantomsection\label{cell-fig-loadloc}
 \begin{figure}[H]
@@ -1302,7 +1283,8 @@ Assessing item fit and dimensionality should be done using multiple
 methods. Item fit and item-restscore should be used in parallel, while
 also examining residual patterns by reviewing standardized factor
 loadings on the first residual contrast (see Figure~\ref{fig-loadloc}
-for an example) as well as Yen's Q3 residual correlations.
+for an example) as well as Yen's Q3 residual correlations (Christensen,
+Makransky, and Horton 2017).
 
 What does this look like with a small sample (Figure~\ref{fig-loadloc2})
 and what is the item fit in the same small sample
@@ -1425,6 +1407,39 @@ Notebook}}
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
 Notebook}}
 
+\subsection{Limitations}\label{limitations}
+
+Number of items could have been varied more and investigated further
+with more variation in sample sizes.
+
+Partial credit model for polytomous data would have been nice to also
+test. Although results regarding detection rate should generalize from
+RM to PCM, maybe the sample size in relation to number of items does not
+easily translate from the dichotomous case?
+
+iterations for the bootstrapped item-restscore - more testing could be
+conducted.
+
+\section{Conclusion}\label{conclusion}
+
+For sample size under 500, rely primarily on item infit with simulation
+based critical values, using 100 iterations with \texttt{RIgetfit()}.
+For sample sizes closer to 500, item-restscore is recommended, either as
+a single-run test, or bootstrapped. With samples larger than 500,
+bootstrapped item-restscore controls false positive rates well, while
+identifying misfitting items at high detection rates. Using 250
+iterations for the bootstrapped item-restscore seems adequate, but more
+testing could be conducted.
+
+Use both infit and item-restscore in your analysis process, if you have
+sample size below 1000.
+
+These findings make a good argument for removing one item at a time when
+the analysis indicates misfitting items, starting with the most
+underfitting item. This is especially relevant for \emph{n}
+\textgreater= 500 and when misfitting items are located close to the
+sample mean.
+
 While the simulations in this paper have all used dichotomous data, all
 functions evaluated in this paper also work with polytomous data using
 the Rasch Partial Credit Model.
@@ -1440,6 +1455,13 @@ Benjamini, Yoav, and Yosef Hochberg. 1995. {``Controlling the {False}
 {Multiple} {Testing}.''} \emph{Journal of the Royal Statistical Society:
 Series B (Methodological)} 57 (1): 289--300.
 \url{https://doi.org/10.1111/j.2517-6161.1995.tb02031.x}.
+
+\bibitem[\citeproctext]{ref-christensen_critical_2017}
+Christensen, Karl Bang, Guido Makransky, and Mike Horton. 2017.
+{``Critical {Values} for {Yen}'s {Q3}: {Identification} of {Local}
+{Dependence} in the {Rasch} {Model} {Using} {Residual}
+{Correlations}.''} \emph{Applied Psychological Measurement} 41 (3):
+178--94. \url{https://doi.org/10.1177/0146621616677520}.
 
 \bibitem[\citeproctext]{ref-goodman_measures_1954}
 Goodman, Leo A., and William H. Kruskal. 1954. {``Measures of
@@ -1528,7 +1550,7 @@ BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRbla
 LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
 
 locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+[1] sv_SE.UTF-8/sv_SE.UTF-8/sv_SE.UTF-8/C/sv_SE.UTF-8/sv_SE.UTF-8
 
 time zone: Europe/Stockholm
 tzcode source: internal
