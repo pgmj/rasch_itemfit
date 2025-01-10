@@ -1,8 +1,14 @@
 project:
   type: manuscript
 
+repo-url: https://github.com/pgmj/rasch_itemfit
+#osf-url:
+#preprint-url:
+
 execute:
   freeze: auto
+  warning: false
+  message: false
 
 format:
   html:
