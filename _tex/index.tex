@@ -203,7 +203,7 @@ values, Model fit},
 
 \title{Detecting item misfit in Rasch models}
 \author{Magnus Johansson}
-\date{2025-01-06}
+\date{2025-01-10}
 
 \begin{document}
 \maketitle
@@ -214,69 +214,120 @@ computers it is both feasible and desirable to use simulation methods to
 determine appropriate critical cutoff values. This paper illustrates and
 evaluates the use of an R package for Rasch psychometrics that has
 implemented functions to simplify the process of determining simulation
-based cutoff values. Through a series of simulation studies a comparison
-is made between information weighted conditional item fit (``infit'')
-and item-restscore correlations using Goodman and Kruskal's \(\gamma\).
-Results indicate the limitations of small samples (n \textless{} 500) in
-correctly detecting item misfit, especially when several items are
-misfit. Item outfit shows very low performance and should not be used.
-Conditional infit with simulation based cutoffs performs slightly better
-than item-restscore with samples below n = 500. Both methods have
-strongly increased rates of false positives with large samples (n
-\textgreater= 1000). Large samples should use non-parametric bootstrap
+based cutoff values. Through a series of simulation studies, a
+comparison is made between information weighted conditional item fit
+(``infit'') and item-restscore correlations using Goodman and Kruskal's
+\(\gamma\). Results indicate the limitations of small samples (n
+\textless{} 500) in correctly detecting item misfit, especially when
+several items are misfit. Item outfit shows very low performance in
+general and should not be used to detect misfitting items. Conditional
+infit with simulation based cutoffs performs slightly better than
+item-restscore with samples below n = 500. Both methods result in
+problematic rates of false positives with large samples (n \textgreater=
+1000). Analyses using large samples should apply nonparametric bootstrap
 of subsamples with item-restscore to avoid type-1 errors. Finally, the
-importance of iterative analyses is emphasized since a situation where
-several items show underfit will induce seemingly overfit items.
-Underfit item should be removed one at a time, and a re-analysis
-conducted for each step to avoid erroneously removing items.
+importance of an iterative analysis process is emphasized, since a
+situation where several items show underfit will induce seemingly
+overfit items. Underfit items should be removed one at a time, and a
+re-analysis conducted for each step to avoid erroneously removing items.
 \end{abstract}
 
 
 \section{Introduction}\label{introduction}
 
 This paper presents a series of simulations conducted to evaluate
-methods to detect of item misfit in Rasch models. First, conditional
-item infit and outfit will be under scrutiny. Second, item infit will be
-compared to item-restscore (Kreiner 2011; Mueller and Santiago 2022).
-Third, a bootstrap method for item-restscore will be presented and
-tested.
+methods to detect item misfit in Rasch models. First, conditional item
+infit and outfit (Müller 2020) will be under scrutiny. Second, item
+infit will be compared to item-restscore {[}Kreiner
+(2011);christensen\_item\_2013{]}. Third, a bootstrap method for
+item-restscore will be presented and tested.
 
-The assessment of item fit under the Rasch model has for decades been
-conducted using various more or less arbitrary rule-of-thumb critical
-values. Müller (2020) showed how the range of critical values for
-conditional item infit varies with sample size. The expected average
-item conditional infit range was described by Müller as fairly well
-captured by Smith's rule-of-thumb formula 1±2/\(\sqrt{n}\) (Smith,
-Schumacker, and Bush 1998). However, the average range does not apply
-for all items, since item location relative to sample location also
-affects model expected item fit. This means that some items within a set
-of items varying in location are likely to have item fit values outside
-Smith's average value range while still fitting the Rasch model.
+The evaluation of item fit under the Rasch model has for decades been
+conducted in the majority of published psychometric papers using various
+more or less arbitrary rule-of-thumb critical values. Regarding mean
+squared (MSQ) item residuals, which should ideally be centered around
+1.0, there are two sources often cited. One is the book by Bond \& Fox
+(2015), which has garnered around 12 000 citations according to Google
+Scholar{]}. It contains a table with rule-of-thumb recommendations for
+various settings, ranging from 0.8--1.2 to 0.5--1.7. Another frequently
+seen source, which is not an actual peer-reviewed publication and thus
+lacks citation counts, is the webpage at
+\url{https://rasch.org/rmt/rmt162f.htm}, where Mike Linacre states
+0.5-1.5 to be ``productive for measurement''. Neither of these sources
+seem to rely on simulation studies to support their recommendations.
 
-It is here proposed that by using parametric bootstrapping one can
-establish item fit critical cutoff values that are sample and item
-specific. This procedure uses the estimated item and person locations
-based on the available data and simulates new response data that fit the
-Rasch model, to determine the range of plausible item fit values for
-each item. The R package \texttt{easyRasch} (Johansson 2024) includes a
-function to determine item infit and outfit cutoff values using this
-method and will be tested in the simulations in this paper.
+Müller (2020) showed how the range of critical values for conditional
+item infit varies with sample size. The expected average conditional
+item infit range was described by Müller as fairly well captured by
+Smith's rule-of-thumb formula 1±2/\(\sqrt{n}\) (R. M. Smith, Schumacker,
+and Bush 1998). However, the average range does not apply for all items,
+since item location relative to sample location also affects model
+expected item fit. This means that some items within a set of items
+varying in location are likely to have item fit values outside Smith's
+average value range while still fitting the Rasch model.
+
+While evaluation of items fit is an essential part of evaluating
+unidimensionality, it is recommended to use multiple methods.
+Standardized residuals are a useful source, and usually subject to both
+principal component analysis (PCA) and analysis of residual correlations
+amongst item pairs, often referred to as Yen's Q3. Chou and Wang (2010)
+showed that the critical value for PCA of residuals to support
+unidimensionality suggested by Smith (2002) with the largest eigenvalue
+\textless{} 1.5 is not generally applicable since it is affected by both
+test length and sample size. Christensen and colleagues (2017) used
+simulation methods to illustrate the expected range of residual
+correlations under different conditions. While both of these papers
+provide useful information about the dubiousness in using rule-of-thumb
+critical values when the empirical distribution of a statistic is not
+known, they leave practitioners without tools to determined appropriate
+cutoffs.
+
+It is here proposed that by using bootstrapping one can establish item
+fit critical cutoff values that are relevant for a specific sample and
+item set. The procedure uses the properties of the available data and
+simulates multiple new response datasets that fit the Rasch model to
+determine the range of plausible item fit values for each item. The R
+package \texttt{easyRasch} (Johansson 2024) includes a function to
+determine item infit and outfit cutoff values using this method and will
+be tested in the simulations in this paper.
 
 Similar developments have recently taken place in the related field of
 confirmatory factor analysis. McNeish and Wolf (2024) have created an R
-package called \texttt{dynamic} that uses simulation to determine
-appropriate critical values for commonly used model fit metrics, both
-for ordinal data and interval data.
+package called \texttt{dynamic}, that uses bootstrapping to determine
+appropriate critical values for commonly used model fit metrics for
+models using ordinal or interval data.
 
 It is important to note that the conditional item fit described by
 Müller (2020) and implemented in the \texttt{iarm} R package (Mueller
 and Santiago 2022) should not be confused with the unconditional item
 fit implemented in software such as Winsteps and RUMM2030, as well as
 all R packages except \texttt{iarm}. Unconditional item fit can result
-in unreliable item fit in sample sizes as small as 250 with increasing
-likelihood of problems as sample size increases. Readers are strongly
+in unreliable item fit in sample sizes as small as 200 with increasing
+probability of problems as sample size increases. Readers are strongly
 recommended to read Müller's paper to fully understand the issues with
-unconditional item fit.
+unconditional item fit. Additionally, the experienced Rasch analyst will
+perhaps wonder why the Wilson-Hilferty transformed Z statistic (often
+abbreviated ZSTD), which is based on unconditional MSQ is not included
+in this analysis. This is also explained in Müller's paper, where she
+shows both the notorious issues with sample size and that conditional
+item fit makes ZSTD unnecessary.
+
+There are five studies included in this paper:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Conditional item infit and outfit
+\item
+  Item-restscore
+\item
+  Comparing infit and item-restscore
+\item
+  Bootstrapped item-restscore
+\item
+  Varying the number of items
+\end{enumerate}
 
 \section{Methods}\label{methods}
 
@@ -766,6 +817,30 @@ has increased for sample size of 1000 and we can see it increase
 strongly at n = 2000. Outfit (Figure~\ref{fig-ifb3out}) again performs
 worse than infit.
 
+\phantomsection\label{cell-fig-ifb3b}
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-ifb3b-1.pdf}}
+
+}
+
+\caption{\label{fig-ifb3b}Conditional infit detection rate with three
+misfitting items}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+In Figure~\ref{fig-ifb3b}, the minimal truncation used previously to
+remove extreme values (quantiles .001 and .999) was increased to .005
+and .995. This improves the detection rate, particularly for the n = 250
+condition and item 13, but also results in increased false positive
+rate.
+
 \phantomsection\label{cell-fig-itemrestscore2}
 \begin{figure}[H]
 
@@ -1098,8 +1173,8 @@ Bootstrap iterations & Item & Median & MAD & Mean & SD \\
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
 Notebook}}
 
-\section{Study 5: Varying number of
-items}\label{study-5-varying-number-of-items}
+\section{Study 5: Varying the number of
+items}\label{study-5-varying-the-number-of-items}
 
 When doing simulation studies there is always a balance to strike
 between trying to evaluate many scenarios and not having too high
@@ -1262,6 +1337,8 @@ item-restscore for the n = 150 condition, but also the n = 250 and n =
 
 \section{Discussion}\label{discussion}
 
+Some writing remains to be done here\ldots{}
+
 \phantomsection\label{cell-fig-loadloc}
 \begin{figure}[H]
 
@@ -1286,126 +1363,11 @@ loadings on the first residual contrast (see Figure~\ref{fig-loadloc}
 for an example) as well as Yen's Q3 residual correlations (Christensen,
 Makransky, and Horton 2017).
 
-What does this look like with a small sample (Figure~\ref{fig-loadloc2})
-and what is the item fit in the same small sample
-(Table~\ref{tbl-itemfit2} and Figure~\ref{fig-getfit2})?
-
-\phantomsection\label{cell-fig-loadloc2}
-\begin{figure}[H]
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-loadloc2-1.pdf}}
-
-}
-
-\caption{\label{fig-loadloc2}}
-
-\end{figure}%
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0549}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0989}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1868}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1099}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1978}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1209}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1319}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0989}}@{}}
-
-\caption{\label{tbl-itemfit2}}
-
-\tabularnewline
-
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Item
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-InfitMSQ
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Infit thresholds
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-OutfitMSQ
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Outfit thresholds
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Infit diff
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Outfit diff
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-Location
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-V1 & 0.996 & {[}0.84, 1.268{]} & 0.781 & {[}0.445, 3.268{]} & no misfit
-& no misfit & -2.55 \\
-V2 & 0.905 & {[}0.79, 1.172{]} & 0.890 & {[}0.7, 1.661{]} & no misfit &
-no misfit & -2.01 \\
-V3 & 0.937 & {[}0.868, 1.217{]} & 1.127 & {[}0.708, 1.893{]} & no misfit
-& no misfit & 0.32 \\
-V4 & 0.996 & {[}0.805, 1.294{]} & 0.769 & {[}0.672, 3.2{]} & no misfit &
-no misfit & 1.94 \\
-V5 & 0.985 & {[}0.833, 1.181{]} & 0.949 & {[}0.533, 2.305{]} & no misfit
-& no misfit & 1.09 \\
-V6 & 0.974 & {[}0.804, 1.293{]} & 1.059 & {[}0.71, 1.505{]} & no misfit
-& no misfit & 1.57 \\
-V7 & 0.999 & {[}0.837, 1.259{]} & 1.035 & {[}0.777, 1.42{]} & no misfit
-& no misfit & 0.66 \\
-V8 & 1.014 & {[}0.842, 1.193{]} & 1.023 & {[}0.651, 2.678{]} & no misfit
-& no misfit & -1.20 \\
-V9 & 1.156 & {[}0.742, 1.174{]} & 1.224 & {[}0.554, 2.483{]} & no misfit
-& no misfit & -0.43 \\
-V10 & 0.950 & {[}0.832, 1.133{]} & 0.887 & {[}0.694, 2.017{]} & no
-misfit & no misfit & -0.08 \\
-V11 & 0.982 & {[}0.816, 1.233{]} & 1.027 & {[}0.726, 1.268{]} & no
-misfit & no misfit & -1.24 \\
-V12 & 1.156 & {[}0.831, 1.165{]} & 1.342 & {[}0.589, 2.434{]} & no
-misfit & no misfit & 1.43 \\
-V13 & 1.055 & {[}0.883, 1.191{]} & 1.379 & {[}0.705, 1.736{]} & no
-misfit & no misfit & -2.01 \\
-V14 & 0.981 & {[}0.804, 1.174{]} & 1.058 & {[}0.737, 1.398{]} & no
-misfit & no misfit & 0.45 \\
-V15 & 0.948 & {[}0.759, 1.25{]} & 0.887 & {[}0.591, 2.128{]} & no misfit
-& no misfit & 0.23 \\
-V16 & 0.864 & {[}0.799, 1.217{]} & 0.875 & {[}0.622, 2.079{]} & no
-misfit & no misfit & 1.88 \\
-V17 & 0.967 & {[}0.774, 1.215{]} & 0.791 & {[}0.63, 3.558{]} & no misfit
-& no misfit & 2.06 \\
-V18 & 1.143 & {[}0.771, 1.261{]} & 1.172 & {[}0.664, 1.538{]} & no
-misfit & no misfit & -1.09 \\
-V19 & 0.887 & {[}0.84, 1.171{]} & 0.845 & {[}0.714, 1.432{]} & no misfit
-& no misfit & 0.23 \\
-V20 & 0.995 & {[}0.867, 1.194{]} & 0.925 & {[}0.774, 1.334{]} & no
-misfit & no misfit & -1.24 \\
-
-\end{longtable}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\phantomsection\label{cell-fig-getfit2}
-\begin{figure}[H]
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-getfit2-1.pdf}}
-
-}
-
-\caption{\label{fig-getfit2}}
-
-\end{figure}%
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
+Item fit in this paper has been assessed using data from all respondents
+in a sample. A useful additional method to evaluate and understand item
+fit or misfit is to inspect item characteristic curves when the sample
+is divided into class intervals (Buchardt, Christensen, and Jensen
+2023).
 
 \subsection{Limitations}\label{limitations}
 
@@ -1431,7 +1393,7 @@ identifying misfitting items at high detection rates. Using 250
 iterations for the bootstrapped item-restscore seems adequate, but more
 testing could be conducted.
 
-Use both infit and item-restscore in your analysis process, if you have
+Use both infit and item-restscore in your analysis process if you have
 sample size below 1000.
 
 These findings make a good argument for removing one item at a time when
@@ -1455,6 +1417,24 @@ Benjamini, Yoav, and Yosef Hochberg. 1995. {``Controlling the {False}
 {Multiple} {Testing}.''} \emph{Journal of the Royal Statistical Society:
 Series B (Methodological)} 57 (1): 289--300.
 \url{https://doi.org/10.1111/j.2517-6161.1995.tb02031.x}.
+
+\bibitem[\citeproctext]{ref-bond_applying_2015}
+Bond, Trevor, and Christine M. Fox. 2015. \emph{Applying the {Rasch}
+{Model}: {Fundamental} {Measurement} in the {Human} {Sciences}}. 3rd ed.
+London, UNITED KINGDOM: Routledge.
+
+\bibitem[\citeproctext]{ref-buchardt_visualizing_2023}
+Buchardt, Ann-Sophie, Karl Bang Christensen, and Normann Jensen. 2023.
+{``Visualizing {Rasch} Item Fit Using Conditional Item Characteristic
+Curves in {R}.''} \emph{Psychological Test and Assessment Modeling} 65
+(2): 206--19.
+
+\bibitem[\citeproctext]{ref-chou_checking_2010}
+Chou, Yeh-Tai, and Wen-Chung Wang. 2010. {``Checking {Dimensionality} in
+{Item} {Response} {Models} {With} {Principal} {Component} {Analysis} on
+{Standardized} {Residuals}.''} \emph{Educational and Psychological
+Measurement} 70 (5): 717--31.
+\url{https://doi.org/10.1177/0013164410379322}.
 
 \bibitem[\citeproctext]{ref-christensen_critical_2017}
 Christensen, Karl Bang, Guido Makransky, and Mike Horton. 2017.
@@ -1507,6 +1487,13 @@ Ostini, Remo, and Michael Nering. 2006. \emph{Polytomous {Item}
 {Response} {Theory} {Models}}. SAGE Publications, Inc.
 \url{https://doi.org/10.4135/9781412985413}.
 
+\bibitem[\citeproctext]{ref-smith_detecting_2002}
+Smith, Everett V. 2002.
+{``\href{https://www.ncbi.nlm.nih.gov/pubmed/12011501}{Detecting and
+Evaluating the Impact of Multidimensionality Using Item Fit Statistics
+and Principal Component Analysis of Residuals}.''} \emph{Journal of
+Applied Measurement} 3 (2): 205--31.
+
 \bibitem[\citeproctext]{ref-smith_using_1998}
 Smith, R. M., R. E. Schumacker, and M. J. Bush. 1998.
 {``\href{https://www.ncbi.nlm.nih.gov/pubmed/9661732}{Using Item Mean
@@ -1539,6 +1526,9 @@ Item Response Theory.''} \emph{Psychometrika} 54 (3): 427--50.
 \subsection{Session info}\label{session-info}
 
 This documents the specific R packages and versions used in this study.
+Note that the simulations were conducted using \texttt{easyRasch}
+version 0.3.3, while the plots and tables generated directly from
+\texttt{easyRasch} were done using version 0.3.3.2.
 
 \begin{verbatim}
 R version 4.4.2 (2024-10-31)
@@ -1550,7 +1540,7 @@ BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRbla
 LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
 
 locale:
-[1] sv_SE.UTF-8/sv_SE.UTF-8/sv_SE.UTF-8/C/sv_SE.UTF-8/sv_SE.UTF-8
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 
 time zone: Europe/Stockholm
 tzcode source: internal
