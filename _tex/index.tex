@@ -203,7 +203,7 @@ values, Model fit},
 
 \title{Detecting item misfit in Rasch models}
 \author{Magnus Johansson}
-\date{2025-01-10}
+\date{2025-01-11}
 
 \begin{document}
 \maketitle
@@ -218,29 +218,30 @@ based cutoff values. Through a series of simulation studies, a
 comparison is made between information weighted conditional item fit
 (``infit'') and item-restscore correlations using Goodman and Kruskal's
 \(\gamma\). Results indicate the limitations of small samples (n
-\textless{} 500) in correctly detecting item misfit, especially when
-several items are misfit. Item outfit shows very low performance in
-general and should not be used to detect misfitting items. Conditional
-infit with simulation based cutoffs performs slightly better than
-item-restscore with samples below n = 500. Both methods result in
-problematic rates of false positives with large samples (n \textgreater=
-1000). Analyses using large samples should apply nonparametric bootstrap
-of subsamples with item-restscore to avoid type-1 errors. Finally, the
+\textless{} 500) in correctly detecting item misfit due to
+multidimensionality, especially when a larger proportion of items are
+misfit. Item outfit shows very low performance in general. Conditional
+infit with simulation based cutoffs performs better than item-restscore
+with sample sizes below 500. Both methods result in problematic rates of
+false positives with large samples (n \textgreater= 1000). Large
+datasets should be analyzed using nonparametric bootstrap of subsamples
+with item-restscore to reduce the risk of type-1 errors. Finally, the
 importance of an iterative analysis process is emphasized, since a
-situation where several items show underfit will induce seemingly
-overfit items. Underfit items should be removed one at a time, and a
-re-analysis conducted for each step to avoid erroneously removing items.
+situation where several items show underfit will cause other items to
+show overfit to the Rasch model. Underfit items should be removed one at
+a time, and a re-analysis conducted for each step to avoid erroneously
+removing items.
 \end{abstract}
 
 
 \section{Introduction}\label{introduction}
 
 This paper presents a series of simulations conducted to evaluate
-methods to detect item misfit in Rasch models. First, conditional item
-infit and outfit (Müller 2020) will be under scrutiny. Second, item
-infit will be compared to item-restscore {[}Kreiner
-(2011);christensen\_item\_2013{]}. Third, a bootstrap method for
-item-restscore will be presented and tested.
+methods to detect item misfit due to multidimensionality in Rasch
+models. First, conditional item infit and outfit (Müller 2020) will be
+under scrutiny. Second, item infit will be compared to item-restscore
+{[}Kreiner (2011);christensen\_item\_2013{]}. Third, a bootstrap method
+for item-restscore will be presented and tested.
 
 The evaluation of item fit under the Rasch model has for decades been
 conducted in the majority of published psychometric papers using various
@@ -287,7 +288,7 @@ fit critical cutoff values that are relevant for a specific sample and
 item set. The procedure uses the properties of the available data and
 simulates multiple new response datasets that fit the Rasch model to
 determine the range of plausible item fit values for each item. The R
-package \texttt{easyRasch} (Johansson 2024) includes a function to
+package \texttt{easyRasch} (Johansson 2024a) includes a function to
 determine item infit and outfit cutoff values using this method and will
 be tested in the simulations in this paper.
 
@@ -1310,6 +1311,15 @@ for 10 items}
 Notebook}}
 
 \phantomsection\label{cell-fig-comp2040}
+\begin{verbatim}
+List of 1
+ $ axis.title.x: list()
+  ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+ - attr(*, "class")= chr [1:2] "theme" "gg"
+ - attr(*, "complete")= logi FALSE
+ - attr(*, "validate")= logi TRUE
+\end{verbatim}
+
 \begin{figure}[H]
 
 \centering{
@@ -1335,9 +1345,94 @@ compared to 20 items results in a larger improvement for infit over
 item-restscore for the n = 150 condition, but also the n = 250 and n =
 500 conditions for the -2 logits off-target item.
 
+\section{Study 6: Global fit test}\label{study-6-global-fit-test}
+
+While global tests of model fit don't provide any information about
+reasons for misfit when detected, they can be useful together with more
+specific tests such as those demonstrated in this paper. A commonly used
+global goodness-of-fit test is the Likelihood Ratio Test (LRT, Andersen
+1973), which is also implemented in the \texttt{eRm} package. While the
+global test is not central to the purposes of this paper, it could
+provide readers with a familiar test as a reference. Previous simulation
+studies evaluating the LRT has not found it to be sensitive to detect
+multidimensionality (Debelak 2019).
+
+For this simulation, sample sizes were set to 150, 250, 500, 1000, and
+2000, using 1000 simulations for each condition. We will repeat the
+previously used datasets, first with one misfitting item out of 20,
+varying the misfitting items location (0, -1, and -2 logits). Then we
+use three misfitting items and compare 20 and 40 items. And finally, one
+dataset with 10 items and one well-targeted misfitting item.
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\subsection{Results}\label{results-4}
+
+\textsubscript{Source:
+\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
+Notebook}}
+
+\begin{figure}
+
+\begin{minipage}{\linewidth}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-lrt1-1.pdf}}
+
+}
+
+\subcaption{\label{fig-lrt1-1}Across sample sizes and location of misfit
+item}
+
+\end{minipage}%
+\newline
+\begin{minipage}{\linewidth}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/fig-lrt1-2.pdf}}
+
+}
+
+\subcaption{\label{fig-lrt1-2}Across sample sizes and number of items}
+
+\end{minipage}%
+
+\caption{\label{fig-lrt1}Likelihood ratio test detection rate}
+
+\end{figure}%
+
+Results for targeting of the misfit item are summarized in
+Figure~\ref{fig-lrt1}, where the detection rate is reported based on the
+proportion of p-values below .05 in each condition.
+
+LRT performs better than item-restscore for the off-target item
+conditions, especially when targeting was at -2 logits. Otherwise
+performance is similar. Infit is better than LRT for n \textless{} 500
+when targeting = 0, similar at targeting = 1, and LRT is better than
+infit at targeting -2.
+
+Looking at LRT for different number of items and comparing to results
+for infit and item-restscore at their best detection rates for the
+corresponding number of items and sample size, it shows much worse
+performance for 10 items compared to infit and item-restscore at n =
+150, but similar performance at larger sample sizes. For 20 and 40
+items, LRT is similar to infit at all samples sizes, and slightly better
+than item-restscore for n \textless{} 500.
+
 \section{Discussion}\label{discussion}
 
-Some writing remains to be done here\ldots{}
+Assessing item fit and dimensionality should be done using multiple
+methods. Study 6 showed the potential benefits of also looking at the
+global likelihood ratio test when the misfitting item is located -2
+logits away from the sample mean location.
 
 \phantomsection\label{cell-fig-loadloc}
 \begin{figure}[H]
@@ -1356,12 +1451,19 @@ Some writing remains to be done here\ldots{}
 \href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
 Notebook}}
 
-Assessing item fit and dimensionality should be done using multiple
-methods. Item fit and item-restscore should be used in parallel, while
-also examining residual patterns by reviewing standardized factor
-loadings on the first residual contrast (see Figure~\ref{fig-loadloc}
-for an example) as well as Yen's Q3 residual correlations (Christensen,
-Makransky, and Horton 2017).
+Item fit and item-restscore should be used in parallel, while also
+examining residual patterns by reviewing standardized factor loadings on
+the first residual contrast (see Figure~\ref{fig-loadloc} for an
+example) as well as Yen's Q3 residual correlations (Christensen,
+Makransky, and Horton 2017). Regarding residual correlations and
+critical values, the \texttt{easyRasch} package also contains a function
+to use bootstrapping, similarly to the \texttt{RIgetfit()} function, to
+determine the appropriate cutoff. This is described briefly in a blog
+post (Johansson 2024b) and a simulation paper is under preparation.
+Global model fit statistics can also be helpful, even if they do not
+provide any information about causes of misfit. As mentioned in the
+introduction, PCA of residuals is one method, and the Likelihood Ratio
+Test (Andersen 1973) is another. Alexandrowicz (\textbf{2011?})\ldots{}
 
 Item fit in this paper has been assessed using data from all respondents
 in a sample. A useful additional method to evaluate and understand item
@@ -1371,36 +1473,34 @@ is divided into class intervals (Buchardt, Christensen, and Jensen
 
 \subsection{Limitations}\label{limitations}
 
-Number of items could have been varied more and investigated further
-with more variation in sample sizes.
-
-Partial credit model for polytomous data would have been nice to also
-test. Although results regarding detection rate should generalize from
-RM to PCM, maybe the sample size in relation to number of items does not
-easily translate from the dichotomous case?
+The total number of items and the proportion of misfit items clearly
+have effects on detection rate and could have been investigated further
+together with more variations in sample sizes. Partial credit model for
+polytomous data would have been nice to also test. Although results
+regarding detection rate should generalize from RM to PCM, maybe the
+sample size in relation to number of items does not easily translate
+from the dichotomous case?
 
 iterations for the bootstrapped item-restscore - more testing could be
 conducted.
 
 \section{Conclusion}\label{conclusion}
 
-For sample size under 500, rely primarily on item infit with simulation
-based critical values, using 100 iterations with \texttt{RIgetfit()}.
-For sample sizes closer to 500, item-restscore is recommended, either as
-a single-run test, or bootstrapped. With samples larger than 500,
-bootstrapped item-restscore controls false positive rates well, while
-identifying misfitting items at high detection rates. Using 250
-iterations for the bootstrapped item-restscore seems adequate, but more
-testing could be conducted.
+For sample sizes under 500, it seems best to rely primarily on item
+infit with simulation based critical values, using 100 iterations with
+\texttt{RIgetfit()}. For sample sizes closer to 500, item-restscore is
+recommended as primary method, either as a single-run test or
+bootstrapped. With samples larger than 500, bootstrapped item-restscore
+controls false positive rates well, while showing high rates of misfit
+detection. Using 250 iterations for the bootstrapped item-restscore
+seems adequate. In general, both infit and item-restscore are useful in
+the analysis process if you have a sample size below 1000.
 
-Use both infit and item-restscore in your analysis process if you have
-sample size below 1000.
-
-These findings make a good argument for removing one item at a time when
-the analysis indicates misfitting items, starting with the most
-underfitting item. This is especially relevant for \emph{n}
-\textgreater= 500 and when misfitting items are located close to the
-sample mean.
+The findings reported here also make a good argument for removing one
+item at a time when the analysis indicates several misfitting items,
+starting with the most underfitting item. This is especially relevant
+for n \textgreater= 500 and when misfitting items are located close to
+the sample mean.
 
 While the simulations in this paper have all used dichotomous data, all
 functions evaluated in this paper also work with polytomous data using
@@ -1411,6 +1511,11 @@ the Rasch Partial Credit Model.
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-andersen_goodness_1973}
+Andersen, Erling B. 1973. {``A Goodness of Fit Test for the Rasch
+Model.''} \emph{Psychometrika} 38 (1): 123--40.
+\url{https://doi.org/10.1007/BF02291180}.
+
 \bibitem[\citeproctext]{ref-benjamini_controlling_1995}
 Benjamini, Yoav, and Yosef Hochberg. 1995. {``Controlling the {False}
 {Discovery} {Rate}: {A} {Practical} and {Powerful} {Approach} to
@@ -1443,6 +1548,12 @@ Christensen, Karl Bang, Guido Makransky, and Mike Horton. 2017.
 {Correlations}.''} \emph{Applied Psychological Measurement} 41 (3):
 178--94. \url{https://doi.org/10.1177/0146621616677520}.
 
+\bibitem[\citeproctext]{ref-debelak_evaluation_2019}
+Debelak, Rudolf. 2019. {``An {Evaluation} of {Overall}
+{Goodness}-of-{Fit} {Tests} for the {Rasch} {Model}.''} \emph{Frontiers
+in Psychology} 9 (January).
+\url{https://doi.org/10.3389/fpsyg.2018.02710}.
+
 \bibitem[\citeproctext]{ref-goodman_measures_1954}
 Goodman, Leo A., and William H. Kruskal. 1954. {``Measures of
 {Association} for {Cross} {Classifications}.''} \emph{Journal of the
@@ -1450,8 +1561,13 @@ American Statistical Association} 49 (268): 732--64.
 \url{https://doi.org/10.2307/2281536}.
 
 \bibitem[\citeproctext]{ref-easyrasch}
-Johansson, Magnus. 2024. \emph{easyRasch: Psychometric Analysis in r
+Johansson, Magnus. 2024a. \emph{easyRasch: Psychometric Analysis in r
 with Rasch Measurement Theory}. \url{https://github.com/pgmj/easyRasch}.
+
+\bibitem[\citeproctext]{ref-johansson_simulation_2024}
+---------. 2024b. {``Simulation Based Cutoff Values for {Rasch} Item Fit
+and Residual Correlations.''} \emph{R, Rasch, Etc}.
+\url{https://pgmj.github.io/simcutoffs.html}.
 
 \bibitem[\citeproctext]{ref-kreiner_note_2011}
 Kreiner, Svend. 2011. {``A {Note} on {Item}--{Restscore} {Association}
@@ -1551,7 +1667,7 @@ attached base packages:
 
 other attached packages:
  [1] showtext_0.9-7    showtextdb_3.0    sysfonts_0.8.9    arrow_16.1.0     
- [5] easyRasch_0.3.3   doParallel_1.0.17 iterators_1.0.14  furrr_0.3.1      
+ [5] easyRasch_0.3.3.2 doParallel_1.0.17 iterators_1.0.14  furrr_0.3.1      
  [9] future_1.34.0     foreach_1.5.2     janitor_2.2.0     hexbin_1.28.4    
 [13] catR_3.17         glue_1.8.0        ggrepel_0.9.6     patchwork_1.3.0  
 [17] reshape_0.8.9     matrixStats_1.4.1 psychotree_0.16-1 psychotools_0.7-4
