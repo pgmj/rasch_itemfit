@@ -13,9 +13,13 @@ execute:
 format:
   html:
     toc: true
+
   pdf:
     number-sections: false
+    notebook-links: global
+
   apaquarto-docx:
     fig-dpi: 175
     number-sections: false
+
 
