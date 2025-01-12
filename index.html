@@ -249,7 +249,7 @@ window.Quarto = {
 
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>This paper presents a series of simulations conducted to evaluate methods to detect item misfit due to multidimensionality in Rasch models. First, conditional item infit and outfit <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">Müller 2020</a>)</span> will be under scrutiny. Second, item infit will be compared to the item-restscore method [<span class="citation" data-cites="kreiner_note_2011">Kreiner (<a href="#ref-kreiner_note_2011" role="doc-biblioref">2011</a>)</span>;christensen_item_2013]. Third, a bootstrap method for item-restscore will be presented and tested. This paper is intended for a target group of those who make practical use of Rasch analysis and wish to better understand the expected performance of methods available. As such, we refer readers interested in mathematical and statistical descriptions of the methods to referenced papers detailing this aspect. Only two simple performance metrics will be presented in the results: correct detection rate and false positive rate, both in percentages.</p>
+<p>This paper presents a series of simulations conducted to evaluate methods to detect item misfit due to multidimensionality in Rasch models. First, conditional item infit and outfit <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">Müller 2020</a>)</span> will be under scrutiny. Second, item infit will be compared to the item-restscore method <span class="citation" data-cites="kreiner_note_2011 christensen_item_2013">(<a href="#ref-kreiner_note_2011" role="doc-biblioref">Kreiner 2011</a>; <a href="#ref-christensen_item_2013" role="doc-biblioref">Christensen and Kreiner 2013</a>)</span>. Third, a bootstrap method for item-restscore will be presented and tested. This paper is intended for a target group of those who make practical use of Rasch analysis and wish to better understand the expected performance of methods available. As such, we refer readers interested in mathematical and statistical descriptions of the methods to referenced papers detailing this aspect. Only two simple performance metrics will be presented in the results: correct detection rate and false positive rate, both in percentages.</p>
 <p>The evaluation of item fit under the Rasch model has, in the majority of published psychometric papers, been conducted using various more or less arbitrary rule-of-thumb critical values. Regarding mean squared (MSQ) item residuals, which should ideally be centered around 1.0, there are two sources often cited. One is the book by Bond &amp; Fox <span class="citation" data-cites="bond_applying_2015">(<a href="#ref-bond_applying_2015" role="doc-biblioref">2015</a>)</span>, which has garnered around 12 000 citations according to Google Scholar]. It contains a table with rule-of-thumb recommendations for various settings, ranging from 0.8–1.2 to 0.5–1.7. Another frequently seen source, which is not an actual peer-reviewed publication and thus lacks citation counts, is the webpage at <a href="https://rasch.org/rmt/rmt162f.htm" class="uri">https://rasch.org/rmt/rmt162f.htm</a>, where Mike Linacre states 0.5-1.5 to be “productive for measurement”. Neither of these sources seem to rely on simulation studies to support their recommendations. While it is reasonable to accept a non-perfect fit to the Rasch model and also describe what one defines as acceptable levels of misfit, such recommendations would seem less arbitrary if related to simulations showing the range of item fit values found when simulating data that fit the Rasch model.</p>
 <p>Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span> used simulation to show how the range of critical values for conditional item infit varies with sample size. The expected average conditional item infit range was described by Müller as fairly well captured by Smith’s rule-of-thumb formula 1±2/<span class="math inline">\(\sqrt{n}\)</span> <span class="citation" data-cites="smith_using_1998">(<a href="#ref-smith_using_1998" role="doc-biblioref">R. M. Smith, Schumacker, and Bush 1998</a>)</span>. However, the average range does not apply for all items within a dataset, since item location relative to sample location also affects the model expected item fit. This means that some items within a set of items varying in location are likely to have item fit values outside Smith’s average value range while still fitting the Rasch model. Although primarily affecte by sample size, each item has its variations in the range of expected item fit.</p>
 <p>While evaluation of item fit is an essential part of evaluating unidimensionality, it is recommended to use multiple methods. Standardized residuals are frequently analyzed, commonly with principal component analysis (PCA) and an analysis of residual correlations amongst item pairs, often referred to as Yen’s Q3. Chou and Wang <span class="citation" data-cites="chou_checking_2010">(<a href="#ref-chou_checking_2010" role="doc-biblioref">2010</a>)</span> showed that the critical value for PCA of residuals to support unidimensionality suggested by Smith <span class="citation" data-cites="smith_detecting_2002">(<a href="#ref-smith_detecting_2002" role="doc-biblioref">2002</a>)</span>, using the largest eigenvalue &lt; 1.5, is not generally applicable since it is affected by both test length and sample size. Christensen and colleagues <span class="citation" data-cites="christensen_critical_2017">(<a href="#ref-christensen_critical_2017" role="doc-biblioref">2017</a>)</span> used simulation methods to illustrate the expected range of residual correlations under different conditions. Both of these papers provide important information about the dubiousness of using rule-of-thumb critical values when the empirical distribution of a statistic is not known, but they leave practitioners without tools to determine appropriate cutoffs to apply in practical analysis work.</p>
@@ -289,7 +289,7 @@ window.Quarto = {
 <p>The function <code>RIgetfit()</code> from the <code>easyRasch</code> R package is tested here. Its source code can be accessed on GitHub, see <a href="#sec-addmat" class="quarto-xref">Section&nbsp;11</a>. The function offers the user a choice of the number of bootstrap iterations to use to determine the critical cutoff values for each item’s infit and outfit. Our main interest in this study is two-fold. We want to test variations in the number of iterations used in <code>RIgetfit()</code> and evaluate how well the critical values based on the parametric bootstrapping procedure detect misfitting items. Additionally, a comparison between infit and outfit statistics in terms of detection rate and false positive rate will be conducted.</p>
 <p>20 dichotomous items are used, with one item misfitting. Item locations are the same throughout all studies unless otherwise noted. The location of the misfitting item relative to the sample theta mean was selected to be approximately 0, -1, and -2 logits. Three separate datasets were generated with these variations, each with 10 000 simulated respondents. One dataset with all three misfitting items was also generated, using the same sample size.</p>
 <p>Then the <code>RIitemfit()</code> function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. <code>RIitemfit()</code> has a default (user-modifiable) setting to slightly truncate the distribution of values using <code>stats::quantile()</code> at 0.001 and 0.999 to remove extreme values. An example is demonstrated in <a href="#tbl-itemfit1" class="quarto-xref">Table&nbsp;1</a>, using a subset of the items used in the simulations. <a href="#fig-itemfit1" class="quarto-xref">Figure&nbsp;1</a> provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith’s rule-of-thumb regarding infit (1±2/<span class="math inline">\(\sqrt{n}\)</span>) would be 0.9-1.1 for a sample size of 400.</p>
-<p>This study was rather computationally demanding since each simulation run entailed 100-400 underlying bootstrap iterations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4<em>3</em>3 = 36 conditions. Each combination used 200 simulation runs. The simulations took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.</p>
+<p>This study was rather computationally demanding since each simulation run entailed 100-400 underlying bootstrap iterations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4 * 3 * 3 = 36 conditions. Each combination used 200 simulation runs. The simulations took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.</p>
 <div class="cell">
 <div id="tbl-itemfit1" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -727,141 +727,6 @@ Table&nbsp;2: Item-restscore summary results across all sample sizes
 <section id="study-4-bootstrapped-item-restscore" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Study 4: Bootstrapped item-restscore</h1>
 <p>For this set of simulations, we will use a non-parametric bootstrap procedure with item-restscore. The difference from the parametric bootstrap is that the non-parametric bootstrap samples with replacement directly from the observed response data. First, based on the above problematic sample size of 2000 when three items are misfitting, we will use the bootstrap function to sample with replacement using n = 800 and 250 bootstrap samples. The function <code>RIbootRestscore()</code> from the <code>easyRasch</code> package will be used.</p>
-<div class="cell" data-tbl-colwidths="[60,40]">
-<div id="tbl-bootir" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-colwidths="[60,40]">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-bootir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3: Example output from <code>RIbootRestscore()</code>
-</figcaption>
-<div aria-describedby="tbl-bootir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<table class="cell caption-top table table-sm table-striped small">
-<colgroup>
-<col style="width: 43%">
-<col style="width: 28%">
-<col style="width: 28%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Item</th>
-<th style="text-align: left;">Item-restscore result</th>
-<th style="text-align: right;">Percent of iterations</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">V9</td>
-<td style="text-align: left;">underfit</td>
-<td style="text-align: right;">100.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">V18</td>
-<td style="text-align: left;">underfit</td>
-<td style="text-align: right;">99.6</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V13</td>
-<td style="text-align: left;">underfit</td>
-<td style="text-align: right;">83.2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">V14</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">42.8</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V10</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">38.4</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">V6</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">32.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V20</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">31.2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">V7</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">26.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V16</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">21.2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">V12</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">17.6</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V5</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">17.6</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">V2</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">16.8</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V8</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">8.8</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">V3</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">7.6</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V1</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">2.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">V17</td>
-<td style="text-align: left;">underfit</td>
-<td style="text-align: right;">2.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V11</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">0.8</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">V4</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">0.8</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V15</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">0.4</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">V19</td>
-<td style="text-align: left;">overfit</td>
-<td style="text-align: right;">0.4</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">V19</td>
-<td style="text-align: left;">underfit</td>
-<td style="text-align: right;">0.4</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</figure>
-</div>
-</div>
-<p><code>RIbootRestscore()</code> is demonstrated using a single sample in <a href="#tbl-bootir" class="quarto-xref">Table&nbsp;3</a>, where the table is sorted on the percent of iterations. The runtime was approximately 10-12 seconds using 8 CPU cores on a Macbook Pro M1 Max. In the simulation, we will repeat this procedure 500 times and report the average and standard deviation for the percent indicating misfit for each item.</p>
 <p>Second, we will also apply the bootstrapped item-restscore method to sample sizes 150 and 250, using the complete sample for the same bootstrap procedure to see if this produces more useful information than previously tested strategies for identifying misfitting items.</p>
 <section id="results-3" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="results-3"><span class="header-section-number">6.1</span> Results</h2>
@@ -882,7 +747,7 @@ Figure&nbsp;14: Item-restscore bootstrap results
 <div id="tbl-irb0mis" class="quarto-layout-panel anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-irb0mis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
+Table&nbsp;3: Summary statistics for item-restscore bootstrap simulation
 </figcaption>
 <div aria-describedby="tbl-irb0mis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
@@ -1102,7 +967,7 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation
 </div>
 </figure>
 </div>
-<p><a href="#fig-irb0all" class="quarto-xref">Figure&nbsp;14</a> shows that there is variation in the false positive rate and it is nearly always indicating overfit, while the misfitting items are only indicated as underfit. The summary statistics in <a href="#tbl-irb0mis" class="quarto-xref">Table&nbsp;4</a> show that there can be quite a bit of variation for false positives, but the clear majority of results are below 50%. 3 items have 95th percentile values above 50, with the highest at 58.8.</p>
+<p><a href="#fig-irb0all" class="quarto-xref">Figure&nbsp;14</a> shows that there is variation in the false positive rate and it is nearly always indicating overfit, while the misfitting items are only indicated as underfit. The summary statistics in <a href="#tbl-irb0mis" class="quarto-xref">Table&nbsp;3</a> show that there can be quite a bit of variation for false positives, but the clear majority of results are below 50%. 3 items have 95th percentile values above 50, with the highest at 58.8.</p>
 </section>
 <section id="small-sample-n-150" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="small-sample-n-150"><span class="header-section-number">6.2</span> Small sample (n = 150)</h2>
@@ -1121,12 +986,12 @@ Figure&nbsp;15
 </div>
 </div>
 </div>
-<p>Item-restscore bootstrapping improves slightly on the single instance of item-restscore for the n = 150 condition (see <a href="#fig-irboot150" class="quarto-xref">Figure&nbsp;15</a>). When comparing to the previous results in <a href="#fig-itemrestscore2" class="quarto-xref">Figure&nbsp;12</a>, where the detection rate for the same sample size was at 49.2%, 14.6%, and 34.6% (for items 9, 13, and 18 respectively), the corresponding median values from the bootstrapped item-restscore with 250 iterations were 52.4%, 19.2%, and 38.4%. Using 500 bootstrap iterations did not result in relevant improvements over 250 iterations (see <a href="#tbl-irb150mis" class="quarto-xref">Table&nbsp;5</a>). Compared to the results using infit (<a href="#fig-ifb3" class="quarto-xref">Figure&nbsp;10</a>), with detection rates of 59.2%, 19%, and 51.8%, item-restscore inferior also when bootstrapped.</p>
+<p>Item-restscore bootstrapping improves slightly on the single instance of item-restscore for the n = 150 condition (see <a href="#fig-irboot150" class="quarto-xref">Figure&nbsp;15</a>). When comparing to the previous results in <a href="#fig-itemrestscore2" class="quarto-xref">Figure&nbsp;12</a>, where the detection rate for the same sample size was at 49.2%, 14.6%, and 34.6% (for items 9, 13, and 18 respectively), the corresponding median values from the bootstrapped item-restscore with 250 iterations were 52.4%, 19.2%, and 38.4%. Using 500 bootstrap iterations did not result in relevant improvements over 250 iterations (see <a href="#tbl-irb150mis" class="quarto-xref">Table&nbsp;4</a>). Compared to the results using infit (<a href="#fig-ifb3" class="quarto-xref">Figure&nbsp;10</a>), with detection rates of 59.2%, 19%, and 51.8%, item-restscore inferior also when bootstrapped.</p>
 <div class="cell">
 <div id="tbl-irb150mis" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-irb150mis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5: Summary statistics for item-restscore bootstrap simulation (n = 150)
+Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation (n = 150)
 </figcaption>
 <div aria-describedby="tbl-irb150mis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1283,19 +1148,11 @@ Figure&nbsp;20: Detection rate for item-restscore and infit for 10 items
 </div>
 </div>
 <div id="cell-fig-comp2040" class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>List of 1
- $ axis.title.x: list()
-  ..- attr(*, "class")= chr [1:2] "element_blank" "element"
- - attr(*, "class")= chr [1:2] "theme" "gg"
- - attr(*, "complete")= logi FALSE
- - attr(*, "validate")= logi TRUE</code></pre>
-</div>
 <div class="cell-output-display">
 <div id="fig-comp2040" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-comp2040-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-comp2040-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21" title="Figure&nbsp;21: Detection rate for item-restscore and infit for 20 and 40 items"><img src="index_files/figure-html/fig-comp2040-1.png" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-comp2040-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21" title="Figure&nbsp;21: Detection rate for item-restscore and infit for 20 and 40 items"><img src="index_files/figure-html/fig-comp2040-1.png" class="img-fluid figure-img" width="768"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comp2040-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;21: Detection rate for item-restscore and infit for 20 and 40 items

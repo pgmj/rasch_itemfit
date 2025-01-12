@@ -238,7 +238,7 @@ This paper presents a series of simulations conducted to evaluate
 methods to detect item misfit due to multidimensionality in Rasch
 models. First, conditional item infit and outfit (Müller 2020) will be
 under scrutiny. Second, item infit will be compared to the
-item-restscore method {[}Kreiner (2011);christensen\_item\_2013{]}.
+item-restscore method (Kreiner 2011; Christensen and Kreiner 2013).
 Third, a bootstrap method for item-restscore will be presented and
 tested. This paper is intended for a target group of those who make
 practical use of Rasch analysis and wish to better understand the
@@ -466,7 +466,7 @@ run entailed 100-400 underlying bootstrap iterations. The sample sizes
 used were 150, 250, 500, and 1000. The number of iterations to determine
 cutoff values were 100, 200, and 400. Sample size and iteration
 conditions were fully crossed with each other and the three different
-targeting variations of the one misfitting item, resulting in 4\emph{3}3
+targeting variations of the one misfitting item, resulting in 4 * 3 * 3
 = 36 conditions. Each combination used 200 simulation runs. The
 simulations took about 12 hours to run on a Macbook Pro Max M1 using 9
 CPU cores.
@@ -875,59 +875,6 @@ use the bootstrap function to sample with replacement using n = 800 and
 250 bootstrap samples. The function \texttt{RIbootRestscore()} from the
 \texttt{easyRasch} package will be used.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4300}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2900}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2900}}@{}}
-
-\caption{\label{tbl-bootir}Example output from
-\texttt{RIbootRestscore()}}
-
-\tabularnewline
-
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Item
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Item-restscore result
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-Percent of iterations
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-V9 & underfit & 100.0 \\
-V18 & underfit & 99.6 \\
-V13 & underfit & 96.8 \\
-V2 & overfit & 67.2 \\
-V10 & overfit & 36.8 \\
-V6 & overfit & 35.2 \\
-V7 & overfit & 23.6 \\
-V5 & overfit & 19.6 \\
-V8 & overfit & 18.0 \\
-V15 & overfit & 17.2 \\
-V4 & overfit & 13.2 \\
-V16 & overfit & 9.6 \\
-V11 & overfit & 8.4 \\
-V20 & overfit & 7.6 \\
-V1 & overfit & 6.4 \\
-V3 & overfit & 4.4 \\
-V17 & overfit & 3.6 \\
-V14 & overfit & 1.6 \\
-V19 & overfit & 1.2 \\
-V12 & overfit & 0.4 \\
-V3 & underfit & 0.4 \\
-
-\end{longtable}
-
-\texttt{RIbootRestscore()} is demonstrated using a single sample in
-Table~\ref{tbl-bootir}, where the table is sorted on the percent of
-iterations. The runtime was approximately 10-12 seconds using 8 CPU
-cores on a Macbook Pro M1 Max. In the simulation, we will repeat this
-procedure 500 times and report the average and standard deviation for
-the percent indicating misfit for each item.
-
 Second, we will also apply the bootstrapped item-restscore method to
 sample sizes 150 and 250, using the complete sample for the same
 bootstrap procedure to see if this produces more useful information than
@@ -1168,15 +1115,6 @@ for 10 items}
 \end{figure}%
 
 \phantomsection\label{cell-fig-comp2040}
-\begin{verbatim}
-List of 1
- $ axis.title.x: list()
-  ..- attr(*, "class")= chr [1:2] "element_blank" "element"
- - attr(*, "class")= chr [1:2] "theme" "gg"
- - attr(*, "complete")= logi FALSE
- - attr(*, "validate")= logi TRUE
-\end{verbatim}
-
 \begin{figure}[H]
 
 \centering{
