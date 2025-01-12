@@ -236,9 +236,9 @@ eliminating items.
 
 This paper presents a series of simulations conducted to evaluate
 methods to detect item misfit due to multidimensionality in Rasch
-models. First, conditional item infit and outfit (Müller 2020) will be
+models. First, conditional item infit and outfit (Müller, 2020) will be
 under scrutiny. Second, item infit will be compared to the
-item-restscore method (Kreiner 2011; Christensen and Kreiner 2013).
+item-restscore method (Christensen \& Kreiner, 2013; Kreiner, 2011).
 Third, a bootstrap method for item-restscore will be presented and
 tested. This paper is intended for a target group of those who make
 practical use of Rasch analysis and wish to better understand the
@@ -270,14 +270,14 @@ the Rasch model.
 Müller (2020) used simulation to show how the range of critical values
 for conditional item infit varies with sample size. The expected average
 conditional item infit range was described by Müller as fairly well
-captured by Smith's rule-of-thumb formula 1±2/\(\sqrt{n}\) (R. M. Smith,
-Schumacker, and Bush 1998). However, the average range does not apply
-for all items within a dataset, since item location relative to sample
-location also affects the model expected item fit. This means that some
-items within a set of items varying in location are likely to have item
-fit values outside Smith's average value range while still fitting the
-Rasch model. Although primarily affecte by sample size, each item has
-its variations in the range of expected item fit.
+captured by Smith's rule-of-thumb formula 1±2/\(\sqrt{n}\) (R. M. Smith
+et al., 1998). However, the average range does not apply for all items
+within a dataset, since item location relative to sample location also
+affects the model expected item fit. This means that some items within a
+set of items varying in location are likely to have item fit values
+outside Smith's average value range while still fitting the Rasch model.
+Although primarily affecte by sample size, each item has its variations
+in the range of expected item fit.
 
 While evaluation of item fit is an essential part of evaluating
 unidimensionality, it is recommended to use multiple methods.
@@ -300,7 +300,7 @@ fit critical cutoff values that are relevant for a specific sample and
 item set. The procedure uses the properties of the available data and
 simulates multiple new response datasets that fit the Rasch model to
 determine the range of plausible item fit values for each item. The R
-package \texttt{easyRasch} (Johansson 2024a) includes a function to
+package \texttt{easyRasch} (Johansson, 2024a) includes a function to
 determine item infit and outfit cutoff values using this method and will
 be tested in the simulation studies in this paper.
 
@@ -312,29 +312,29 @@ appropriate critical values for commonly used model fit metrics for
 models using ordinal or interval data.
 
 It is important to note that the conditional item fit described by
-Müller (2020) and implemented in the \texttt{iarm} R package (Mueller
-and Santiago 2022) should not be confused with the unconditional item
-fit implemented in software such as Winsteps and RUMM2030, as well as
-all R packages except \texttt{iarm}. Unconditional item fit can result
-in unreliable item fit in sample sizes as small as 200 with an
-increasing probability of problems as sample size increases. Readers are
-strongly recommended to read Müller's paper to fully understand the
-issues with unconditional item fit. Additionally, the experienced Rasch
-analyst will perhaps wonder why the Wilson-Hilferty transformed Z
-statistic (often abbreviated ZSTD), which is based on unconditional MSQ
-is not included in this analysis. This is also explained in Müller's
-paper, where she describes both the notorious problems with sample size
-and shows that conditional item fit makes ZSTD superfluous. The
-\texttt{easyRasch} package, which is used in this paper, uses the
-\texttt{iarm} implementation of conditional item fit.
+Müller (2020) and implemented in the \texttt{iarm} R package (Mueller \&
+Santiago, 2022) should not be confused with the unconditional item fit
+implemented in software such as Winsteps and RUMM2030, as well as all R
+packages except \texttt{iarm}. Unconditional item fit can result in
+unreliable item fit in sample sizes as small as 200 with an increasing
+probability of problems as sample size increases. Readers are strongly
+recommended to read Müller's paper to fully understand the issues with
+unconditional item fit. Additionally, the experienced Rasch analyst will
+perhaps wonder why the Wilson-Hilferty transformed Z statistic (often
+abbreviated ZSTD), which is based on unconditional MSQ is not included
+in this analysis. This is also explained in Müller's paper, where she
+describes both the notorious problems with sample size and shows that
+conditional item fit makes ZSTD superfluous. The \texttt{easyRasch}
+package, which is used in this paper, uses the \texttt{iarm}
+implementation of conditional item fit.
 
 Currently, there are no published studies on the performance the
 item-restscore method, as described by Kreiner and Christensen
-{[}Kreiner (2011);christensen\_item\_2013{]}, in detecting misfitting
+(Christensen \& Kreiner, 2013; Kreiner, 2011), in detecting misfitting
 items. Comparing it with an improved version of the long used item
 infit/outfit methods seemed like a good setting to evaluate
-item-restscore. The conditional likelihood ratio test (Andersen 1973) is
-included in Study 6, since it is a global test of fit that many are
+item-restscore. The conditional likelihood ratio test (Andersen, 1973)
+is included in Study 6, since it is a global test of fit that many are
 likely to be familiar with. As such, it also serves as a point of
 reference.
 
@@ -371,7 +371,7 @@ of item locations ranging from -2 to 2 logits were generated for
 dichotomous items, using
 \texttt{runif(n\ =\ 20,\ min\ =\ -2,\ max\ =\ 2)}. Third, the theta
 values were used to simulate item responses for participants, using
-\texttt{sim.xdim()} from the \texttt{eRm} package (Mair and Hatzinger
+\texttt{sim.xdim()} from the \texttt{eRm} package (Mair \& Hatzinger,
 2007), which allows the simulation of multidimensional response data.
 Multiple datasets with 10 000 respondents each were generated using the
 same item and person parameters, varying the targeting of the misfitting
@@ -387,10 +387,10 @@ The general procedure for the parametric bootstrapping is as follows:
 \tightlist
 \item
   Estimation of item locations based on simulated item response data,
-  using conditional maximum likelihood (CML, Mair and Hatzinger 2007).
+  using conditional maximum likelihood (CML, Mair \& Hatzinger, 2007).
 \item
   Estimation of sample theta values using weighted maximum likelihood
-  (Warm 1989).
+  (Warm, 1989).
 \item
   Simulation of new response data that fit the Rasch model, using the
   estimated item locations and theta values.
@@ -399,8 +399,8 @@ The general procedure for the parametric bootstrapping is as follows:
   using CML.
 \item
   Based on step 4, calculation of conditional item infit and outfit
-  (Müller 2020; Mueller and Santiago 2022) and/or item-restscore metrics
-  (Kreiner 2011; Mueller and Santiago 2022).
+  (Mueller \& Santiago, 2022; Müller, 2020) and/or item-restscore
+  metrics (Kreiner, 2011; Mueller \& Santiago, 2022).
 \end{enumerate}
 
 Steps three and four were iterated over, using resampling with
@@ -417,7 +417,7 @@ Study 1: Item infit and outfit
 
 Item mean square standardized residuals are either unweighted, which is
 referred to as ``outfit'', or information weighted, also known as
-``infit'' (Ostini and Nering 2006, 86--87). Outfit is sensitive to
+``infit'' (Ostini \& Nering, 2006, pp. 86--87). Outfit is sensitive to
 outliers, while infit is much less affected by outliers. Both infit and
 outfit are based on individual response residuals. For details on
 conditional item fit we refer to the previously mentioned paper by
@@ -670,12 +670,12 @@ Study 2: Item-restscore
 
 Item-restscore is a metric that compares an expected correlation with
 the observed correlation, using Goodman and Kruskal's \(\gamma\)
-(Goodman and Kruskal 1954; Kreiner 2011). Lower observed values than
+(Goodman \& Kruskal, 1954; Kreiner, 2011). Lower observed values than
 expected indicate that an item is underfit to the Rasch model, while
 higher values indicate overfit. The item-restscore function used in this
-simulation is from the \texttt{iarm} package (Mueller and Santiago 2022)
-and outputs Benjamini-Hochberg corrected \emph{p}-values (Benjamini and
-Hochberg 1995), which are used to determine whether the differences
+simulation is from the \texttt{iarm} package (Mueller \& Santiago, 2022)
+and outputs Benjamini-Hochberg corrected \emph{p}-values (Benjamini \&
+Hochberg, 1995), which are used to determine whether the differences
 between the observed and expected values are statistically significant
 (using \emph{p} \textless{} .05 as critical value) for each item. The
 data and procedure in this study follow the same structure as Study 1,
@@ -1141,13 +1141,13 @@ Study 6: Conditional likelihood ratio test
 While global tests of model fit don't provide any information about
 reasons for misfit when detected, they can be useful together with more
 specific tests such as those demonstrated in this paper. A commonly used
-global goodness-of-fit test is the Likelihood Ratio Test (LRT, Andersen
+global goodness-of-fit test is the Likelihood Ratio Test (LRT, Andersen,
 1973), which is also implemented in the \texttt{eRm} package. While the
 global test is not central to the purposes of this paper (detecting item
 misfit), it could provide readers with a familiar test as a reference
 and perhaps aid the item-focused methods in determining misfit. Previous
 simulation studies evaluating the LRT have found it to not be sensitive
-to detect multidimensionality (Debelak 2019).
+to detect multidimensionality (Debelak, 2019).
 
 For this simulation, sample sizes were set to 150, 250, 500, 1000, and
 2000, using 1000 simulations for each condition. Study 6 follows the
@@ -1271,19 +1271,19 @@ Item fit and item-restscore are recommended to be used in parallel,
 while also examining residual patterns by reviewing standardized factor
 loadings on the first residual contrast (see Figure~\ref{fig-loadloc}
 for an example using n = 400) as well as Yen's Q3 residual correlations
-(Christensen, Makransky, and Horton 2017). Regarding residual
-correlations and critical values, the \texttt{easyRasch} package also
-contains a function to use bootstrapping (\texttt{RIgetResidCor()}),
-similar to the \texttt{RIgetfit()} function, to determine the
-appropriate cutoff. This is described briefly in a blog post (Johansson
-2024b) and a simulation paper is under preparation.
+(Christensen et al., 2017). Regarding residual correlations and critical
+values, the \texttt{easyRasch} package also contains a function to use
+bootstrapping (\texttt{RIgetResidCor()}), similar to the
+\texttt{RIgetfit()} function, to determine the appropriate cutoff. This
+is described briefly in a blog post (Johansson, 2024b) and a simulation
+paper is under preparation.
 
 Item fit in this paper has been assessed using data from individual
 respondent residuals in a sample. A useful additional method to evaluate
 and understand item fit or misfit is to inspect item characteristic
 curves where the sample is divided into class intervals based on their
-total score (Buchardt, Christensen, and Jensen 2023) and the group
-residuals are inspected.
+total score (Buchardt et al., 2023) and the group residuals are
+inspected.
 
 While the simulations in this paper have all used dichotomous data, all
 functions evaluated from the \texttt{easyRasch} package in this paper
@@ -1294,7 +1294,7 @@ also work with polytomous data using the Rasch Partial Credit Model.
 The total number of items and the proportion of misfit items clearly
 have effects on detection rate and could have been investigated further
 using more variations in sample sizes. The Rasch partial credit model
-for polytomous data (PCM, Masters 1982) would have been useful to
+for polytomous data (PCM, Masters, 1982) would have been useful to
 include in a comparison study. When testing the bootstrapped
 item-restscore method, more variations in the number of bootstrap
 samples (iterations) might have been of interest, although the
@@ -1323,124 +1323,123 @@ References
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
 \bibitem[\citeproctext]{ref-andersen_goodness_1973}
-Andersen, Erling B. 1973. {``A Goodness of Fit Test for the Rasch
-Model.''} \emph{Psychometrika} 38 (1): 123--40.
-\url{https://doi.org/10.1007/BF02291180}.
+Andersen, E. B. (1973). A goodness of fit test for the rasch model.
+\emph{Psychometrika}, \emph{38}(1), 123--140.
+\url{https://doi.org/10.1007/BF02291180}
 
 \bibitem[\citeproctext]{ref-benjamini_controlling_1995}
-Benjamini, Yoav, and Yosef Hochberg. 1995. {``Controlling the {False}
+Benjamini, Y., \& Hochberg, Y. (1995). Controlling the {False}
 {Discovery} {Rate}: {A} {Practical} and {Powerful} {Approach} to
-{Multiple} {Testing}.''} \emph{Journal of the Royal Statistical Society:
-Series B (Methodological)} 57 (1): 289--300.
-\url{https://doi.org/10.1111/j.2517-6161.1995.tb02031.x}.
+{Multiple} {Testing}. \emph{Journal of the Royal Statistical Society:
+Series B (Methodological)}, \emph{57}(1), 289--300.
+\url{https://doi.org/10.1111/j.2517-6161.1995.tb02031.x}
 
 \bibitem[\citeproctext]{ref-bond_applying_2015}
-Bond, Trevor, and Christine M. Fox. 2015. \emph{Applying the {Rasch}
-{Model}: {Fundamental} {Measurement} in the {Human} {Sciences}}. 3rd ed.
-London, UNITED KINGDOM: Routledge.
+Bond, T., \& Fox, C. M. (2015). \emph{Applying the {Rasch} {Model}:
+{Fundamental} {Measurement} in the {Human} {Sciences}} (3rd ed.).
+Routledge.
 
 \bibitem[\citeproctext]{ref-buchardt_visualizing_2023}
-Buchardt, Ann-Sophie, Karl Bang Christensen, and Normann Jensen. 2023.
-{``Visualizing {Rasch} Item Fit Using Conditional Item Characteristic
-Curves in {R}.''} \emph{Psychological Test and Assessment Modeling} 65
-(2): 206--19.
+Buchardt, A.-S., Christensen, K. B., \& Jensen, N. (2023). Visualizing
+{Rasch} item fit using conditional item characteristic curves in {R}.
+\emph{Psychological Test and Assessment Modeling}, \emph{65}(2),
+206--219.
 
 \bibitem[\citeproctext]{ref-chou_checking_2010}
-Chou, Yeh-Tai, and Wen-Chung Wang. 2010. {``Checking {Dimensionality} in
-{Item} {Response} {Models} {With} {Principal} {Component} {Analysis} on
-{Standardized} {Residuals}.''} \emph{Educational and Psychological
-Measurement} 70 (5): 717--31.
-\url{https://doi.org/10.1177/0013164410379322}.
+Chou, Y.-T., \& Wang, W.-C. (2010). Checking {Dimensionality} in {Item}
+{Response} {Models} {With} {Principal} {Component} {Analysis} on
+{Standardized} {Residuals}. \emph{Educational and Psychological
+Measurement}, \emph{70}(5), 717--731.
+\url{https://doi.org/10.1177/0013164410379322}
 
 \bibitem[\citeproctext]{ref-christensen_item_2013}
-Christensen, Karl Bang, and Svend Kreiner. 2013. {``Item {Fit}
-{Statistics}.''} In \emph{Rasch {Models} in {Health}}, 83--104. John
-Wiley \& Sons, Ltd. \url{https://doi.org/10.1002/9781118574454.ch5}.
+Christensen, K. B., \& Kreiner, S. (2013). Item {Fit} {Statistics}. In
+\emph{Rasch {Models} in {Health}} (pp. 83--104). John Wiley \& Sons,
+Ltd. \url{https://doi.org/10.1002/9781118574454.ch5}
 
 \bibitem[\citeproctext]{ref-christensen_critical_2017}
-Christensen, Karl Bang, Guido Makransky, and Mike Horton. 2017.
-{``Critical {Values} for {Yen}'s {Q3}: {Identification} of {Local}
-{Dependence} in the {Rasch} {Model} {Using} {Residual}
-{Correlations}.''} \emph{Applied Psychological Measurement} 41 (3):
-178--94. \url{https://doi.org/10.1177/0146621616677520}.
+Christensen, K. B., Makransky, G., \& Horton, M. (2017). Critical
+{Values} for {Yen}'s {Q3}: {Identification} of {Local} {Dependence} in
+the {Rasch} {Model} {Using} {Residual} {Correlations}. \emph{Applied
+Psychological Measurement}, \emph{41}(3), 178--194.
+\url{https://doi.org/10.1177/0146621616677520}
 
 \bibitem[\citeproctext]{ref-debelak_evaluation_2019}
-Debelak, Rudolf. 2019. {``An {Evaluation} of {Overall}
-{Goodness}-of-{Fit} {Tests} for the {Rasch} {Model}.''} \emph{Frontiers
-in Psychology} 9 (January).
-\url{https://doi.org/10.3389/fpsyg.2018.02710}.
+Debelak, R. (2019). An {Evaluation} of {Overall} {Goodness}-of-{Fit}
+{Tests} for the {Rasch} {Model}. \emph{Frontiers in Psychology},
+\emph{9}. \url{https://doi.org/10.3389/fpsyg.2018.02710}
 
 \bibitem[\citeproctext]{ref-goodman_measures_1954}
-Goodman, Leo A., and William H. Kruskal. 1954. {``Measures of
-{Association} for {Cross} {Classifications}.''} \emph{Journal of the
-American Statistical Association} 49 (268): 732--64.
-\url{https://doi.org/10.2307/2281536}.
+Goodman, L. A., \& Kruskal, W. H. (1954). Measures of {Association} for
+{Cross} {Classifications}. \emph{Journal of the American Statistical
+Association}, \emph{49}(268), 732--764.
+\url{https://doi.org/10.2307/2281536}
 
 \bibitem[\citeproctext]{ref-easyrasch}
-Johansson, Magnus. 2024a. \emph{easyRasch: Psychometric Analysis in r
-with Rasch Measurement Theory}. \url{https://github.com/pgmj/easyRasch}.
+Johansson, M. (2024a). \emph{easyRasch: Psychometric analysis in r with
+rasch measurement theory}. \url{https://github.com/pgmj/easyRasch}
 
 \bibitem[\citeproctext]{ref-johansson_simulation_2024}
----------. 2024b. {``Simulation Based Cutoff Values for {Rasch} Item Fit
-and Residual Correlations.''} \emph{R, Rasch, Etc}.
-\url{https://pgmj.github.io/simcutoffs.html}.
+Johansson, M. (2024b). Simulation based cutoff values for {Rasch} item
+fit and residual correlations. In \emph{R, Rasch, etc}.
+\url{https://pgmj.github.io/simcutoffs.html}
 
 \bibitem[\citeproctext]{ref-kreiner_note_2011}
-Kreiner, Svend. 2011. {``A {Note} on {Item}--{Restscore} {Association}
-in {Rasch} {Models}.''} \emph{Applied Psychological Measurement} 35 (7):
-557--61. \url{https://doi.org/10.1177/0146621611410227}.
+Kreiner, S. (2011). A {Note} on {Item}--{Restscore} {Association} in
+{Rasch} {Models}. \emph{Applied Psychological Measurement},
+\emph{35}(7), 557--561. \url{https://doi.org/10.1177/0146621611410227}
 
 \bibitem[\citeproctext]{ref-mair_extended_2007}
-Mair, Patrick, and Reinhold Hatzinger. 2007. {``Extended {Rasch}
-{Modeling}: {The} {eRm} {Package} for the {Application} of {IRT}
-{Models} in {R}.''} \emph{Journal of Statistical Software} 20 (1):
-1--20. \url{https://doi.org/10.18637/jss.v020.i09}.
+Mair, P., \& Hatzinger, R. (2007). Extended {Rasch} {Modeling}: {The}
+{eRm} {Package} for the {Application} of {IRT} {Models} in {R}.
+\emph{Journal of Statistical Software}, \emph{20}(1), 1--20.
+\url{https://doi.org/10.18637/jss.v020.i09}
 
 \bibitem[\citeproctext]{ref-masters_rasch_1982}
-Masters, Geoff N. 1982. {``A {Rasch} {Model} for {Partial} {Credit}
-{Scoring}.''} \emph{Psychometrika} 47 (2): 149--74.
-\url{https://doi.org/10.1007/BF02296272}.
+Masters, G. N. (1982). A {Rasch} {Model} for {Partial} {Credit}
+{Scoring}. \emph{Psychometrika}, \emph{47}(2), 149--174.
+\url{https://doi.org/10.1007/BF02296272}
 
 \bibitem[\citeproctext]{ref-mcneish_direct_2024}
-McNeish, Daniel, and Melissa G. Wolf. 2024. {``Direct {Discrepancy}
-{Dynamic} {Fit} {Index} {Cutoffs} for {Arbitrary} {Covariance}
-{Structure} {Models}.''} \emph{Structural Equation Modeling: A
-Multidisciplinary Journal} 31 (5): 835--62.
-\url{https://doi.org/10.1080/10705511.2024.2308005}.
+McNeish, D., \& Wolf, M. G. (2024). Direct {Discrepancy} {Dynamic} {Fit}
+{Index} {Cutoffs} for {Arbitrary} {Covariance} {Structure} {Models}.
+\emph{Structural Equation Modeling: A Multidisciplinary Journal},
+\emph{31}(5), 835--862.
+\url{https://doi.org/10.1080/10705511.2024.2308005}
 
 \bibitem[\citeproctext]{ref-mueller_iarm_2022}
-Mueller, Marianne, and Pedro Henrique Ribeiro Santiago. 2022. {``Iarm:
-{Item} {Analysis} in {Rasch} {Models}.''}
-\url{https://cran.r-project.org/web/packages/iarm/index.html}.
+Mueller, M., \& Santiago, P. H. R. (2022). \emph{Iarm: {Item} {Analysis}
+in {Rasch} {Models}}.
+\url{https://cran.r-project.org/web/packages/iarm/index.html}
 
 \bibitem[\citeproctext]{ref-muller_item_2020}
-Müller, Marianne. 2020. {``Item Fit Statistics for {Rasch} Analysis: Can
-We Trust Them?''} \emph{Journal of Statistical Distributions and
-Applications} 7 (1): 5.
-\url{https://doi.org/10.1186/s40488-020-00108-7}.
+Müller, M. (2020). Item fit statistics for {Rasch} analysis: Can we
+trust them? \emph{Journal of Statistical Distributions and
+Applications}, \emph{7}(1), 5.
+\url{https://doi.org/10.1186/s40488-020-00108-7}
 
 \bibitem[\citeproctext]{ref-ostini_polytomous_2006}
-Ostini, Remo, and Michael Nering. 2006. \emph{Polytomous {Item}
-{Response} {Theory} {Models}}. SAGE Publications, Inc.
-\url{https://doi.org/10.4135/9781412985413}.
+Ostini, R., \& Nering, M. (2006). \emph{Polytomous {Item} {Response}
+{Theory} {Models}}. SAGE Publications, Inc.
+\url{https://doi.org/10.4135/9781412985413}
 
 \bibitem[\citeproctext]{ref-smith_detecting_2002}
-Smith, Everett V. 2002.
-{``\href{https://www.ncbi.nlm.nih.gov/pubmed/12011501}{Detecting and
-Evaluating the Impact of Multidimensionality Using Item Fit Statistics
-and Principal Component Analysis of Residuals}.''} \emph{Journal of
-Applied Measurement} 3 (2): 205--31.
+Smith, E. V. (2002).
+\href{https://www.ncbi.nlm.nih.gov/pubmed/12011501}{Detecting and
+evaluating the impact of multidimensionality using item fit statistics
+and principal component analysis of residuals}. \emph{Journal of Applied
+Measurement}, \emph{3}(2), 205--231.
 
 \bibitem[\citeproctext]{ref-smith_using_1998}
-Smith, R. M., R. E. Schumacker, and M. J. Bush. 1998.
-{``\href{https://www.ncbi.nlm.nih.gov/pubmed/9661732}{Using Item Mean
-Squares to Evaluate Fit to the {Rasch} Model}.''} \emph{Journal of
-Outcome Measurement} 2 (1): 66--78.
+Smith, R. M., Schumacker, R. E., \& Bush, M. J. (1998).
+\href{https://www.ncbi.nlm.nih.gov/pubmed/9661732}{Using item mean
+squares to evaluate fit to the {Rasch} model}. \emph{Journal of Outcome
+Measurement}, \emph{2}(1), 66--78.
 
 \bibitem[\citeproctext]{ref-warm_weighted_1989}
-Warm, Thomas A. 1989. {``Weighted Likelihood Estimation of Ability in
-Item Response Theory.''} \emph{Psychometrika} 54 (3): 427--50.
-\url{https://doi.org/10.1007/BF02294627}.
+Warm, T. A. (1989). Weighted likelihood estimation of ability in item
+response theory. \emph{Psychometrika}, \emph{54}(3), 427--450.
+\url{https://doi.org/10.1007/BF02294627}
 
 \end{CSLReferences}
 
