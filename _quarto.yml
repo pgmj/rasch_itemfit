@@ -1,10 +1,6 @@
 project:
   type: manuscript
 
-repo-url: https://github.com/pgmj/rasch_itemfit
-#osf-url:
-#preprint-url:
-
 execute:
   freeze: auto
   warning: false
@@ -13,7 +9,17 @@ execute:
 format:
   html:
     toc: true
-
+    citations-hover: true
+    crossrefs-hover: true
+    other-links:
+      - text: GitHub repo
+        icon: file-code
+        href: https://github.com/pgmj/rasch_itemfit
+  #    - text: OSF Preprint
+        
+    comments:
+      hypothesis: true
+      
   pdf:
     number-sections: false
     notebook-links: global

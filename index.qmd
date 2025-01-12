@@ -25,7 +25,7 @@ bibliography: references.bib
 number-sections: true
 shorttitle: Detecting item misfit in Rasch models
 notebook-links: global
-repo-url: https://github.com/pgmj/rasch_itemfit
+csl: apa.csl
 editor_options: 
   chunk_output_type: console
 ---
