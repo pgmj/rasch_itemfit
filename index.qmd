@@ -32,7 +32,7 @@ editor_options:
 
 # Introduction
 
-This paper presents a series of simulations conducted to evaluate methods to detect item misfit due to multidimensionality in Rasch models. First, conditional item infit and outfit [@muller_item_2020] will be under scrutiny. Second, item infit will be compared to the item-restscore method [@kreiner_note_2011;christensen_item_2013]. Third, a bootstrap method for item-restscore will be presented and tested. This paper is intended for a target group of those who make practical use of Rasch analysis and wish to better understand the expected performance of methods available. As such, we refer readers interested in mathematical and statistical descriptions of the methods to referenced papers detailing this aspect. Only two simple performance metrics will be presented in the results: correct detection rate and false positive rate, both in percentages.
+This paper presents a series of simulations conducted to evaluate methods to detect item misfit due to multidimensionality in Rasch models. First, conditional item infit and outfit [@muller_item_2020] will be under scrutiny. Second, item infit will be compared to the item-restscore method [@kreiner_note_2011;@christensen_item_2013]. Third, a bootstrap method for item-restscore will be presented and tested. This paper is intended for a target group of those who make practical use of Rasch analysis and wish to better understand the expected performance of methods available. As such, we refer readers interested in mathematical and statistical descriptions of the methods to referenced papers detailing this aspect. Only two simple performance metrics will be presented in the results: correct detection rate and false positive rate, both in percentages.
 
 The evaluation of item fit under the Rasch model has, in the majority of published psychometric papers, been conducted using various more or less arbitrary rule-of-thumb critical values. Regarding mean squared (MSQ) item residuals, which should ideally be centered around 1.0, there are two sources often cited. One is the book by Bond & Fox [-@bond_applying_2015], which has garnered around 12 000 citations according to Google Scholar]. It contains a table with rule-of-thumb recommendations for various settings, ranging from 0.8–1.2 to 0.5–1.7. Another frequently seen source, which is not an actual peer-reviewed publication and thus lacks citation counts, is the webpage at <https://rasch.org/rmt/rmt162f.htm>, where Mike Linacre states 0.5-1.5 to be "productive for measurement". Neither of these sources seem to rely on simulation studies to support their recommendations. While it is reasonable to accept a non-perfect fit to the Rasch model and also describe what one defines as acceptable levels of misfit, such recommendations would seem less arbitrary if related to simulations showing the range of item fit values found when simulating data that fit the Rasch model.
 
@@ -210,7 +210,7 @@ The function `RIgetfit()` from the `easyRasch` R package is tested here. Its sou
 
 Then the `RIitemfit()` function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. `RIitemfit()` has a default (user-modifiable) setting to slightly truncate the distribution of values using `stats::quantile()` at 0.001 and 0.999 to remove extreme values. An example is demonstrated in @tbl-itemfit1, using a subset of the items used in the simulations. @fig-itemfit1 provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith's rule-of-thumb regarding infit (1±2/$\sqrt{n}$) would be 0.9-1.1 for a sample size of 400.
 
-This study was rather computationally demanding since each simulation run entailed 100-400 underlying bootstrap iterations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4*3*3 = 36 conditions. Each combination used 200 simulation runs. The simulations took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.
+This study was rather computationally demanding since each simulation run entailed 100-400 underlying bootstrap iterations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4 * 3 * 3 = 36 conditions. Each combination used 200 simulation runs. The simulations took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.
 
 ```{r}
 #| label: tbl-itemfit1
@@ -457,7 +457,7 @@ ifb %>%
   group_by(targeting, samplesize, sims) %>% 
   filter(!outfit_diff == "no misfit",
          targeting == 0) %>% 
-  count(item, .drop = F) %>% 
+  dplyr::count(item, .drop = F) %>% 
   mutate(Percent = n/200*100) %>% 
     ungroup() %>% 
   mutate(sims = factor(sims, levels = c(100,200,400),
@@ -476,7 +476,7 @@ ifb %>%
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = 0, vjust = -1) +
+            hjust = 0, vjust = -0.3) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
   scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
@@ -877,7 +877,7 @@ ifb3_df %>%
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = -0.5, vjust = -0.5) +
+            hjust = -0.5, vjust = -0.1) +
     geom_text(data = . %>% filter(item == 13),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
@@ -941,7 +941,7 @@ Looking at the performance of infit with three misfitting items (@fig-ifb3), we 
 ```{r}
 #| label: fig-ifb3b
 #| fig-cap: Conditional infit detection rate with three misfitting items
-#| fig-height: 7
+#| fig-height: 5
 
 ifb3c_df <- bind_rows(ifb3c)
 
@@ -973,7 +973,7 @@ ifb3c_df %>%
     geom_text(data = . %>% filter(item == 18),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = -0.5, vjust = 1) +
+            hjust = -0.8, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
   scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
@@ -1097,26 +1097,6 @@ Reviewing the type of misfit identified by item-restscore (see @tbl-overunder), 
 # Study 4: Bootstrapped item-restscore
 
 For this set of simulations, we will use a non-parametric bootstrap procedure with item-restscore. The difference from the parametric bootstrap is that the non-parametric bootstrap samples with replacement directly from the observed response data. First, based on the above problematic sample size of 2000 when three items are misfitting, we will use the bootstrap function to sample with replacement using n = 800 and 250 bootstrap samples. The function `RIbootRestscore()` from the `easyRasch` package will be used. 
-
-```{r}
-#| label: tbl-bootir
-#| tbl-cap: Example output from `RIbootRestscore()`
-#| tbl-colwidths: [60,40]
-#| cache: true
-
-#tic()
-simdata3 %>% 
-  slice_sample(n = 2000) %>% 
-  RIbootRestscore(iterations = 250, samplesize = 800, cpu = 8, output = "dataframe", cutoff = 0) %>% 
-  select(item,item_restscore,percent) %>% 
-  filter(!item_restscore == "no misfit") %>% 
-  arrange(desc(percent)) %>% 
-  set_names(c("Item","Item-restscore result","Percent of iterations")) %>% 
-  knitr::kable()
-#toc()
-```
-
-`RIbootRestscore()` is demonstrated using a single sample in @tbl-bootir, where the table is sorted on the percent of iterations. The runtime was approximately 10-12 seconds using 8 CPU cores on a Macbook Pro M1 Max. In the simulation, we will repeat this procedure 500 times and report the average and standard deviation for the percent indicating misfit for each item.
 
 Second, we will also apply the bootstrapped item-restscore method to sample sizes 150 and 250, using the complete sample for the same bootstrap procedure to see if this produces more useful information than previously tested strategies for identifying misfitting items.
 
@@ -1532,7 +1512,7 @@ ifb10_df %>%
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = 0, vjust = 2) +
+            hjust = 0.5, vjust = 1.5) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
   scale_x_discrete('Item') +
   guides(fill = "none") +
@@ -1559,7 +1539,7 @@ ir10_df %>%
   geom_col(aes(fill = ifelse(Percent > 5, "a","b"))) +
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), position = position_dodge(width = 0.9),
-            hjust = 0, vjust = 2) +
+            hjust = 0.5, vjust = 1.5) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
   scale_x_discrete() +
   guides(fill = "none") +
@@ -1762,7 +1742,7 @@ dfk10 %>%
   geom_col(position = "dodge") +
   geom_text(aes(label = paste0(Percent,"%"), y = 8), color = "white",
             position = position_dodge(width = 0.9),
-            size = 3) +
+            size = 3.3) +
   facet_grid(samplesize ~ n_items) +
   theme_rise(fontfamily = "sans") +
   labs(y = "Detection rate in percent",
@@ -1777,6 +1757,7 @@ dfk10 %>%
 #| label: fig-comp2040
 #| fig-cap: Detection rate for item-restscore and infit for 20 and 40 items
 #| fig-height: 5
+#| fig-width: 8
 dfk2040 %>% 
   mutate(item = as.numeric(item)) %>% 
   filter(item %in% c(9,18,13),
@@ -1787,6 +1768,7 @@ dfk2040 %>%
                                                           "Item 13 (location -2)"),
                        ordered = T),
          n_items = factor(n_items, levels = c(20,40), labels = c("20 items","40 items"))) %>% 
+  mutate(Method = factor(Method, labels = c("Conditional\ninfit","Item-\nrestscore"))) %>% 
 
   ggplot(aes(x = item, y = Percent, fill = Method)) +
   geom_col(position = "dodge") +
@@ -1799,7 +1781,7 @@ dfk2040 %>%
        title = "Detection rate for item-restscore and infit across sample sizes and number of items",
        subtitle = "Three items misfitting.") +
   scale_fill_brewer(type = "qual", palette = "Dark2") +
-  scale_x_discrete(guide = guide_axis(n.dodge = 2))
+  scale_x_discrete(guide = guide_axis(n.dodge = 2)) +
   theme(axis.title.x = element_blank())
   
 ```
