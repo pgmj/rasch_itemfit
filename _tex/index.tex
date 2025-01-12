@@ -190,7 +190,7 @@
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
   pdftitle={Introduction},
-  pdfauthor={Magnus Johansson},
+  pdfauthor={Magnus Johansson, PhD},
   pdfkeywords={Rasch, Psychometrics, Item fit, Cutoffs, Critical
 values, Model fit},
   colorlinks=true,
@@ -202,7 +202,7 @@ values, Model fit},
 
 
 \title{Introduction}
-\author{Magnus Johansson}
+\author{Magnus Johansson, PhD}
 \date{2025-01-12}
 
 \begin{document}
@@ -359,10 +359,6 @@ There are six simulation studies included in this paper:
 
 Methods
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 A fully reproducible manuscript with R code and data is available on
 GitHub: \url{https://github.com/pgmj/rasch_itemfit}. Each study included
 in this paper has its own brief introduction and method section. This is
@@ -414,43 +410,31 @@ the response data in step three.
 Summary statistics were created with a focus on the percentage of
 correct detection of misfit and false positives.
 
-A complete list of software used for the analyses is listed in
-\#sec-addmat.
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
+A complete list of software used for the analyses is listed under
+Section~\ref{sec-addmat}.
 
 Study 1: Item infit and outfit
 
 Item mean square standardized residuals are either unweighted, which is
-referred to as ``outfit'', or information weighted, which we call
-``infit'' (Ostini and Nering 2006, 86--87). For details on conditional
-item fit we refer to the previously mentioned paper by Müller (2020).
-Conditional item infit and outfit are expected to be near 1, with higher
-values indicating an item to be underfitting the Rasch model (often due
-to multidimensionality issues) and lower values indicating overfit.
+referred to as ``outfit'', or information weighted, also known as
+``infit'' (Ostini and Nering 2006, 86--87). Outfit is sensitive to
+outliers, while infit is much less affected by outliers. Both infit and
+outfit are based on individual response residuals. For details on
+conditional item fit we refer to the previously mentioned paper by
+Müller (2020). Conditional item infit and outfit are expected to be near
+1, with higher values indicating an item to be underfitting the Rasch
+model (often due to multidimensionality issues) and lower values
+indicating overfit. For a good overview on item fit and its
+interpretation, see the chapter by Christensen and Kreiner (2013).
 
 The function \texttt{RIgetfit()} from the \texttt{easyRasch} R package
 is tested here. Its source code can be accessed on GitHub, see
-\#sec-addmat. The function offers the user a choice of the number of
-bootstrap iterations to use to determine the critical cutoff values for
-each item's infit and outfit. Our main interest in this study is
-two-fold. We want to test variations in the number of iterations used in
-\texttt{RIgetfit()} and evaluate how well the critical values based on
-the parametric bootstrapping procedure detect misfitting items.
+Section~\ref{sec-addmat}. The function offers the user a choice of the
+number of bootstrap iterations to use to determine the critical cutoff
+values for each item's infit and outfit. Our main interest in this study
+is two-fold. We want to test variations in the number of iterations used
+in \texttt{RIgetfit()} and evaluate how well the critical values based
+on the parametric bootstrapping procedure detect misfitting items.
 Additionally, a comparison between infit and outfit statistics in terms
 of detection rate and false positive rate will be conducted.
 
@@ -535,10 +519,6 @@ V12 & 0.966 & {[}0.841, 1.189{]} & 0.793 & {[}0.803, 1.28{]} & no misfit
 
 \end{longtable}
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \phantomsection\label{cell-fig-itemfit1}
 \begin{figure}[H]
 
@@ -553,23 +533,7 @@ and estimated item fit from observed data}
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \section{Results}\label{results}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 Figures show the percent of simulation runs that have identified an item
 as misfitting. Items with more than 5\% are colored in light red. A
@@ -594,10 +558,6 @@ at 0 logits)}
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 Figure~\ref{fig-ifb0} shows the detection rate when the misfitting item
 is located at the sample mean. The detection rate is highest for the
 condition with 100 iterations with sample sizes 150 and 250, but it also
@@ -618,10 +578,6 @@ at -1 logits)}
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 When the misfitting item is offset in targeting by -1 logits compared to
 the sample mean (see Figure~\ref{fig-ifb1}), the smallest sample size
 has less power to detect misfit compared to the on-target misfitting
@@ -641,10 +597,6 @@ and iterations.
 at -2 logits)}
 
 \end{figure}%
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 Finally, when the misfitting item is located at -2 logits compared to
 the sample mean (see Figure~\ref{fig-ifb2}), we see a stronger reduction
@@ -667,10 +619,6 @@ item at 0 logits)}
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \phantomsection\label{cell-fig-ifb1out}
 \begin{figure}[H]
 
@@ -685,10 +633,6 @@ item at -1 logits)}
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \phantomsection\label{cell-fig-ifb2out}
 \begin{figure}[H]
 
@@ -702,10 +646,6 @@ Notebook}}
 item at -2 logits)}
 
 \end{figure}%
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 As shown in Figure~\ref{fig-ifb0out}, Figure~\ref{fig-ifb1out}, and
 Figure~\ref{fig-ifb2out}, outfit is performing worse than infit across
@@ -741,14 +681,6 @@ between the observed and expected values are statistically significant
 data and procedure in this study follow the same structure as Study 1,
 with the addition of a smaller sample condition with 100 respondents.
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \section{Results}\label{results-1}
 
 \phantomsection\label{cell-fig-itemrestscore1}
@@ -764,10 +696,6 @@ Notebook}}
 targeting and sample size}
 
 \end{figure}%
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 This simulation includes an additional condition with 100 respondents,
 which results in significantly lower detection rates compared to n =
@@ -790,18 +718,6 @@ in Study 1. Outfit is also included in the study, mostly to check if
 its' performance is similar to the condition with only one misfitting
 item.
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \subsection{Results}\label{results-2}
 
 \phantomsection\label{cell-fig-ifb3out}
@@ -818,10 +734,6 @@ misfitting items}
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \phantomsection\label{cell-fig-ifb3}
 \begin{figure}[H]
 
@@ -835,10 +747,6 @@ Notebook}}
 misfitting items}
 
 \end{figure}%
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 Looking at the performance of infit with three misfitting items
 (Figure~\ref{fig-ifb3}), we can see that the detection rate is markedly
@@ -862,10 +770,6 @@ misfitting items}
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 In Figure~\ref{fig-ifb3b}, the minimal truncation used previously to
 remove extreme values (quantiles .001 and .999) was increased to .005
 and .995. This improves the detection rate, particularly for the n = 250
@@ -885,10 +789,6 @@ rate.
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \phantomsection\label{cell-fig-comp1}
 \begin{figure}[H]
 
@@ -902,10 +802,6 @@ Notebook}}
 infit}
 
 \end{figure}%
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 Item-restscore (see Figure~\ref{fig-itemrestscore2}) shows a comparable
 detection rate to infit and higher levels of false positives. A
@@ -960,10 +856,6 @@ Percent
 12 & underfit & 0.08 \\
 
 \end{longtable}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 Reviewing the type of misfit identified by item-restscore (see
 Table~\ref{tbl-overunder}), the false positives are all overfitting the
@@ -1029,10 +921,6 @@ V3 & underfit & 0.4 \\
 
 \end{longtable}
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \texttt{RIbootRestscore()} is demonstrated using a single sample in
 Table~\ref{tbl-bootir}, where the table is sorted on the percent of
 iterations. The runtime was approximately 10-12 seconds using 8 CPU
@@ -1047,10 +935,6 @@ previously tested strategies for identifying misfitting items.
 
 \section{Results}\label{results-3}
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \phantomsection\label{cell-fig-irb0all}
 \begin{figure}[H]
 
@@ -1063,10 +947,6 @@ Notebook}}
 \caption{\label{fig-irb0all}Item-restscore bootstrap results}
 
 \end{figure}%
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 \begin{table}
 
@@ -1144,10 +1024,6 @@ item-restscore function for sample size 150. As an additional
 experimental condition, we will use both 250 and 500 bootstrap
 iterations for item-restscore in each simulation.
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \phantomsection\label{cell-fig-irboot150}
 \begin{figure}[H]
 
@@ -1160,10 +1036,6 @@ Notebook}}
 \caption{\label{fig-irboot150}}
 
 \end{figure}%
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 Item-restscore bootstrapping improves slightly on the single instance of
 item-restscore for the n = 150 condition (see
@@ -1200,10 +1072,6 @@ Bootstrap iterations & Item & Median & MAD & Mean & SD \\
 
 \end{longtable}
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 Study 5: Varying the number of items
 
 When doing simulation studies there is always a balance to strike
@@ -1222,18 +1090,6 @@ Item-restscore and item infit will be compared. The latter will use 100
 bootstrap iterations to determine critical values for sample sizes 150
 and 250, and 200 bootstrap iterations for n \textgreater= 500.
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \section{Results 40 items}\label{results-40-items}
 
 \phantomsection\label{cell-fig-ifb40}
@@ -1249,10 +1105,6 @@ Notebook}}
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \phantomsection\label{cell-fig-itemrestscore40}
 \begin{figure}[H]
 
@@ -1265,10 +1117,6 @@ Notebook}}
 \caption{\label{fig-itemrestscore40}}
 
 \end{figure}%
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 Infit performs better when the sample size is 150 or 250 (see
 Figure~\ref{fig-ifb40}), while performance is slightly better for
@@ -1290,10 +1138,6 @@ positives (see Figure~\ref{fig-itemrestscore40}).
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \phantomsection\label{cell-fig-itemrestscore10}
 \begin{figure}[H]
 
@@ -1307,19 +1151,7 @@ Notebook}}
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \section{Summary figure}\label{summary-figure}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 \phantomsection\label{cell-fig-comp10}
 \begin{figure}[H]
@@ -1334,10 +1166,6 @@ Notebook}}
 for 10 items}
 
 \end{figure}%
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 \phantomsection\label{cell-fig-comp2040}
 \begin{verbatim}
@@ -1361,10 +1189,6 @@ List of 1
 for 20 and 40 items}
 
 \end{figure}%
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 Figure~\ref{fig-comp10} and Figure~\ref{fig-comp2040} summarize the
 findings from the two different comparisons of item numbers. Adding more
@@ -1395,19 +1219,7 @@ Then the datasets with three misfitting items, and comparing 20 and 40
 items. And finally, one dataset with 10 items and one well-targeted
 misfitting item.
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 \section{Results}\label{results-4}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 \begin{figure}
 
@@ -1517,10 +1329,6 @@ size (n = 150), LRT did not do much worse than the other methods.
 
 \end{figure}%
 
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
-
 Item fit and item-restscore are recommended to be used in parallel,
 while also examining residual patterns by reviewing standardized factor
 loadings on the first residual contrast (see Figure~\ref{fig-loadloc}
@@ -1532,11 +1340,12 @@ similar to the \texttt{RIgetfit()} function, to determine the
 appropriate cutoff. This is described briefly in a blog post (Johansson
 2024b) and a simulation paper is under preparation.
 
-Item fit in this paper has been assessed using data from all individual
-respondents in a sample. A useful additional method to evaluate and
-understand item fit or misfit is to inspect item characteristic curves
-where the sample is divided into class intervals based on their total
-score (Buchardt, Christensen, and Jensen 2023).
+Item fit in this paper has been assessed using data from individual
+respondent residuals in a sample. A useful additional method to evaluate
+and understand item fit or misfit is to inspect item characteristic
+curves where the sample is divided into class intervals based on their
+total score (Buchardt, Christensen, and Jensen 2023) and the group
+residuals are inspected.
 
 While the simulations in this paper have all used dichotomous data, all
 functions evaluated from the \texttt{easyRasch} package in this paper
@@ -1604,6 +1413,11 @@ Chou, Yeh-Tai, and Wen-Chung Wang. 2010. {``Checking {Dimensionality} in
 {Standardized} {Residuals}.''} \emph{Educational and Psychological
 Measurement} 70 (5): 717--31.
 \url{https://doi.org/10.1177/0013164410379322}.
+
+\bibitem[\citeproctext]{ref-christensen_item_2013}
+Christensen, Karl Bang, and Svend Kreiner. 2013. {``Item {Fit}
+{Statistics}.''} In \emph{Rasch {Models} in {Health}}, 83--104. John
+Wiley \& Sons, Ltd. \url{https://doi.org/10.1002/9781118574454.ch5}.
 
 \bibitem[\citeproctext]{ref-christensen_critical_2017}
 Christensen, Karl Bang, Guido Makransky, and Mike Horton. 2017.
@@ -1785,10 +1599,6 @@ loaded via a namespace (and not attached):
 [103] Matrix_1.7-1         qvcalc_1.0.3         hms_1.1.3           
 [106] bit64_4.0.5          bit_4.0.5            readxl_1.4.3        
 \end{verbatim}
-
-\textsubscript{Source:
-\href{https://pgmj.github.io/rasch_itemfit/index.qmd.html}{Article
-Notebook}}
 
 
 

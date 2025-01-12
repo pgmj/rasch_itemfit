@@ -1,7 +1,7 @@
 ---
 title: "Detecting item misfit in Rasch models"
 author:
-  - name: Magnus Johansson
+  - name: Magnus Johansson, PhD
     affiliations:
       - name: RISE Research Institutes of Sweden, Division Built Environment, System Transition
       - name: Centre for Psychiatry Research, Department of Clinical Neuroscience, Karolinska Institutet, & Stockholm Health Care Services, Region Stockholm
@@ -24,6 +24,8 @@ date: last-modified
 bibliography: references.bib
 number-sections: true
 shorttitle: Detecting item misfit in Rasch models
+notebook-links: global
+repo-url: https://github.com/pgmj/rasch_itemfit
 editor_options: 
   chunk_output_type: console
 ---
@@ -92,7 +94,7 @@ Steps three and four were iterated over, using resampling with replacement from 
 
 Summary statistics were created with a focus on the percentage of correct detection of misfit and false positives.
 
-A complete list of software used for the analyses is listed in #sec-addmat.
+A complete list of software used for the analyses is listed under @sec-addmat.
 
 ```{r}
 # read pre-generated item locations for reproducibility
@@ -200,9 +202,9 @@ simdata40items <- readRDS("data/simdata40items.rds") %>%
 
 # Study 1: Item infit and outfit
 
-Item mean square standardized residuals are either unweighted, which is referred to as "outfit", or information weighted, which we call "infit" [@ostini_polytomous_2006, pp. 86-87]. For details on conditional item fit we refer to the previously mentioned paper by Müller [-@muller_item_2020]. Conditional item infit and outfit are expected to be near 1, with higher values indicating an item to be underfitting the Rasch model (often due to multidimensionality issues) and lower values indicating overfit.
+Item mean square standardized residuals are either unweighted, which is referred to as "outfit", or information weighted, also known as "infit" [@ostini_polytomous_2006, pp. 86-87]. Outfit is sensitive to outliers, while infit is much less affected by outliers. Both infit and outfit are based on individual response residuals. For details on conditional item fit we refer to the previously mentioned paper by Müller [-@muller_item_2020]. Conditional item infit and outfit are expected to be near 1, with higher values indicating an item to be underfitting the Rasch model (often due to multidimensionality issues) and lower values indicating overfit. For a good overview on item fit and its interpretation, see the chapter by Christensen and Kreiner [-@christensen_item_2013].
 
-The function `RIgetfit()` from the `easyRasch` R package is tested here. Its source code can be accessed on GitHub, see #sec-addmat. The function offers the user a choice of the number of bootstrap iterations to use to determine the critical cutoff values for each item's infit and outfit. Our main interest in this study is two-fold. We want to test variations in the number of iterations used in `RIgetfit()` and evaluate how well the critical values based on the parametric bootstrapping procedure detect misfitting items. Additionally, a comparison between infit and outfit statistics in terms of detection rate and false positive rate will be conducted.
+The function `RIgetfit()` from the `easyRasch` R package is tested here. Its source code can be accessed on GitHub, see @sec-addmat. The function offers the user a choice of the number of bootstrap iterations to use to determine the critical cutoff values for each item's infit and outfit. Our main interest in this study is two-fold. We want to test variations in the number of iterations used in `RIgetfit()` and evaluate how well the critical values based on the parametric bootstrapping procedure detect misfitting items. Additionally, a comparison between infit and outfit statistics in terms of detection rate and false positive rate will be conducted.
 
 20 dichotomous items are used, with one item misfitting. Item locations are the same throughout all studies unless otherwise noted. The location of the misfitting item relative to the sample theta mean was selected to be approximately 0, -1, and -2 logits. Three separate datasets were generated with these variations, each with 10 000 simulated respondents. One dataset with all three misfitting items was also generated, using the same sample size.
 
@@ -1993,7 +1995,7 @@ RIloadLoc(simdata3[1:400,], model = "RM")
 
 Item fit and item-restscore are recommended to be used in parallel, while also examining residual patterns by reviewing standardized factor loadings on the first residual contrast (see @fig-loadloc for an example using n = 400) as well as Yen's Q3 residual correlations [@christensen_critical_2017]. Regarding residual correlations and critical values, the `easyRasch` package also contains a function to use bootstrapping (`RIgetResidCor()`), similar to the `RIgetfit()` function, to determine the appropriate cutoff. This is described briefly in a blog post [@johansson_simulation_2024] and a simulation paper is under preparation.
 
-Item fit in this paper has been assessed using data from all individual respondents in a sample. A useful additional method to evaluate and understand item fit or misfit is to inspect item characteristic curves where the sample is divided into class intervals based on their total score [@buchardt_visualizing_2023].
+Item fit in this paper has been assessed using data from individual respondent residuals in a sample. A useful additional method to evaluate and understand item fit or misfit is to inspect item characteristic curves where the sample is divided into class intervals based on their total score [@buchardt_visualizing_2023] and the group residuals are inspected.
 
 While the simulations in this paper have all used dichotomous data, all functions evaluated from the `easyRasch` package in this paper also work with polytomous data using the Rasch Partial Credit Model.
 
