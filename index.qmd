@@ -364,7 +364,8 @@ ifb %>%
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting 0 logits (item 9 misfit). 200 simulations per combination.",
-       title = "Conditional infit detection rate")
+       #title = "Conditional infit detection rate"
+       )
 ```
 
 @fig-ifb0 shows the detection rate when the misfitting item is located at the sample mean. The detection rate is highest for the condition with 100 iterations with sample sizes 150 and 250, but it also shows higher levels of false positives when the sample size increases to 500 or more.
@@ -403,7 +404,8 @@ ifb %>%
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting -1 logits (item 18 misfit). 200 simulations per combination.",
-       title = "Conditional infit detection rate")
+       #title = "Conditional infit detection rate"
+       )
 ```
 
 When the misfitting item is offset in targeting by -1 logits compared to the sample mean (see @fig-ifb1), the smallest sample size has less power to detect misfit compared to the on-target misfitting item. There are lower rates of false positives across all sample sizes and iterations.
@@ -442,7 +444,8 @@ ifb %>%
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting -2 logits (item 13 misfit). 200 simulations per combination.",
-       title = "Conditional infit detection rate")
+       #title = "Conditional infit detection rate"
+       )
 ```
 
 Finally, when the misfitting item is located at -2 logits compared to the sample mean (see @fig-ifb2), we see a stronger reduction in power for sample sizes 150 and 250. No false positives are identified.
@@ -483,7 +486,8 @@ ifb %>%
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting 0 logits (item 9 misfit). 200 simulations per combination.",
-       title = "Conditional outfit detection rate")
+       #title = "Conditional outfit detection rate"
+       )
 ```
 
 ```{r}
@@ -520,7 +524,8 @@ ifb %>%
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting -1 logits (item 18 misfit). 200 simulations per combination.",
-       title = "Conditional outfit detection rate")
+       #title = "Conditional outfit detection rate"
+       )
 ```
 
 ```{r}
@@ -557,7 +562,8 @@ ifb %>%
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
   labs(subtitle = "Targeting -2 logits (item 13 misfit). 200 simulations per combination.",
-       title = "Conditional outfit detection rate")
+       #title = "Conditional outfit detection rate"
+       )
 ```
 
 As shown in @fig-ifb0out, @fig-ifb1out, and @fig-ifb2out, outfit is performing worse than infit across the board.
@@ -717,7 +723,7 @@ results2 <- ir_results %>%
 results0 + results1 + results2 +
   plot_layout(axes = "collect",
               axis_titles = "collect") +
-  plot_annotation(title = "Item-restscore detection rate across targeting and sample size",
+  plot_annotation(#title = "Item-restscore detection rate across targeting and sample size",
                   subtitle = "1000 simulated datasets for each combination.",
                   theme = theme_rise(fontfamily = "sans"))
 ```
@@ -877,7 +883,7 @@ ifb3_df %>%
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = -0.5, vjust = -0.1) +
+            hjust = -0.5, vjust = 0) +
     geom_text(data = . %>% filter(item == 13),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
@@ -892,7 +898,8 @@ ifb3_df %>%
   facet_grid(samplesize~.) +
   theme_rise(fontfamily = "sans") +
   labs(str_wrap("3 items misfitting. 200 iterations used to determine critial value. 500 simulations per combination.",68),
-       title = "Conditional outfit detection rate")
+       #title = "Conditional outfit detection rate"
+       )
 ```
 
 ```{r}
@@ -918,22 +925,23 @@ ifb3_df %>%
   geom_text(data = . %>% filter(item == 9),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = -0.5, vjust = 1) +
+            hjust = -0.6, vjust = 1) +
     geom_text(data = . %>% filter(item == 13),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = -0.5, vjust = 1) +
+            hjust = -0.6, vjust = 1) +
     geom_text(data = . %>% filter(item == 18),
             aes(label = Percent), 
             position = position_dodge(width = 0.9),
-            hjust = -0.5, vjust = 1) +
+            hjust = -0.6, vjust = 1) +
   scale_y_continuous(limits = c(0,105), breaks = seq(0,100,25)) +
   scale_x_discrete('Item', guide = guide_axis(n.dodge = 2)) +
   guides(fill = "none") +
   facet_grid(samplesize~.) +
   theme_rise(fontfamily = "sans") +
   labs(subtitle = str_wrap("3 items misfitting. 500 simulations per combination.",68),
-       title = "Conditional infit detection rate")
+       #title = "Conditional infit detection rate"
+       )
 ```
 
 Looking at the performance of infit with three misfitting items (@fig-ifb3), we can see that the detection rate is markedly worse for item 13 (targeting -2 logits) in sample sizes 500 and below, compared to when single items were misfitting. The false positive rate has increased for a sample size of 1000 and we can see it increase strongly at n = 2000. Outfit (@fig-ifb3out) again performs worse than infit.
@@ -941,7 +949,7 @@ Looking at the performance of infit with three misfitting items (@fig-ifb3), we 
 ```{r}
 #| label: fig-ifb3b
 #| fig-cap: Conditional infit detection rate with three misfitting items
-#| fig-height: 5
+#| fig-height: 4
 
 ifb3c_df <- bind_rows(ifb3c)
 
@@ -980,7 +988,8 @@ ifb3c_df %>%
   facet_grid(samplesize~.) +
   theme_rise(fontfamily = "sans") +
   labs(subtitle = str_wrap("3 items misfitting. 500 simulations per combination. Reduced truncation of bootstrap output values.",68),
-       title = "Conditional infit detection rate")
+       #title = "Conditional infit detection rate"
+       )
 ```
 
 In @fig-ifb3b, the minimal truncation used previously to remove extreme values (quantiles .001 and .999) was increased to .005 and .995. This improves the detection rate, particularly for the n = 250 condition and item 13, but also results in an increased false positive rate.
@@ -1020,7 +1029,8 @@ ir3_df %>%
   facet_grid(samplesize ~ .) +
   theme_rise(fontfamily = "sans") +
   labs(subtitle = "3 items misfitting. 500 simulations per combination.",
-       title = "Item-restscore detection rate")
+       #title = "Item-restscore detection rate"
+       )
 
 ```
 
@@ -1069,7 +1079,8 @@ rbind(ifb3_sum,ir3_sum) %>%
   facet_grid(samplesize ~ .) +
   theme_rise(fontfamily = "sans") +
   labs(y = "Detection rate in percent",
-       title = "Detection rate for item-restscore compared to infit") +
+       #title = "Detection rate for item-restscore compared to infit"
+       ) +
   scale_fill_brewer(type = "qual", palette = "Dark2") +
   theme(axis.title.x = element_blank())
 
@@ -1126,7 +1137,7 @@ saveRDS(irb0,"data/irb0.rds")
 
 ```{r}
 #| label: fig-irb0all
-#| fig-cap: Item-restscore bootstrap results
+#| fig-cap: Item-restscore bootstrap results (n = 2000)
 #| fig-height: 5
 irb0 <- readRDS("data/irb0.rds")
 
@@ -1163,7 +1174,7 @@ irb0_df %>%
   theme_rise(fontfamily = "sans") +
   labs(caption = str_wrap("Point indicates median value and horizontal lines are median absolute deviation.",80),
        x = "Distribution of percent values for item misfit", y = "Item",
-       title = "Item-restscore bootstrap results",
+       #title = "Item-restscore bootstrap results",
        subtitle = str_wrap("250 bootstrap iterations with 800 respondents from a sample of 2000. 500 simulations were used.",70)
        ) +
   scale_color_discrete('Type', labels = c("Overfit","Underfit"))
@@ -1264,6 +1275,7 @@ saveRDS(irb150,"data/irb150.rds")
 
 ```{r}
 #| label: fig-irboot150
+#| fig-cap: Item-restscore bootstrap results (n = 150)
 #| fig-height: 6
 irb150 <- readRDS("data/irb150.rds")
 
@@ -1303,7 +1315,7 @@ irb150_df %>%
   theme_rise(fontfamily = "sans") +
   labs(caption = str_wrap("Point indicates median value and horizontal lines are median absolute deviation.",80),
        x = "Distribution of percent values for item misfit", y = "Item",
-       title = "Item-restscore bootstrap results",
+       #title = "Item-restscore bootstrap results",
        subtitle = str_wrap("250 bootstrap iterations with 800 respondents from a sample of 2000. 500 simulations were used.",70)
        ) +
   scale_color_discrete('Type', labels = c("Overfit","Underfit")) +
@@ -1415,6 +1427,7 @@ ifb10_df <- bind_rows(ifb10)
 
 ```{r}
 #| label: fig-ifb40
+#| fig-cap: Conditional infit detection rate with 40 items (3 misfit)
 #| fig-height: 5
 ifb40_df %>% 
   group_by(samplesize) %>% 
@@ -1449,12 +1462,14 @@ ifb40_df %>%
   facet_grid(samplesize~.) +
   theme_rise(fontfamily = "sans") +
   labs(subtitle = "3 items misfitting. 200 simulations per combination.",
-       title = "Conditional infit detection rate")
+       #title = "Conditional infit detection rate"
+       )
 ```
 
 
 ```{r}
 #| label: fig-itemrestscore40
+#| fig-cap: Item-restscore detection rate with 40 items (3 misfit)
 #| fig-height: 5
 
 ir40_df %>% 
@@ -1483,7 +1498,8 @@ ir40_df %>%
   facet_grid(samplesize ~ .) +
   theme_rise(fontfamily = "sans") +
   labs(subtitle = "3 items misfitting. 500 simulations per combination.",
-       title = "Item-restscore detection rate")
+       #title = "Item-restscore detection rate"
+       )
 
 ```
 
@@ -1493,6 +1509,7 @@ Infit performs better when the sample size is 150 or 250 (see @fig-ifb40), while
 
 ```{r}
 #| label: fig-ifb10
+#| fig-cap: Conditional infit detection rate (10 items)
 #| fig-height: 5
 ifb10_df %>% 
   group_by(samplesize) %>% 
@@ -1520,11 +1537,13 @@ ifb10_df %>%
   coord_cartesian(clip = "off") +
   theme_rise(fontfamily = "sans") +
   labs(subtitle = "Item 9 misfitting (targeting = 0). 200 simulations per combination.",
-       title = "Conditional infit detection rate")
+       #title = "Conditional infit detection rate"
+       )
 ```
 
 ```{r}
 #| label: fig-itemrestscore10
+#| fig-cap: Item-restscore detection rate (10 items)
 #| fig-height: 5
 
 ir10_df %>% 
@@ -1546,7 +1565,7 @@ ir10_df %>%
   facet_grid(samplesize ~ .) +
   theme_rise(fontfamily = "sans") +
   labs(subtitle = "Item 9 misfitting (targeting = 0). 500 simulations per combination.",
-       title = "Item-restscore detection rate",
+       #title = "Item-restscore detection rate",
        x = "Item")
 ```
 
@@ -1746,7 +1765,7 @@ dfk10 %>%
   facet_grid(samplesize ~ n_items) +
   theme_rise(fontfamily = "sans") +
   labs(y = "Detection rate in percent",
-       title = "Detection rate for item-restscore and infit across sample sizes",
+       #title = "Detection rate for item-restscore and infit across sample sizes",
        subtitle = "One item misfitting with location = 0 logits compared to sample mean.") +
   scale_fill_brewer(type = "qual", palette = "Dark2") +
   theme(axis.title.x = element_blank())
@@ -1778,7 +1797,7 @@ dfk2040 %>%
   facet_grid(samplesize ~ n_items) +
   theme_rise(fontfamily = "sans") +
   labs(y = "Detection rate in percent",
-       title = "Detection rate for item-restscore and infit across sample sizes and number of items",
+       #title = "Detection rate for item-restscore and infit across sample sizes and number of items",
        subtitle = "Three items misfitting.") +
   scale_fill_brewer(type = "qual", palette = "Dark2") +
   scale_x_discrete(guide = guide_axis(n.dodge = 2)) +
@@ -1913,7 +1932,7 @@ lrt_targ %>%
   theme_rise(fontfamily = "sans") +
   scale_fill_brewer(palette = "Greens") +
   labs(y = "Detection rate in percent",
-       title = "Detection rate for LRT across sample sizes and location of misfit item",
+       #title = "Detection rate for LRT across sample sizes and location of misfit item",
        subtitle = "One item out of 20 with misfit. 1000 simulations.",
        x = "Sample size")
 
@@ -1944,7 +1963,7 @@ lrt_n %>%
   theme_rise(fontfamily = "sans") +
   scale_fill_brewer('Number of items') +
   labs(y = "Detection rate in percent",
-       title = "Detection rate for LRT across sample sizes and number of items",
+       #title = "Detection rate for LRT across sample sizes and number of items",
        subtitle = "1000 simulations.",
        x = "Sample size")
 ```
@@ -1971,6 +1990,7 @@ Assessment of item fit and dimensionality should always be done using multiple m
 
 ```{r}
 #| label: fig-loadloc
+#| fig-cap: Standardized loadings on first residual contrast factor and item location
 #| fig-height: 5
 RIloadLoc(simdata3[1:400,], model = "RM")
 ```
