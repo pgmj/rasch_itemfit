@@ -210,19 +210,20 @@ values, Model fit},
 \begin{abstract}
 Psychometrics in general have long relied on rule-of-thumb critical
 values for various goodness of fit metrics. With more powerful personal
-computers it is both feasible and desirable to use simulation methods to
-determine appropriate critical cutoff values. This paper illustrates and
-evaluates the use of an R package for Rasch psychometrics that has
-implemented functions to simplify the process of determining simulation
-based cutoff values. Through a series of simulation studies, a
-comparison is made between the two methods of information-weighted
-conditional item fit (``infit'') and item-restscore correlations using
-Goodman and Kruskal's \(\gamma\). Results indicate the limitations of
-small samples (n \textless{} 500) in correctly detecting item misfit due
-to multidimensionality, especially when a larger proportion of items are
-misfit. Item outfit shows very low performance in general. Conditional
-infit with simulation-based cutoffs performs better than item-restscore
-with sample sizes below 500. Both methods result in problematic rates of
+computers it is both feasible and desirable to use simulation and/or
+bootstrap methods to determine appropriate cutoff values. This paper
+illustrates and evaluates the use of an R package for Rasch
+psychometrics that has implemented functions to simplify the process of
+determining simulation-based cutoff values. Through a series of
+simulation studies, a comparison is made between the two methods of
+information-weighted conditional item fit (``infit'') and item-restscore
+correlations using Goodman and Kruskal's \(\gamma\). Results indicate
+the limitations of small samples (n \textless{} 500) in correctly
+detecting item misfit due to multidimensionality, especially when a
+larger proportion of items are misfit and misfit items are off-target.
+Item outfit shows very low performance in general. Conditional infit
+with simulation-based cutoffs performs better than item-restscore with
+sample sizes below 500. Both methods result in problematic rates of
 false positives with large samples (n \textgreater= 1000). Large
 datasets should be analyzed using nonparametric bootstrap of subsamples
 with item-restscore to reduce the risk of type-1 errors. Finally, the
@@ -1274,36 +1275,47 @@ contrast factor and item location}
 
 Item fit and item-restscore are recommended to be used in parallel,
 while also examining residual patterns by reviewing standardized factor
-loadings on the first residual contrast (see Figure~\ref{fig-loadloc}
-for an example using n = 400) as well as Yen's Q3 residual correlations
-(Christensen et al., 2017). Regarding residual correlations and critical
-values, the \texttt{easyRasch} package also contains a function to use
-bootstrapping (\texttt{RIgetResidCor()}), similar to the
-\texttt{RIgetfit()} function, to determine the appropriate cutoff. This
-is described briefly in a blog post (Johansson, 2024b) and a simulation
-paper is under preparation.
+loadings on the first residual contrast as well as Yen's Q3 residual
+correlations (Christensen et al., 2017). Figure~\ref{fig-loadloc}
+illustrates an example, using n = 400 and 3/20 items misfitting, where
+it is clearly seen how the misfitting items form a separate cluster on
+the x axis. Regarding residual correlations and critical values, the
+\texttt{easyRasch} package also contains a function to use bootstrapping
+(\texttt{RIgetResidCor()}), similar to the \texttt{RIgetfit()} function,
+to determine the appropriate cutoff. This is described briefly in a blog
+post (Johansson, 2024b) and a simulation paper is under preparation.
+
+The findings reported here also make a good argument for removing one
+item at a time when the analysis indicates several misfitting items,
+starting with the most underfitting item. Such practice would reduce the
+risk for type-1 errors. This is especially relevant for n \textgreater=
+500 and when truly misfitting items are located close to the sample
+mean, when the risk for false positive misfit indication is elevated. In
+a situation where the analysis of residual patterns using PCA and Yen's
+Q3 clearly shows clustering of items, it can be justified to remove
+several items simultaneously.
 
 Item fit in this paper has been assessed using data from individual
-respondent residuals in a sample. A useful additional method to evaluate
-and understand item fit or misfit is to inspect item characteristic
+respondent residuals in a sample. A useful additional method to analyze
+and understand item fit and misfit is to inspect item characteristic
 curves where the sample is divided into class intervals based on their
-total score (Buchardt et al., 2023) and the group residuals are
-inspected.
+total score and the group residuals are inspected (Buchardt et al.,
+2023).
 
 While the simulations in this paper have all used dichotomous data, all
-functions evaluated from the \texttt{easyRasch} package in this paper
-also work with polytomous data using the Rasch Partial Credit Model.
+functions evaluated from the \texttt{easyRasch} package also work with
+polytomous data using the Rasch Partial Credit Model (PCM, Masters,
+1982).
 
 \section{Limitations}\label{limitations}
 
 The total number of items and the proportion of misfit items clearly
 have effects on detection rate and could have been investigated further
 using more variations in sample sizes. The Rasch partial credit model
-for polytomous data (PCM, Masters, 1982) would have been useful to
-include in a comparison study. When testing the bootstrapped
-item-restscore method, more variations in the number of bootstrap
-samples (iterations) might have been of interest, although the
-difference between 250 and 500 was small.
+for polytomous data would have been useful to include in a comparison
+study. When testing the bootstrapped item-restscore method, more
+variations in the number of bootstrap samples (iterations) might have
+been of interest, although the difference between 250 and 500 was small.
 
 Conclusion
 
@@ -1316,12 +1328,6 @@ controls false positive rates well, while showing high rates of misfit
 detection. Using 250 iterations for the bootstrapped item-restscore
 seems adequate. In general, both infit and item-restscore are useful in
 the analysis process if you have a sample size below 1000.
-
-The findings reported here also make a good argument for removing one
-item at a time when the analysis indicates several misfitting items,
-starting with the most underfitting item. This is especially relevant
-for n \textgreater= 500 and when misfitting items are located close to
-the sample mean.
 
 References
 
