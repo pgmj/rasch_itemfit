@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
     <meta name="author" content="Magnus Johansson, PhD">
-    <meta name="dcterms.date" content="2025-01-12">
+    <meta name="dcterms.date" content="2025-01-13">
     <meta name="keywords" content="Rasch, Psychometrics, Item fit, Cutoffs, Critical values, Model fit">
 
     <title>Detecting item misfit in Rasch models</title>
@@ -194,10 +194,10 @@
 ">
 <meta name="citation_keywords" content="Rasch,Psychometrics,Item fit,Cutoffs,Critical values,Model fit">
 <meta name="citation_author" content="Magnus Johansson, PhD">
-<meta name="citation_publication_date" content="2025-01-12">
-<meta name="citation_cover_date" content="2025-01-12">
+<meta name="citation_publication_date" content="2025-01-13">
+<meta name="citation_cover_date" content="2025-01-13">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-01-12">
+<meta name="citation_online_date" content="2025-01-13">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=A Rasch Model for Partial Credit Scoring;,citation_abstract=A unidimensional latent trait model for responses scored in two or more ordered categories is developed. This “Partial Credit” model is a member of the family of latent trait models which share the property of parameter separability and so permit “specifically objective” comparisons of persons and items. The model can be viewed as an extension of Andrich’s Rating Scale model to situations in which ordered response alternatives are free to vary in number and structure from item to item. The difference between the parameters in this model and the “category boundaries” in Samejima’s Graded Response model is demonstrated. An unconditional maximum likelihood procedure for estimating the model parameters is developed.;,citation_author=Geoff N. Masters;,citation_publication_date=1982-06;,citation_cover_date=1982-06;,citation_year=1982;,citation_fulltext_html_url=https://www.cambridge.org/core/journals/psychometrika/article/abs/rasch-model-for-partial-credit-scoring/D7202CB6D2D1593889B1318DD6297E01;,citation_issue=2;,citation_doi=10.1007/BF02296272;,citation_issn=0033-3123, 1860-0980;,citation_volume=47;,citation_journal_title=Psychometrika;">
 <meta name="citation_reference" content="citation_title=An Evaluation of Overall Goodness-of-Fit Tests for the Rasch Model;,citation_abstract=&amp;amp;amp;lt;p&amp;gt;For assessing the fit of item response theory models, it has been suggested to apply overall goodness-of-fit tests as well as tests for individual items and item pairs. Although numerous goodness-of-fit tests have been proposed in the literature for the Rasch model, their relative power against several model violations has not been investigated so far. This study compares four of these tests, which are all available in R software: &amp;lt;italic&amp;gt;T</italic>$_{\textrm{10}}$, <italic>T</italic>$_{\textrm{11}}$, <italic>M</italic>$_{\textrm{2}}$, and the LR test. Results on the Type I error rate and the sensitivity to violations of different assumptions of the Rasch model (unidimensionality, local independence on the level of item pairs, equal item discrimination, zero as a lower asymptote for the item characteristic curves, invariance of the item parameters) are reported. The results indicate that the <italic>T</italic>$_{\textrm{11}}$ test is comparatively most powerful against violations of the assumption of parallel item characteristic curves, which includes the presence of unequal item discriminations and a non-zero lower asymptote. Against the remaining model violations, which can be summarized as local dependence, <italic>M</italic>$_{\textrm{2}}$ is found to be most powerful. <italic>T</italic>$_{\textrm{10}}$ and LR are found to be sensitive against violations of the assumption of parallel item characteristic curves, but are insensitive against local dependence.</p>;,citation_author=Rudolf Debelak;,citation_publication_date=2019-01;,citation_cover_date=2019-01;,citation_year=2019;,citation_fulltext_html_url=https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2018.02710/full;,citation_doi=10.3389/fpsyg.2018.02710;,citation_issn=1664-1078;,citation_volume=9;,citation_journal_title=Frontiers in Psychology;">
@@ -263,7 +263,7 @@
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">January 12, 2025</p>
+              <p class="date">January 13, 2025</p>
             </div>
           </div>
           
@@ -872,7 +872,8 @@ Figure&nbsp;1: Distribution of simulation based item fit and estimated item fit 
 <span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize<span class="sc">~</span>sims) <span class="sc">+</span></span>
 <span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Targeting 0 logits (item 9 misfit). 200 simulations per combination."</span>,</span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Conditional infit detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Conditional infit detection rate"</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-ifb0" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -918,7 +919,8 @@ Figure&nbsp;2: Conditional infit detection rate (misfit item at 0 logits)
 <span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize<span class="sc">~</span>sims) <span class="sc">+</span></span>
 <span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Targeting -1 logits (item 18 misfit). 200 simulations per combination."</span>,</span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Conditional infit detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Conditional infit detection rate"</span></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-ifb1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -964,7 +966,8 @@ Figure&nbsp;3: Conditional infit detection rate (misfit item at -1 logits)
 <span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize<span class="sc">~</span>sims) <span class="sc">+</span></span>
 <span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Targeting -2 logits (item 13 misfit). 200 simulations per combination."</span>,</span>
-<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Conditional infit detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Conditional infit detection rate"</span></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-ifb2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1013,7 +1016,8 @@ Figure&nbsp;4: Conditional infit detection rate (misfit item at -2 logits)
 <span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize<span class="sc">~</span>sims) <span class="sc">+</span></span>
 <span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Targeting 0 logits (item 9 misfit). 200 simulations per combination."</span>,</span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Conditional outfit detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Conditional outfit detection rate"</span></span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-ifb0out" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1058,7 +1062,8 @@ Figure&nbsp;5: Conditional outfit detection rate (misfit item at 0 logits)
 <span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize<span class="sc">~</span>sims) <span class="sc">+</span></span>
 <span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Targeting -1 logits (item 18 misfit). 200 simulations per combination."</span>,</span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Conditional outfit detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Conditional outfit detection rate"</span></span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-ifb1out" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1103,7 +1108,8 @@ Figure&nbsp;6: Conditional outfit detection rate (misfit item at -1 logits)
 <span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize<span class="sc">~</span>sims) <span class="sc">+</span></span>
 <span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Targeting -2 logits (item 13 misfit). 200 simulations per combination."</span>,</span>
-<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Conditional outfit detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Conditional outfit detection rate"</span></span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-ifb2out" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1266,7 +1272,7 @@ Figure&nbsp;7: Conditional outfit detection rate (misfit item at -2 logits)
 <span id="cb32-77"><a href="#cb32-77" aria-hidden="true" tabindex="-1"></a>results0 <span class="sc">+</span> results1 <span class="sc">+</span> results2 <span class="sc">+</span></span>
 <span id="cb32-78"><a href="#cb32-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">axes =</span> <span class="st">"collect"</span>,</span>
 <span id="cb32-79"><a href="#cb32-79" aria-hidden="true" tabindex="-1"></a>              <span class="at">axis_titles =</span> <span class="st">"collect"</span>) <span class="sc">+</span></span>
-<span id="cb32-80"><a href="#cb32-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">"Item-restscore detection rate across targeting and sample size"</span>,</span>
+<span id="cb32-80"><a href="#cb32-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="co">#title = "Item-restscore detection rate across targeting and sample size",</span></span>
 <span id="cb32-81"><a href="#cb32-81" aria-hidden="true" tabindex="-1"></a>                  <span class="at">subtitle =</span> <span class="st">"1000 simulated datasets for each combination."</span>,</span>
 <span id="cb32-82"><a href="#cb32-82" aria-hidden="true" tabindex="-1"></a>                  <span class="at">theme =</span> <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1428,7 +1434,7 @@ Figure&nbsp;8: Item-restscore detection rate across targeting and sample size
 <span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">9</span>),</span>
 <span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), </span>
 <span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
-<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">vjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
 <span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">13</span>),</span>
 <span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), </span>
 <span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
@@ -1443,7 +1449,8 @@ Figure&nbsp;8: Item-restscore detection rate across targeting and sample size
 <span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize<span class="sc">~</span>.) <span class="sc">+</span></span>
 <span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="fu">str_wrap</span>(<span class="st">"3 items misfitting. 200 iterations used to determine critial value. 500 simulations per combination."</span>,<span class="dv">68</span>),</span>
-<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Conditional outfit detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Conditional outfit detection rate"</span></span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-ifb3out" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1477,22 +1484,23 @@ Figure&nbsp;9: Conditional outfit detection rate with three misfitting items
 <span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">9</span>),</span>
 <span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), </span>
 <span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
-<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.6</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">13</span>),</span>
 <span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), </span>
 <span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
-<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.6</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">filter</span>(item <span class="sc">==</span> <span class="dv">18</span>),</span>
 <span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> Percent), </span>
 <span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
-<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.6</span>, <span class="at">vjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">105</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">25</span>)) <span class="sc">+</span></span>
 <span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="st">'Item'</span>, <span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">n.dodge =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
 <span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize<span class="sc">~</span>.) <span class="sc">+</span></span>
 <span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">str_wrap</span>(<span class="st">"3 items misfitting. 500 simulations per combination."</span>,<span class="dv">68</span>),</span>
-<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Conditional infit detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Conditional infit detection rate"</span></span>
+<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-ifb3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1545,7 +1553,8 @@ Figure&nbsp;10: Conditional infit detection rate with three misfitting items
 <span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize<span class="sc">~</span>.) <span class="sc">+</span></span>
 <span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">str_wrap</span>(<span class="st">"3 items misfitting. 500 simulations per combination. Reduced truncation of bootstrap output values."</span>,<span class="dv">68</span>),</span>
-<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Conditional infit detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Conditional infit detection rate"</span></span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-ifb3b" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1592,7 +1601,8 @@ Figure&nbsp;11: Conditional infit detection rate with three misfitting items
 <span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize <span class="sc">~</span> .) <span class="sc">+</span></span>
 <span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"3 items misfitting. 500 simulations per combination."</span>,</span>
-<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Item-restscore detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Item-restscore detection rate"</span></span>
+<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-itemrestscore2" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1647,9 +1657,10 @@ Figure&nbsp;12
 <span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize <span class="sc">~</span> .) <span class="sc">+</span></span>
 <span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Detection rate in percent"</span>,</span>
-<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Detection rate for item-restscore compared to infit"</span>) <span class="sc">+</span></span>
-<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>, <span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Detection rate for item-restscore compared to infit"</span></span>
+<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>, <span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-comp1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1872,7 +1883,7 @@ Table&nbsp;2: Item-restscore summary results across all sample sizes
 <span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb43-34"><a href="#cb43-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="fu">str_wrap</span>(<span class="st">"Point indicates median value and horizontal lines are median absolute deviation."</span>,<span class="dv">80</span>),</span>
 <span id="cb43-35"><a href="#cb43-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Distribution of percent values for item misfit"</span>, <span class="at">y =</span> <span class="st">"Item"</span>,</span>
-<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Item-restscore bootstrap results"</span>,</span>
+<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Item-restscore bootstrap results",</span></span>
 <span id="cb43-37"><a href="#cb43-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">str_wrap</span>(<span class="st">"250 bootstrap iterations with 800 respondents from a sample of 2000. 500 simulations were used."</span>,<span class="dv">70</span>)</span>
 <span id="cb43-38"><a href="#cb43-38" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
 <span id="cb43-39"><a href="#cb43-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="st">'Type'</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Overfit"</span>,<span class="st">"Underfit"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1884,10 +1895,10 @@ Table&nbsp;2: Item-restscore summary results across all sample sizes
 <div id="fig-irb0all" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-irb0all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="index_files/figure-html/fig-irb0all-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;14: Item-restscore bootstrap results"><img src="index_files/figure-html/fig-irb0all-1.png" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-irb0all-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;14: Item-restscore bootstrap results (n = 2000)"><img src="index_files/figure-html/fig-irb0all-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-irb0all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14: Item-restscore bootstrap results
+Figure&nbsp;14: Item-restscore bootstrap results (n = 2000)
 </figcaption>
 </figure>
 </div>
@@ -2234,7 +2245,7 @@ Table&nbsp;3: Summary statistics for item-restscore bootstrap simulation
 <span id="cb47-36"><a href="#cb47-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb47-37"><a href="#cb47-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="fu">str_wrap</span>(<span class="st">"Point indicates median value and horizontal lines are median absolute deviation."</span>,<span class="dv">80</span>),</span>
 <span id="cb47-38"><a href="#cb47-38" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Distribution of percent values for item misfit"</span>, <span class="at">y =</span> <span class="st">"Item"</span>,</span>
-<span id="cb47-39"><a href="#cb47-39" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Item-restscore bootstrap results"</span>,</span>
+<span id="cb47-39"><a href="#cb47-39" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Item-restscore bootstrap results",</span></span>
 <span id="cb47-40"><a href="#cb47-40" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">str_wrap</span>(<span class="st">"250 bootstrap iterations with 800 respondents from a sample of 2000. 500 simulations were used."</span>,<span class="dv">70</span>)</span>
 <span id="cb47-41"><a href="#cb47-41" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
 <span id="cb47-42"><a href="#cb47-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="st">'Type'</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Overfit"</span>,<span class="st">"Underfit"</span>)) <span class="sc">+</span></span>
@@ -2258,13 +2269,13 @@ using the `.groups` argument.</code></pre>
 <span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_color_discrete('Type', labels = c("Overfit","Underfit")) +</span></span>
 <span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   facet_wrap(~bootit)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-irboot150" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-irboot150" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-irboot150-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="index_files/figure-html/fig-irboot150-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure&nbsp;15: "><img src="index_files/figure-html/fig-irboot150-1.png" id="fig-irboot150" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-irboot150-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure&nbsp;15: Item-restscore bootstrap results (n = 150)"><img src="index_files/figure-html/fig-irboot150-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-irboot150-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-irboot150-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15: Item-restscore bootstrap results (n = 150)
 </figcaption>
 </figure>
 </div>
@@ -2454,19 +2465,20 @@ Table&nbsp;4: Summary statistics for item-restscore bootstrap simulation (n = 15
 <span id="cb56-31"><a href="#cb56-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize<span class="sc">~</span>.) <span class="sc">+</span></span>
 <span id="cb56-32"><a href="#cb56-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb56-33"><a href="#cb56-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"3 items misfitting. 200 simulations per combination."</span>,</span>
-<span id="cb56-34"><a href="#cb56-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Conditional infit detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb56-34"><a href="#cb56-34" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Conditional infit detection rate"</span></span>
+<span id="cb56-35"><a href="#cb56-35" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 8 rows containing missing values or values outside the scale range
 (`geom_col()`).</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-ifb40" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-ifb40" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ifb40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="index_files/figure-html/fig-ifb40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;16: "><img src="index_files/figure-html/fig-ifb40-1.png" id="fig-ifb40" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-ifb40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;16: Conditional infit detection rate with 40 items (3 misfit)"><img src="index_files/figure-html/fig-ifb40-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ifb40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;16
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ifb40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16: Conditional infit detection rate with 40 items (3 misfit)
 </figcaption>
 </figure>
 </div>
@@ -2499,15 +2511,16 @@ Figure&nbsp;16
 <span id="cb58-24"><a href="#cb58-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize <span class="sc">~</span> .) <span class="sc">+</span></span>
 <span id="cb58-25"><a href="#cb58-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb58-26"><a href="#cb58-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"3 items misfitting. 500 simulations per combination."</span>,</span>
-<span id="cb58-27"><a href="#cb58-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Item-restscore detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb58-27"><a href="#cb58-27" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Item-restscore detection rate"</span></span>
+<span id="cb58-28"><a href="#cb58-28" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-itemrestscore40" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-itemrestscore40" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-itemrestscore40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="index_files/figure-html/fig-itemrestscore40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;17: "><img src="index_files/figure-html/fig-itemrestscore40-1.png" id="fig-itemrestscore40" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-itemrestscore40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;17: Item-restscore detection rate with 40 items (3 misfit)"><img src="index_files/figure-html/fig-itemrestscore40-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-itemrestscore40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-itemrestscore40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17: Item-restscore detection rate with 40 items (3 misfit)
 </figcaption>
 </figure>
 </div>
@@ -2544,15 +2557,16 @@ Figure&nbsp;17
 <span id="cb59-24"><a href="#cb59-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
 <span id="cb59-25"><a href="#cb59-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb59-26"><a href="#cb59-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Item 9 misfitting (targeting = 0). 200 simulations per combination."</span>,</span>
-<span id="cb59-27"><a href="#cb59-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Conditional infit detection rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb59-27"><a href="#cb59-27" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Conditional infit detection rate"</span></span>
+<span id="cb59-28"><a href="#cb59-28" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-ifb10" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-ifb10" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ifb10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="index_files/figure-html/fig-ifb10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;18: "><img src="index_files/figure-html/fig-ifb10-1.png" id="fig-ifb10" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-ifb10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;18: Conditional infit detection rate (10 items)"><img src="index_files/figure-html/fig-ifb10-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ifb10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;18
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ifb10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18: Conditional infit detection rate (10 items)
 </figcaption>
 </figure>
 </div>
@@ -2578,16 +2592,16 @@ Figure&nbsp;18
 <span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize <span class="sc">~</span> .) <span class="sc">+</span></span>
 <span id="cb60-18"><a href="#cb60-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Item 9 misfitting (targeting = 0). 500 simulations per combination."</span>,</span>
-<span id="cb60-20"><a href="#cb60-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Item-restscore detection rate"</span>,</span>
+<span id="cb60-20"><a href="#cb60-20" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Item-restscore detection rate",</span></span>
 <span id="cb60-21"><a href="#cb60-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Item"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-itemrestscore10" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-itemrestscore10" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-itemrestscore10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="index_files/figure-html/fig-itemrestscore10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Figure&nbsp;19: "><img src="index_files/figure-html/fig-itemrestscore10-1.png" id="fig-itemrestscore10" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-itemrestscore10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Figure&nbsp;19: Item-restscore detection rate (10 items)"><img src="index_files/figure-html/fig-itemrestscore10-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-itemrestscore10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;19
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-itemrestscore10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19: Item-restscore detection rate (10 items)
 </figcaption>
 </figure>
 </div>
@@ -2783,7 +2797,7 @@ Figure&nbsp;19
 <span id="cb63-17"><a href="#cb63-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize <span class="sc">~</span> n_items) <span class="sc">+</span></span>
 <span id="cb63-18"><a href="#cb63-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb63-19"><a href="#cb63-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Detection rate in percent"</span>,</span>
-<span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Detection rate for item-restscore and infit across sample sizes"</span>,</span>
+<span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Detection rate for item-restscore and infit across sample sizes",</span></span>
 <span id="cb63-21"><a href="#cb63-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"One item misfitting with location = 0 logits compared to sample mean."</span>) <span class="sc">+</span></span>
 <span id="cb63-22"><a href="#cb63-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>, <span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
 <span id="cb63-23"><a href="#cb63-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2821,7 +2835,7 @@ Figure&nbsp;20: Detection rate for item-restscore and infit for 10 items
 <span id="cb64-18"><a href="#cb64-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(samplesize <span class="sc">~</span> n_items) <span class="sc">+</span></span>
 <span id="cb64-19"><a href="#cb64-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb64-20"><a href="#cb64-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Detection rate in percent"</span>,</span>
-<span id="cb64-21"><a href="#cb64-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Detection rate for item-restscore and infit across sample sizes and number of items"</span>,</span>
+<span id="cb64-21"><a href="#cb64-21" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Detection rate for item-restscore and infit across sample sizes and number of items",</span></span>
 <span id="cb64-22"><a href="#cb64-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Three items misfitting."</span>) <span class="sc">+</span></span>
 <span id="cb64-23"><a href="#cb64-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>, <span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
 <span id="cb64-24"><a href="#cb64-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">n.dodge =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
@@ -2953,7 +2967,7 @@ Figure&nbsp;21: Detection rate for item-restscore and infit for 20 and 40 items
 <span id="cb68-24"><a href="#cb68-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb68-25"><a href="#cb68-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>) <span class="sc">+</span></span>
 <span id="cb68-26"><a href="#cb68-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Detection rate in percent"</span>,</span>
-<span id="cb68-27"><a href="#cb68-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Detection rate for LRT across sample sizes and location of misfit item"</span>,</span>
+<span id="cb68-27"><a href="#cb68-27" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Detection rate for LRT across sample sizes and location of misfit item",</span></span>
 <span id="cb68-28"><a href="#cb68-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"One item out of 20 with misfit. 1000 simulations."</span>,</span>
 <span id="cb68-29"><a href="#cb68-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Sample size"</span>)</span>
 <span id="cb68-30"><a href="#cb68-30" aria-hidden="true" tabindex="-1"></a></span>
@@ -2984,7 +2998,7 @@ Figure&nbsp;21: Detection rate for item-restscore and infit for 20 and 40 items
 <span id="cb68-55"><a href="#cb68-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_rise</span>(<span class="at">fontfamily =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
 <span id="cb68-56"><a href="#cb68-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="st">'Number of items'</span>) <span class="sc">+</span></span>
 <span id="cb68-57"><a href="#cb68-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Detection rate in percent"</span>,</span>
-<span id="cb68-58"><a href="#cb68-58" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Detection rate for LRT across sample sizes and number of items"</span>,</span>
+<span id="cb68-58"><a href="#cb68-58" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Detection rate for LRT across sample sizes and number of items",</span></span>
 <span id="cb68-59"><a href="#cb68-59" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"1000 simulations."</span>,</span>
 <span id="cb68-60"><a href="#cb68-60" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Sample size"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="fig-lrt1" class="quarto-layout-panel">
@@ -3044,13 +3058,13 @@ Figure&nbsp;22: Likelihood ratio test detection rate
 <div class="cell-container"><div class="cell-decorator"><pre>In [51]:</pre></div><div id="cell-fig-loadloc" class="cell">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">RIloadLoc</span>(simdata3[<span class="dv">1</span><span class="sc">:</span><span class="dv">400</span>,], <span class="at">model =</span> <span class="st">"RM"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-loadloc" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-loadloc" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-loadloc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="index_files/figure-html/fig-loadloc-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24" title="Figure&nbsp;23: "><img src="index_files/figure-html/fig-loadloc-1.png" id="fig-loadloc" class="img-fluid figure-img" width="672"></a>
+<a href="index_files/figure-html/fig-loadloc-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24" title="Figure&nbsp;23: Standardized loadings on first residual contrast factor and item location"><img src="index_files/figure-html/fig-loadloc-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-loadloc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;23
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loadloc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;23: Standardized loadings on first residual contrast factor and item location
 </figcaption>
 </figure>
 </div>
