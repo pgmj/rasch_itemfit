@@ -203,7 +203,7 @@ values, Model fit},
 
 \title{Introduction}
 \author{Magnus Johansson, PhD}
-\date{2025-01-13}
+\date{2025-01-14}
 
 \begin{document}
 \maketitle
@@ -273,12 +273,12 @@ for conditional item infit varies with sample size. The expected average
 conditional item infit range was described by Müller as fairly well
 captured by Smith's rule-of-thumb formula 1±2/\(\sqrt{n}\) (R. M. Smith
 et al., 1998). However, the average range does not apply for all items
-within a dataset, since item location relative to sample location also
-affects the model expected item fit. This means that some items within a
-set of items varying in location are likely to have item fit values
-outside Smith's average value range while still fitting the Rasch model.
-Although primarily affecte by sample size, each item has its variations
-in the range of expected item fit.
+within a dataset, since item location relative to sample mean location
+also affects the model expected fit for individual items. This means
+that some items within a set of items varying in location are likely to
+have item fit values outside Smith's average value range while still
+fitting the Rasch model. Although primarily affecte by sample size, each
+item has its variations in the range of expected item fit.
 
 While evaluation of item fit is an essential part of evaluating
 unidimensionality, it is recommended to use multiple methods.
@@ -473,16 +473,16 @@ simulations took about 12 hours to run on a Macbook Pro Max M1 using 9
 CPU cores.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0549}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0989}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1868}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1099}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1978}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1209}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1319}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0989}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0500}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0900}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1700}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1100}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1200}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1800}}@{}}
 
-\caption{\label{tbl-itemfit1}Conditional item fit with simulation based
+\caption{\label{tbl-itemfit1}Conditional item fit with simulation-based
 cutoff values}
 
 \tabularnewline
@@ -503,20 +503,20 @@ Infit diff
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Outfit diff
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-Location
+Relative location
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-V1 & 1.017 & {[}0.874, 1.138{]} & 1.061 & {[}0.631, 1.605{]} & no misfit
-& no misfit & -1.37 \\
-V11 & 1.000 & {[}0.808, 1.184{]} & 1.032 & {[}0.666, 1.277{]} & no
-misfit & no misfit & -0.66 \\
-V3 & 1.022 & {[}0.918, 1.119{]} & 1.050 & {[}0.668, 1.554{]} & no misfit
-& no misfit & 0.46 \\
-V12 & 0.966 & {[}0.841, 1.189{]} & 0.793 & {[}0.803, 1.28{]} & no misfit
-& 0.01 & 1.58 \\
+V1 & 1.017 & {[}0.881, 1.138{]} & 1.061 & {[}0.655, 1.493{]} & no misfit
+& no misfit & -1.55 \\
+V11 & 1.000 & {[}0.788, 1.172{]} & 1.032 & {[}0.672, 1.308{]} & no
+misfit & no misfit & -0.84 \\
+V3 & 1.022 & {[}0.896, 1.128{]} & 1.050 & {[}0.683, 1.437{]} & no misfit
+& no misfit & 0.28 \\
+V12 & 0.966 & {[}0.817, 1.187{]} & 0.793 & {[}0.76, 1.262{]} & no misfit
+& no misfit & 1.40 \\
 
 \end{longtable}
 
@@ -529,7 +529,7 @@ V12 & 0.966 & {[}0.841, 1.189{]} & 0.793 & {[}0.803, 1.28{]} & no misfit
 
 }
 
-\caption{\label{fig-itemfit1}Distribution of simulation based item fit
+\caption{\label{fig-itemfit1}Distribution of simulation-based item fit
 and estimated item fit from observed data}
 
 \end{figure}%
@@ -1023,17 +1023,12 @@ Bootstrap iterations & Item & Median & MAD & Mean & SD \\
 
 Study 5: Varying the number of items
 
-When doing simulation studies there is always a balance to strike
-between trying to evaluate many scenarios and not having too high
-complexity. We have been keeping several things constant, such as item
-locations and number of items, which makes interpretation easier but may
-limit the applicability of the results. For our final simulation, we
-will vary the number of items and the number of misfitting items. First,
-40 dichotomous items will be used, adding 20 new item locations to the
-previously used set, with the same three items misfitting (items 9, 13,
-and 18). Second, items 1-10 out of the initial 20 items will be used,
-which means only item 9 will be misfit. We'll again be using sample
-sizes of 150, 250, 500, and 1000.
+For this simulation, we will vary the number of items and the number of
+misfitting items. First, 40 dichotomous items will be used, adding 20
+new item locations to the previously used set, with the same three items
+misfitting (items 9, 13, and 18). Second, items 1-10 out of the initial
+20 items will be used, which means only item 9 will be misfit. We'll
+again be using sample sizes of 150, 250, 500, and 1000.
 
 Item-restscore and item infit will be compared. The latter will use 100
 bootstrap iterations to determine critical values for sample sizes 150
@@ -1308,6 +1303,12 @@ polytomous data using the Rasch Partial Credit Model (PCM, Masters,
 1982).
 
 \section{Limitations}\label{limitations}
+
+When doing simulation studies there is always a balance to strike
+between trying to evaluate many scenarios and not having too high
+complexity. We have been keeping several things constant, such as item
+locations and number of items, which makes interpretation easier but may
+limit the applicability of the results.
 
 The total number of items and the proportion of misfit items clearly
 have effects on detection rate and could have been investigated further
