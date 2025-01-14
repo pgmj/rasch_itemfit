@@ -6,6 +6,8 @@ author:
       - name: RISE Research Institutes of Sweden, Division Built Environment, System Transition
       - name: Centre for Psychiatry Research, Department of Clinical Neuroscience, Karolinska Institutet, & Stockholm Health Care Services, Region Stockholm
     orcid: 0000-0003-1669-592X
+    email: magnus.p.johansson@ri.se
+    corresponding: true
 keywords:
   - Rasch
   - Psychometrics
@@ -25,7 +27,10 @@ bibliography: references.bib
 number-sections: true
 shorttitle: Detecting item misfit in Rasch models
 notebook-links: global
-csl: apa.csl
+license: "CC BY"
+funding: "The author received no specific funding for this work."
+#citation:
+#  doi: 
 editor_options: 
   chunk_output_type: console
 ---
@@ -36,7 +41,7 @@ This paper presents a series of simulations conducted to evaluate methods to det
 
 The evaluation of item fit under the Rasch model has, in the majority of published psychometric papers, been conducted using various more or less arbitrary rule-of-thumb critical values. Regarding mean squared (MSQ) item residuals, which should ideally be centered around 1.0, there are two sources often cited. One is the book by Bond & Fox [-@bond_applying_2015], which has garnered around 12 000 citations according to Google Scholar]. It contains a table with rule-of-thumb recommendations for various settings, ranging from 0.8–1.2 to 0.5–1.7. Another frequently seen source, which is not an actual peer-reviewed publication and thus lacks citation counts, is the webpage at <https://rasch.org/rmt/rmt162f.htm>, where Mike Linacre states 0.5-1.5 to be "productive for measurement". Neither of these sources seem to rely on simulation studies to support their recommendations. While it is reasonable to accept a non-perfect fit to the Rasch model and also describe what one defines as acceptable levels of misfit, such recommendations would seem less arbitrary if related to simulations showing the range of item fit values found when simulating data that fit the Rasch model.
 
-Müller [-@muller_item_2020] used simulation to show how the range of critical values for conditional item infit varies with sample size. The expected average conditional item infit range was described by Müller as fairly well captured by Smith's rule-of-thumb formula 1±2/$\sqrt{n}$ [@smith_using_1998]. However, the average range does not apply for all items within a dataset, since item location relative to sample location also affects the model expected item fit. This means that some items within a set of items varying in location are likely to have item fit values outside Smith's average value range while still fitting the Rasch model. Although primarily affecte by sample size, each item has its variations in the range of expected item fit.
+Müller [-@muller_item_2020] used simulation to show how the range of critical values for conditional item infit varies with sample size. The expected average conditional item infit range was described by Müller as fairly well captured by Smith's rule-of-thumb formula 1±2/$\sqrt{n}$ [@smith_using_1998]. However, the average range does not apply for all items within a dataset, since item location relative to sample mean location also affects the model expected fit for individual items. This means that some items within a set of items varying in location are likely to have item fit values outside Smith's average value range while still fitting the Rasch model. Although primarily affecte by sample size, each item has its variations in the range of expected item fit.
 
 While evaluation of item fit is an essential part of evaluating unidimensionality, it is recommended to use multiple methods. Standardized residuals are frequently analyzed, commonly with principal component analysis (PCA) and an analysis of residual correlations amongst item pairs, often referred to as Yen's Q3. Chou and Wang [-@chou_checking_2010] showed that the critical value for PCA of residuals to support unidimensionality suggested by Smith [-@smith_detecting_2002], using the largest eigenvalue < 1.5, is not generally applicable since it is affected by both test length and sample size. Christensen and colleagues [-@christensen_critical_2017] used simulation methods to illustrate the expected range of residual correlations under different conditions. Both of these papers provide important information about the dubiousness of using rule-of-thumb critical values when the empirical distribution of a statistic is not known, but they leave practitioners without tools to determine appropriate cutoffs to apply in practical analysis work.
 
@@ -214,7 +219,7 @@ This study was rather computationally demanding since each simulation run entail
 
 ```{r}
 #| label: tbl-itemfit1
-#| tbl-cap: Conditional item fit with simulation based cutoff values
+#| tbl-cap: Conditional item fit with simulation-based cutoff values
 #| cache: true
 
 simfit <- RIgetfit(demodata, iterations = 400, cpu = 8)
@@ -223,7 +228,7 @@ RIitemfit(demodata, simfit, output = "quarto")
 
 ```{r}
 #| label: fig-itemfit1
-#| fig-cap: Distribution of simulation based item fit and estimated item fit from observed data
+#| fig-cap: Distribution of simulation-based item fit and estimated item fit from observed data
 RIgetfitPlot(simfit, demodata, output = "both")
 ```
 
@@ -1368,7 +1373,7 @@ knitr::kable(irb150_tbl)
 
 # Study 5: Varying the number of items 
 
-When doing simulation studies there is always a balance to strike between trying to evaluate many scenarios and not having too high complexity. We have been keeping several things constant, such as item locations and number of items, which makes interpretation easier but may limit the applicability of the results. For our final simulation, we will vary the number of items and the number of misfitting items. First, 40 dichotomous items will be used, adding 20 new item locations to the previously used set, with the same three items misfitting (items 9, 13, and 18). Second, items 1-10 out of the initial 20 items will be used, which means only item 9 will be misfit. We'll again be using sample sizes of 150, 250, 500, and 1000.
+For this simulation, we will vary the number of items and the number of misfitting items. First, 40 dichotomous items will be used, adding 20 new item locations to the previously used set, with the same three items misfitting (items 9, 13, and 18). Second, items 1-10 out of the initial 20 items will be used, which means only item 9 will be misfit. We'll again be using sample sizes of 150, 250, 500, and 1000.
 
 Item-restscore and item infit will be compared. The latter will use 100 bootstrap iterations to determine critical values for sample sizes 150 and 250, and 200 bootstrap iterations for n >= 500.
 
@@ -2004,6 +2009,8 @@ Item fit in this paper has been assessed using data from individual respondent r
 While the simulations in this paper have all used dichotomous data, all functions evaluated from the `easyRasch` package also work with polytomous data using the Rasch Partial Credit Model [PCM, @masters_rasch_1982].
 
 ## Limitations
+
+When doing simulation studies there is always a balance to strike between trying to evaluate many scenarios and not having too high complexity. We have been keeping several things constant, such as item locations and number of items, which makes interpretation easier but may limit the applicability of the results.
 
 The total number of items and the proportion of misfit items clearly have effects on detection rate and could have been investigated further using more variations in sample sizes. The Rasch partial credit model for polytomous data would have been useful to include in a comparison study. When testing the bootstrapped item-restscore method, more variations in the number of bootstrap samples (iterations) might have been of interest, although the difference between 250 and 500 was small.
 
