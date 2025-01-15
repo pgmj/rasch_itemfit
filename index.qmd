@@ -6,7 +6,7 @@ author:
       - name: RISE Research Institutes of Sweden, Division Built Environment, System Transition
       - name: Centre for Psychiatry Research, Department of Clinical Neuroscience, Karolinska Institutet, & Stockholm Health Care Services, Region Stockholm
     orcid: 0000-0003-1669-592X
-    email: magnus.p.johansson@ri.se
+    email: pgmj@pm.me
     corresponding: true
 keywords:
   - Rasch
@@ -16,7 +16,7 @@ keywords:
   - Critical values
   - Model fit
 abstract: |
-  Psychometrics in general have long relied on rule-of-thumb critical values for various goodness of fit metrics. With more powerful personal computers it is both feasible and desirable to use simulation and/or bootstrap methods to determine appropriate cutoff values. This paper illustrates and evaluates the use of an R package for Rasch psychometrics that has implemented functions to simplify the process of determining simulation-based cutoff values. Through a series of simulation studies, a comparison is made between the two methods of information-weighted conditional item fit ("infit") and item-restscore correlations using Goodman and Kruskal’s $\gamma$. Results indicate the limitations of small samples (n < 500) in correctly detecting item misfit due to multidimensionality, especially when a larger proportion of items are misfit and misfit items are off-target. Item outfit shows very low performance in general. Conditional infit with simulation-based cutoffs performs better than item-restscore with sample sizes below 500. Both methods result in problematic rates of false positives with large samples (n >= 1000). Large datasets should be analyzed using nonparametric bootstrap of subsamples with item-restscore to reduce the risk of type-1 errors. Finally, the importance of an iterative analysis process is emphasized, since a situation where several items show underfit will cause other items to show overfit to the Rasch model. Underfit items should be removed one at a time, and a re-analysis conducted for each step to avoid erroneously eliminating items.
+  Psychometrics have long relied on rule-of-thumb critical values for goodness of fit metrics. With  powerful personal computers it is both feasible and desirable to use simulation methods to determine appropriate cutoff values. This paper evaluates the use of an R package for Rasch psychometrics that has implemented functions to simplify the process of determining simulation-based cutoff values. Through six simulation studies, comparisons are made between information-weighted conditional item fit ("infit") and item-restscore correlations using Goodman and Kruskal’s $\gamma$. Results indicate the limitations of small samples (n < 500) in correctly detecting item misfit, especially when a larger proportion of items are misfit and/or when misfit items are off-target. Infit with simulation-based cutoffs outperforms item-restscore with sample sizes below 500. Both methods result in problematic rates of false positives with large samples (n >= 1000). Large datasets should be analyzed using nonparametric bootstrap of subsamples with item-restscore to reduce the risk of type-1 errors. Finally, the importance of an iterative analysis process is emphasized, since a situation where several items show underfit will cause other items to show overfit. Underfit items should be removed one at a time, and a re-analysis conducted for each step to avoid erroneously eliminating items.
 key-points:
   - Rule-of-thumb critical values for item fit metrics should be replaced with simulation-based values
   - Sample size affects the detection rate and false positive rate
@@ -24,13 +24,12 @@ key-points:
   - Mean squared unweighted "outfit" is not useful
 date: last-modified
 bibliography: references.bib
-number-sections: true
 shorttitle: Detecting item misfit in Rasch models
 notebook-links: global
 license: "CC BY"
 funding: "The author received no specific funding for this work."
-#citation:
-#  doi: 
+citation:
+  doi: 10.31219/osf.io/j8fg2
 editor_options: 
   chunk_output_type: console
 ---
@@ -39,7 +38,7 @@ editor_options:
 
 This paper presents a series of simulations conducted to evaluate methods to detect item misfit due to multidimensionality in Rasch models. First, conditional item infit and outfit [@muller_item_2020] will be under scrutiny. Second, item infit will be compared to the item-restscore method [@kreiner_note_2011;@christensen_item_2013]. Third, a bootstrap method for item-restscore will be presented and tested. This paper is intended for a target group of those who make practical use of Rasch analysis and wish to better understand the expected performance of methods available. As such, we refer readers interested in mathematical and statistical descriptions of the methods to referenced papers detailing this aspect. Only two simple performance metrics will be presented in the results: correct detection rate and false positive rate, both in percentages.
 
-The evaluation of item fit under the Rasch model has, in the majority of published psychometric papers, been conducted using various more or less arbitrary rule-of-thumb critical values. Regarding mean squared (MSQ) item residuals, which should ideally be centered around 1.0, there are two sources often cited. One is the book by Bond & Fox [-@bond_applying_2015], which has garnered around 12 000 citations according to Google Scholar]. It contains a table with rule-of-thumb recommendations for various settings, ranging from 0.8–1.2 to 0.5–1.7. Another frequently seen source, which is not an actual peer-reviewed publication and thus lacks citation counts, is the webpage at <https://rasch.org/rmt/rmt162f.htm>, where Mike Linacre states 0.5-1.5 to be "productive for measurement". Neither of these sources seem to rely on simulation studies to support their recommendations. While it is reasonable to accept a non-perfect fit to the Rasch model and also describe what one defines as acceptable levels of misfit, such recommendations would seem less arbitrary if related to simulations showing the range of item fit values found when simulating data that fit the Rasch model.
+The evaluation of item fit under the Rasch model has, in the majority of published psychometric papers, been conducted using various more or less arbitrary rule-of-thumb critical values. Regarding mean squared (MSQ) item residuals, which should ideally be centered around 1.0, there are two sources often cited. One is the book by Bond & Fox [-@bond_applying_2015], which has garnered around 12 000 citations according to Google Scholar. It contains a table with rule-of-thumb recommendations for various settings, ranging from 0.8–1.2 to 0.5–1.7. Another frequently seen source, which is not an actual peer-reviewed publication and thus lacks citation counts, is the webpage at <https://rasch.org/rmt/rmt162f.htm>, where Mike Linacre states 0.5-1.5 to be "productive for measurement". Neither of these sources seem to rely on simulation studies to support their recommendations. While it is reasonable to accept a non-perfect fit to the Rasch model and also describe what one defines as acceptable levels of misfit, such recommendations would seem less arbitrary if related to simulations showing the range of item fit values found when simulating data that fit the Rasch model.
 
 Müller [-@muller_item_2020] used simulation to show how the range of critical values for conditional item infit varies with sample size. The expected average conditional item infit range was described by Müller as fairly well captured by Smith's rule-of-thumb formula 1±2/$\sqrt{n}$ [@smith_using_1998]. However, the average range does not apply for all items within a dataset, since item location relative to sample mean location also affects the model expected fit for individual items. This means that some items within a set of items varying in location are likely to have item fit values outside Smith's average value range while still fitting the Rasch model. Although primarily affecte by sample size, each item has its variations in the range of expected item fit.
 
@@ -87,7 +86,7 @@ A fully reproducible manuscript with R code and data is available on GitHub: <ht
 
 The simulation of response data used three steps: First, a vector of theta values (person scores on the latent variable's logit scale) was generated using `rnorm(mean = 0, sd = 1.5)`. Second, a set of item locations ranging from -2 to 2 logits were generated for dichotomous items, using `runif(n = 20, min = -2, max = 2)`. Third, the theta values were used to simulate item responses for participants, using `sim.xdim()` from the `eRm` package [@mair_extended_2007], which allows the simulation of multidimensional response data. Multiple datasets with 10 000 respondents each were generated using the same item and person parameters, varying the targeting of the misfitting item(s) and number of the misfitting item(s). More details are described in the separate studies. The parametric bootstrapping procedure was implemented using random samples from the simulated datasets. Sample size variations tested are also described in each study. 
 
-The general procedure for the parametric bootstrapping is as follows:
+The general procedure for the parametric bootstrapping was as follows:
 
 1. Estimation of item locations based on simulated item response data, using conditional maximum likelihood [CML, @mair_extended_2007].
 2. Estimation of sample theta values using weighted maximum likelihood [@warm_weighted_1989].
@@ -95,11 +94,7 @@ The general procedure for the parametric bootstrapping is as follows:
 4. Estimation of the dichotomous Rasch model for the new response data using CML.
 5. Based on step 4, calculation of conditional item infit and outfit [@muller_item_2020;@mueller_iarm_2022] and/or item-restscore metrics [@kreiner_note_2011;@mueller_iarm_2022].
 
-Steps three and four were iterated over, using resampling with replacement from the estimated theta values as a basis for simulating the response data in step three.
-
-Summary statistics were created with a focus on the percentage of correct detection of misfit and false positives.
-
-A complete list of software used for the analyses is listed under @sec-addmat.
+Steps three and four were iterated over, using resampling with replacement from the estimated theta values as a basis for simulating the response data in step three. Summary statistics were created with a focus on the percentage of correct detection of misfit and false positives. A complete list of software used for the analyses is listed under @sec-addmat.
 
 ```{r}
 # read pre-generated item locations for reproducibility

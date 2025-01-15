@@ -41,7 +41,7 @@
 \makeatother
 \usepackage{xcolor}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
 \makeatletter
 \ifx\paragraph\undefined\else
@@ -189,7 +189,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={Introduction},
+  pdftitle={Detecting item misfit in Rasch models},
   pdfauthor={Magnus Johansson, PhD},
   pdfkeywords={Rasch, Psychometrics, Item fit, Cutoffs, Critical
 values, Model fit},
@@ -201,39 +201,38 @@ values, Model fit},
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{Introduction}
+\title{Detecting item misfit in Rasch models}
 \author{Magnus Johansson, PhD}
-\date{2025-01-14}
+\date{2025-01-15}
 
 \begin{document}
 \maketitle
 \begin{abstract}
-Psychometrics in general have long relied on rule-of-thumb critical
-values for various goodness of fit metrics. With more powerful personal
-computers it is both feasible and desirable to use simulation and/or
-bootstrap methods to determine appropriate cutoff values. This paper
-illustrates and evaluates the use of an R package for Rasch
-psychometrics that has implemented functions to simplify the process of
-determining simulation-based cutoff values. Through a series of
-simulation studies, a comparison is made between the two methods of
-information-weighted conditional item fit (``infit'') and item-restscore
-correlations using Goodman and Kruskal's \(\gamma\). Results indicate
-the limitations of small samples (n \textless{} 500) in correctly
-detecting item misfit due to multidimensionality, especially when a
-larger proportion of items are misfit and misfit items are off-target.
-Item outfit shows very low performance in general. Conditional infit
-with simulation-based cutoffs performs better than item-restscore with
-sample sizes below 500. Both methods result in problematic rates of
-false positives with large samples (n \textgreater= 1000). Large
-datasets should be analyzed using nonparametric bootstrap of subsamples
-with item-restscore to reduce the risk of type-1 errors. Finally, the
-importance of an iterative analysis process is emphasized, since a
-situation where several items show underfit will cause other items to
-show overfit to the Rasch model. Underfit items should be removed one at
-a time, and a re-analysis conducted for each step to avoid erroneously
-eliminating items.
+Psychometrics have long relied on rule-of-thumb critical values for
+goodness of fit metrics. With powerful personal computers it is both
+feasible and desirable to use simulation methods to determine
+appropriate cutoff values. This paper evaluates the use of an R package
+for Rasch psychometrics that has implemented functions to simplify the
+process of determining simulation-based cutoff values. Through six
+simulation studies, comparisons are made between information-weighted
+conditional item fit (``infit'') and item-restscore correlations using
+Goodman and Kruskal's \(\gamma\). Results indicate the limitations of
+small samples (n \textless{} 500) in correctly detecting item misfit,
+especially when a larger proportion of items are misfit and/or when
+misfit items are off-target. Infit with simulation-based cutoffs
+outperforms item-restscore with sample sizes below 500. Both methods
+result in problematic rates of false positives with large samples (n
+\textgreater= 1000). Large datasets should be analyzed using
+nonparametric bootstrap of subsamples with item-restscore to reduce the
+risk of type-1 errors. Finally, the importance of an iterative analysis
+process is emphasized, since a situation where several items show
+underfit will cause other items to show overfit. Underfit items should
+be removed one at a time, and a re-analysis conducted for each step to
+avoid erroneously eliminating items.
 \end{abstract}
 
+
+\section{Introduction}\label{introduction}
 
 This paper presents a series of simulations conducted to evaluate
 methods to detect item misfit due to multidimensionality in Rasch
@@ -254,7 +253,7 @@ published psychometric papers, been conducted using various more or less
 arbitrary rule-of-thumb critical values. Regarding mean squared (MSQ)
 item residuals, which should ideally be centered around 1.0, there are
 two sources often cited. One is the book by Bond \& Fox (2015), which
-has garnered around 12 000 citations according to Google Scholar{]}. It
+has garnered around 12 000 citations according to Google Scholar. It
 contains a table with rule-of-thumb recommendations for various
 settings, ranging from 0.8--1.2 to 0.5--1.7. Another frequently seen
 source, which is not an actual peer-reviewed publication and thus lacks
@@ -358,7 +357,7 @@ There are six simulation studies included in this paper:
   Conditional likelihood ratio test
 \end{enumerate}
 
-Methods
+\section{Methods}\label{methods}
 
 A fully reproducible manuscript with R code and data is available on
 GitHub: \url{https://github.com/pgmj/rasch_itemfit}. Each study included
@@ -381,7 +380,7 @@ in the separate studies. The parametric bootstrapping procedure was
 implemented using random samples from the simulated datasets. Sample
 size variations tested are also described in each study.
 
-The general procedure for the parametric bootstrapping is as follows:
+The general procedure for the parametric bootstrapping was as follows:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -406,15 +405,13 @@ The general procedure for the parametric bootstrapping is as follows:
 
 Steps three and four were iterated over, using resampling with
 replacement from the estimated theta values as a basis for simulating
-the response data in step three.
+the response data in step three. Summary statistics were created with a
+focus on the percentage of correct detection of misfit and false
+positives. A complete list of software used for the analyses is listed
+under Section~\ref{sec-addmat}.
 
-Summary statistics were created with a focus on the percentage of
-correct detection of misfit and false positives.
-
-A complete list of software used for the analyses is listed under
-Section~\ref{sec-addmat}.
-
-Study 1: Item infit and outfit
+\section{Study 1: Item infit and
+outfit}\label{study-1-item-infit-and-outfit}
 
 Item mean square standardized residuals are either unweighted, which is
 referred to as ``outfit'', or information weighted, also known as
@@ -534,7 +531,7 @@ and estimated item fit from observed data}
 
 \end{figure}%
 
-\section{Results}\label{results}
+\subsection{Results}\label{results}
 
 Figures show the percent of simulation runs that have identified an item
 as misfitting. Items with more than 5\% are colored in light red. A
@@ -543,7 +540,7 @@ representing the misfitting item. The figure grid columns are labeled
 with the number of iterations used by \texttt{RIgetfit()} to determine
 cutoff values and grid rows are labeled with the sample size.
 
-\subsection{Infit}\label{infit}
+\subsubsection{Infit}\label{infit}
 
 \phantomsection\label{cell-fig-ifb0}
 \begin{figure}[H]
@@ -604,7 +601,7 @@ the sample mean (see Figure~\ref{fig-ifb2}), we see a stronger reduction
 in power for sample sizes 150 and 250. No false positives are
 identified.
 
-\subsection{Outfit}\label{outfit}
+\subsubsection{Outfit}\label{outfit}
 
 \phantomsection\label{cell-fig-ifb0out}
 \begin{figure}[H]
@@ -652,7 +649,7 @@ As shown in Figure~\ref{fig-ifb0out}, Figure~\ref{fig-ifb1out}, and
 Figure~\ref{fig-ifb2out}, outfit is performing worse than infit across
 the board.
 
-\subsection{Comments}\label{comments}
+\subsubsection{Comments}\label{comments}
 
 Based on these simulation, it is highly recommended to use infit over
 outfit in assessing item fit. The performance of outfit calls to
@@ -667,7 +664,7 @@ sizes 500 and 1000 only. The risk for false positives is notably higher
 when the misfitting item is located at the sample mean compared to when
 the misfitting item is off-target by -1 logits or more.
 
-Study 2: Item-restscore
+\section{Study 2: Item-restscore}\label{study-2-item-restscore}
 
 Item-restscore is a metric that compares an expected correlation with
 the observed correlation, using Goodman and Kruskal's \(\gamma\)
@@ -682,7 +679,7 @@ between the observed and expected values are statistically significant
 data and procedure in this study follow the same structure as Study 1,
 with the addition of a smaller sample condition with 100 respondents.
 
-\section{Results}\label{results-1}
+\subsection{Results}\label{results-1}
 
 \phantomsection\label{cell-fig-itemrestscore1}
 \begin{figure}[H]
@@ -707,7 +704,8 @@ detection rate is similar, including the increased tendency for false
 positives at n = 1000. The false positive rate is lower for
 item-restscore than infit for sample sizes below 1000.
 
-Study 3: Comparing infit and item-restscore
+\section{Study 3: Comparing infit and
+item-restscore}\label{study-3-comparing-infit-and-item-restscore}
 
 We will now compare the performance of infit and item-restscore when all
 three items are misfitting at the same time. This simulation will also
@@ -719,7 +717,7 @@ in Study 1. Outfit is also included in the study, mostly to check if
 its' performance is similar to the condition with only one misfitting
 item.
 
-\subsection{Results}\label{results-2}
+\subsubsection{Results}\label{results-2}
 
 \phantomsection\label{cell-fig-ifb3out}
 \begin{figure}[H]
@@ -865,7 +863,8 @@ for item 12. Items 9, 13, and 18, which were simulated to be misfitting
 due to loading on a separate dimension, are as expected showing underfit
 to the Rasch model.
 
-Study 4: Bootstrapped item-restscore
+\section{Study 4: Bootstrapped
+item-restscore}\label{study-4-bootstrapped-item-restscore}
 
 For this set of simulations, we will use a non-parametric bootstrap
 procedure with item-restscore. The difference from the parametric
@@ -881,7 +880,7 @@ sample sizes 150 and 250, using the complete sample for the same
 bootstrap procedure to see if this produces more useful information than
 previously tested strategies for identifying misfitting items.
 
-\section{Results}\label{results-3}
+\subsection{Results}\label{results-3}
 
 \phantomsection\label{cell-fig-irb0all}
 \begin{figure}[H]
@@ -965,7 +964,7 @@ variation for false positives, but the clear majority of results are
 below 50\%. 3 items have 95th percentile values above 50, with the
 highest at 58.8.
 
-\section{Small sample (n = 150)}\label{small-sample-n-150}
+\subsection{Small sample (n = 150)}\label{small-sample-n-150}
 
 We will use 200 simulations to check the performance of the bootstrapped
 item-restscore function for sample size 150. As an additional
@@ -1021,7 +1020,8 @@ Bootstrap iterations & Item & Median & MAD & Mean & SD \\
 
 \end{longtable}
 
-Study 5: Varying the number of items
+\section{Study 5: Varying the number of
+items}\label{study-5-varying-the-number-of-items}
 
 For this simulation, we will vary the number of items and the number of
 misfitting items. First, 40 dichotomous items will be used, adding 20
@@ -1034,7 +1034,7 @@ Item-restscore and item infit will be compared. The latter will use 100
 bootstrap iterations to determine critical values for sample sizes 150
 and 250, and 200 bootstrap iterations for n \textgreater= 500.
 
-\section{Results 40 items}\label{results-40-items}
+\subsection{Results 40 items}\label{results-40-items}
 
 \phantomsection\label{cell-fig-ifb40}
 \begin{figure}[H]
@@ -1069,7 +1069,7 @@ Figure~\ref{fig-ifb40}), while performance is slightly better for
 item-restscore for n \textgreater= 500 in terms of lower rates of false
 positives (see Figure~\ref{fig-itemrestscore40}).
 
-\section{Results 10 items}\label{results-10-items}
+\subsection{Results 10 items}\label{results-10-items}
 
 \phantomsection\label{cell-fig-ifb10}
 \begin{figure}[H]
@@ -1098,7 +1098,7 @@ items)}
 
 \end{figure}%
 
-\section{Summary figure}\label{summary-figure}
+\subsection{Summary figure}\label{summary-figure}
 
 \phantomsection\label{cell-fig-comp10}
 \begin{figure}[H]
@@ -1136,7 +1136,8 @@ compared to 20 items result in a larger improvement for infit over
 item-restscore for the n = 150 condition, but also the n = 250 and n =
 500 conditions for the -2 logits off-target item.
 
-Study 6: Conditional likelihood ratio test
+\section{Study 6: Conditional likelihood ratio
+test}\label{study-6-conditional-likelihood-ratio-test}
 
 While global tests of model fit don't provide any information about
 reasons for misfit when detected, they can be useful together with more
@@ -1157,7 +1158,7 @@ Then the datasets with three misfitting items, and comparing 20 and 40
 items. And finally, one dataset with 10 items and one well-targeted
 misfitting item.
 
-\section{Results}\label{results-4}
+\subsection{Results}\label{results-4}
 
 \begin{figure}
 
@@ -1208,7 +1209,7 @@ performance for 10 items compared to infit and item-restscore at n =
 items, LRT is similar to infit at all sample sizes, and slightly better
 than item-restscore for n \textless{} 500.
 
-Discussion
+\section{Discussion}\label{discussion}
 
 This paper was created primarily out of a desire to understand the
 performance of conditional item fit and item-restscore in detecting item
@@ -1302,7 +1303,7 @@ functions evaluated from the \texttt{easyRasch} package also work with
 polytomous data using the Rasch Partial Credit Model (PCM, Masters,
 1982).
 
-\section{Limitations}\label{limitations}
+\subsection{Limitations}\label{limitations}
 
 When doing simulation studies there is always a balance to strike
 between trying to evaluate many scenarios and not having too high
@@ -1318,7 +1319,7 @@ study. When testing the bootstrapped item-restscore method, more
 variations in the number of bootstrap samples (iterations) might have
 been of interest, although the difference between 250 and 500 was small.
 
-Conclusion
+\section{Conclusion}\label{conclusion}
 
 For sample sizes under 500, it seems best to rely mostly on item infit
 with simulation-based critical values, using 100 iterations with
@@ -1330,7 +1331,8 @@ detection. Using 250 iterations for the bootstrapped item-restscore
 seems adequate. In general, both infit and item-restscore are useful in
 the analysis process if you have a sample size below 1000.
 
-References
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
@@ -1455,7 +1457,7 @@ response theory. \emph{Psychometrika}, \emph{54}(3), 427--450.
 
 \end{CSLReferences}
 
-Additional materials
+\section{Additional materials}\label{sec-addmat}
 
 \begin{itemize}
 \tightlist
@@ -1471,7 +1473,7 @@ Additional materials
   \end{itemize}
 \end{itemize}
 
-\section{Session info}\label{session-info}
+\subsection{Session info}\label{session-info}
 
 This documents the specific R packages and versions used in this study.
 Note that the simulations were conducted using \texttt{easyRasch}
