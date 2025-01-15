@@ -9,6 +9,7 @@ execute:
 format:
   html:
     toc: true
+    number-sections: true
     citations-hover: true
     crossrefs-hover: true
     other-links:
@@ -33,6 +34,7 @@ format:
     csl: apa.csl
   
   # preprint-typst:
+  #   number-sections: true
   #   running-head: "*Preprint:* Detecting item misfit in Rasch models"
   #   authornote: This manuscript is not yet peer-reviewed.
   #   citeproc: true
