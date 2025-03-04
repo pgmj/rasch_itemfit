@@ -295,11 +295,11 @@ ifb2 <- list()
 
 #library(tictoc)
 #tic()
-ifb0 <- map(samplesizes, ~ itemfitboot(simdata[[1]], iterations = 200, samplesize = .x))
+ifb0 <- map(samplesizes, ~ itemfitboot(simdata[[1]], iterations = 500, samplesize = .x))
 #toc() # 14257.358 sec elapsed
 
-ifb1 <- map(samplesizes, ~ itemfitboot(simdata[[2]], iterations = 200, samplesize = .x))
-ifb2 <- map(samplesizes, ~ itemfitboot(simdata[[3]], iterations = 200, samplesize = .x))
+ifb1 <- map(samplesizes, ~ itemfitboot(simdata[[2]], iterations = 500, samplesize = .x))
+ifb2 <- map(samplesizes, ~ itemfitboot(simdata[[3]], iterations = 500, samplesize = .x))
 
 # saveRDS(ifb0, "data/ifb0_200.rds")
 # saveRDS(ifb2, "data/ifb2_200.rds")
@@ -316,7 +316,9 @@ ifb2_df <- map_dfr(1:4, ~ do.call("rbind", ifb2[[.x]])) %>%
 
 ifb <- rbind(ifb0_df,ifb1_df,ifb2_df)
 
-write_parquet(ifb,"data/ifb.parquet")
+write_parquet(ifb,"data/ifb.parquet") 
+# This code chunk was processed on three separate occasions (200+200+100 iterations) due to the time-consuming simulation.
+# This resulted in three parquet-files with results, files named ifb_part2 and ifb_part3 in addition to the filename two lines above.
 ```
 
 
@@ -324,6 +326,12 @@ write_parquet(ifb,"data/ifb.parquet")
 
 ```{r}
 ifb <- read_parquet("data/ifb.parquet")
+ifb_part2 <- read_parquet("data/ifb_part2.parquet") %>% 
+  mutate(iteration = iteration + 200)
+ifb_part3 <- read_parquet("data/ifb_part3.parquet") %>% 
+  mutate(iteration = iteration + 400)
+
+ifb <- rbind(ifb,ifb_part2,ifb_part3)
 ```
 
 Figures show the percent of simulation runs that have identified an item as misfitting. Items with more than 5% are colored in light red. A number representing the detection rate is shown adjacent to the bar representing the misfitting item. The figure grid columns are labeled with the number of iterations used by `RIgetfit()` to determine cutoff values and grid rows are labeled with the sample size.
@@ -339,7 +347,7 @@ ifb %>%
   filter(!infit_diff == "no misfit",
          targeting == 0) %>% 
   count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
   ungroup() %>% 
   mutate(sims = factor(sims, levels = c(100,200,400),
                        labels = c("100 iterations",
@@ -363,7 +371,7 @@ ifb %>%
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "Targeting 0 logits (item 9 misfit). 200 simulations per combination.",
+  labs(subtitle = "Targeting 0 logits (item 9 misfit). 500 simulations per combination.",
        #title = "Conditional infit detection rate"
        )
 ```
@@ -379,7 +387,7 @@ ifb %>%
   filter(!infit_diff == "no misfit",
          targeting == 1) %>% 
   count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
   ungroup() %>% 
   mutate(sims = factor(sims, levels = c(100,200,400),
                        labels = c("100 iterations",
@@ -403,7 +411,7 @@ ifb %>%
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "Targeting -1 logits (item 18 misfit). 200 simulations per combination.",
+  labs(subtitle = "Targeting -1 logits (item 18 misfit). 500 simulations per combination.",
        #title = "Conditional infit detection rate"
        )
 ```
@@ -419,7 +427,7 @@ ifb %>%
   filter(!infit_diff == "no misfit",
          targeting == 2) %>% 
   count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
   ungroup() %>% 
   mutate(sims = factor(sims, levels = c(100,200,400),
                        labels = c("100 iterations",
@@ -443,7 +451,7 @@ ifb %>%
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "Targeting -2 logits (item 13 misfit). 200 simulations per combination.",
+  labs(subtitle = "Targeting -2 logits (item 13 misfit). 500 simulations per combination.",
        #title = "Conditional infit detection rate"
        )
 ```
@@ -461,7 +469,7 @@ ifb %>%
   filter(!outfit_diff == "no misfit",
          targeting == 0) %>% 
   dplyr::count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
     ungroup() %>% 
   mutate(sims = factor(sims, levels = c(100,200,400),
                        labels = c("100 iterations",
@@ -485,7 +493,7 @@ ifb %>%
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "Targeting 0 logits (item 9 misfit). 200 simulations per combination.",
+  labs(subtitle = "Targeting 0 logits (item 9 misfit). 500 simulations per combination.",
        #title = "Conditional outfit detection rate"
        )
 ```
@@ -499,7 +507,7 @@ ifb %>%
   filter(!outfit_diff == "no misfit",
          targeting == 1) %>% 
   count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
     ungroup() %>% 
   mutate(sims = factor(sims, levels = c(100,200,400),
                        labels = c("100 iterations",
@@ -523,7 +531,7 @@ ifb %>%
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "Targeting -1 logits (item 18 misfit). 200 simulations per combination.",
+  labs(subtitle = "Targeting -1 logits (item 18 misfit). 500 simulations per combination.",
        #title = "Conditional outfit detection rate"
        )
 ```
@@ -537,7 +545,7 @@ ifb %>%
   filter(!outfit_diff == "no misfit",
          targeting == 2) %>% 
   count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
     ungroup() %>% 
   mutate(sims = factor(sims, levels = c(100,200,400),
                        labels = c("100 iterations",
@@ -561,7 +569,7 @@ ifb %>%
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "Targeting -2 logits (item 13 misfit). 200 simulations per combination.",
+  labs(subtitle = "Targeting -2 logits (item 13 misfit). 500 simulations per combination.",
        #title = "Conditional outfit detection rate"
        )
 ```
@@ -728,7 +736,7 @@ results0 + results1 + results2 +
                   theme = theme_rise(fontfamily = "sans"))
 ```
 
-This simulation includes an additional condition with 100 respondents, which results in significantly lower detection rates compared to n = 150. Compared to infit at 250 respondents, item-restscore has detection rates of 95.2%, 90.9%, and 62.4% for targeting 0, -1, and -2, while infit has 96.5%, 96.5%, and 71%. For sample sizes 500 and 1000, the detection rate is similar, including the increased tendency for false positives at n = 1000. The false positive rate is lower for item-restscore than infit for sample sizes below 1000.
+This simulation includes an additional condition with 100 respondents, which results in significantly lower detection rates compared to n = 150. Compared to infit at 250 respondents, item-restscore has detection rates of 95.2%, 90.9%, and 62.4% for targeting 0, -1, and -2, while infit has 96.6%, 96.2%, and 70.6%. For sample sizes 500 and 1000, the detection rate is similar, including the increased tendency for false positives at n = 1000. The false positive rate is lower for item-restscore than infit for sample sizes below 1000.
 
 # Study 3: Comparing infit and item-restscore
 
