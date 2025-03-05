@@ -213,7 +213,7 @@ $$
 P(X_{vi} = 1) = \frac{\exp(\theta_v - \beta_i)}{1 + \exp(\theta_v - \beta_i)}
 $$ {#eq-rasch}
 
-In @eq-rasch, $X$ denotes a response, persons are indexed by $v$, items by $i$, and $\theta$ and $\beta$ are person and item parameters, respectively. To compute the Rasch model response residuals $Z_{vi}$, we use:
+In @eq-rasch, $X$ denotes a response, persons are indexed by $v$, items by $i$, and $\theta$ and $\beta$ are person and item parameters, respectively. To compute the standardized Rasch model response residuals $Z_{vi}$, we use:
 
 $$
 Z_{vi} = \frac{X_{vi} - E(X_{vi})}{\sqrt{\text{Var}(X_{vi})}}
@@ -2062,6 +2062,7 @@ The total number of items and the proportion of misfit items clearly have effect
 
 For sample sizes under 500, it seems best to rely mostly on item infit with simulation-based critical values, using 100 iterations with `RIgetfit()`. For sample sizes closer to 500, item-restscore is recommended as the primary method, either as a single-run test or bootstrapped. With samples larger than 500, bootstrapped item-restscore controls false positive rates well, while showing high rates of misfit detection. Using 250 iterations for the bootstrapped item-restscore seems adequate. In general, both infit and item-restscore are useful in the analysis process if you have a sample size below 1000.
 
+{{< pagebreak >}}
 
 
 # References {.unnumbered}
