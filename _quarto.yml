@@ -36,7 +36,7 @@ format:
   # preprint-typst:
   #   number-sections: true
   #   running-head: "*Preprint:* Detecting item misfit in Rasch models"
-  #   authornote: This manuscript is not yet peer-reviewed.
+  #   authornote: This manuscript is currently under peer-review.
   #   citeproc: true
   #   csl: https://www.zotero.org/styles/apa-with-abstract
 

@@ -1,10 +1,3 @@
-base
-methods
-datasets
-utils
-grDevices
-graphics
-stats
 eRm
 ggplot2
 iarm
@@ -20,11 +13,9 @@ forcats
 lubridate
 formattable
 kableExtra
-stats4
 lattice
 mirt
 psych
-grid
 libcoin
 mvtnorm
 partykit
@@ -42,7 +33,6 @@ foreach
 future
 furrr
 iterators
-parallel
 doParallel
 easyRasch
 arrow
