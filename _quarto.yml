@@ -23,10 +23,10 @@ format:
       hypothesis: true
     csl: apa.csl
 
-  pdf:
-    number-sections: false
-    notebook-links: global
-    csl: apa.csl
+  # pdf:
+  #   number-sections: false
+  #   notebook-links: global
+  #   csl: apa.csl
 
   apaquarto-docx:
     fig-dpi: 175
