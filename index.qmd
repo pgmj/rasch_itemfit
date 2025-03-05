@@ -38,15 +38,15 @@ editor_options:
 
 This paper presents a series of simulations conducted to evaluate methods to detect item misfit due to multidimensionality in Rasch models. First, conditional item infit and outfit [@muller_item_2020] will be under scrutiny. Second, item infit will be compared to the item-restscore method [@kreiner_note_2011;@christensen_item_2013]. Third, a bootstrap method for item-restscore will be presented and tested. This paper is intended for a target group of those who make practical use of Rasch analysis and wish to better understand the expected performance of methods available. As such, we refer readers interested in mathematical and statistical descriptions of the methods to referenced papers detailing this aspect. Only two simple performance metrics will be presented in the results: correct detection rate and false positive rate, both in percentages.
 
-The evaluation of item fit under the Rasch model has, in the majority of published psychometric papers, been conducted using various more or less arbitrary rule-of-thumb critical values. Regarding mean squared (MSQ) item residuals, which should ideally be centered around 1.0, there are two sources often cited. One is the book by Bond & Fox [-@bond_applying_2015], which has garnered around 12 000 citations according to Google Scholar. It contains a table with rule-of-thumb recommendations for various settings, ranging from 0.8–1.2 to 0.5–1.7. Another frequently seen source, which is not an actual peer-reviewed publication and thus lacks citation counts, is the webpage at <https://rasch.org/rmt/rmt162f.htm>, where Mike Linacre states 0.5-1.5 to be "productive for measurement". Neither of these sources seem to rely on simulation studies to support their recommendations. While it is reasonable to accept a non-perfect fit to the Rasch model and also describe what one defines as acceptable levels of misfit, such recommendations would seem less arbitrary if related to simulations showing the range of item fit values found when simulating data that fit the Rasch model.
+The evaluation of item fit under the Rasch model has, in the majority of published psychometric papers, been conducted using various more or less arbitrary rule-of-thumb critical values. Regarding mean squared (MSQ) item residuals, which should ideally be centered around 1.0, there are two sources often cited. One is the book by Bond and Fox [-@bond_applying_2015], which has garnered around 12 000 citations according to Google Scholar. It contains a table with rule-of-thumb recommendations for various settings, ranging from 0.8–1.2 to 0.5–1.7. Another frequently seen source, which is not an actual peer-reviewed publication and thus lacks citation counts, is the webpage at <https://rasch.org/rmt/rmt162f.htm>, where Mike Linacre states 0.5-1.5 to be "productive for measurement". Neither of these sources seem to rely on simulation studies to support their recommendations. While it is reasonable to accept a non-perfect fit to the Rasch model and also describe what one defines as acceptable levels of misfit, such recommendations would seem less arbitrary if related to simulations showing the range of item fit values found when simulating data that fit the Rasch model.
 
-Müller [-@muller_item_2020] used simulation to show how the range of critical values for conditional item infit varies with sample size. The expected average conditional item infit range was described by Müller as fairly well captured by Smith's rule-of-thumb formula 1±2/$\sqrt{n}$ [@smith_using_1998]. However, the average range does not apply for all items within a dataset, since item location relative to sample mean location also affects the model expected fit for individual items. This means that some items within a set of items varying in location are likely to have item fit values outside Smith's average value range while still fitting the Rasch model. Although primarily affecte by sample size, each item has its variations in the range of expected item fit.
+Müller [-@muller_item_2020] used simulation to show how the range of critical values for conditional item infit varies with sample size. The expected average conditional item infit range was described by Müller as fairly well captured by Smith's rule-of-thumb formula 1±2/$\sqrt{n}$ [@smith_using_1998], where n denotes the sample size. However, the average range does not apply for all items within a dataset, since item location relative to sample mean location also affects the expected model fit for individual items. This means that some items within a set of items varying in location are likely to have item fit values outside Smith's average value range while still fitting the Rasch model. Although primarily affecte by sample size, each item has its variations in the range of expected item fit.
 
 While evaluation of item fit is an essential part of evaluating unidimensionality, it is recommended to use multiple methods. Standardized residuals are frequently analyzed, commonly with principal component analysis (PCA) and an analysis of residual correlations amongst item pairs, often referred to as Yen's Q3. Chou and Wang [-@chou_checking_2010] showed that the critical value for PCA of residuals to support unidimensionality suggested by Smith [-@smith_detecting_2002], using the largest eigenvalue < 1.5, is not generally applicable since it is affected by both test length and sample size. Christensen and colleagues [-@christensen_critical_2017] used simulation methods to illustrate the expected range of residual correlations under different conditions. Both of these papers provide important information about the dubiousness of using rule-of-thumb critical values when the empirical distribution of a statistic is not known, but they leave practitioners without tools to determine appropriate cutoffs to apply in practical analysis work.
 
-It is here proposed that by using bootstrapping one can establish item fit critical cutoff values that are relevant for a specific sample and item set. The procedure uses the properties of the available data and simulates multiple new response datasets that fit the Rasch model to determine the range of plausible item fit values for each item. The R package `easyRasch` [@easyrasch] includes a function to determine item infit and outfit cutoff values using this method and will be tested in the simulation studies in this paper.
+It is here proposed that by using parametric bootstrapping one can establish item fit critical cutoff values that are relevant for a specific sample and item set. The procedure uses the estimated properties of the available data and simulates multiple new response datasets that fit the Rasch model to determine the range of plausible item fit values for each item. The R package `easyRasch` [@easyrasch] includes a function to determine item infit and outfit cutoff values using this method and will be tested in the simulation studies in this paper.
 
-Similar developments, moving from rule-of-thumb towards adaptive critical values, have recently taken place in the related field of confirmatory factor analysis. McNeish and Wolf [-@mcneish_direct_2024] have created an R package called `dynamic` that uses bootstrapping to determine appropriate critical values for commonly used model fit metrics for models using ordinal or interval data. 
+Similar developments, moving from rule-of-thumb towards adaptive critical values, have recently taken place in the related field of confirmatory factor analysis. McNeish and Wolf [-@mcneish_direct_2024] have created an R package called `dynamic` that uses simulation to determine appropriate critical values for commonly used model fit metrics for models using ordinal or interval data. 
 
 It is important to note that the conditional item fit described by Müller [-@muller_item_2020] and implemented in the `iarm` R package [@mueller_iarm_2022] should not be confused with the unconditional item fit implemented in software such as Winsteps and RUMM2030, as well as all R packages except `iarm`. Unconditional item fit can result in unreliable item fit in sample sizes as small as 200 with an increasing probability of problems as sample size increases. Readers are strongly recommended to read Müller's paper to fully understand the issues with unconditional item fit. Additionally, the experienced Rasch analyst will perhaps wonder why the Wilson-Hilferty transformed Z statistic (often abbreviated ZSTD), which is based on unconditional MSQ is not included in this analysis. This is also explained in Müller's paper, where she describes both the notorious problems with sample size and shows that conditional item fit makes ZSTD superfluous. The `easyRasch` package, which is used in this paper, uses the `iarm` implementation of conditional item fit.
 
@@ -82,19 +82,19 @@ rename <- dplyr::rename
 theme_rise <- theme_rise(fontfamily = "sans")
 ```
 
-A fully reproducible manuscript with R code and data is available on GitHub: <https://github.com/pgmj/rasch_itemfit>. Each study included in this paper has its own brief introduction and method section. This is a general description of the methods used.
+This is a general description of the methods used. Each study included in this paper has its own brief introduction and method section. A reproducible manuscript with R code and data is available on GitHub: <https://github.com/pgmj/rasch_itemfit>. First, a note on terminology. Non-parametric bootstrapping is synonymous with sampling with replacement. With this method, the original response data is directly sampled from multiple times. Parametric bootstrapping is synonymous with simulation, since new data is generated based on person and item parameter estimates from the original response data.
 
-The simulation of response data used three steps: First, a vector of theta values (person scores on the latent variable's logit scale) was generated using `rnorm(mean = 0, sd = 1.5)`. Second, a set of item locations ranging from -2 to 2 logits were generated for dichotomous items, using `runif(n = 20, min = -2, max = 2)`. Third, the theta values were used to simulate item responses for participants, using `sim.xdim()` from the `eRm` package [@mair_extended_2007], which allows the simulation of multidimensional response data. Multiple datasets with 10 000 respondents each were generated using the same item and person parameters, varying the targeting of the misfitting item(s) and number of the misfitting item(s). More details are described in the separate studies. The parametric bootstrapping procedure was implemented using random samples from the simulated datasets. Sample size variations tested are also described in each study. 
+The simulation of response data used three steps: First, a vector of theta values (person scores on the latent variable's logit scale) was generated using `rnorm(mean = 0, sd = 1.5)`. Second, a set of item locations ranging from -2 to 2 logits were generated for dichotomous items, using `runif(n = 20, min = -2, max = 2)`. The same set of item locations were used for all studies except Study 5, which adds 20 more item locations. Third, the theta values were used to simulate item responses for participants, using `sim.xdim()` from the `eRm` package [@mair_extended_2007], which allows the simulation of multidimensional response data. The sigma matrix used by `sim.xdim()` was specified to use 0.15 on the off-diagonal, where values are between 0 and 1 with lower values indicating stronger multidimensionality. Multiple datasets with 10 000 respondents each were generated using the same item and person parameters, varying the targeting of the misfitting item(s) and number of the misfitting item(s). More details are described in the separate studies. The parametric bootstrapping procedure was implemented using random samples from the simulated datasets. Sample size variations tested are also described in each study. 
 
-The general procedure for the parametric bootstrapping was as follows:
+The general procedure for the parametric bootstrap was as follows:
 
-1. Estimation of item locations based on simulated item response data, using conditional maximum likelihood [CML, @mair_extended_2007].
+1. Estimation of item locations based on simulated item response data, using Conditional Maximum Likelihood [CML, @mair_extended_2007].
 2. Estimation of sample theta values using weighted maximum likelihood [@warm_weighted_1989].
 3. Simulation of new response data that fit the Rasch model, using the estimated item locations and theta values.
 4. Estimation of the dichotomous Rasch model for the new response data using CML.
 5. Based on step 4, calculation of conditional item infit and outfit [@muller_item_2020;@mueller_iarm_2022] and/or item-restscore metrics [@kreiner_note_2011;@mueller_iarm_2022].
 
-Steps three and four were iterated over, using resampling with replacement from the estimated theta values as a basis for simulating the response data in step three. Summary statistics were created with a focus on the percentage of correct detection of misfit and false positives. A complete list of software used for the analyses is listed under @sec-addmat.
+Steps three and four were iterated over, using sampling with replacement from the estimated theta values as a basis for simulating the response data in step three. Summary statistics were created with a focus on the percentage of correct detection of misfit and false positives. A complete list of software used for the analyses is listed under @sec-addmat.
 
 ```{r}
 # read pre-generated item locations for reproducibility
@@ -105,6 +105,9 @@ items1 <- read_csv("data/rm_items40.csv") %>%
 
 ```{r}
 #| eval: false
+
+# we want two dimensional data, lower off diagonal values -> stronger misfit
+sigma <- matrix(c(1, 0.15, 0.15, 1), 2)
 # a matrix to specify which dimension each item loads on
 wmat0 <- matrix(nrow = 20,
                ncol = 2)
@@ -202,22 +205,51 @@ simdata40items <- readRDS("data/simdata40items.rds") %>%
 
 # Study 1: Item infit and outfit
 
-Item mean square standardized residuals are either unweighted, which is referred to as "outfit", or information weighted, also known as "infit" [@ostini_polytomous_2006, pp. 86-87]. Outfit is sensitive to outliers, while infit is much less affected by outliers. Both infit and outfit are based on individual response residuals. For details on conditional item fit we refer to the previously mentioned paper by Müller [-@muller_item_2020]. Conditional item infit and outfit are expected to be near 1, with higher values indicating an item to be underfitting the Rasch model (often due to multidimensionality issues) and lower values indicating overfit. For a good overview on item fit and its interpretation, see the chapter by Christensen and Kreiner [-@christensen_item_2013].
+Assessing item fit to the Rasch model using infit and outfit was first proposed by Wright and Panchapakesan [-@wright_procedure_1969]. For a historical perspective, see Smith and colleagues [-@smith_using_1998]. Item mean square standardized residuals are either unweighted, which is referred to as "outfit", or information weighted, also known as "infit" [@ostini_polytomous_2006, pp. 86-87]. Outfit is sensitive to outliers, while infit is much less affected by outliers. Both infit and outfit are based on individual response residuals.   Conditional item infit and outfit are expected to be near 1, with higher values indicating an item to be underfitting the Rasch model (often due to multidimensionality issues) and lower values indicating overfit. For a more recent overview on item fit and its interpretation, see the book chapter by Christensen and Kreiner [-@christensen_item_2013].
 
-The function `RIgetfit()` from the `easyRasch` R package is tested here. Its source code can be accessed on GitHub, see @sec-addmat. The function offers the user a choice of the number of bootstrap iterations to use to determine the critical cutoff values for each item's infit and outfit. Our main interest in this study is two-fold. We want to test variations in the number of iterations used in `RIgetfit()` and evaluate how well the critical values based on the parametric bootstrapping procedure detect misfitting items. Additionally, a comparison between infit and outfit statistics in terms of detection rate and false positive rate will be conducted.
+Unconditional item fit uses person and item parameter estimates, which results in biased residuals [@kreiner_exact_2011]. By using the total person score instead of an estimated person score, this bias can be virtually eliminated. The Rasch model describes the probability of a correct or positive response by a person to an item as:
+
+$$
+P(X_{vi} = 1) = \frac{\exp(\theta_v - \beta_i)}{1 + \exp(\theta_v - \beta_i)}
+$$ {#eq-rasch}
+
+In @eq-rasch, $X$ denotes a response, persons are indexed by $v$, items by $i$, and $\theta$ and $\beta$ are person and item parameters, respectively. To compute the Rasch model response residuals $Z_{vi}$, we use:
+
+$$
+Z_{vi} = \frac{X_{vi} - E(X_{vi})}{\sqrt{\text{Var}(X_{vi})}}
+$$ {#eq-residuals}
+
+where $E(X_{vi}) = P(X_{vi} = 1)$. The formula for outfit and infit is:
+
+$$
+\text{Outfit}_i = \sum\frac{Z_{vi}^2}{n}, \quad \text{Infit}_i = \frac{\sum_{v}
+Z_{v_i}^2 \cdot w_{vi}}{\sum_{v}w_{vi}}
+$$ {#eq-inoutfit}
+
+where the weights to calculate infit, $w_{vi} = \text{Var}(X_{vi})$. Since $E(X_{vi})$ and $\text{Var}(X_{vi})$ need to be estimated, these are replaced in the conditional fit statistics, where:
+
+$$
+\hat{E}(X_{vi}) = \hat{P}(X_{vi} = 1 \mid R_v = r) = \frac{\exp \left(
+-\hat{\beta}_i\right) \gamma_r{-1}\left(\hat{\beta}^\left({i}\right) \right) } {\gamma_r (\hat{\beta)}}
+$$ {#eq-condfit}
+
+
+In @eq-condfit, $\hat{\beta}$ indicates the vector of item parameters and $\gamma_r (\hat{\beta})$ is "the elementary symmetrical function of order r of the item parameter estimates" [@muller_item_2020, p. 4]. For further details on conditional item fit we refer to the previously mentioned paper by Müller [-@muller_item_2020] and the book chapter on item fit by Christensen and Kreiner [-@christensen_item_2013].
+
+The function `RIgetfit()` from the `easyRasch` R package is tested here. Its source code can be accessed on GitHub, see @sec-addmat. The function offers the user a choice of the number of bootstrap iterations to use to determine the critical cutoff values for each item's infit and outfit. Our main interest in this study is two-fold. We want to test variations in the number of iterations used in `RIgetfit()` and evaluate how well the critical values based on the parametric bootstrap procedure detect misfitting items. Additionally, a comparison between infit and outfit statistics in terms of detection rate and false positive rate will be conducted.
 
 20 dichotomous items are used, with one item misfitting. Item locations are the same throughout all studies unless otherwise noted. The location of the misfitting item relative to the sample theta mean was selected to be approximately 0, -1, and -2 logits. Three separate datasets were generated with these variations, each with 10 000 simulated respondents. One dataset with all three misfitting items was also generated, using the same sample size.
 
 Then the `RIitemfit()` function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. `RIitemfit()` has a default (user-modifiable) setting to slightly truncate the distribution of values using `stats::quantile()` at 0.001 and 0.999 to remove extreme values. An example is demonstrated in @tbl-itemfit1, using a subset of the items used in the simulations. @fig-itemfit1 provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith's rule-of-thumb regarding infit (1±2/$\sqrt{n}$) would be 0.9-1.1 for a sample size of 400.
 
-This study was rather computationally demanding since each simulation run entailed 100-400 underlying bootstrap iterations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4 * 3 * 3 = 36 conditions. Each combination used 200 simulation runs. The simulations took about 12 hours to run on a Macbook Pro Max M1 using 9 CPU cores.
+This study was rather computationally demanding since each simulation run entailed 100-400 underlying bootstrap iterations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4 * 3 * 3 = 36 conditions. Each combination used 500 replications.
 
 ```{r}
 #| label: tbl-itemfit1
 #| tbl-cap: Conditional item fit with simulation-based cutoff values
 #| cache: true
 
-simfit <- RIgetfit(demodata, iterations = 400, cpu = 8)
+simfit <- RIgetfit(demodata, iterations = 200, cpu = 8)
 RIitemfit(demodata, simfit, output = "quarto")
 ```
 
@@ -295,11 +327,11 @@ ifb2 <- list()
 
 #library(tictoc)
 #tic()
-ifb0 <- map(samplesizes, ~ itemfitboot(simdata[[1]], iterations = 200, samplesize = .x))
+ifb0 <- map(samplesizes, ~ itemfitboot(simdata[[1]], iterations = 500, samplesize = .x))
 #toc() # 14257.358 sec elapsed
 
-ifb1 <- map(samplesizes, ~ itemfitboot(simdata[[2]], iterations = 200, samplesize = .x))
-ifb2 <- map(samplesizes, ~ itemfitboot(simdata[[3]], iterations = 200, samplesize = .x))
+ifb1 <- map(samplesizes, ~ itemfitboot(simdata[[2]], iterations = 500, samplesize = .x))
+ifb2 <- map(samplesizes, ~ itemfitboot(simdata[[3]], iterations = 500, samplesize = .x))
 
 # saveRDS(ifb0, "data/ifb0_200.rds")
 # saveRDS(ifb2, "data/ifb2_200.rds")
@@ -316,7 +348,9 @@ ifb2_df <- map_dfr(1:4, ~ do.call("rbind", ifb2[[.x]])) %>%
 
 ifb <- rbind(ifb0_df,ifb1_df,ifb2_df)
 
-write_parquet(ifb,"data/ifb.parquet")
+write_parquet(ifb,"data/ifb.parquet") 
+# This code chunk was processed on three separate occasions (200+200+100 iterations) due to the time-consuming simulation.
+# This resulted in three parquet-files with results, files named ifb_part2 and ifb_part3 in addition to the filename two lines above.
 ```
 
 
@@ -324,9 +358,17 @@ write_parquet(ifb,"data/ifb.parquet")
 
 ```{r}
 ifb <- read_parquet("data/ifb.parquet")
+ifb_part2 <- read_parquet("data/ifb_part2.parquet") %>% 
+  mutate(iteration = iteration + 200)
+ifb_part3 <- read_parquet("data/ifb_part3.parquet") %>% 
+  mutate(iteration = iteration + 400)
+
+ifb <- rbind(ifb,ifb_part2,ifb_part3)
 ```
 
 Figures show the percent of simulation runs that have identified an item as misfitting. Items with more than 5% are colored in light red. A number representing the detection rate is shown adjacent to the bar representing the misfitting item. The figure grid columns are labeled with the number of iterations used by `RIgetfit()` to determine cutoff values and grid rows are labeled with the sample size.
+
+Tables describing the results are available under Additional Materials, see @sec-tblinfitresults.
 
 ### Infit
 
@@ -339,7 +381,7 @@ ifb %>%
   filter(!infit_diff == "no misfit",
          targeting == 0) %>% 
   count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
   ungroup() %>% 
   mutate(sims = factor(sims, levels = c(100,200,400),
                        labels = c("100 iterations",
@@ -363,7 +405,7 @@ ifb %>%
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "Targeting 0 logits (item 9 misfit). 200 simulations per combination.",
+  labs(subtitle = "Targeting 0 logits (item 9 misfit). 500 simulations per combination.",
        #title = "Conditional infit detection rate"
        )
 ```
@@ -379,7 +421,7 @@ ifb %>%
   filter(!infit_diff == "no misfit",
          targeting == 1) %>% 
   count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
   ungroup() %>% 
   mutate(sims = factor(sims, levels = c(100,200,400),
                        labels = c("100 iterations",
@@ -403,7 +445,7 @@ ifb %>%
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "Targeting -1 logits (item 18 misfit). 200 simulations per combination.",
+  labs(subtitle = "Targeting -1 logits (item 18 misfit). 500 simulations per combination.",
        #title = "Conditional infit detection rate"
        )
 ```
@@ -419,7 +461,7 @@ ifb %>%
   filter(!infit_diff == "no misfit",
          targeting == 2) %>% 
   count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
   ungroup() %>% 
   mutate(sims = factor(sims, levels = c(100,200,400),
                        labels = c("100 iterations",
@@ -443,7 +485,7 @@ ifb %>%
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "Targeting -2 logits (item 13 misfit). 200 simulations per combination.",
+  labs(subtitle = "Targeting -2 logits (item 13 misfit). 500 simulations per combination.",
        #title = "Conditional infit detection rate"
        )
 ```
@@ -461,7 +503,7 @@ ifb %>%
   filter(!outfit_diff == "no misfit",
          targeting == 0) %>% 
   dplyr::count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
     ungroup() %>% 
   mutate(sims = factor(sims, levels = c(100,200,400),
                        labels = c("100 iterations",
@@ -485,7 +527,7 @@ ifb %>%
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "Targeting 0 logits (item 9 misfit). 200 simulations per combination.",
+  labs(subtitle = "Targeting 0 logits (item 9 misfit). 500 simulations per combination.",
        #title = "Conditional outfit detection rate"
        )
 ```
@@ -499,7 +541,7 @@ ifb %>%
   filter(!outfit_diff == "no misfit",
          targeting == 1) %>% 
   count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
     ungroup() %>% 
   mutate(sims = factor(sims, levels = c(100,200,400),
                        labels = c("100 iterations",
@@ -523,7 +565,7 @@ ifb %>%
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "Targeting -1 logits (item 18 misfit). 200 simulations per combination.",
+  labs(subtitle = "Targeting -1 logits (item 18 misfit). 500 simulations per combination.",
        #title = "Conditional outfit detection rate"
        )
 ```
@@ -537,7 +579,7 @@ ifb %>%
   filter(!outfit_diff == "no misfit",
          targeting == 2) %>% 
   count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
     ungroup() %>% 
   mutate(sims = factor(sims, levels = c(100,200,400),
                        labels = c("100 iterations",
@@ -561,7 +603,7 @@ ifb %>%
   guides(fill = "none") +
   facet_grid(samplesize~sims) +
   theme_rise(fontfamily = "sans") +
-  labs(subtitle = "Targeting -2 logits (item 13 misfit). 200 simulations per combination.",
+  labs(subtitle = "Targeting -2 logits (item 13 misfit). 500 simulations per combination.",
        #title = "Conditional outfit detection rate"
        )
 ```
@@ -572,12 +614,12 @@ As shown in @fig-ifb0out, @fig-ifb1out, and @fig-ifb2out, outfit is performing w
 
 Based on these simulation, it is highly recommended to use infit over outfit in assessing item fit. The performance of outfit calls to question whether it is useful at all for detecting item misfit.
 
-Regarding infit and the use of parametric bootstrapping with the function `RIgetfit()`, it looks like 100 iterations are to recommend to determine cutoff values when the sample size is 250 or lower, while 200 or 400 iterations reduce the risk for false positives at sample sizes of 500 or larger. False positives are found at sample sizes 500 and 1000 only. The risk for false positives is notably higher when the misfitting item is located at the sample mean compared to when the misfitting item is off-target by -1 logits or more.
+Regarding infit and the use of parametric bootstrap with the function `RIgetfit()`, it looks like 100 iterations are to recommend to determine cutoff values when the sample size is 250 or lower, while 200 or 400 iterations reduce the risk for false positives at sample sizes of 500 or larger. False positives are found at sample sizes 500 and 1000 only. The risk for false positives is notably higher when the misfitting item is located at the sample mean compared to when the misfitting item is off-target by -1 logits or more.
 
 
 # Study 2: Item-restscore
 
-Item-restscore is a metric that compares an expected correlation with the observed correlation, using Goodman and Kruskal’s $\gamma$ [@goodman_measures_1954;@kreiner_note_2011]. Lower observed values than expected indicate that an item is underfit to the Rasch model, while higher values indicate overfit. The item-restscore function used in this simulation is from the `iarm` package [@mueller_iarm_2022] and outputs Benjamini-Hochberg corrected *p*-values [@benjamini_controlling_1995], which are used to determine whether the differences between the observed and expected values are statistically significant (using *p* < .05 as critical value) for each item. The data and procedure in this study follow the same structure as Study 1, with the addition of a smaller sample condition with 100 respondents.
+Item-restscore is a metric that compares an expected correlation with the observed correlation. The "restscore" is the ordinal sum score from all items except the item under scrutiny. Since item data are ordinal, the marginal association between item-score and restscore is assessed using Goodman and Kruskal’s $\gamma$ [@goodman_measures_1954;@kreiner_note_2011]. Lower observed values than expected indicate that an item is underfit to the Rasch model, while higher values indicate overfit. The item-restscore function used in this simulation is from the `iarm` package [@mueller_iarm_2022] and outputs Benjamini-Hochberg corrected *p*-values [@benjamini_controlling_1995], which are used to determine whether the differences between the observed and expected values are statistically significant, using *p* < .05 as critical value for each item. The data and procedure in this study follow the same structure as Study 1, with the addition of a smaller sample condition with 100 respondents.
 
 ```{r}
 ir <- function(dat, iterations, samplesize, cpu = 9) {
@@ -728,7 +770,9 @@ results0 + results1 + results2 +
                   theme = theme_rise(fontfamily = "sans"))
 ```
 
-This simulation includes an additional condition with 100 respondents, which results in significantly lower detection rates compared to n = 150. Compared to infit at 250 respondents, item-restscore has detection rates of 95.2%, 90.9%, and 62.4% for targeting 0, -1, and -2, while infit has 96.5%, 96.5%, and 71%. For sample sizes 500 and 1000, the detection rate is similar, including the increased tendency for false positives at n = 1000. The false positive rate is lower for item-restscore than infit for sample sizes below 1000.
+This simulation includes an additional condition with 100 respondents, which results in significantly lower detection rates compared to n = 150. Compared to infit at 250 respondents, item-restscore has detection rates of 95.2%, 90.9%, and 62.4% for targeting 0, -1, and -2, while infit has 96.6%, 96.2%, and 70.6%. For sample sizes 500 and 1000, the detection rate is similar, including the increased tendency for false positives at n = 1000. The false positive rate is lower for item-restscore than infit for sample sizes below 1000.
+
+Tables describing the results are available under Additional Materials, see @sec-tblirresults.
 
 # Study 3: Comparing infit and item-restscore
 
@@ -948,7 +992,7 @@ Looking at the performance of infit with three misfitting items (@fig-ifb3), we 
 
 ```{r}
 #| label: fig-ifb3b
-#| fig-cap: Conditional infit detection rate with three misfitting items
+#| fig-cap: Conditional infit detection rate with three misfitting items and increased truncation
 #| fig-height: 4
 
 ifb3c_df <- bind_rows(ifb3c)
@@ -996,6 +1040,7 @@ In @fig-ifb3b, the minimal truncation used previously to remove extreme values (
 
 ```{r}
 #| label: fig-itemrestscore2
+#| fig-cap: Item-restscore detection rate with three misfitting items
 #| fig-height: 7
 
 ir3_df %>% 
@@ -1087,6 +1132,8 @@ rbind(ifb3_sum,ir3_sum) %>%
 ```
 
 Item-restscore (see @fig-itemrestscore2) shows a comparable detection rate to infit and higher levels of false positives. A comparison is made between the two in @fig-comp1, where item-restscore is performing better than infit at detecting the -2 logits off-target item at n = 250, and better across all items for n = 500 and n = 1000. Infit performs better for samples n = 150 and n = 250 (except for the item with location -2 logits).
+
+Tables describing the results are available under Additional Materials, see @sec-infirresults.
 
 ```{r}
 #| label: tbl-overunder
@@ -1704,7 +1751,7 @@ ifb20_1 <- ifb %>%
   filter(samplesize %in% c(150,250) & sims == 100) %>% 
   group_by(samplesize) %>% 
   count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
   ungroup() %>% 
   mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000),
                              labels = c("n = 150",
@@ -1721,7 +1768,7 @@ ifb20_2 <- ifb %>%
   filter(samplesize %in% c(500,1000) & sims == 200) %>% 
   group_by(samplesize) %>% 
   count(item, .drop = F) %>% 
-  mutate(Percent = n/200*100) %>% 
+  mutate(Percent = n/500*100) %>% 
   ungroup() %>% 
   mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000),
                              labels = c("n = 150",
@@ -1974,6 +2021,8 @@ LRT performs better than item-restscore for the off-target item conditions, espe
 
 Looking at LRT for different numbers of items and comparing to results for infit and item-restscore at their best detection rates for the corresponding number of items and sample size, it shows much worse performance for 10 items compared to infit and item-restscore at n = 150, but similar performance at larger sample sizes. For 20 and 40 items, LRT is similar to infit at all sample sizes, and slightly better than item-restscore for n < 500.
 
+It should be noted that LRT also is sensitive to larger sample sizes and increased numbers of items, see <https://pgmj.github.io/clrt.html> for a brief example, and is likely to have a higher error rate than the nominal 5% under many conditions.
+
 # Discussion
 
 This paper was created primarily out of a desire to understand the performance of conditional item fit and item-restscore in detecting item misfit. Studies 1-3 and 5 were originally planned, while study 4 was added due to the results of previous studies showing issues with large sample sizes, and study 6 was added mostly for didactic purposes but also out of curiosity of the global fit LRT performance compared to the other methods. Müller's [-@muller_item_2020] paper on conditional item fit was published five years ago with results that should have sparked discussions in the Rasch community about updating methods (and software) and the justification of rule-of-thumb critical values. We hope that this paper can help spur such discussions by the simple methodology and presentation of results used, which could make this paper more accessible for practitioners.
@@ -2021,10 +2070,679 @@ For sample sizes under 500, it seems best to rely mostly on item infit with simu
 
 :::
 
+{{< pagebreak >}}
+
 # Additional materials {#sec-addmat}
 
 - GitHub link for `easyRasch` source code: <https://github.com/pgmj/easyRasch/>
   - Most functions are defined in this file: <https://github.com/pgmj/easyRasch/blob/main/R/easyRasch.R>
+  
+
+## Results tables
+
+```{r}
+# library(gt)
+# 
+# # APA table styling from <https://gist.github.com/pdparker/1b61b6d36d09cb295bf286a931990159>
+# apa_style <- function(data) {
+#   data %>%
+#     opt_table_lines(extent = "none") %>%
+#     tab_options(
+#       heading.border.bottom.width = 2,
+#       heading.border.bottom.color = "black",
+#       heading.border.bottom.style = "solid",
+#       table.border.top.color = "white",
+#       table_body.hlines.color = "white",
+#       table_body.border.top.color = "black",
+#       table_body.border.top.style = "solid",
+#       table_body.border.top.width = 1,
+#       heading.title.font.size = 12,
+#       table.font.size = 12,
+#       heading.subtitle.font.size = 12,
+#       table_body.border.bottom.color = "black",
+#       table_body.border.bottom.width = 1,
+#       table_body.border.bottom.style = "solid",
+#       column_labels.border.bottom.color = "black",
+#       column_labels.border.bottom.style = "solid",
+#       column_labels.border.bottom.width = 1
+#     ) %>%
+#       opt_table_font(font = "times")
+# }
+# library(flextable)
+# set_flextable_defaults(digits = 1)
+options(knitr.kable.NA = "0")
+```
+
+### Study 1: Item infit and outfit {#sec-tblinfitresults}
+
+#### 100 iterations
+
+```{r}
+#| label: tbl-ifbresults1000
+#| tbl-cap: Conditional infit detection rate, 100 bootstrap iterations, targeting = 0 logit
+
+ifb %>% 
+  group_by(targeting, samplesize, sims) %>% 
+  filter(!infit_diff == "no misfit",
+         targeting == 0
+         ) %>% 
+  count(item, .drop = F) %>% 
+  mutate(`Percent misfit` = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(`Bootstrap iterations` = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         `Sample size` = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000")),
+         Item = factor(item, levels = 1:20, ordered = T),
+         Targeting = factor(targeting, levels = c(0,1,2), labels = c('Misfit item 0 logit offset','Misfit item -1 logit offset','Misfit item -2 logits offset'))
+         ) %>% 
+  mutate(Targeting = gsub("<","=",Targeting)) %>% 
+  select(`Sample size`,`Bootstrap iterations`,Item,`Percent misfit`) %>% 
+  filter(`Bootstrap iterations` == "100 iterations") %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:20, ordered = T)) %>% 
+  arrange(Item) %>% 
+  kable()
+```
+
+
+```{r}
+#| label: tbl-ifbresults1001
+#| tbl-cap: Conditional infit detection rate, 100 bootstrap iterations, targeting = -1 logit
+
+ifb %>% 
+  group_by(targeting, samplesize, sims) %>% 
+  filter(!infit_diff == "no misfit",
+         targeting == 1
+         ) %>% 
+  count(item, .drop = F) %>% 
+  mutate(`Percent misfit` = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(`Bootstrap iterations` = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         `Sample size` = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000")),
+         Item = factor(item, levels = 1:20, ordered = T),
+         Targeting = factor(targeting, levels = c(0,1,2), labels = c('Misfit item 0 logit offset','Misfit item -1 logit offset','Misfit item -2 logits offset'))
+         ) %>% 
+  mutate(Targeting = gsub("<","=",Targeting)) %>% 
+  select(`Sample size`,`Bootstrap iterations`,Item,`Percent misfit`) %>% 
+  filter(`Bootstrap iterations` == "100 iterations") %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:20, ordered = T)) %>% 
+  arrange(Item) %>% 
+  kable()
+```
+
+
+```{r}
+#| label: tbl-ifbresults1002
+#| tbl-cap: Conditional infit detection rate, 100 bootstrap iterations, targeting = -2 logits
+ifb %>% 
+  group_by(targeting, samplesize, sims) %>% 
+  filter(!infit_diff == "no misfit",
+         targeting == 2
+         ) %>% 
+  count(item, .drop = F) %>% 
+  mutate(`Percent misfit` = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(`Bootstrap iterations` = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         `Sample size` = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000")),
+         Item = factor(item, levels = 1:20, ordered = T),
+         Targeting = factor(targeting, levels = c(0,1,2), labels = c('Misfit item 0 logit offset','Misfit item -1 logit offset','Misfit item -2 logits offset'))
+         ) %>% 
+  mutate(Targeting = gsub("<","=",Targeting)) %>% 
+  select(`Sample size`,`Bootstrap iterations`,Item,`Percent misfit`) %>% 
+  filter(`Bootstrap iterations` == "100 iterations") %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:20, ordered = T)) %>% 
+  arrange(Item) %>% 
+  kable()
+```
+
+#### 200 iterations
+
+```{r}
+#| label: tbl-ifbresults2000
+#| tbl-cap: Conditional infit detection rate, 200 bootstrap iterations, targeting = 0 logit
+ifb %>% 
+  group_by(targeting, samplesize, sims) %>% 
+  filter(!infit_diff == "no misfit",
+         targeting == 0
+         ) %>% 
+  count(item, .drop = F) %>% 
+  mutate(`Percent misfit` = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(`Bootstrap iterations` = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         `Sample size` = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000")),
+         Item = factor(item, levels = 1:20, ordered = T),
+         Targeting = factor(targeting, levels = c(0,1,2), labels = c('Misfit item 0 logit offset','Misfit item -1 logit offset','Misfit item -2 logits offset'))
+         ) %>% 
+  mutate(Targeting = gsub("<","=",Targeting),
+         `Percent misfit` = car::recode(`Percent misfit`,"NA=0")) %>% 
+  
+  select(`Sample size`,`Bootstrap iterations`,Item,`Percent misfit`) %>% 
+  filter(`Bootstrap iterations` == "200 iterations") %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:20, ordered = T)) %>% 
+  arrange(Item) %>% 
+  kable()
+  # #group_by(Targeting) %>% 
+  # as_grouped_data("Targeting") %>% 
+  # #arrange(Item) %>% 
+  # flextable() %>%
+  # autofit() %>% 
+  # theme_apa() %>% 
+  # colformat_double()
+```
+
+```{r}
+#| label: tbl-ifbresults2001
+#| tbl-cap: Conditional infit detection rate, 200 bootstrap iterations, targeting = -1 logit
+ifb %>% 
+  group_by(targeting, samplesize, sims) %>% 
+  filter(!infit_diff == "no misfit",
+         targeting == 1
+         ) %>% 
+  count(item, .drop = F) %>% 
+  mutate(`Percent misfit` = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(`Bootstrap iterations` = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         `Sample size` = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000")),
+         Item = factor(item, levels = 1:20, ordered = T),
+         Targeting = factor(targeting, levels = c(0,1,2), labels = c('Misfit item 0 logit offset','Misfit item -1 logit offset','Misfit item -2 logits offset'))
+         ) %>% 
+  mutate(Targeting = gsub("<","=",Targeting),
+         `Percent misfit` = car::recode(`Percent misfit`,"NA=0")) %>% 
+  
+  select(`Sample size`,`Bootstrap iterations`,Item,`Percent misfit`) %>% 
+  filter(`Bootstrap iterations` == "200 iterations") %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:20, ordered = T)) %>% 
+  arrange(Item) %>% 
+  kable()
+  # #group_by(Targeting) %>% 
+  # as_grouped_data("Targeting") %>% 
+  # #arrange(Item) %>% 
+  # flextable() %>%
+  # autofit() %>% 
+  # theme_apa() %>% 
+  # colformat_double()
+```
+
+```{r}
+#| label: tbl-ifbresults2002
+#| tbl-cap: Conditional infit detection rate, 200 bootstrap iterations, targeting = -2 logits
+ifb %>% 
+  group_by(targeting, samplesize, sims) %>% 
+  filter(!infit_diff == "no misfit",
+         targeting == 2
+         ) %>% 
+  count(item, .drop = F) %>% 
+  mutate(`Percent misfit` = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(`Bootstrap iterations` = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         `Sample size` = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000")),
+         Item = factor(item, levels = 1:20, ordered = T),
+         Targeting = factor(targeting, levels = c(0,1,2), labels = c('Misfit item 0 logit offset','Misfit item -1 logit offset','Misfit item -2 logits offset'))
+         ) %>% 
+  mutate(Targeting = gsub("<","=",Targeting),
+         `Percent misfit` = car::recode(`Percent misfit`,"NA=0")) %>% 
+  
+  select(`Sample size`,`Bootstrap iterations`,Item,`Percent misfit`) %>% 
+  filter(`Bootstrap iterations` == "200 iterations") %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:20, ordered = T)) %>% 
+  arrange(Item) %>% 
+  kable()
+  # #group_by(Targeting) %>% 
+  # as_grouped_data("Targeting") %>% 
+  # #arrange(Item) %>% 
+  # flextable() %>%
+  # autofit() %>% 
+  # theme_apa() %>% 
+  # colformat_double()
+```
+
+#### 400 iterations
+
+```{r}
+#| label: tbl-ifbresults4000
+#| tbl-cap: Conditional infit detection rate, 400 bootstrap iterations, targeting = 0 logit
+ifb %>% 
+  group_by(targeting, samplesize, sims) %>% 
+  filter(!infit_diff == "no misfit",
+         targeting == 0
+         ) %>% 
+  count(item, .drop = F) %>% 
+  mutate(`Percent misfit` = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(`Bootstrap iterations` = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         `Sample size` = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000")),
+         Item = factor(item, levels = 1:20, ordered = T),
+         Targeting = car::recode(targeting,"0='Misfit item 0 logit offset';1='Misfit item -1 logit offset';2='Misfit item -2 logits offset'", as.factor = TRUE)
+         ) %>% 
+  #mutate(Targeting = gsub("<","=",Targeting)) %>% 
+  select(`Sample size`,`Bootstrap iterations`,Item,`Percent misfit`) %>% 
+  filter(`Bootstrap iterations` == "400 iterations") %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:20, ordered = T)) %>% 
+  #group_by(Targeting) %>% 
+  #as_grouped_data("Targeting") %>% 
+  arrange(Item) %>% 
+  kable()
+  # flextable() %>%
+  # autofit() %>% 
+  # theme_apa() %>% 
+  # colformat_double() 
+```
+
+```{r}
+#| label: tbl-ifbresults4001
+#| tbl-cap: Conditional infit detection rate, 400 bootstrap iterations, targeting = -1 logit
+ifb %>% 
+  group_by(targeting, samplesize, sims) %>% 
+  filter(!infit_diff == "no misfit",
+         targeting == 1
+         ) %>% 
+  count(item, .drop = F) %>% 
+  mutate(`Percent misfit` = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(`Bootstrap iterations` = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         `Sample size` = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000")),
+         Item = factor(item, levels = 1:20, ordered = T),
+         Targeting = car::recode(targeting,"0='Misfit item 0 logit offset';1='Misfit item -1 logit offset';2='Misfit item -2 logits offset'", as.factor = TRUE)
+         ) %>% 
+  #mutate(Targeting = gsub("<","=",Targeting)) %>% 
+  select(`Sample size`,`Bootstrap iterations`,Item,`Percent misfit`) %>% 
+  filter(`Bootstrap iterations` == "400 iterations") %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:20, ordered = T)) %>% 
+  arrange(Item) %>% 
+  kable()
+```
+
+```{r}
+#| label: tbl-ifbresults4002
+#| tbl-cap: Conditional infit detection rate, 400 bootstrap iterations, targeting = -2 logits
+ifb %>% 
+  group_by(targeting, samplesize, sims) %>% 
+  filter(!infit_diff == "no misfit",
+         targeting == 2
+         ) %>% 
+  count(item, .drop = F) %>% 
+  mutate(`Percent misfit` = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(`Bootstrap iterations` = factor(sims, levels = c(100,200,400),
+                       labels = c("100 iterations",
+                                  "200 iterations",
+                                  "400 iterations")),
+         `Sample size` = factor(samplesize, levels = c(150,250,500,1000),
+                       labels = c("n = 150",
+                                  "n = 250",
+                                  "n = 500",
+                                  "n = 1000")),
+         Item = factor(item, levels = 1:20, ordered = T),
+         Targeting = car::recode(targeting,"0='Misfit item 0 logit offset';1='Misfit item -1 logit offset';2='Misfit item -2 logits offset'", as.factor = TRUE)
+         ) %>% 
+  #mutate(Targeting = gsub("<","=",Targeting)) %>% 
+  select(`Sample size`,`Bootstrap iterations`,Item,`Percent misfit`) %>% 
+  filter(`Bootstrap iterations` == "400 iterations") %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:20, ordered = T)) %>% 
+  arrange(Item) %>% 
+  kable()
+```
+
+### Study 2: Item-restscore {#sec-tblirresults}
+
+```{r}
+#| label: tbl-irresults0
+#| tbl-cap: Item-restscore detection rate, targeting = 0 logit
+ir_results %>% 
+  group_by(targeting, samplesize) %>% 
+  filter(ir_padj == "sign. misfit",
+         targeting == 0) %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/1000,
+         targeting = factor(targeting, levels = c(0,1,2), labels = c('Misfit item 0 logit offset','Misfit item -1 logit offset','Misfit item -2 logits offset')),
+         item = factor(item),
+         samplesize = car::recode(samplesize,"100='n < 100';150='n < 150';250='n < 250';500='n < 500';1000='n < 1000'")) %>% 
+  mutate(samplesize = gsub("<","=",samplesize)) %>% 
+  rename(Targeting = targeting,
+         `Sample size` = samplesize,
+         Item = item,
+         `Percent misfit` = Percent) %>% 
+  select(!n) %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:20, ordered = T)) %>% 
+  arrange(Item) %>% 
+  kable()
+
+```
+
+```{r}
+#| label: tbl-irresults1
+#| tbl-cap: Item-restscore detection rate, targeting = -1 logit
+ir_results %>% 
+  group_by(targeting, samplesize) %>% 
+  filter(ir_padj == "sign. misfit",
+         targeting == 1) %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/1000,
+         targeting = factor(targeting, levels = c(0,1,2), labels = c('Misfit item 0 logit offset','Misfit item -1 logit offset','Misfit item -2 logits offset')),
+         item = factor(item),
+         samplesize = car::recode(samplesize,"100='n < 100';150='n < 150';250='n < 250';500='n < 500';1000='n < 1000'")) %>% 
+  mutate(samplesize = gsub("<","=",samplesize)) %>% 
+  rename(Targeting = targeting,
+         `Sample size` = samplesize,
+         Item = item,
+         `Percent misfit` = Percent) %>% 
+  select(!n) %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:20, ordered = T)) %>% 
+  arrange(Item) %>% 
+  kable()
+
+```
+
+```{r}
+#| label: tbl-irresults2
+#| tbl-cap: Item-restscore detection rate, targeting = -2 logits
+ir_results %>% 
+  group_by(targeting, samplesize) %>% 
+  filter(ir_padj == "sign. misfit",
+         targeting == 2) %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/1000,
+         targeting = factor(targeting, levels = c(0,1,2), labels = c('Misfit item 0 logit offset','Misfit item -1 logit offset','Misfit item -2 logits offset')),
+         item = factor(item),
+         samplesize = car::recode(samplesize,"100='n < 100';150='n < 150';250='n < 250';500='n < 500';1000='n < 1000'")) %>% 
+  mutate(samplesize = gsub("<","=",samplesize)) %>% 
+  rename(Targeting = targeting,
+         `Sample size` = samplesize,
+         Item = item,
+         `Percent misfit` = Percent) %>% 
+  select(!n) %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:20, ordered = T)) %>% 
+  arrange(Item) %>% 
+  kable()
+
+```
+
+### Study 3: Comparing infit and item-restscore {#sec-infirresults}
+
+```{r}
+#| label: tbl-ifb3out
+#| tbl-cap: Conditional outfit detection rate with three misfitting items
+ifb3_df %>% 
+  group_by(samplesize) %>% 
+  filter(!outfit_diff == "no misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000")),
+         item = factor(item)) %>% 
+  rename(`Sample size` = samplesize,
+         Item = item,
+         `Percent misfit` = Percent) %>% 
+  select(!n) %>% 
+  pivot_wider(id_cols = Item, names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  arrange(Item) %>% 
+  # gt() %>% 
+  # sub_missing(missing_text = "0") %>% 
+  # tab_footnote(footnote = "Note. Misfitting items are 9, 13, and 18.") 
+  kable()
+```
+
+```{r}
+#| label: tbl-ifb3
+#| tbl-cap: Conditional infit detection rate with three misfitting items
+ifb3_df %>% 
+  group_by(samplesize) %>% 
+  filter(!infit_diff == "no misfit") %>% 
+  dplyr::count(item, .drop = F) %>% 
+  mutate(Percent = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000")),
+         item = factor(item)) %>% 
+    rename(`Sample size` = samplesize,
+         Item = item,
+         `Percent misfit` = Percent) %>% 
+  select(!n) %>% 
+  pivot_wider(id_cols = Item, names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  arrange(Item) %>% 
+  # gt() %>% 
+  # sub_missing(missing_text = "0") %>% 
+  # tab_footnote(footnote = "Note. Misfitting items are 9, 13, and 18.") %>% 
+  # apa_style()
+  kable()
+```
+
+```{r}
+#| label: tbl-ifb3b
+#| tbl-cap: Conditional infit detection rate with three misfitting items and increased truncation
+
+ifb3c_df %>% 
+  group_by(samplesize) %>% 
+  filter(!infit_diff == "no misfit",
+         samplesize < 400) %>% 
+  dplyr::count(item, .drop = F) %>% 
+  mutate(Percent = n/500*100) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000")),
+         item = factor(item)) %>% 
+  rename(`Sample size` = samplesize,
+         Item = item,
+         `Percent misfit` = Percent) %>% 
+  select(!n) %>% 
+  pivot_wider(id_cols = Item, names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  arrange(Item) %>% 
+  # gt() %>% 
+  # sub_missing(missing_text = "0") %>% 
+  # tab_footnote(footnote = "Note. Misfitting items are 9, 13, and 18.") %>% 
+  # apa_style()
+  kable()
+```
+
+```{r}
+#| label: tbl-itemrestscore2
+#| tbl-cap: Item-restscore detection rate with three misfitting items
+
+ir3_df %>% 
+  group_by(samplesize) %>% 
+  filter(ir_padj == "sign. misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/500) %>% 
+  ungroup() %>% 
+  mutate(item = factor(item)) %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000"))) %>% 
+    rename(`Sample size` = samplesize,
+         Item = item,
+         `Percent misfit` = Percent) %>% 
+  select(!n) %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:20, ordered = T)) %>% 
+  arrange(Item) %>% 
+  # gt() %>% 
+  # sub_missing(missing_text = "0") %>% 
+  # tab_footnote(footnote = "Note. Misfitting items are 9, 13, and 18.") %>% 
+  # apa_style()
+  kable()
+```
+
+```{r}
+#| label: tbl-comp1
+#| tbl-cap: Detection rate for item-restscore compared to infit
+
+rbind(ifb3_sum,ir3_sum) %>% 
+  mutate(item = factor(item, levels = c(9,18,13), labels = c("Item 9 (location 0)",
+                                                             " Item 18 (location -1)",
+                                                             " Item 13 (location -2)"),
+                       ordered = T)) %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000"))) %>% 
+  rename(`Sample size` = samplesize,
+         Item = item,
+         `Percent misfit` = percent) %>% 
+  pivot_wider(id_cols = c(Method,Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  arrange(Item) %>% 
+  # gt() %>% 
+  # sub_missing(missing_text = "") %>% 
+  # apa_style()
+  kable()
+```
+
+### Study 5: Varying the number of items 
+
+```{r}
+#| label: tbl-ifb40
+#| tbl-cap: Conditional infit detection rate with 40 items (3 misfit)
+ifb40_df %>% 
+  group_by(samplesize) %>% 
+  filter(!infit_diff == "no misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = round(n/200*100,1)) %>% 
+  ungroup() %>% 
+  mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000"))) %>% 
+  rename(`Sample size` = samplesize,
+         Item = item,
+         `Percent misfit` = Percent) %>% 
+  select(!n) %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:40, ordered = T)) %>% 
+  arrange(Item) %>% 
+  kable()
+```
+
+```{r}
+#| label: tbl-itemrestscore40
+#| tbl-cap: Item-restscore detection rate with 40 items (3 misfit)
+
+ir40_df %>% 
+  group_by(samplesize) %>% 
+  filter(ir_padj == "sign. misfit") %>% 
+  count(item, .drop = F) %>% 
+  mutate(Percent = n*100/500) %>% 
+  ungroup() %>% 
+    mutate(samplesize = factor(samplesize, levels = c(150,250,500,1000,2000),
+                             labels = c("n = 150",
+                                        "n = 250",
+                                        "n = 500",
+                                        "n = 1000",
+                                        "n = 2000"))) %>% 
+  rename(`Sample size` = samplesize,
+         Item = item,
+         `Percent misfit` = Percent) %>% 
+  select(!n) %>% 
+  pivot_wider(id_cols = c(Item), names_from = c(`Sample size`),
+              values_from = `Percent misfit`) %>% 
+  mutate(Item = factor(Item, levels = 1:40, ordered = T)) %>% 
+  arrange(Item) %>% 
+  kable()
+  
+```
+
 
 ## Session info
 
