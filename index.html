@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.13">
+<meta name="generator" content="quarto-1.7.15">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Magnus Johansson, PhD">
-<meta name="dcterms.date" content="2025-03-05">
+<meta name="dcterms.date" content="2025-03-12">
 <meta name="keywords" content="Rasch, Psychometrics, Item fit, Cutoffs, Critical values, Model fit">
 
 <title>Detecting item misfit in Rasch models</title>
@@ -53,10 +53,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-66ab7fd5e73b7f0a764e0d49b3e29ab1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-26a54071d5a5d1f5c34874d8d975e232.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4c3f21f622398162bebe0d2c2d806a7a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-739378c0bda30779e554a5960cb6cecc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -102,12 +102,16 @@ window.Quarto = {
 ">
 <meta name="citation_keywords" content="Rasch,Psychometrics,Item fit,Cutoffs,Critical values,Model fit">
 <meta name="citation_author" content="Magnus Johansson, PhD">
-<meta name="citation_publication_date" content="2025-03-05">
-<meta name="citation_cover_date" content="2025-03-05">
+<meta name="citation_publication_date" content="2025-03-12">
+<meta name="citation_cover_date" content="2025-03-12">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-03-05">
-<meta name="citation_doi" content="10.31219/osf.io/j8fg2">
+<meta name="citation_online_date" content="2025-03-12">
+<meta name="citation_issue" content="18">
+<meta name="citation_doi" content="10.61186/emp.2025.5">
+<meta name="citation_issn" content="2943-873X">
+<meta name="citation_volume" content="3">
 <meta name="citation_language" content="en">
+<meta name="citation_journal_title" content="Educational Methods &amp;amp; Psychometrics">
 <meta name="citation_reference" content="citation_title=Exact Evaluation of Bias in Rasch Model Residuals;,citation_author=Svend Kreiner;,citation_author=Karl Bang Christensen;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;,citation_fulltext_html_url=https://www.proquest.com/openview/4eb6401a5ec2700b01cf3e12dd98a36e/1;,citation_issue=2/3;,citation_issn=1060-9881;,citation_volume=21;,citation_journal_title=International Journal of Mathematics, Game Theory and Algebra;">
 <meta name="citation_reference" content="citation_title=A Procedure for Sample-Free Item Analysis;,citation_author=Benjamin Wright;,citation_author=Nargis Panchapakesan;,citation_publication_date=1969-04;,citation_cover_date=1969-04;,citation_year=1969;,citation_fulltext_html_url=https://doi.org/10.1177/001316446902900102;,citation_issue=1;,citation_doi=10.1177/001316446902900102;,citation_issn=0013-1644;,citation_volume=29;,citation_journal_title=Educational and Psychological Measurement;">
 <meta name="citation_reference" content="citation_title=A Rasch Model for Partial Credit Scoring;,citation_author=Geoff N. Masters;,citation_publication_date=1982-06;,citation_cover_date=1982-06;,citation_year=1982;,citation_fulltext_html_url=https://www.cambridge.org/core/journals/psychometrika/article/abs/rasch-model-for-partial-credit-scoring/D7202CB6D2D1593889B1318DD6297E01;,citation_issue=2;,citation_doi=10.1007/BF02296272;,citation_issn=0033-3123, 1860-0980;,citation_volume=47;,citation_journal_title=Psychometrika;">
@@ -167,7 +171,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">March 5, 2025</p>
+              <p class="date">March 12, 2025</p>
             </div>
           </div>
           
@@ -175,7 +179,7 @@ window.Quarto = {
               </div>
       </div>
       <div class="quarto-title-meta-column-end quarto-other-formats-target">
-      <div class="quarto-alternate-formats"><div class="quarto-title-meta-heading">Other Formats</div><div class="quarto-title-meta-contents"><p><a href="index.docx"><i class="bi bi-file-word"></i>MS Word (apaquarto)</a></p></div></div></div>
+      </div>
     </div>
 
     <div>
@@ -193,7 +197,7 @@ window.Quarto = {
     </div>
 
     <div class="quarto-other-links-text-target">
-    <div class="quarto-other-links"><div class="quarto-title-meta-heading">Other Links</div><div class="quarto-title-meta-contents"><span style="padding-right: 0.5em;"><a href="https://github.com/pgmj/rasch_itemfit"><i class="bi bi-file-code"></i>GitHub code repository</a>,</span><span><a href="https://osf.io/preprints/osf/j8fg2"><i class="bi bi-file-pdf"></i>OSF preprint</a></span></div></div></div>  </div>
+    <div class="quarto-other-links"><div class="quarto-title-meta-heading">Other Links</div><div class="quarto-title-meta-contents"><span style="padding-right: 0.5em;"><a href="https://www.emp-open.de/abstract?article_id=145"><i class="bi bi-file-pdf"></i>Journal website (with PDF)</a>,</span><span style="padding-right: 0.5em;"><a href="https://github.com/pgmj/rasch_itemfit"><i class="bi bi-file-code"></i>GitHub code repository</a>,</span><span><a href="https://osf.io/preprints/osf/j8fg2"><i class="bi bi-file-pdf"></i>OSF preprint</a></span></div></div></div>  </div>
 </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
 <div id="quarto-sidebar-toc-left" class="sidebar toc-left">
   <nav id="TOC" role="doc-toc" class="toc-active">
@@ -208,8 +212,8 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#infit" id="toc-infit" class="nav-link" data-scroll-target="#infit"><span class="header-section-number">3.1.1</span> Infit</a></li>
   <li><a href="#outfit" id="toc-outfit" class="nav-link" data-scroll-target="#outfit"><span class="header-section-number">3.1.2</span> Outfit</a></li>
-  <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments"><span class="header-section-number">3.1.3</span> Comments</a></li>
   </ul></li>
+  <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments"><span class="header-section-number">3.2</span> Comments</a></li>
   </ul></li>
   <li><a href="#study-2-item-restscore" id="toc-study-2-item-restscore" class="nav-link" data-scroll-target="#study-2-item-restscore"><span class="header-section-number">4</span> Study 2: Item-restscore</a>
   <ul class="collapse">
@@ -285,7 +289,7 @@ window.Quarto = {
 </section>
 <section id="methods" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Methods</h1>
-<p>This is a general description of the methods used. Each study included in this paper has its own brief introduction and method section. A reproducible manuscript with R code and data is available on GitHub: <a href="https://github.com/pgmj/rasch_itemfit" class="uri">https://github.com/pgmj/rasch_itemfit</a>. First, a note on terminology. Non-parametric bootstrapping is synonymous with sampling with replacement. With this method, the original response data is directly sampled from multiple times. Parametric bootstrapping is synonymous with simulation, since new data is generated based on person and item parameter estimates from the original response data.</p>
+<p>This is a general description of the methods used. Each study included in this paper has its own brief introduction and method section. A reproducible manuscript with R code and data is available on GitHub: <a href="https://github.com/pgmj/rasch_itemfit" class="uri">https://github.com/pgmj/rasch_itemfit</a>. First, a note on terminology. Non-parametric bootstrapping is synonymous with sampling with replacement. With this method, multiple random samples are drawn from the original response data. Parametric bootstrapping is synonymous with simulation since new data is generated based on person and item parameter estimates made from the original response data. This new data is then used for sampling with replacement.</p>
 <p>The simulation of response data used three steps: First, a vector of theta values (person scores on the latent variable’s logit scale) was generated using <code>rnorm(mean = 0, sd = 1.5)</code>. Second, a set of item locations ranging from -2 to 2 logits were generated for dichotomous items, using <code>runif(n = 20, min = -2, max = 2)</code>. The same set of item locations were used for all studies except Study 5, which adds 20 more item locations. Third, the theta values were used to simulate item responses for participants, using <code>sim.xdim()</code> from the <code>eRm</code> package <span class="citation" data-cites="mair_extended_2007">(<a href="#ref-mair_extended_2007" role="doc-biblioref">Mair &amp; Hatzinger, 2007</a>)</span>, which allows the simulation of multidimensional response data. The sigma matrix used by <code>sim.xdim()</code> was specified to use 0.15 on the off-diagonal, where values are between 0 and 1 with lower values indicating stronger multidimensionality. Multiple datasets with 10 000 respondents each were generated using the same item and person parameters, varying the targeting of the misfitting item(s) and number of the misfitting item(s). More details are described in the separate studies. The parametric bootstrapping procedure was implemented using random samples from the simulated datasets. Sample size variations tested are also described in each study.</p>
 <p>The general procedure for the parametric bootstrap was as follows:</p>
 <ol type="1">
@@ -321,7 +325,7 @@ Z_{v_i}^2 \cdot w_{vi}}{\sum_{v}w_{vi}}
 <p>In <a href="#eq-condfit" class="quarto-xref">Equation&nbsp;4</a>, <span class="math inline">\(\hat{\beta}\)</span> indicates the vector of item parameters and <span class="math inline">\(\gamma_r (\hat{\beta})\)</span> is “the elementary symmetrical function of order r of the item parameter estimates” <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">Müller, 2020, p. 4</a>)</span>. For further details on conditional item fit we refer to the previously mentioned paper by Müller <span class="citation" data-cites="muller_item_2020">(<a href="#ref-muller_item_2020" role="doc-biblioref">2020</a>)</span> and the book chapter on item fit by Christensen and Kreiner <span class="citation" data-cites="christensen_item_2013">(<a href="#ref-christensen_item_2013" role="doc-biblioref">2013</a>)</span>.</p>
 <p>The function <code>RIgetfit()</code> from the <code>easyRasch</code> R package is tested here. Its source code can be accessed on GitHub, see <a href="#sec-addmat" class="quarto-xref">Section&nbsp;11</a>. The function offers the user a choice of the number of bootstrap iterations to use to determine the critical cutoff values for each item’s infit and outfit. Our main interest in this study is two-fold. We want to test variations in the number of iterations used in <code>RIgetfit()</code> and evaluate how well the critical values based on the parametric bootstrap procedure detect misfitting items. Additionally, a comparison between infit and outfit statistics in terms of detection rate and false positive rate will be conducted.</p>
 <p>20 dichotomous items are used, with one item misfitting. Item locations are the same throughout all studies unless otherwise noted. The location of the misfitting item relative to the sample theta mean was selected to be approximately 0, -1, and -2 logits. Three separate datasets were generated with these variations, each with 10 000 simulated respondents. One dataset with all three misfitting items was also generated, using the same sample size.</p>
-<p>Then the <code>RIitemfit()</code> function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. <code>RIitemfit()</code> has a default (user-modifiable) setting to slightly truncate the distribution of values using <code>stats::quantile()</code> at 0.001 and 0.999 to remove extreme values. An example is demonstrated in <a href="#tbl-itemfit1" class="quarto-xref">Table&nbsp;1</a>, using a subset of the items used in the simulations. <a href="#fig-itemfit1" class="quarto-xref">Figure&nbsp;1</a> provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith’s rule-of-thumb regarding infit (1±2/<span class="math inline">\(\sqrt{n}\)</span>) would be 0.9-1.1 for a sample size of 400.</p>
+<p>Then the <code>RIitemfit()</code> function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. <code>RIitemfit()</code> has a default (user-modifiable) setting to slightly truncate the distribution of values using <code>stats::quantile()</code> at 0.001 and 0.999 to remove extreme values. An example is demonstrated in <a href="#tbl-itemfit1" class="quarto-xref">Table&nbsp;1</a>, using a subset of the items used in the simulations. Note the variation between items in plausible threshold values for infit and outfit based on the bootstrap procedure compared to Smith’s rule-of-thumb regarding infit (1±2/<span class="math inline">\(\sqrt{n}\)</span>), which would be 0.9-1.1 for a sample size of 400. <a href="#fig-itemfit1" class="quarto-xref">Figure&nbsp;1</a> provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape.</p>
 <p>This study was rather computationally demanding since each simulation run entailed 100-400 underlying bootstrap iterations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4 * 3 * 3 = 36 conditions. Each combination used 500 replications.</p>
 <div class="cell">
 <div id="tbl-itemfit1" class="cell quarto-float quarto-figure quarto-figure-center anchored">
@@ -514,11 +518,11 @@ Figure&nbsp;7: Conditional outfit detection rate (misfit item at -2 logits)
 </div>
 <p>As shown in <a href="#fig-ifb0out" class="quarto-xref">Figure&nbsp;5</a>, <a href="#fig-ifb1out" class="quarto-xref">Figure&nbsp;6</a>, and <a href="#fig-ifb2out" class="quarto-xref">Figure&nbsp;7</a>, outfit is performing worse than infit across the board.</p>
 </section>
-<section id="comments" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="comments"><span class="header-section-number">3.1.3</span> Comments</h3>
+</section>
+<section id="comments" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="comments"><span class="header-section-number">3.2</span> Comments</h2>
 <p>Based on these simulation, it is highly recommended to use infit over outfit in assessing item fit. The performance of outfit calls to question whether it is useful at all for detecting item misfit.</p>
 <p>Regarding infit and the use of parametric bootstrap with the function <code>RIgetfit()</code>, it looks like 100 iterations are to recommend to determine cutoff values when the sample size is 250 or lower, while 200 or 400 iterations reduce the risk for false positives at sample sizes of 500 or larger. False positives are found at sample sizes 500 and 1000 only. The risk for false positives is notably higher when the misfitting item is located at the sample mean compared to when the misfitting item is off-target by -1 logits or more.</p>
-</section>
 </section>
 </section>
 <section id="study-2-item-restscore" class="level1" data-number="4">
@@ -1022,7 +1026,7 @@ Figure&nbsp;15: Item-restscore bootstrap results (n = 150)
 </div>
 </div>
 </div>
-<p>Item-restscore bootstrapping improves slightly on the single instance of item-restscore for the n = 150 condition (see <a href="#fig-irboot150" class="quarto-xref">Figure&nbsp;15</a>). When comparing to the previous results in <a href="#fig-itemrestscore2" class="quarto-xref">Figure&nbsp;12</a>, where the detection rate for the same sample size was at 49.2%, 14.6%, and 34.6% (for items 9, 13, and 18 respectively), the corresponding median values from the bootstrapped item-restscore with 250 iterations were 52.4%, 19.2%, and 38.4%. Using 500 bootstrap iterations did not result in relevant improvements over 250 iterations (see <a href="#tbl-irb150mis" class="quarto-xref">Table&nbsp;4</a>). Compared to the results using infit (<a href="#fig-ifb3" class="quarto-xref">Figure&nbsp;10</a>), with detection rates of 59.2%, 19%, and 51.8%, item-restscore inferior also when bootstrapped.</p>
+<p>Item-restscore bootstrapping improves slightly on the single instance of item-restscore for the n = 150 condition (see <a href="#fig-irboot150" class="quarto-xref">Figure&nbsp;15</a>). When comparing to the previous results in <a href="#fig-itemrestscore2" class="quarto-xref">Figure&nbsp;12</a>, where the detection rate for the same sample size was at 49.2%, 14.6%, and 34.6% (for items 9, 13, and 18 respectively), the corresponding median values from the bootstrapped item-restscore with 250 iterations were 52.4%, 19.2%, and 38.4%. Using 500 bootstrap iterations did not result in relevant improvements over 250 iterations (see <a href="#tbl-irb150mis" class="quarto-xref">Table&nbsp;4</a>). Compared to the results using infit (<a href="#fig-ifb3" class="quarto-xref">Figure&nbsp;10</a>), with detection rates of 59.2%, 19%, and 51.8%, item-restscore is inferior also when bootstrapped.</p>
 <div class="cell">
 <div id="tbl-irb150mis" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -4919,11 +4923,15 @@ loaded via a namespace (and not attached):
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{johansson,_phd2025,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{johansson,_phd2025,
   author = {Johansson, PhD, Magnus},
   title = {Detecting Item Misfit in {Rasch} Models},
-  date = {2025-03-05},
-  doi = {10.31219/osf.io/j8fg2},
+  journal = {Educational Methods \&amp; Psychometrics},
+  volume = {3},
+  number = {18},
+  date = {2025-03-12},
+  doi = {10.61186/emp.2025.5},
+  issn = {2943-873X},
   langid = {en},
   abstract = {Psychometrics have long relied on rule-of-thumb critical
     values for goodness of fit metrics. With powerful personal computers
@@ -4949,8 +4957,8 @@ loaded via a namespace (and not attached):
     for each step to avoid erroneously eliminating items.}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-johansson,_phd2025" class="csl-entry quarto-appendix-citeas" role="listitem">
-Johansson, PhD, M. (2025, March 5). <em>Detecting item misfit in Rasch
-models</em>. <a href="https://doi.org/10.31219/osf.io/j8fg2">https://doi.org/10.31219/osf.io/j8fg2</a>
+Johansson, PhD, M. (2025). Detecting item misfit in Rasch models.
+<em>Educational Methods &amp; Psychometrics</em>, <em>3</em>(18). <a href="https://doi.org/10.61186/emp.2025.5">https://doi.org/10.61186/emp.2025.5</a>
 </div></div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
