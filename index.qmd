@@ -22,7 +22,7 @@ key-points:
   - Sample size affects the detection rate and false positive rate
   - More misfitting items increase the false positive rate
   - Mean squared unweighted "outfit" is not useful
-date: 2025-03-12
+date: 2025-03-11
 bibliography: references.bib
 shorttitle: Detecting item misfit in Rasch models
 notebook-links: global
