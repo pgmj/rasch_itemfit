@@ -13,6 +13,9 @@ format:
     citations-hover: true
     crossrefs-hover: true
     other-links:
+      - text: Journal website (with PDF)
+        icon: file-pdf
+        href: https://www.emp-open.de/abstract?article_id=145
       - text: GitHub code repository
         icon: file-code
         href: https://github.com/pgmj/rasch_itemfit
@@ -28,10 +31,10 @@ format:
   #   notebook-links: global
   #   csl: apa.csl
 
-  apaquarto-docx:
-    fig-dpi: 175
-    number-sections: false
-    csl: apa.csl
+  # apaquarto-docx:
+  #   fig-dpi: 175
+  #   number-sections: false
+  #   csl: apa.csl
   
   # preprint-typst:
   #   number-sections: true

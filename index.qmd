@@ -22,14 +22,19 @@ key-points:
   - Sample size affects the detection rate and false positive rate
   - More misfitting items increase the false positive rate
   - Mean squared unweighted "outfit" is not useful
-date: last-modified
+date: 2025-03-12
 bibliography: references.bib
 shorttitle: Detecting item misfit in Rasch models
 notebook-links: global
 license: "CC BY"
 funding: "The author received no specific funding for this work."
 citation:
-  doi: 10.31219/osf.io/j8fg2
+  type: article-journal
+  container-title: "Educational Methods & Psychometrics"
+  volume: 3
+  issue: 18
+  doi: "10.61186/emp.2025.5"
+  issn: "2943-873X"
 editor_options: 
   chunk_output_type: console
 ---
@@ -82,7 +87,7 @@ rename <- dplyr::rename
 theme_rise <- theme_rise(fontfamily = "sans")
 ```
 
-This is a general description of the methods used. Each study included in this paper has its own brief introduction and method section. A reproducible manuscript with R code and data is available on GitHub: <https://github.com/pgmj/rasch_itemfit>. First, a note on terminology. Non-parametric bootstrapping is synonymous with sampling with replacement. With this method, the original response data is directly sampled from multiple times. Parametric bootstrapping is synonymous with simulation, since new data is generated based on person and item parameter estimates from the original response data.
+This is a general description of the methods used. Each study included in this paper has its own brief introduction and method section. A reproducible manuscript with R code and data is available on GitHub: <https://github.com/pgmj/rasch_itemfit>. First, a note on terminology. Non-parametric bootstrapping is synonymous with sampling with replacement. With this method, multiple random samples are drawn from the original response data. Parametric bootstrapping is synonymous with simulation since new data is generated based on person and item parameter estimates made from the original response data. This new data is then used for sampling with replacement.
 
 The simulation of response data used three steps: First, a vector of theta values (person scores on the latent variable's logit scale) was generated using `rnorm(mean = 0, sd = 1.5)`. Second, a set of item locations ranging from -2 to 2 logits were generated for dichotomous items, using `runif(n = 20, min = -2, max = 2)`. The same set of item locations were used for all studies except Study 5, which adds 20 more item locations. Third, the theta values were used to simulate item responses for participants, using `sim.xdim()` from the `eRm` package [@mair_extended_2007], which allows the simulation of multidimensional response data. The sigma matrix used by `sim.xdim()` was specified to use 0.15 on the off-diagonal, where values are between 0 and 1 with lower values indicating stronger multidimensionality. Multiple datasets with 10 000 respondents each were generated using the same item and person parameters, varying the targeting of the misfitting item(s) and number of the misfitting item(s). More details are described in the separate studies. The parametric bootstrapping procedure was implemented using random samples from the simulated datasets. Sample size variations tested are also described in each study. 
 
@@ -205,7 +210,7 @@ simdata40items <- readRDS("data/simdata40items.rds") %>%
 
 # Study 1: Item infit and outfit
 
-Assessing item fit to the Rasch model using infit and outfit was first proposed by Wright and Panchapakesan [-@wright_procedure_1969]. For a historical perspective, see Smith and colleagues [-@smith_using_1998]. Item mean square standardized residuals are either unweighted, which is referred to as "outfit", or information weighted, also known as "infit" [@ostini_polytomous_2006, pp. 86-87]. Outfit is sensitive to outliers, while infit is much less affected by outliers. Both infit and outfit are based on individual response residuals.   Conditional item infit and outfit are expected to be near 1, with higher values indicating an item to be underfitting the Rasch model (often due to multidimensionality issues) and lower values indicating overfit. For a more recent overview on item fit and its interpretation, see the book chapter by Christensen and Kreiner [-@christensen_item_2013].
+Assessing item fit to the Rasch model using infit and outfit was first proposed by Wright and Panchapakesan [-@wright_procedure_1969]. For a historical perspective, see Smith and colleagues [-@smith_using_1998]. Item mean square standardized residuals are either unweighted, which is referred to as "outfit", or information weighted, also known as "infit" [@ostini_polytomous_2006, pp. 86-87]. Outfit is sensitive to outliers, while infit is much less affected by outliers. Both infit and outfit are based on individual response residuals. Conditional item infit and outfit are expected to be near 1, with higher values indicating an item to be underfitting the Rasch model (often due to multidimensionality issues) and lower values indicating overfit. For a more recent overview on item fit and its interpretation, see the book chapter by Christensen and Kreiner [-@christensen_item_2013].
 
 Unconditional item fit uses person and item parameter estimates, which results in biased residuals [@kreiner_exact_2011]. By using the total person score instead of an estimated person score, this bias can be virtually eliminated. The Rasch model describes the probability of a correct or positive response by a person to an item as:
 
@@ -240,7 +245,7 @@ The function `RIgetfit()` from the `easyRasch` R package is tested here. Its sou
 
 20 dichotomous items are used, with one item misfitting. Item locations are the same throughout all studies unless otherwise noted. The location of the misfitting item relative to the sample theta mean was selected to be approximately 0, -1, and -2 logits. Three separate datasets were generated with these variations, each with 10 000 simulated respondents. One dataset with all three misfitting items was also generated, using the same sample size.
 
-Then the `RIitemfit()` function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. `RIitemfit()` has a default (user-modifiable) setting to slightly truncate the distribution of values using `stats::quantile()` at 0.001 and 0.999 to remove extreme values. An example is demonstrated in @tbl-itemfit1, using a subset of the items used in the simulations. @fig-itemfit1 provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. Note the variation between items in plausible values of infit and outfit based on the bootstrap, and that Smith's rule-of-thumb regarding infit (1±2/$\sqrt{n}$) would be 0.9-1.1 for a sample size of 400.
+Then the `RIitemfit()` function is used to summarize the bootstrap results and also calculates the infit and outfit for each item in the observed data and highlights items with infit/outfit values outside of the cutoff values. `RIitemfit()` has a default (user-modifiable) setting to slightly truncate the distribution of values using `stats::quantile()` at 0.001 and 0.999 to remove extreme values. An example is demonstrated in @tbl-itemfit1, using a subset of the items used in the simulations. Note the variation between items in plausible threshold values for infit and outfit based on the bootstrap procedure compared to Smith's rule-of-thumb regarding infit (1±2/$\sqrt{n}$), which would be 0.9-1.1 for a sample size of 400. @fig-itemfit1 provides a visualization of the distribution of bootstrapped infit and outfit values, together with the infit/outfit values from the observed data illustrated using an orange diamond shape. 
 
 This study was rather computationally demanding since each simulation run entailed 100-400 underlying bootstrap iterations. The sample sizes used were 150, 250, 500, and 1000. The number of iterations to determine cutoff values were 100, 200, and 400. Sample size and iteration conditions were fully crossed with each other and the three different targeting variations of the one misfitting item, resulting in 4 * 3 * 3 = 36 conditions. Each combination used 500 replications.
 
@@ -610,7 +615,7 @@ ifb %>%
 
 As shown in @fig-ifb0out, @fig-ifb1out, and @fig-ifb2out, outfit is performing worse than infit across the board.
 
-### Comments
+## Comments
 
 Based on these simulation, it is highly recommended to use infit over outfit in assessing item fit. The performance of outfit calls to question whether it is useful at all for detecting item misfit.
 
@@ -1384,7 +1389,7 @@ irb150_df %>%
 #   facet_wrap(~bootit)
 ```
 
-Item-restscore bootstrapping improves slightly on the single instance of item-restscore for the n = 150 condition (see @fig-irboot150). When comparing to the previous results in @fig-itemrestscore2, where the detection rate for the same sample size was at 49.2%, 14.6%, and 34.6% (for items 9, 13, and 18 respectively), the corresponding median values from the bootstrapped item-restscore with 250 iterations were 52.4%, 19.2%, and 38.4%. Using 500 bootstrap iterations did not result in relevant improvements over 250 iterations (see @tbl-irb150mis). Compared to the results using infit (@fig-ifb3), with detection rates of 59.2%, 19%, and 51.8%, item-restscore inferior also when bootstrapped.
+Item-restscore bootstrapping improves slightly on the single instance of item-restscore for the n = 150 condition (see @fig-irboot150). When comparing to the previous results in @fig-itemrestscore2, where the detection rate for the same sample size was at 49.2%, 14.6%, and 34.6% (for items 9, 13, and 18 respectively), the corresponding median values from the bootstrapped item-restscore with 250 iterations were 52.4%, 19.2%, and 38.4%. Using 500 bootstrap iterations did not result in relevant improvements over 250 iterations (see @tbl-irb150mis). Compared to the results using infit (@fig-ifb3), with detection rates of 59.2%, 19%, and 51.8%, item-restscore is inferior also when bootstrapped.
 
 ```{r}
 #| label: tbl-irb150mis
