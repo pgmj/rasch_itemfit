@@ -1,7 +1,7 @@
 ---
 title: "Detecting item misfit in Rasch models"
 author:
-  - name: Magnus Johansson, PhD
+  - name: Magnus Johansson
     affiliations:
       - name: RISE Research Institutes of Sweden, Division Built Environment, System Transition
       - name: Centre for Psychiatry Research, Department of Clinical Neuroscience, Karolinska Institutet, & Stockholm Health Care Services, Region Stockholm
